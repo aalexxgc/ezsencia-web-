@@ -67,13 +67,12 @@
         }
 
         .exp-page-hero-caption {
-            background:  var(--fondo);
-            width:       100%;
-            display:     flex;
-            align-items: baseline;
-            gap:         4vw;
-            padding:     2.4rem 4rem 2.4rem;
-            border-bottom: 1px solid rgba(26,25,22,0.08);
+            background:           var(--fondo);
+            display:              grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows:   auto 1fr;
+            padding:              3rem 5rem 3.5rem;
+            border-top:           1px solid rgba(26,25,22,0.1);
         }
 
         .exp-page-hero-content {
@@ -83,40 +82,46 @@
         }
 
         .exp-page-hero-eyebrow {
-            font-size:      0.55rem;
-            letter-spacing: 0.44em;
+            grid-column:    1;
+            grid-row:       1;
+            font-size:      0.58rem;
+            letter-spacing: 0.42em;
             text-transform: uppercase;
             color:          var(--dorado);
             font-family:    'Lato', sans-serif;
             font-weight:    400;
-            white-space:    nowrap;
-            flex-shrink:    0;
+            margin-bottom:  1.4rem;
             opacity:        0;
             animation:      fadeUp 1s 0.4s forwards;
         }
 
         .exp-page-hero-title {
+            grid-column:    1;
+            grid-row:       2;
+            align-self:     end;
             font-family:    'Playfair Display', serif;
-            font-size:      clamp(1.4rem, 2.2vw, 2rem);
+            font-size:      clamp(2rem, 3.5vw, 3.2rem);
             font-weight:    400;
             font-style:     italic;
-            line-height:    1.1;
+            line-height:    1.05;
             letter-spacing: -0.01em;
             color:          #1a1916;
-            white-space:    nowrap;
-            flex-shrink:    0;
             margin:         0;
             opacity:        0;
             animation:      fadeUp 1s 0.7s forwards;
         }
 
         .exp-page-hero-sub {
+            grid-column:    2;
+            grid-row:       1 / 3;
+            align-self:     end;
+            padding-left:   6vw;
             font-family:    'EB Garamond', serif;
-            font-size:      clamp(0.85rem, 1.2vw, 1rem);
+            font-size:      clamp(0.95rem, 1.3vw, 1.1rem);
             font-style:     italic;
             font-weight:    400;
             color:          rgba(26,25,22,0.5);
-            line-height:    1.6;
+            line-height:    1.8;
             opacity:        0;
             animation:      fadeUp 1s 1s forwards;
         }
@@ -1031,8 +1036,8 @@
 
     <div class="exp-page-hero-caption">
         <p class="exp-page-hero-eyebrow">Ezsencia &nbsp;&middot;&nbsp; Truffle Society</p>
-        <h1 class="exp-page-hero-title">La Experiencia</h1>
-        <p class="exp-page-hero-sub">No es un evento. Es un instante que no puede simularse.</p>
+        <h1 class="exp-page-hero-title">La<br>Experiencia</h1>
+        <p class="exp-page-hero-sub">No es un evento.<br>Es un instante que no puede simularse.</p>
     </div>
 
 
