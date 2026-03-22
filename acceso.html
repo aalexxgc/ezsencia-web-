@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- ============================================================
+     EZSENCIA — Solicitar Invitación
+     ============================================================ -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Solicita tu invitación a la Ezsencia Truffle Society. Edición Fundadores 2026. 25 miembros. Selección por afinidad.">
+
+    <meta property="og:title"       content="Solicitar Invitación — EZSENCIA">
+    <meta property="og:description" content="El acceso no se compra. Se otorga. Edición Fundadores 2026.">
+    <meta property="og:image"       content="assets/og-image.jpg">
+    <meta property="og:type"        content="website">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <title>Solicitar Invitaci&oacute;n — EZSENCIA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* ====================================================
+           HERO — ACCESO (pantalla completa oscuro)
+           ==================================================== */
+
+        .acceso-hero {
+            height:          100vh;
+            min-height:      600px;
+            display:         flex;
+            flex-direction:  column;
+            justify-content: center;
+            align-items:     center;
+            text-align:      center;
+            padding:         6rem 3rem;
+            position:        relative;
+            overflow:        hidden;
+            background:      #0e0d0b;
+        }
+
+        .acceso-hero-bg {
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(
+                ellipse 70% 60% at 50% 50%,
+                rgba(154,125,74,0.07) 0%,
+                transparent 65%
+            );
+            pointer-events: none;
+        }
+
+        .acceso-hero-img {
+            position:   absolute;
+            inset:      0;
+            background: url('assets/origen.jpg') center 30% / cover no-repeat;
+            opacity:    0.1;
+            filter:     grayscale(0.4);
+        }
+
+        .acceso-hero-content {
+            position:  relative;
+            z-index:   2;
+            max-width: 700px;
+        }
+
+        .acceso-hero-eyebrow {
+            font-size:      0.62rem;
+            letter-spacing: 0.48em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.65;
+            font-family:    'Lato', sans-serif;
+            margin-bottom:  2.8rem;
+            opacity:        0;
+            animation:      fadeUp 1s 0.4s forwards;
+        }
+
+        .acceso-hero-title {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(3rem, 7vw, 6.5rem);
+            font-weight:    300;
+            line-height:    1;
+            letter-spacing: -0.02em;
+            color:          rgba(245,240,232,0.92);
+            margin-bottom:  2.8rem;
+            opacity:        0;
+            animation:      fadeUp 1s 0.7s forwards;
+        }
+
+        .acceso-hero-sub {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1.1rem, 2vw, 1.45rem);
+            font-style:     italic;
+            font-weight:    300;
+            color:          rgba(245,240,232,0.42);
+            line-height:    1.85;
+            max-width:      500px;
+            margin:         0 auto 3.5rem;
+            opacity:        0;
+            animation:      fadeUp 1s 1s forwards;
+        }
+
+        .acceso-hero-scroll {
+            position:       absolute;
+            bottom:         3rem;
+            left:           50%;
+            transform:      translateX(-50%);
+            z-index:        2;
+            display:        flex;
+            flex-direction: column;
+            align-items:    center;
+            gap:            0.8rem;
+            opacity:        0;
+            animation:      fadeUp 1s 1.4s forwards;
+        }
+
+        .acceso-hero-scroll span {
+            font-size:      0.58rem;
+            letter-spacing: 0.36em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.25);
+        }
+
+        .acceso-hero-scroll::after {
+            content:    '';
+            width:      1px;
+            height:     48px;
+            background: linear-gradient(180deg, rgba(154,125,74,0.4), transparent);
+        }
+
+        /* ====================================================
+           BLOQUE DE EXCLUSIVIDAD
+           ==================================================== */
+
+        .acceso-exclusiv {
+            background:  var(--fondo-alt);
+            padding:     8rem 3rem;
+            text-align:  center;
+        }
+
+        .acceso-exclusiv-inner {
+            max-width: 640px;
+            margin:    0 auto;
+        }
+
+        .acceso-exclusiv-inner h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            font-style:    italic;
+            line-height:   1.2;
+            color:         var(--tinta);
+            margin-bottom: 2.8rem;
+        }
+
+        .acceso-exclusiv-inner p {
+            font-size:     0.95rem;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.4rem;
+        }
+
+        .acceso-pills {
+            display:         flex;
+            justify-content: center;
+            gap:             0;
+            border:          1px solid var(--borde);
+            margin-top:      3.5rem;
+        }
+
+        .acceso-pill {
+            padding:        1.8rem 2.8rem;
+            border-right:   1px solid var(--borde);
+            display:        flex;
+            flex-direction: column;
+            align-items:    center;
+            gap:            0.5rem;
+            flex:           1;
+        }
+
+        .acceso-pill:last-child { border-right: none; }
+
+        .acceso-pill-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      2.4rem;
+            font-weight:    300;
+            color:          var(--dorado);
+            line-height:    1;
+        }
+
+        .acceso-pill-label {
+            font-size:      0.6rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            text-align:     center;
+            line-height:    1.6;
+        }
+
+        /* ====================================================
+           FORMULARIO
+           ==================================================== */
+
+        .acceso-form-section {
+            background: var(--fondo);
+            padding:    9rem 3rem;
+        }
+
+        .acceso-form-inner {
+            max-width:             960px;
+            margin:                0 auto;
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   8rem;
+            align-items:           start;
+        }
+
+        /* Columna info */
+        .acceso-form-info h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            line-height:   1.1;
+            color:         var(--tinta);
+            margin-bottom: 2.2rem;
+        }
+
+        .acceso-form-info p {
+            font-size:     0.95rem;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.4rem;
+        }
+
+        .acceso-detail-list {
+            list-style:      none;
+            display:         flex;
+            flex-direction:  column;
+            gap:             1.1rem;
+            margin-top:      2.8rem;
+            padding-top:     2.8rem;
+            border-top:      1px solid var(--borde);
+        }
+
+        .acceso-detail-list li {
+            display:        flex;
+            align-items:    center;
+            gap:            1.2rem;
+            font-size:      0.84rem;
+            color:          var(--tinta-suave);
+            letter-spacing: 0.04em;
+        }
+
+        .acceso-detail-list li::before {
+            content:    '';
+            width:      20px;
+            height:     1px;
+            background: var(--dorado);
+            flex-shrink: 0;
+        }
+
+        .acceso-afinidad {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.1rem;
+            font-style:     italic;
+            color:          var(--tinta-suave);
+            margin-top:     2.5rem;
+            line-height:    1.7;
+        }
+
+        .acceso-afinidad strong {
+            font-style:  normal;
+            font-weight: 400;
+            color:       var(--tinta);
+        }
+
+        /* Formulario */
+        .acceso-form-box {
+            border:  1px solid var(--borde);
+            padding: 4rem;
+        }
+
+        .acceso-form-title {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.5rem;
+            font-weight:    300;
+            color:          var(--tinta);
+            margin-bottom:  0.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        .acceso-form-sub {
+            font-size:      0.72rem;
+            letter-spacing: 0.14em;
+            color:          var(--tinta-fina);
+            margin-bottom:  3rem;
+        }
+
+        .form-group { margin-bottom: 2rem; }
+
+        .form-group label {
+            display:        block;
+            font-size:      0.62rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            margin-bottom:  0.7rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width:          100%;
+            background:     transparent;
+            border:         none;
+            border-bottom:  1px solid var(--borde);
+            padding:        0.8rem 0;
+            font-family:    'Lato', sans-serif;
+            font-size:      0.94rem;
+            font-weight:    300;
+            color:          var(--tinta);
+            outline:        none;
+            transition:     border-color 0.3s;
+            resize:         none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus { border-color: var(--dorado); }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color:     var(--tinta-fina);
+            font-size: 0.9rem;
+        }
+
+        .acceso-submit {
+            width:          100%;
+            margin-top:     1.5rem;
+            padding:        1.2rem 2rem;
+            background:     transparent;
+            border:         1px solid var(--tinta);
+            font-family:    'Lato', sans-serif;
+            font-size:      0.68rem;
+            font-weight:    300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:          var(--tinta);
+            transition:     color 0.35s, border-color 0.35s, background 0.35s;
+        }
+
+        .acceso-submit:hover {
+            background:   var(--tinta);
+            color:        var(--fondo);
+            border-color: var(--tinta);
+        }
+
+        .acceso-notice {
+            font-size:   0.72rem;
+            line-height: 1.8;
+            color:       var(--tinta-fina);
+            margin-top:  2rem;
+            text-align:  center;
+        }
+
+        .acceso-notice a {
+            color:           inherit;
+            text-decoration: underline;
+        }
+
+        /* Success */
+        .acceso-success {
+            display:     none;
+            text-align:  center;
+            padding:     4rem 2rem;
+        }
+
+        .acceso-success-icon {
+            font-family: 'EB Garamond', serif;
+            font-size:   3rem;
+            color:       var(--dorado);
+            margin-bottom: 1.5rem;
+        }
+
+        .acceso-success h3 {
+            font-family:   'EB Garamond', serif;
+            font-size:     2rem;
+            font-weight:   300;
+            color:         var(--tinta);
+            margin-bottom: 1.2rem;
+        }
+
+        .acceso-success p {
+            font-size:   0.95rem;
+            line-height: 1.9;
+            color:       var(--tinta-suave);
+        }
+
+        /* ====================================================
+           RESPONSIVE
+           ==================================================== */
+
+        @media (max-width: 900px) {
+            .acceso-hero        { padding: 6rem 1.5rem 5rem; }
+            .acceso-exclusiv    { padding: 6rem 1.5rem; }
+            .acceso-pills       { flex-direction: column; }
+            .acceso-pill        { border-right: none; border-bottom: 1px solid var(--borde); }
+            .acceso-pill:last-child { border-bottom: none; }
+
+            .acceso-form-section  { padding: 6rem 1.5rem; }
+            .acceso-form-inner    { grid-template-columns: 1fr; gap: 4rem; }
+            .acceso-form-box      { padding: 2.5rem 1.5rem; }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- ========================================================
+         NAVEGACIÓN
+         ======================================================== -->
+
+    <nav id="navbar">
+
+        <a href="index.html" class="nav-logo">EZSENCIA</a>
+
+        <ul class="nav-links">
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-cta">Solicitar Invitaci&oacute;n</a>
+
+        <button class="nav-hamburger"
+                id="navHamburger"
+                aria-label="Abrir men&uacute;"
+                aria-expanded="false"
+                aria-controls="navMobileDrawer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </nav>
+
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <div class="nav-mobile-drawer"
+         id="navMobileDrawer"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true"
+         aria-label="Men&uacute; de navegaci&oacute;n">
+
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+
+        <ul class="nav-mobile-links">
+            <li><a href="index.html">Ezsencia</a></li>
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="#form" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
+        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 25 miembros</p>
+
+    </div>
+
+
+    <!-- ========================================================
+         HERO
+         ======================================================== -->
+
+    <header class="acceso-hero" id="inicio">
+        <div class="acceso-hero-img"></div>
+        <div class="acceso-hero-bg"></div>
+        <div class="acceso-hero-content">
+            <p class="acceso-hero-eyebrow">Ezsencia Truffle Society &nbsp;&middot;&nbsp; 2026</p>
+            <h1 class="acceso-hero-title">
+                El acceso<br>no se compra.<br>
+                <em style="font-style:italic; color: rgba(154,125,74,0.7);">Se otorga.</em>
+            </h1>
+            <p class="acceso-hero-sub">
+                Cada a&ntilde;o, 25 personas son invitadas a formar parte.
+                La selecci&oacute;n no sigue un orden de solicitud.
+                Se hace por afinidad.
+            </p>
+        </div>
+        <div class="acceso-hero-scroll">
+            <span>Solicitar</span>
+        </div>
+    </header>
+
+
+    <!-- ========================================================
+         EXCLUSIVIDAD
+         ======================================================== -->
+
+    <section class="acceso-exclusiv">
+        <div class="acceso-exclusiv-inner reveal">
+            <div class="section-label" style="justify-content: center;">Edici&oacute;n Fundadores 2026</div>
+            <h2>
+                Un club que tiene sentido<br>
+                precisamente porque es peque&ntilde;o.
+            </h2>
+            <p>
+                25 miembros es el tama&ntilde;o en el que todos saben el nombre de todos.
+                En el que el productor puede mantener una relaci&oacute;n real con cada persona.
+                En el que la exclusividad no es marketing, es consecuencia.
+            </p>
+            <p>
+                La Edici&oacute;n Fundadores 2026 es la primera edici&oacute;n del club.
+                Estas 25 personas definir&aacute;n su car&aacute;cter para siempre.
+            </p>
+            <div class="acceso-pills">
+                <div class="acceso-pill">
+                    <span class="acceso-pill-num">25</span>
+                    <span class="acceso-pill-label">Plazas<br>disponibles</span>
+                </div>
+                <div class="acceso-pill">
+                    <span class="acceso-pill-num">2</span>
+                    <span class="acceso-pill-label">Encuentros<br>al a&ntilde;o</span>
+                </div>
+                <div class="acceso-pill">
+                    <span class="acceso-pill-num">7</span>
+                    <span class="acceso-pill-label">D&iacute;as para<br>respuesta</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         FORMULARIO
+         ======================================================== -->
+
+    <section class="acceso-form-section" id="form">
+        <div class="acceso-form-inner">
+
+            <!-- Info -->
+            <div class="acceso-form-info reveal">
+                <div class="section-label">Acceso</div>
+                <h2>
+                    Solicita tu<br>
+                    invitaci&oacute;n
+                </h2>
+                <p>
+                    El acceso a la Ezsencia Truffle Society no se compra.
+                    Se solicita. Revisamos cada candidatura de forma personal
+                    y respondemos a todos los interesados en un plazo m&aacute;ximo de 7 d&iacute;as.
+                </p>
+                <ul class="acceso-detail-list">
+                    <li>25 plazas disponibles por edici&oacute;n</li>
+                    <li>Temporada activa: enero &mdash; marzo</li>
+                    <li>Respuesta personalizada en 7 d&iacute;as</li>
+                    <li>Sin compromiso de compra al solicitar</li>
+                </ul>
+                <p class="acceso-afinidad">
+                    No asignamos plazas por orden de solicitud.<br>
+                    <strong>Lo hacemos por afinidad.</strong>
+                </p>
+            </div>
+
+            <!-- Formulario -->
+            <div class="reveal">
+                <div class="acceso-form-box" id="formWrapper">
+
+                    <div id="formContent">
+                        <p class="acceso-form-title">Edici&oacute;n Fundadores 2026</p>
+                        <p class="acceso-form-sub">Tiempo estimado: 2 minutos &nbsp;&middot;&nbsp; Todos los campos son necesarios</p>
+
+                        <div class="form-group">
+                            <label for="field-nombre">Nombre completo</label>
+                            <input id="field-nombre" type="text" placeholder="Tu nombre">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="field-email">Correo electr&oacute;nico</label>
+                            <input id="field-email" type="email" placeholder="tu@correo.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="field-ciudad">Ciudad</label>
+                            <input id="field-ciudad" type="text" placeholder="D&oacute;nde resides">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="field-motivo">&iquest;Por qu&eacute; quieres formar parte?</label>
+                            <textarea id="field-motivo" rows="3" placeholder="Cu&eacute;ntanos brevemente..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="field-origen">&iquest;Qu&eacute; significa para ti el origen?</label>
+                            <textarea id="field-origen" rows="3" placeholder="Tu reflexi&oacute;n..."></textarea>
+                        </div>
+
+                        <button class="acceso-submit" onclick="handleSubmit()">Solicitar acceso</button>
+
+                        <p class="acceso-notice">
+                            Tu candidatura es tratada con absoluta confidencialidad.
+                            Recibir&aacute;s una respuesta en m&aacute;ximo 7 d&iacute;as.
+                            <a href="privacidad.html">Pol&iacute;tica de privacidad</a>.
+                        </p>
+                    </div>
+
+                    <div class="acceso-success" id="formSuccess">
+                        <div class="acceso-success-icon">&#10022;</div>
+                        <h3>Solicitud recibida</h3>
+                        <p>
+                            Gracias por tu inter&eacute;s. Hemos recibido tu candidatura y nos pondremos
+                            en contacto contigo en los pr&oacute;ximos 7 d&iacute;as de forma personalizada.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <footer>
+
+        <div class="footer-logo">EZSENCIA</div>
+
+        <ul class="footer-links">
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mailto:contacto@ezsencia.com">contacto@ezsencia.com</a></li>
+        </ul>
+
+        <p class="footer-copy">&copy; 2026 EZSENCIA. Alcotas, Teruel.</p>
+
+    </footer>
+
+
+    <!-- ========================================================
+         JAVASCRIPT
+         ======================================================== -->
+
+    <script>
+
+        const cursor = document.getElementById('cursor');
+        const ring   = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', function (e) {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top  = mouseY + 'px';
+        });
+
+        (function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            ring.style.left = ringX + 'px';
+            ring.style.top  = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+
+        document.querySelectorAll('a, button').forEach(function (el) {
+            el.addEventListener('mouseenter', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                ring.style.transform   = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            observer.observe(el);
+        });
+
+        /* Formulario */
+        function handleSubmit() {
+            var nombre = document.getElementById('field-nombre').value.trim();
+            var email  = document.getElementById('field-email').value.trim();
+            var ciudad = document.getElementById('field-ciudad').value.trim();
+            var motivo = document.getElementById('field-motivo').value.trim();
+            var origen = document.getElementById('field-origen').value.trim();
+
+            if (!nombre || !email || !ciudad || !motivo || !origen) return;
+
+            var content = document.getElementById('formContent');
+            var success = document.getElementById('formSuccess');
+
+            content.style.transition = 'opacity 0.5s';
+            content.style.opacity    = 0;
+
+            setTimeout(function () {
+                content.style.display     = 'none';
+                success.style.display     = 'block';
+                success.style.opacity     = 0;
+                success.style.transition  = 'opacity 1s';
+                setTimeout(function () { success.style.opacity = 1; }, 50);
+            }, 500);
+        }
+
+        /* Menú hamburguesa */
+        const hamburger   = document.getElementById('navHamburger');
+        const drawer      = document.getElementById('navMobileDrawer');
+        const backdrop    = document.getElementById('navBackdrop');
+        const drawerClose = document.getElementById('navMobileClose');
+
+        function openMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'true');
+            drawer.setAttribute('aria-hidden', 'false');
+            drawer.classList.add('open');
+            backdrop.classList.add('open');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+            drawerClose.focus();
+        }
+
+        function closeMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'false');
+            drawer.setAttribute('aria-hidden', 'true');
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+            hamburger.focus();
+        }
+
+        hamburger.addEventListener('click', openMobileMenu);
+        drawerClose.addEventListener('click', closeMobileMenu);
+        backdrop.addEventListener('click', closeMobileMenu);
+        drawer.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) closeMobileMenu();
+        });
+
+    </script>
+
+</body>
+</html>

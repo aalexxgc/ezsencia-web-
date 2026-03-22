@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- ============================================================
+     EZSENCIA — Truffle Society
+     Sitio web oficial · Edición Fundadores 2026
+     ============================================================ -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EZSENCIA Truffle Society. Club privado de trufa negra. Alcotas, Teruel. Edición Fundadores 2026.">
+
+    <meta property="og:title"       content="EZSENCIA — Truffle Society">
+    <meta property="og:description" content="Un club privado de origen. Alcotas, Teruel. Edición Fundadores 2026.">
+    <meta property="og:image"       content="assets/og-image.jpg">
+    <meta property="og:type"        content="website">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>EZSENCIA — Truffle Society</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* ====================================================
+           1. HERO
+           ==================================================== */
+
+        #inicio {
+            position:   relative;
+            height:     92vh;
+            min-height: 560px;
+            overflow:   hidden;
+            margin:     0;
+        }
+
+        /* Vídeo decorativo — fade in al cargar */
+        .hero-video {
+            opacity:        0;
+            transition:     opacity 1.8s ease;
+            pointer-events: none;
+        }
+        .hero-video.hero-loaded { opacity: 1; }
+
+        /* Overlay: solo visual, no bloquea toques */
+        .hero-overlay {
+            pointer-events: none;
+            background: linear-gradient(
+                180deg,
+                rgba(10,9,7,0.04)  0%,
+                rgba(10,9,7,0.12) 50%,
+                rgba(10,9,7,0.30) 100%
+            );
+        }
+
+        /* ── Área de tap — cubre todo el vídeo ──────────── */
+        /* cursor:pointer es obligatorio en iOS para recibir tap events en divs */
+        .hero-tap {
+            position: absolute;
+            inset:    0;
+            z-index:  2;
+            cursor:   pointer;
+        }
+
+        /* ── Barra de controles integrada ─────────────────  */
+        .hero-bar {
+            position:    absolute;
+            bottom:      0;
+            left:        0;
+            right:       0;
+            display:     flex;
+            align-items: center;
+            gap:         0.6rem;
+            padding:     2.5rem 2rem 1.6rem;
+            background:  linear-gradient(0deg, rgba(10,9,7,0.5) 0%, transparent 100%);
+            opacity:     0;
+            transform:   translateY(4px);
+            transition:  opacity 0.35s ease, transform 0.35s ease;
+            pointer-events: none;
+        }
+        .hero-bar.show {
+            opacity:        1;
+            transform:      translateY(0);
+            pointer-events: auto;
+        }
+
+        /* ── Botones play/mute ───────────────────────────── */
+        .hero-vbtn {
+            flex-shrink:             0;
+            width:                   44px;
+            height:                  44px;
+            display:                 flex;
+            align-items:             center;
+            justify-content:         center;
+            background:              none;
+            border:                  none;
+            padding:                 0;
+            cursor:                  pointer;
+            touch-action:            manipulation;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select:     none;
+            user-select:             none;
+            transition:              transform 0.15s ease, opacity 0.2s ease;
+        }
+        .hero-vbtn:active  { transform: scale(0.85); }
+        .hero-vbtn svg     { pointer-events: none; display: block; }
+
+        /* ── Barra de progreso ───────────────────────────── */
+        .hero-pbar-wrap {
+            flex:         1;
+            height:       44px;
+            display:      flex;
+            align-items:  center;
+            cursor:       pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hero-pbar-track {
+            width:         100%;
+            height:        2px;
+            background:    rgba(245,240,232,0.22);
+            border-radius: 2px;
+            overflow:      hidden;
+        }
+        .hero-pbar-fill {
+            height:        100%;
+            width:         0%;
+            background:    rgba(245,240,232,0.82);
+            border-radius: 2px;
+            transition:    width 0.4s linear;
+            will-change:   width;
+        }
+
+        /* Caption block below the video */
+        .hero-caption {
+            background:  var(--fondo);
+            border-top:  1px solid var(--borde);
+            padding:     4.5rem 6vw 6.5rem;
+            display:     grid;
+            grid-template-columns: auto 1fr;
+            gap:         0 8rem;
+            align-items: end;
+        }
+
+        .hero-caption-left { padding-bottom: 0.4rem; }
+
+        .hero-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.7rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+            margin-bottom:  2.4rem;
+            opacity:        0;
+            animation:      fadeUp 1s 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(3.8rem, 9vw, 8.5rem);
+            font-weight:    400;
+            font-style:     italic;
+            line-height:    0.92;
+            letter-spacing: -0.01em;
+            color:          var(--tinta);
+            margin:         0;
+            opacity:        0;
+            animation:      fadeUp 1.1s 0.5s forwards;
+        }
+
+        .hero-caption-right {
+            display:        flex;
+            flex-direction: column;
+            gap:            3rem;
+            padding-bottom: 0.8rem;
+        }
+
+        .hero-sub {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.82rem;
+            font-weight:    300;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color:          var(--tinta);
+            opacity:        0.72;
+            line-height:    2;
+            margin:         0;
+            animation:      fadeUp 1s 0.7s forwards;
+        }
+
+        .hero-ctas {
+            display:         flex;
+            gap:             2rem;
+            align-items:     center;
+            justify-content: flex-start;
+            opacity:         0;
+            animation:       fadeUp 1s 0.9s forwards;
+        }
+
+        .hero-btn {
+            font-family:     'Lato', sans-serif;
+            font-size:       0.65rem;
+            letter-spacing:  0.24em;
+            text-transform:  uppercase;
+            text-decoration: none;
+            padding:         1rem 2.8rem;
+            transition:      background 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+                             transform 0.2s ease;
+        }
+
+        .hero-btn--primary {
+            background: var(--tinta);
+            border:     1px solid var(--tinta);
+            color:      var(--fondo);
+        }
+
+        .hero-btn--primary:hover {
+            background:   transparent;
+            border-color: var(--tinta);
+            color:        var(--tinta);
+            transform:    translateY(-1px);
+        }
+
+        .hero-btn--secondary {
+            color:        var(--tinta-suave);
+            border:       none;
+            padding-left: 0;
+            padding-right: 0;
+            font-size:    0.65rem;
+            letter-spacing: 0.22em;
+        }
+
+        .hero-btn--secondary:hover {
+            color:     var(--tinta);
+            transform: translateX(3px);
+        }
+
+        .hero-scroll {
+            position:       absolute;
+            bottom:         2.5rem;
+            left:           50%;
+            transform:      translateX(-50%);
+            font-size:      0.55rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.28);
+            z-index:        2;
+        }
+
+        /* ====================================================
+           2. CONCEPTO — split foto + texto
+           ==================================================== */
+
+        .idx-concepto {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            min-height:            620px;
+        }
+
+        .idx-concepto-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .idx-concepto-img img {
+            position:        absolute;
+            inset:           0;
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center;
+            display:         block;
+            transition:      transform 1.4s ease;
+        }
+
+        .idx-concepto-img:hover img { transform: scale(1.03); }
+
+        .idx-concepto-text {
+            background:      #f0ebe0;
+            padding:         8rem 6rem;
+            display:         flex;
+            flex-direction:  column;
+            justify-content: center;
+        }
+
+        .idx-concepto-text .section-label { margin-bottom: 3rem; }
+
+        .idx-concepto-text h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(1.9rem, 3vw, 2.8rem);
+            font-weight:   400;
+            font-style:    italic;
+            line-height:   1.25;
+            color:         #3a3228;
+            margin-bottom: 3rem;
+        }
+
+        .idx-concepto-text p {
+            font-size:     0.92rem;
+            line-height:   2.2;
+            color:         #6b5e50;
+            margin-bottom: 1.4rem;
+            max-width:     400px;
+        }
+
+        .idx-concepto-text p:last-child { margin-bottom: 0; }
+
+        /* ====================================================
+           3. TRES PILARES — columnas de texto puro
+           ==================================================== */
+
+        .idx-pilares {
+            background: var(--fondo);
+            padding:    9rem 6vw 10rem;
+        }
+
+        .idx-pilares-header {
+            text-align:    center;
+            margin-bottom: 7rem;
+        }
+
+        .idx-pilares-header .section-label { justify-content: center; }
+
+        .idx-pilares-grid {
+            max-width:             1000px;
+            margin:                0 auto;
+            display:               grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap:                   0;
+        }
+
+        .idx-pilar-img {
+            width:      100%;
+            height:     260px;
+            overflow:   hidden;
+            position:   relative;
+            margin-bottom: 3.5rem;
+        }
+
+        .idx-pilar-img img {
+            position:   absolute;
+            inset:      0;
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+            transition: transform 1s ease;
+        }
+
+        .idx-pilar:hover .idx-pilar-img img { transform: scale(1.04); }
+
+        .idx-pilar {
+            padding:      0 4rem;
+            text-align:   center;
+            border-right: 1px solid var(--borde);
+        }
+
+        .idx-pilar:first-child { padding-left: 0; }
+        .idx-pilar:last-child  { border-right: none; padding-right: 0; }
+
+        .idx-pilar-num {
+            font-family:   'EB Garamond', serif;
+            font-size:     2.6rem;
+            font-weight:   400;
+            font-style:    italic;
+            color:         var(--dorado);
+            opacity:       0.4;
+            display:       block;
+            line-height:   1;
+            margin-bottom: 1.5rem;
+        }
+
+        .idx-pilar-sep {
+            width:      24px;
+            height:     1px;
+            background: rgba(154,125,74,0.28);
+            margin:     0 auto 2rem;
+        }
+
+        .idx-pilar-titulo {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.35rem;
+            font-weight:    400;
+            color:          var(--tinta);
+            margin-bottom:  1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .idx-pilar-texto {
+            font-size:   0.88rem;
+            line-height: 2.1;
+            color:       var(--tinta-suave);
+        }
+
+        /* ====================================================
+           4. EXPERIENCIA — bloque visual full-width
+           ==================================================== */
+
+        .idx-experiencia {
+            position:   relative;
+            height:     75vh;
+            min-height: 480px;
+            overflow:   hidden;
+        }
+
+        .idx-experiencia-video {
+            position:   absolute;
+            inset:      0;
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+        }
+
+        .idx-experiencia-overlay {
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(
+                180deg,
+                rgba(10,9,7,0.12) 0%,
+                rgba(10,9,7,0.52) 100%
+            );
+        }
+
+        .idx-experiencia-content {
+            background: var(--fondo);
+            text-align: center;
+            padding:    5rem 3rem 6rem;
+        }
+
+        .idx-experiencia-content .section-label {
+            justify-content: center;
+            color:           var(--tinta-suave);
+            margin-bottom:   2rem;
+        }
+
+        .idx-experiencia-content h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2.2rem, 4.5vw, 4rem);
+            font-weight:   300;
+            font-style:    italic;
+            line-height:   1.1;
+            color:         var(--tinta);
+            margin-bottom: 2.5rem;
+        }
+
+        .idx-experiencia-btn {
+            display:         inline-block;
+            font-size:       0.6rem;
+            letter-spacing:  0.28em;
+            text-transform:  uppercase;
+            text-decoration: none;
+            color:           var(--tinta-suave);
+            border:          1px solid var(--borde);
+            padding:         0.9rem 2.5rem;
+            transition:      all 0.3s ease;
+        }
+
+        .idx-experiencia-btn:hover {
+            background:   transparent;
+            border-color: var(--tinta);
+            color:        var(--tinta);
+        }
+
+        /* ====================================================
+           5. TERRITORIO — split imagen + texto
+           ==================================================== */
+
+        /* Vídeo Alcotas — separador editorial */
+
+        .idx-video-alcotas {
+            width:    100%;
+            height:   70vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .idx-video-alcotas video {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+        }
+
+        /* Territorio — foto full-width + caption AMAN */
+
+        .idx-territorio {
+            display: block;
+        }
+
+        .idx-territorio-img {
+            overflow:   hidden;
+            position:   relative;
+            height:     70vh;
+            min-height: 460px;
+            width:      100%;
+        }
+
+        .idx-territorio-img img {
+            position:        absolute;
+            inset:           0;
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center 25%;
+            display:         block;
+            transition:      transform 1.4s ease;
+            filter:          brightness(0.93);
+        }
+
+        .idx-territorio-img:hover img { transform: scale(1.02); }
+
+        .idx-territorio-body {
+            background:            var(--fondo);
+            border-top:            1px solid var(--borde);
+            padding:               3rem 6vw 6rem;
+            display:               grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap:                   0 7rem;
+            align-items:           start;
+        }
+
+        .idx-territorio-body .section-label {
+            margin-bottom: 1.8rem;
+            opacity:       0.55;
+        }
+
+        .idx-territorio-body h2 {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1.8rem, 2.8vw, 2.6rem);
+            font-weight:    300;
+            font-style:     italic;
+            line-height:    1.15;
+            color:          var(--tinta);
+            margin-bottom:  0;
+        }
+
+        .idx-territorio-body p {
+            font-size:     0.9rem;
+            line-height:   2.1;
+            color:         var(--tinta-suave);
+            margin-bottom: 0;
+            padding-top:   0.5rem;
+        }
+
+        .idx-territorio-datos {
+            margin-top:            2.5rem;
+            display:               grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap:                   0;
+            grid-column:           1 / -1;
+            border-top:            1px solid var(--borde);
+            padding-top:           2rem;
+        }
+
+        .idx-territorio-dato {
+            display:        flex;
+            flex-direction: column;
+            gap:            0.5rem;
+            padding-right:  2rem;
+            border-right:   1px solid var(--borde);
+            padding-left:   2rem;
+        }
+
+        .idx-territorio-dato:first-child { padding-left: 0; }
+        .idx-territorio-dato:last-child  { border-right: none; }
+
+        .idx-territorio-dato-key {
+            font-size:      0.54rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.7;
+        }
+
+        .idx-territorio-dato-val {
+            font-family: 'EB Garamond', serif;
+            font-size:   1.1rem;
+            font-weight: 300;
+            color:       var(--tinta);
+        }
+
+        /* ====================================================
+           6. INSTAGRAM
+           ==================================================== */
+
+        .idx-instagram {
+            background: var(--fondo);
+            padding:    9rem 3rem;
+            text-align: center;
+        }
+
+        .idx-instagram-header {
+            max-width:     480px;
+            margin:        0 auto 4rem;
+        }
+
+        .idx-instagram-handle {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1.8rem, 3.5vw, 3rem);
+            font-weight:    300;
+            font-style:     italic;
+            color:          var(--tinta);
+            text-decoration: none;
+            display:        block;
+            margin-bottom:  1rem;
+            transition:     opacity 0.3s ease;
+        }
+
+        .idx-instagram-handle:hover { opacity: 0.6; }
+
+        .idx-instagram-sub {
+            font-size:   0.88rem;
+            line-height: 1.9;
+            color:       var(--tinta-suave);
+        }
+
+        .idx-instagram-grid {
+            max-width:             1100px;
+            margin:                0 auto 4rem;
+            display:               grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:                   6px;
+        }
+
+        .idx-instagram-item {
+            aspect-ratio: 1 / 1;
+            overflow:     hidden;
+            position:     relative;
+        }
+
+        .idx-instagram-item img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+            filter:     brightness(0.92);
+            transition: transform 0.7s ease, filter 0.4s ease;
+        }
+
+        .idx-instagram-item:hover img {
+            transform: scale(1.06);
+            filter:    brightness(1);
+        }
+
+        .idx-instagram-cta {
+            display:        inline-block;
+            font-size:      0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color:          var(--tinta-suave);
+            border-bottom:  1px solid var(--borde);
+            padding-bottom: 0.3rem;
+            transition:     color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .idx-instagram-cta:hover {
+            color:        var(--tinta);
+            border-color: var(--tinta);
+        }
+
+        /* ====================================================
+           RESPONSIVE
+           ==================================================== */
+
+        @media (max-width: 1100px) {
+            .idx-territorio-body { gap: 0 4rem; }
+            .hero-caption        { gap: 0 4rem; }
+        }
+
+        /* ── Tablet 900px ─────────────────────────── */
+        @media (max-width: 900px) {
+            #inicio    { height: 80vh; }
+            .hero-bar  { padding: 2rem 1.4rem 1.4rem; }
+            .hero-caption {
+                grid-template-columns: 1fr;
+                gap:     2.5rem;
+                padding: 2.5rem 1.5rem 4rem;
+            }
+
+            .idx-concepto              { grid-template-columns: 1fr; }
+            .idx-concepto-img          { height: 60vw; min-height: 280px; }
+            .idx-concepto-text         { padding: 5rem 2rem 6rem; }
+            .idx-concepto-text p       { max-width: 100%; }
+            .idx-pilares               { padding: 7rem 1.5rem; }
+
+            .idx-pilares-grid      { grid-template-columns: 1fr; gap: 4rem; }
+            .idx-pilar             { border-right: none; border-bottom: 1px solid var(--borde); padding: 0 0 4rem; }
+            .idx-pilar:last-child  { border-bottom: none; padding: 0; }
+            .idx-pilar:first-child { padding-left: 0; }
+
+            .idx-experiencia       { height: 65vw; min-height: 340px; }
+            .idx-video-alcotas     { height: 55vw; min-height: 280px; }
+
+            .idx-territorio-body   { grid-template-columns: 1fr; gap: 2.5rem; padding: 2.5rem 1.5rem 5rem; }
+            .idx-territorio-datos  { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 0; }
+            .idx-territorio-dato   { border-right: none; padding-left: 0; padding-right: 0; border-bottom: 1px solid var(--borde); padding-bottom: 1.2rem; }
+            .idx-territorio-dato:last-child { border-bottom: none; }
+            .idx-territorio-body p { max-width: 100%; }
+
+            .idx-instagram         { padding: 6rem 1.5rem; }
+            .idx-instagram-grid    { grid-template-columns: 1fr 1fr; gap: 2px; }
+
+            .hero-ctas             { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+
+        /* ── Móvil 600px ──────────────────────────── */
+        @media (max-width: 600px) {
+            #inicio    { height: 78vh; min-height: 480px; }
+            .hero-bar  { padding: 1.8rem 1.2rem 1.2rem; gap: 0.4rem; }
+            .hero-caption {
+                padding: 2rem 1.2rem 3.5rem;
+                gap:     2rem;
+            }
+            .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.22em; }
+            .hero-title   { font-size: clamp(2.6rem, 11vw, 4rem); line-height: 1; }
+            .hero-sub     { font-size: 0.72rem; }
+            .hero-ctas    { align-items: stretch; }
+            .hero-btn     { text-align: center; padding: 1rem 1.5rem; min-height: 44px; }
+
+            .idx-concepto-text     { padding: 3.5rem 1.2rem 4rem; }
+            .idx-concepto-text h2  { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+
+            .idx-pilares           { padding: 4rem 1.2rem; }
+            .idx-pilares-grid      { gap: 3rem; }
+            .idx-pilar-img         { height: 200px; }
+
+            .idx-experiencia       { height: 56vw; min-height: 220px; }
+            .idx-video-alcotas     { height: 50vw; min-height: 200px; }
+
+            .idx-territorio-body   { padding: 2rem 1.2rem 4rem; }
+            .idx-territorio-datos  { grid-template-columns: 1fr 1fr; }
+            .idx-territorio-dato-val { font-size: 1.6rem; }
+
+            .idx-instagram         { padding: 4rem 1.2rem; }
+            .idx-instagram-grid    { grid-template-columns: 1fr; gap: 2px; }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- ========================================================
+         NAVEGACIÓN
+         ======================================================== -->
+
+    <nav id="navbar">
+
+        <a href="#inicio" class="nav-logo">EZSENCIA</a>
+
+        <ul class="nav-links">
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-cta">Solicitar Invitaci&oacute;n</a>
+
+        <button class="nav-hamburger"
+                id="navHamburger"
+                aria-label="Abrir men&uacute;"
+                aria-expanded="false"
+                aria-controls="navMobileDrawer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </nav>
+
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <div class="nav-mobile-drawer"
+         id="navMobileDrawer"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true"
+         aria-label="Men&uacute; de navegaci&oacute;n">
+
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+
+        <ul class="nav-mobile-links">
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
+        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 25 miembros</p>
+
+    </div>
+
+
+    <!-- ========================================================
+         1. HERO — vídeo a pantalla completa
+         ======================================================== -->
+
+    <section id="inicio">
+
+        <iframe class="yt-bg"
+                src="https://www.youtube.com/embed/ylK3nQOcVkA?autoplay=1&mute=1&loop=1&playlist=ylK3nQOcVkA&controls=0&rel=0&modestbranding=1&playsinline=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="Ezsencia hero"></iframe>
+
+        <div class="hero-overlay"></div>
+
+    </section>
+
+    <div class="hero-caption">
+
+        <div class="hero-caption-left">
+            <p class="hero-eyebrow">Alcotas, Teruel &nbsp;&middot;&nbsp; Edici&oacute;n Fundadores 2026</p>
+            <h1 class="hero-title">Ezsencia</h1>
+        </div>
+
+        <div class="hero-caption-right">
+            <p class="hero-sub">El origen no se explica.&nbsp;&nbsp;Se vive.</p>
+            <div class="hero-ctas">
+                <a href="acceso.html"      class="hero-btn hero-btn--primary">Solicitar invitaci&oacute;n</a>
+                <a href="experiencia.html" class="hero-btn hero-btn--secondary">La experiencia &rarr;</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         2. CONCEPTO — split foto + texto
+         ======================================================== -->
+
+    <section class="idx-concepto">
+
+        <div class="idx-concepto-img reveal">
+            <img src="assets/club.jpg" alt="El Club EZSENCIA">
+        </div>
+
+        <div class="idx-concepto-text reveal">
+            <div class="section-label">El Club</div>
+            <h2>
+                No es un club de gastronom&iacute;a.<br>
+                Es un club de origen.
+            </h2>
+            <p>
+                Ezsencia es un c&iacute;rculo privado de 25 personas construido alrededor
+                de la trufa negra de Alcotas. No alrededor de un producto,
+                sino de un territorio, un ritual y una forma de entender lo que vale la pena.
+            </p>
+            <p>
+                Acceso por invitaci&oacute;n. Selecci&oacute;n por afinidad.
+                Lo que se comparte aqu&iacute; no puede encontrarse en ning&uacute;n otro lugar.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         3. TRES PILARES — Territorio · Ritual · Círculo
+         ======================================================== -->
+
+    <section class="idx-pilares">
+
+        <div class="idx-pilares-header reveal">
+            <div class="section-label" style="justify-content: center;">Ezsencia</div>
+        </div>
+
+        <div class="idx-pilares-grid reveal">
+
+            <div class="idx-pilar">
+                <div class="idx-pilar-img">
+                    <img src="assets/pueblo.jpg" alt="Alcotas, Teruel">
+                </div>
+                <span class="idx-pilar-num">I</span>
+                <div class="idx-pilar-sep"></div>
+                <p class="idx-pilar-titulo">Territorio</p>
+                <p class="idx-pilar-texto">
+                    Alcotas, Teruel. A m&aacute;s de 1.100 metros.
+                    Un suelo calizo que lleva d&eacute;cadas
+                    guardando uno de los ingredientes
+                    m&aacute;s valorados del mundo.
+                </p>
+            </div>
+
+            <div class="idx-pilar">
+                <div class="idx-pilar-img">
+                    <img src="assets/ritual.png" alt="El ritual de la trufa">
+                </div>
+                <span class="idx-pilar-num">II</span>
+                <div class="idx-pilar-sep"></div>
+                <p class="idx-pilar-titulo">Ritual</p>
+                <p class="idx-pilar-texto">
+                    La caza con perros al amanecer,
+                    la mesa en el campo, los env&iacute;os
+                    de temporada. Cada gesto repite
+                    una secuencia de siglos.
+                </p>
+            </div>
+
+            <div class="idx-pilar">
+                <div class="idx-pilar-img">
+                    <img src="assets/circulo.png" alt="El círculo EZSENCIA">
+                </div>
+                <span class="idx-pilar-num">III</span>
+                <div class="idx-pilar-sep"></div>
+                <p class="idx-pilar-titulo">C&iacute;rculo</p>
+                <p class="idx-pilar-texto">
+                    25 miembros. El tama&ntilde;o exacto
+                    en el que todos se conocen
+                    y lo que se comparte
+                    a&uacute;n tiene peso real.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         4. EXPERIENCIA — bloque visual con enlace
+         ======================================================== -->
+
+    <div class="idx-experiencia reveal">
+        <iframe class="yt-bg"
+                src="https://www.youtube.com/embed/3VS1aarcTxc?autoplay=1&mute=1&loop=1&playlist=3VS1aarcTxc&controls=0&rel=0&modestbranding=1&playsinline=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="Ezsencia experiencia"></iframe>
+        <div class="idx-experiencia-overlay"></div>
+    </div>
+
+    <div class="idx-experiencia-content reveal">
+        <div class="section-label">La Experiencia</div>
+        <h2>
+            La caza. La mesa.<br>
+            El encuentro.
+        </h2>
+        <a href="experiencia.html" class="idx-experiencia-btn">Descubrir el club &rarr;</a>
+    </div>
+
+
+    <!-- ========================================================
+         VÍDEO ALCOTAS — separador editorial
+         ======================================================== -->
+
+    <div class="idx-video-alcotas">
+        <iframe class="yt-bg"
+                src="https://www.youtube.com/embed/uIZMwBRCons?autoplay=1&mute=1&loop=1&playlist=uIZMwBRCons&controls=0&rel=0&modestbranding=1&playsinline=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="Alcotas"></iframe>
+    </div>
+
+
+    <!-- ========================================================
+         5. TERRITORIO — imagen paisaje + texto
+         ======================================================== -->
+
+    <div class="idx-territorio">
+
+        <div class="idx-territorio-body reveal">
+
+            <div>
+                <div class="section-label">El Territorio</div>
+                <h2>
+                    Alcotas,<br>
+                    Teruel.
+                </h2>
+            </div>
+
+            <p>
+                A m&aacute;s de 1.100 metros, entre encinares y suelos calizos,
+                existe un lugar donde el tiempo pertenece a quienes lo trabajan.
+                Doce a&ntilde;os cultivando la relaci&oacute;n entre la tierra y la trufa negra.
+            </p>
+
+            <div class="idx-territorio-datos">
+                <div class="idx-territorio-dato">
+                    <span class="idx-territorio-dato-key">Altitud</span>
+                    <span class="idx-territorio-dato-val">+1.100 m</span>
+                </div>
+                <div class="idx-territorio-dato">
+                    <span class="idx-territorio-dato-key">Especie</span>
+                    <span class="idx-territorio-dato-val">Tuber melanosporum</span>
+                </div>
+                <div class="idx-territorio-dato">
+                    <span class="idx-territorio-dato-key">Temporada</span>
+                    <span class="idx-territorio-dato-val">Enero &mdash; Marzo</span>
+                </div>
+                <div class="idx-territorio-dato">
+                    <span class="idx-territorio-dato-key">Plantaci&oacute;n</span>
+                    <span class="idx-territorio-dato-val">2012</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         6. INSTAGRAM
+         ======================================================== -->
+
+    <section class="idx-instagram">
+
+        <div class="idx-instagram-header reveal">
+            <div class="section-label" style="justify-content: center; margin-bottom: 1.5rem;">S&iacute;guenos</div>
+            <a href="https://www.instagram.com/ezsencia.co"
+               target="_blank" rel="noopener"
+               class="idx-instagram-handle">@ezsencia.co</a>
+            <p class="idx-instagram-sub">
+                Desde los bosques de Alcotas.<br>
+                La temporada en im&aacute;genes.
+            </p>
+        </div>
+
+        <div class="idx-instagram-grid reveal">
+            <a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener" class="idx-instagram-item">
+                <img src="assets/trufas.JPG" alt="Ezsencia en Instagram">
+            </a>
+            <a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener" class="idx-instagram-item">
+                <img src="assets/pueblo.jpg" alt="Ezsencia en Instagram">
+            </a>
+            <a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener" class="idx-instagram-item">
+                <img src="assets/caja_abierta.png" alt="Ezsencia en Instagram">
+            </a>
+        </div>
+
+        <a href="https://www.instagram.com/ezsencia.co"
+           target="_blank" rel="noopener"
+           class="idx-instagram-cta reveal">Ver perfil en Instagram</a>
+
+    </section>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <footer>
+
+        <div class="footer-logo">EZSENCIA</div>
+
+        <ul class="footer-links">
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mailto:contacto@ezsencia.com">contacto@ezsencia.com</a></li>
+        </ul>
+
+        <p class="footer-copy">&copy; 2026 EZSENCIA. Alcotas, Teruel.</p>
+
+    </footer>
+
+
+    <!-- ========================================================
+         JAVASCRIPT
+         ======================================================== -->
+
+    <script>
+
+        /* ── Cursor personalizado (solo escritorio) ──────── */
+        var cursor = document.getElementById('cursor');
+        var ring   = document.getElementById('cursorRing');
+
+        if (cursor && ring) {
+            var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top  = mouseY + 'px';
+            });
+
+            (function animateRing() {
+                ringX += (mouseX - ringX) * 0.12;
+                ringY += (mouseY - ringY) * 0.12;
+                ring.style.left = ringX + 'px';
+                ring.style.top  = ringY + 'px';
+                requestAnimationFrame(animateRing);
+            })();
+
+            document.querySelectorAll('a, button').forEach(function (el) {
+                el.addEventListener('mouseenter', function () {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                    ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
+                });
+                el.addEventListener('mouseleave', function () {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    ring.style.transform   = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        }
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            observer.observe(el);
+        });
+
+        const hamburger   = document.getElementById('navHamburger');
+        const drawer      = document.getElementById('navMobileDrawer');
+        const backdrop    = document.getElementById('navBackdrop');
+        const drawerClose = document.getElementById('navMobileClose');
+
+        function openMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'true');
+            drawer.setAttribute('aria-hidden', 'false');
+            drawer.classList.add('open');
+            backdrop.classList.add('open');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+            drawerClose.focus();
+        }
+
+        function closeMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'false');
+            drawer.setAttribute('aria-hidden', 'true');
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+            hamburger.focus();
+        }
+
+        hamburger.addEventListener('click', openMobileMenu);
+        drawerClose.addEventListener('click', closeMobileMenu);
+        backdrop.addEventListener('click', closeMobileMenu);
+        drawer.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) closeMobileMenu();
+        });
+
+    </script>
+
+
+</body>
+</html>

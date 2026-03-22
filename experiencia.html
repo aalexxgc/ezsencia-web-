@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- ============================================================
+     EZSENCIA — La Experiencia
+     ============================================================ -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Experiencia EZSENCIA. Encuentros privados en los truferos de Alcotas. Gastronomía, territorio y ritual.">
+
+    <meta property="og:title"       content="La Experiencia — EZSENCIA">
+    <meta property="og:description" content="Encuentros privados en los truferos de Alcotas, Teruel.">
+    <meta property="og:image"       content="assets/og-image.jpg">
+    <meta property="og:type"        content="website">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <title>La Experiencia — EZSENCIA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* ====================================================
+           HERO — LA EXPERIENCIA
+           ==================================================== */
+
+        .exp-page-hero {
+            height:          100vh;
+            min-height:      600px;
+            display:         flex;
+            flex-direction:  column;
+            justify-content: flex-end;
+            padding:         0 3rem 6rem;
+            position:        relative;
+            overflow:        hidden;
+            background:      #0e0d0b;
+        }
+
+        .exp-page-hero-bg {
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(
+                ellipse 80% 60% at 30% 60%,
+                rgba(154, 125, 74, 0.08) 0%,
+                transparent 60%
+            );
+        }
+
+        .exp-page-hero-video {
+            position:   absolute;
+            inset:      0;
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            opacity:    0.9;
+            display:    block;
+        }
+
+        .exp-page-hero-overlay {
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(
+                180deg,
+                rgba(10,9,7,0.15) 0%,
+                rgba(10,9,7,0.48) 55%,
+                rgba(10,9,7,0.82) 100%
+            );
+        }
+
+        .exp-page-hero-content {
+            position:   relative;
+            z-index:    2;
+            max-width:  700px;
+        }
+
+        .exp-page-hero-eyebrow {
+            font-size:      0.65rem;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.75;
+            font-family:    'Lato', sans-serif;
+            font-weight:    300;
+            margin-bottom:  2rem;
+            opacity:        0;
+            animation:      fadeUp 1s 0.4s forwards;
+        }
+
+        .exp-page-hero-title {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(4rem, 9vw, 8rem);
+            font-weight:    300;
+            line-height:    0.92;
+            letter-spacing: -0.02em;
+            color:          #f5f0e8;
+            margin-bottom:  2.2rem;
+            opacity:        0;
+            animation:      fadeUp 1s 0.7s forwards;
+            text-shadow:    0 2px 30px rgba(0,0,0,0.5);
+        }
+
+        .exp-page-hero-sub {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1.1rem, 2vw, 1.4rem);
+            font-style:     italic;
+            font-weight:    300;
+            color:          rgba(245,240,232,0.88);
+            line-height:    1.8;
+            max-width:      480px;
+            opacity:        0;
+            animation:      fadeUp 1s 1s forwards;
+            text-shadow:    0 1px 14px rgba(0,0,0,0.5);
+        }
+
+        /* ====================================================
+           INTRO NARRATIVA
+           ==================================================== */
+
+        .exp-intro-block {
+            background:  var(--fondo);
+            padding:     10rem 3rem;
+            text-align:  center;
+        }
+
+        .exp-intro-inner {
+            max-width: 680px;
+            margin:    0 auto;
+        }
+
+        .exp-intro-inner h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2.2rem, 4vw, 3.5rem);
+            font-weight:   300;
+            font-style:    italic;
+            line-height:   1.25;
+            color:         var(--tinta);
+            margin-bottom: 2.8rem;
+        }
+
+        .exp-intro-inner p {
+            font-size:     1rem;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.6rem;
+        }
+
+        /* ====================================================
+           GALERÍA CINEMATOGRÁFICA
+           ==================================================== */
+
+        .exp-cinema-gallery {
+            display:        grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows:    560px 360px;
+            gap:            3px;
+            background:     #0e0d0b;
+        }
+
+        .exp-cinema-item {
+            position:   relative;
+            overflow:   hidden;
+        }
+
+        .exp-cinema-item:first-child {
+            grid-row: span 2;
+        }
+
+        .exp-cinema-item img {
+            position:   absolute;
+            inset:      0;
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            filter:     brightness(0.88) contrast(1.05);
+        }
+
+        .exp-cinema-item:hover img { transform: scale(1.04); }
+
+        .exp-cinema-overlay {
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(180deg, transparent 50%, rgba(10,9,7,0.6) 100%);
+        }
+
+        .exp-cinema-label {
+            position:       absolute;
+            bottom:         2rem;
+            left:           2rem;
+            z-index:        2;
+            font-size:      0.62rem;
+            letter-spacing: 0.36em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.65);
+            font-family:    'Lato', sans-serif;
+        }
+
+        /* ====================================================
+           TIMELINE CINEMATOGRÁFICO
+           ==================================================== */
+
+        .exp-timeline-block {
+            background: var(--fondo-alt);
+            padding:    10rem 3rem;
+        }
+
+        .exp-timeline-header {
+            max-width:    680px;
+            margin:       0 auto 7rem;
+            text-align:   center;
+        }
+
+        .exp-timeline-header h2 {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+            color:       var(--tinta);
+            line-height: 1.2;
+        }
+
+        .exp-timeline-list {
+            max-width:      960px;
+            margin:         0 auto;
+            display:        grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:            0;
+            border-left:    1px solid var(--borde);
+        }
+
+        .exp-timeline-step {
+            padding:        4rem 3.5rem;
+            border-right:   1px solid var(--borde);
+            border-bottom:  1px solid var(--borde);
+            transition:     background 0.4s;
+        }
+
+        .exp-timeline-step:hover { background: var(--fondo); }
+
+        .exp-timeline-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      3.5rem;
+            font-weight:    300;
+            color:          var(--dorado);
+            opacity:        0.3;
+            line-height:    1;
+            margin-bottom:  2rem;
+        }
+
+        .exp-timeline-title {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.3rem;
+            font-weight:    400;
+            color:          var(--tinta);
+            letter-spacing: 0.04em;
+            margin-bottom:  1rem;
+        }
+
+        .exp-timeline-desc {
+            font-size:   0.88rem;
+            line-height: 1.85;
+            color:       var(--tinta-fina);
+        }
+
+        /* ====================================================
+           GASTRONOMÍA — split oscuro
+           ==================================================== */
+
+        .exp-gastro {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   0;
+            background:            #0e0d0b;
+            min-height:            520px;
+        }
+
+        .exp-gastro-text {
+            padding:         8rem 5rem;
+            display:         flex;
+            flex-direction:  column;
+            justify-content: center;
+        }
+
+        .exp-gastro-text .section-label { color: var(--dorado); opacity: 0.7; }
+
+        .exp-gastro-text h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            font-style:    italic;
+            color:         rgba(245,240,232,0.9);
+            line-height:   1.2;
+            margin-bottom: 2.4rem;
+        }
+
+        .exp-gastro-text p {
+            font-size:     0.95rem;
+            line-height:   2;
+            color:         rgba(245,240,232,0.42);
+            margin-bottom: 1.4rem;
+            max-width:     440px;
+        }
+
+        .exp-gastro-img {
+            position:   relative;
+            overflow:   hidden;
+            min-height: 420px;
+        }
+
+        .exp-gastro-img img {
+            position:   absolute;
+            inset:      0;
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            opacity:    0.7;
+            transition: transform 0.9s ease;
+        }
+
+        .exp-gastro-img:hover img { transform: scale(1.03); }
+
+        /* ====================================================
+           COMUNIDAD
+           ==================================================== */
+
+        .exp-comunidad {
+            background:  var(--fondo);
+            padding:     10rem 3rem;
+            text-align:  center;
+        }
+
+        .exp-comunidad-inner {
+            max-width: 640px;
+            margin:    0 auto;
+        }
+
+        .exp-comunidad-inner h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            color:         var(--tinta);
+            line-height:   1.2;
+            margin-bottom: 2.4rem;
+        }
+
+        .exp-comunidad-inner p {
+            font-size:     1rem;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.6rem;
+        }
+
+        /* ====================================================
+           RESPONSIVE
+           ==================================================== */
+
+        @media (max-width: 900px) {
+            .exp-page-hero        { padding: 0 1.5rem 5rem; }
+
+            .exp-intro-block      { padding: 6rem 1.5rem; }
+
+            .exp-cinema-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows:    repeat(5, 260px);
+            }
+            .exp-cinema-item:first-child { grid-row: span 1; }
+
+            .exp-timeline-block   { padding: 6rem 1.5rem; }
+            .exp-timeline-list    { grid-template-columns: 1fr; border-left: none; }
+            .exp-timeline-step    { border: none; border-bottom: 1px solid var(--borde); padding: 3rem 0; }
+            .exp-timeline-step:last-child { border-bottom: none; }
+
+            .exp-gastro           { grid-template-columns: 1fr; }
+            .exp-gastro-text      { padding: 5rem 1.5rem; order: 2; }
+            .exp-gastro-img       { min-height: 300px; order: 1; }
+
+            .exp-comunidad        { padding: 6rem 1.5rem; }
+        }
+
+        /* ====================================================
+           EL CLUB ESENCIA — 4 momentos
+           ==================================================== */
+
+        .club-intro-sub {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(1.1rem, 1.8vw, 1.4rem);
+            font-style:    italic;
+            font-weight:   300;
+            color:         rgba(245,240,232,0.45);
+            margin-top:    1.5rem;
+            line-height:   1.8;
+        }
+
+        .club-intro {
+            background:      #0e0d0b;
+            padding:         10rem 3rem;
+            text-align:      center;
+            position:        relative;
+            overflow:        hidden;
+        }
+
+        .club-intro::before {
+            content:    '';
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(154,125,74,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .club-intro-inner {
+            max-width:  700px;
+            margin:     0 auto;
+            position:   relative;
+            z-index:    1;
+        }
+
+        .club-intro-inner h2 {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(2.5rem, 5vw, 4.5rem);
+            font-weight:    300;
+            color:          rgba(245,240,232,0.88);
+            line-height:    1.1;
+            letter-spacing: -0.01em;
+            margin-bottom:  2.8rem;
+        }
+
+        .club-intro-inner p {
+            font-size:   0.95rem;
+            line-height: 2;
+            color:       rgba(245,240,232,0.32);
+            max-width:   520px;
+            margin:      0 auto;
+        }
+
+        /* Cada momento */
+        .club-moment {
+            padding:    10rem 3rem;
+            position:   relative;
+        }
+
+        .club-moment:nth-child(odd)  { background: var(--fondo); }
+        .club-moment:nth-child(even) { background: var(--fondo-alt); }
+
+        .club-moment-inner {
+            max-width:             960px;
+            margin:                0 auto;
+            display:               grid;
+            grid-template-columns: 140px 1fr;
+            gap:                   5rem;
+            align-items:           start;
+        }
+
+        .club-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      6rem;
+            font-weight:    300;
+            color:          var(--dorado);
+            opacity:        0.18;
+            line-height:    1;
+            letter-spacing: -0.03em;
+            padding-top:    0.2rem;
+        }
+
+        .club-body { max-width: 580px; }
+
+        .club-body .section-label { margin-bottom: 1.8rem; }
+
+        .club-title {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            line-height:   1.1;
+            color:         var(--tinta);
+            margin-bottom: 1rem;
+        }
+
+        .club-sub {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.15rem;
+            font-style:     italic;
+            font-weight:    300;
+            color:          var(--dorado);
+            opacity:        0.75;
+            line-height:    1.7;
+            margin-bottom:  2.4rem;
+        }
+
+        .club-body p {
+            font-size:     0.97rem;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.4rem;
+            max-width:     520px;
+        }
+
+        .club-body p:last-child { margin-bottom: 0; }
+
+        /* Imagen dentro de cada momento */
+        .club-moment-img {
+            max-width:  960px;
+            margin:     4rem auto 0;
+            overflow:   hidden;
+        }
+
+        .club-moment-img img {
+            width:      100%;
+            height:     auto;
+            display:    block;
+            filter:     brightness(0.92);
+            transition: filter 0.6s ease;
+        }
+
+        .club-moment-img img:hover { filter: brightness(1); }
+
+        /* Dos fotos lado a lado */
+        .club-moment-imgs {
+            max-width: 960px;
+            margin:    4rem auto 0;
+            display:   grid;
+            grid-template-columns: 1fr 1fr;
+            gap:       1.5rem;
+        }
+
+        .club-moment-imgs-item {
+            overflow: hidden;
+        }
+
+        .club-moment-imgs-item img {
+            width:       100%;
+            height:      420px;
+            object-fit:  cover;
+            display:     block;
+            filter:      brightness(0.9);
+            transition:  filter 0.6s ease, transform 0.6s ease;
+        }
+
+        .club-moment-imgs-item img:hover {
+            filter:    brightness(1);
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 900px) {
+            .club-moment-img img  { height: auto; }
+            .club-moment-imgs     { grid-template-columns: 1fr; gap: 1rem; }
+            .club-moment-imgs-item img { height: 260px; }
+        }
+
+        /* Separador entre momentos */
+        .club-divider {
+            width:      1px;
+            height:     80px;
+            background: linear-gradient(180deg, transparent, var(--borde), transparent);
+            margin:     0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .club-intro             { padding: 7rem 1.5rem; }
+            .club-moment            { padding: 6rem 1.5rem; }
+            .club-moment-inner      { grid-template-columns: 1fr; gap: 0; }
+            .club-num               { font-size: 4rem; margin-bottom: 1.5rem; }
+        }
+
+        /* ====================================================
+           BOTÓN DESCUBRIR
+           ==================================================== */
+
+        .club-descubrir {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.8rem;
+            margin-top:      2.8rem;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.62rem;
+            letter-spacing:  0.3em;
+            text-transform:  uppercase;
+            color:           var(--tinta);
+            background:      none;
+            border:          none;
+            border-bottom:   1px solid var(--borde);
+            padding-bottom:  0.35rem;
+            cursor:          pointer;
+            transition:      border-color 0.3s, color 0.3s, gap 0.3s;
+        }
+
+        .club-descubrir::after {
+            content:    '→';
+            font-size:  0.75rem;
+            transition: transform 0.3s;
+        }
+
+        .club-descubrir:hover {
+            border-color: var(--tinta);
+            gap:          1.2rem;
+        }
+
+        /* ====================================================
+           MODAL SYSTEM
+           ==================================================== */
+
+        .exp-modal-overlay {
+            position:       fixed;
+            inset:          0;
+            z-index:        900;
+            background:     rgba(20, 18, 14, 0.72);
+            backdrop-filter: blur(6px);
+            opacity:        0;
+            pointer-events: none;
+            transition:     opacity 0.5s ease;
+            display:        flex;
+            align-items:    center;
+            justify-content: center;
+            padding:        2rem;
+        }
+
+        .exp-modal-overlay.is-open {
+            opacity:        1;
+            pointer-events: all;
+        }
+
+        .exp-modal {
+            background:    var(--fondo);
+            width:         100%;
+            max-width:     1000px;
+            max-height:    88vh;
+            overflow-y:    auto;
+            position:      relative;
+            transform:     translateY(24px) scale(0.97);
+            opacity:       0;
+            transition:    transform 0.5s cubic-bezier(0.16,1,0.3,1),
+                           opacity 0.5s ease;
+        }
+
+        .exp-modal-overlay.is-open .exp-modal {
+            transform: translateY(0) scale(1);
+            opacity:   1;
+        }
+
+        .exp-modal-img {
+            width:      100%;
+            height:     320px;
+            object-fit: cover;
+            display:    block;
+            filter:     brightness(0.9);
+        }
+
+        .exp-modal-body {
+            padding: 3.5rem 4rem 4rem;
+        }
+
+        .exp-modal-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.6rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.8;
+            margin-bottom:  1.4rem;
+        }
+
+        .exp-modal-title {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight:    400;
+            font-style:     italic;
+            line-height:    1.15;
+            color:          var(--tinta);
+            margin-bottom:  2rem;
+        }
+
+        .exp-modal-sep {
+            width:         2.5rem;
+            height:        1px;
+            background:    var(--dorado);
+            opacity:       0.5;
+            margin-bottom: 2rem;
+        }
+
+        .exp-modal-text {
+            font-size:   0.95rem;
+            line-height: 2;
+            color:       var(--tinta-suave);
+        }
+
+        .exp-modal-close {
+            position:   absolute;
+            top:        1.4rem;
+            right:      1.6rem;
+            width:      2rem;
+            height:     2rem;
+            display:    flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border:     none;
+            cursor:     pointer;
+            color:      rgba(245,240,232,0.7);
+            font-size:  1.1rem;
+            transition: color 0.3s, transform 0.3s;
+            z-index:    2;
+        }
+
+        .exp-modal-close:hover {
+            color:     rgba(245,240,232,1);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 600px) {
+            .exp-modal-body  { padding: 2.5rem 1.8rem 3rem; }
+            .exp-modal-img   { height: 220px; }
+        }
+
+        /* ====================================================
+           MODAL CAJA FUNDADORA — estructura editorial rica
+           ==================================================== */
+
+        /* Hero del modal */
+        .mcaja-hero {
+            position:   relative;
+            height:     52vh;
+            min-height: 340px;
+            overflow:   hidden;
+        }
+
+        .mcaja-hero-img {
+            position:   absolute;
+            inset:      0;
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            object-position: center 40%;
+            filter:     brightness(0.62);
+            transition: transform 8s ease;
+        }
+
+        .exp-modal-overlay.is-open .mcaja-hero-img { transform: scale(1.04); }
+
+        .mcaja-hero-overlay {
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(
+                180deg,
+                rgba(20,18,14,0.1)  0%,
+                rgba(20,18,14,0.55) 100%
+            );
+        }
+
+        .mcaja-hero-text {
+            position:        absolute;
+            inset:           0;
+            display:         flex;
+            flex-direction:  column;
+            align-items:     center;
+            justify-content: flex-end;
+            padding:         3.5rem 3rem;
+            text-align:      center;
+            z-index:         2;
+        }
+
+        .mcaja-hero-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.55);
+            margin-bottom:  1.2rem;
+        }
+
+        .mcaja-hero-title {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight:    400;
+            font-style:     italic;
+            line-height:    1.15;
+            color:          #f5f0e8;
+            margin-bottom:  1.2rem;
+        }
+
+        .mcaja-hero-sub {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.72rem;
+            font-weight:    300;
+            letter-spacing: 0.18em;
+            color:          rgba(245,240,232,0.65);
+            line-height:    2;
+        }
+
+        /* Intro */
+        .mcaja-intro {
+            padding:    4.5rem 5rem 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .mcaja-intro p {
+            font-family: 'EB Garamond', serif;
+            font-size:   1.12rem;
+            font-weight: 400;
+            line-height: 2;
+            color:       var(--tinta-suave);
+            max-width:   580px;
+            margin:      0 auto 1.2rem;
+        }
+
+        .mcaja-intro p:last-child { margin-bottom: 0; }
+
+        .mcaja-intro-frase {
+            font-family: 'Playfair Display', serif !important;
+            font-style:  italic !important;
+            font-size:   1.25rem !important;
+            color:       var(--tinta) !important;
+            margin-top:  2rem !important;
+        }
+
+        /* Grid de contenido */
+        .mcaja-grid {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            border-top:            1px solid var(--borde);
+        }
+
+        .mcaja-item {
+            border-right:  1px solid var(--borde);
+            border-bottom: 1px solid var(--borde);
+            overflow:      hidden;
+        }
+
+        .mcaja-item:nth-child(even) { border-right: none; }
+
+        .mcaja-item-img {
+            width:      100%;
+            height:     200px;
+            object-fit: cover;
+            display:    block;
+            filter:     brightness(0.88);
+            transition: filter 0.6s ease, transform 0.7s ease;
+        }
+
+        .mcaja-item:hover .mcaja-item-img {
+            filter:    brightness(1);
+            transform: scale(1.03);
+        }
+
+        .mcaja-item-body {
+            padding: 2.2rem 2.5rem 2.8rem;
+        }
+
+        .mcaja-item-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      0.75rem;
+            font-style:     italic;
+            color:          var(--dorado);
+            opacity:        0.6;
+            letter-spacing: 0.12em;
+            margin-bottom:  0.8rem;
+        }
+
+        .mcaja-item-title {
+            font-family:   'Playfair Display', serif;
+            font-size:     1rem;
+            font-weight:   400;
+            color:         var(--tinta);
+            line-height:   1.4;
+            margin-bottom: 1rem;
+        }
+
+        .mcaja-item-desc {
+            font-size:   0.88rem;
+            line-height: 1.9;
+            color:       var(--tinta-suave);
+        }
+
+        /* Cierre */
+        .mcaja-cierre {
+            padding:       5rem 5rem 5.5rem;
+            text-align:    center;
+            background:    var(--tinta);
+        }
+
+        .mcaja-cierre p {
+            font-family: 'Playfair Display', serif;
+            font-size:   clamp(1rem, 2vw, 1.35rem);
+            font-weight: 400;
+            font-style:  italic;
+            line-height: 1.9;
+            color:       rgba(245,240,232,0.75);
+            max-width:   520px;
+            margin:      0 auto;
+        }
+
+        .mcaja-cierre-final {
+            color:       rgba(245,240,232,0.4) !important;
+            font-size:   0.62rem !important;
+            font-family: 'Lato', sans-serif !important;
+            font-style:  normal !important;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            margin-top:  2.8rem !important;
+        }
+
+        /* ── Modal responsive ─────────────────────── */
+
+        @media (max-width: 700px) {
+            .mcaja-grid      { grid-template-columns: 1fr; }
+            .mcaja-item      { border-right: none; }
+            .mcaja-intro     { padding: 3rem 1.5rem; }
+            .mcaja-cierre    { padding: 3rem 1.5rem; }
+            .mcaja-item-body { padding: 1.8rem 1.5rem 2.2rem; }
+            .mcaja-item-img  { height: 180px; }
+        }
+
+        @media (max-width: 600px) {
+            /* Overlay sin padding lateral → modal fullscreen */
+            .exp-modal-overlay { padding: 0; align-items: flex-end; }
+            .exp-modal {
+                max-height:    94vh;
+                border-radius: 0;
+            }
+
+            /* Hero más compacto */
+            .mcaja-hero          { height: 36vh; min-height: 220px; }
+            .mcaja-hero-title    { font-size: clamp(1.2rem, 5.5vw, 1.8rem); }
+            .mcaja-hero-eyebrow  { font-size: 0.52rem; }
+            .mcaja-hero-sub      { font-size: 0.65rem; }
+
+            /* Intro */
+            .mcaja-intro         { padding: 2.5rem 1.2rem 2rem; }
+            .mcaja-intro p       { font-size: 0.98rem; }
+
+            /* Items */
+            .mcaja-item-img      { height: 160px; }
+            .mcaja-item-body     { padding: 1.4rem 1.2rem 1.8rem; }
+            .mcaja-item-title    { font-size: 0.92rem; }
+            .mcaja-item-desc     { font-size: 0.82rem; }
+
+            /* Cierre */
+            .mcaja-cierre        { padding: 2.5rem 1.2rem 3rem; }
+            .mcaja-cierre p      { font-size: 1rem; }
+
+            /* Botón cerrar siempre visible */
+            .exp-modal-close     { top: 1rem; right: 1rem; }
+
+            /* Otros modales en móvil */
+            .exp-modal-body      { padding: 2rem 1.2rem 2.5rem; }
+            .exp-modal-img       { height: 200px; }
+            .exp-modal-title     { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+
+            /* Botón descubrir táctil */
+            .club-descubrir      { min-height: 44px; padding-bottom: 0.5rem; }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- ========================================================
+         NAVEGACIÓN
+         ======================================================== -->
+
+    <nav id="navbar">
+
+        <a href="index.html" class="nav-logo">EZSENCIA</a>
+
+        <ul class="nav-links">
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-cta">Solicitar Invitaci&oacute;n</a>
+
+        <button class="nav-hamburger"
+                id="navHamburger"
+                aria-label="Abrir men&uacute;"
+                aria-expanded="false"
+                aria-controls="navMobileDrawer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </nav>
+
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <div class="nav-mobile-drawer"
+         id="navMobileDrawer"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true"
+         aria-label="Men&uacute; de navegaci&oacute;n">
+
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+
+        <ul class="nav-mobile-links">
+            <li><a href="index.html">Ezsencia</a></li>
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
+        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 25 miembros</p>
+
+    </div>
+
+
+    <!-- ========================================================
+         HERO
+         ======================================================== -->
+
+    <header class="exp-page-hero">
+        <iframe class="yt-bg"
+                src="https://www.youtube.com/embed/3VS1aarcTxc?autoplay=1&mute=1&loop=1&playlist=3VS1aarcTxc&controls=0&rel=0&modestbranding=1&playsinline=1"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                title="Ezsencia experiencia"></iframe>
+        <div class="exp-page-hero-overlay"></div>
+        <div class="exp-page-hero-content">
+            <p class="exp-page-hero-eyebrow">Ezsencia &nbsp;&middot;&nbsp; Truffle Society</p>
+            <h1 class="exp-page-hero-title">La<br>Experiencia</h1>
+            <p class="exp-page-hero-sub">
+                No es un evento.<br>Es un instante que no puede simularse.
+            </p>
+        </div>
+    </header>
+
+
+    <!-- ========================================================
+         EL CLUB ESENCIA
+         ======================================================== -->
+
+    <section class="club-intro reveal">
+        <div class="section-label" style="justify-content: center;">El Club</div>
+        <h2>El Club Esencia</h2>
+        <p class="club-intro-sub">
+            Cuatro momentos.<br>
+            Una pertenencia que no se compra.
+        </p>
+    </section>
+
+
+    <!-- I. La Caja Fundadora -->
+
+    <div class="club-divider"></div>
+
+    <section class="club-moment reveal">
+        <div class="club-moment-inner">
+            <div class="club-num">I</div>
+            <div class="club-body">
+                <div class="section-label">El Primer Gesto</div>
+                <h3 class="club-title">La Caja Fundadora</h3>
+                <p class="club-sub">
+                    Un objeto curado. Numerado. Solo 20 en el mundo.
+                </p>
+                <p>
+                    El primer gesto del club hacia sus miembros es tangible. Cada socio fundador
+                    recibe una caja numerada y firmada: dentro, trufa negra fresca de Alcotas,
+                    un laminador de acero, y una carta manuscrita sobre el origen de esa pieza concreta.
+                </p>
+                <p>
+                    No es un regalo de bienvenida. Es el inicio de una relaci&oacute;n con el territorio
+                    que comienza antes del primer encuentro. La caja no se vende. No se reproduce.
+                    Existe solo para los veinte.
+                </p>
+                <button class="club-descubrir" data-modal="modal-caja">Descubrir</button>
+            </div>
+        </div>
+        <div class="club-moment-img">
+            <img src="assets/caja_abierta.png" alt="La Caja Fundadora EZSENCIA &mdash; abierta">
+        </div>
+    </section>
+
+    <div class="club-divider"></div>
+
+
+    <!-- II. El Origen -->
+
+    <section class="club-moment reveal">
+        <div class="club-moment-inner">
+            <div class="club-num">II</div>
+            <div class="club-body">
+                <div class="section-label">El Encuentro Anual</div>
+                <h3 class="club-title">El Origen</h3>
+                <p class="club-sub">
+                    Una vez al a&ntilde;o. En temporada. En el campo.
+                </p>
+                <p>
+                    Los miembros acceden a la finca de Alcotas en plena temporada de recolecci&oacute;n.
+                    Con los perros, entre encinares y suelo calizo a m&aacute;s de 1.200 metros,
+                    el grupo peque&ntilde;o participa en la b&uacute;squeda: la espera, el instinto del
+                    animal, el silencio antes del hallazgo.
+                </p>
+                <p>
+                    El d&iacute;a cierra con una mesa gastron&oacute;mica en la finca: trufa reci&eacute;n
+                    extra&iacute;da, cocina de proximidad, conversaci&oacute;n sin protocolo.
+                    Del suelo a la mesa en horas. No existe experiencia comparable.
+                </p>
+                <button class="club-descubrir" data-modal="modal-origen">Descubrir</button>
+            </div>
+        </div>
+        <div class="club-moment-img">
+            <img src="assets/experiencia.jpg" alt="El campo de Alcotas en temporada de trufa">
+        </div>
+    </section>
+
+    <div class="club-divider"></div>
+
+
+    <!-- III. La Mesa Esencia -->
+
+    <section class="club-moment reveal">
+        <div class="club-moment-inner">
+            <div class="club-num">III</div>
+            <div class="club-body">
+                <div class="section-label">El Encuentro Gastron&oacute;mico</div>
+                <h3 class="club-title">La Mesa Esencia</h3>
+                <p class="club-sub">
+                    Un restaurante. Un men&uacute; &uacute;nico. Solo para el club.
+                </p>
+                <p>
+                    Una vez al a&ntilde;o, fuera de temporada de cosecha, el club se re&uacute;ne
+                    en un espacio cuidadosamente elegido. Un chef trabaja un men&uacute; dise&ntilde;ado
+                    exclusivamente para la ocasi&oacute;n: la trufa Ezsencia como eje, cada plato
+                    como argumento.
+                </p>
+                <p>
+                    No es una cena de cl&iacute;entes. Es la celebraci&oacute;n de una comunidad que
+                    comparte algo concreto: la convicci&oacute;n de que el origen de lo que se come
+                    no es un detalle. Es todo.
+                </p>
+                <button class="club-descubrir" data-modal="modal-mesa">Descubrir</button>
+            </div>
+        </div>
+        <div class="club-moment-img">
+            <img src="assets/hotel.jpg" alt="La Mesa Esencia &mdash; encuentro gastron&oacute;mico">
+        </div>
+    </section>
+
+    <div class="club-divider"></div>
+
+
+    <!-- IV. El Ritual de Invierno -->
+
+    <section class="club-moment reveal">
+        <div class="club-moment-inner">
+            <div class="club-num">IV</div>
+            <div class="club-body">
+                <div class="section-label">La Temporada</div>
+                <h3 class="club-title">El Ritual de Invierno</h3>
+                <p class="club-sub">
+                    Diciembre a marzo. Cada mes. En casa.
+                </p>
+                <p>
+                    Durante los cuatro meses de temporada alta de la <em>Tuber melanosporum</em>,
+                    cada miembro recibe en su domicilio un env&iacute;o mensual de trufa negra
+                    fresca de Alcotas: reci&eacute;n recogida, calibrada, envasada en el mismo d&iacute;a.
+                </p>
+                <p>
+                    El env&iacute;o incluye una nota de la cosecha &mdash; variaci&oacute;n de aroma,
+                    condiciones del suelo esa semana, sugerencia de uso. No es un pedido.
+                    Es una continuaci&oacute;n del ritual que empez&oacute; en el campo.
+                </p>
+                <button class="club-descubrir" data-modal="modal-ritual">Descubrir</button>
+            </div>
+        </div>
+        <div class="club-moment-img">
+            <img src="assets/trufas.jpg" alt="El Ritual de Invierno &mdash; trufa fresca de temporada">
+        </div>
+    </section>
+
+    <div class="club-divider"></div>
+
+
+    <!-- ========================================================
+         CTA CIERRE
+         ======================================================== -->
+
+    <section class="cta-closing reveal">
+        <p class="cta-closing-label">Acceso</p>
+        <h2>Solicitar invitaci&oacute;n a la<br>Edici&oacute;n Fundadores 2026</h2>
+        <p class="cta-closing-sub">
+            25 plazas. Selecci&oacute;n por afinidad.<br>
+            Sin compromiso de compra al solicitar.
+        </p>
+        <a href="acceso.html" class="cta-closing-btn">Solicitar invitaci&oacute;n</a>
+    </section>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <footer>
+
+        <div class="footer-logo">EZSENCIA</div>
+
+        <ul class="footer-links">
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mailto:contacto@ezsencia.com">contacto@ezsencia.com</a></li>
+        </ul>
+
+        <p class="footer-copy">&copy; 2026 EZSENCIA. Alcotas, Teruel.</p>
+
+    </footer>
+
+
+    <!-- ========================================================
+         JAVASCRIPT
+         ======================================================== -->
+
+    <!-- ========================================================
+         MODALES DE EXPERIENCIA
+         ======================================================== -->
+
+    <!-- Modal I: La Caja Fundadora — editorial premium -->
+    <div class="exp-modal-overlay" id="modal-caja" role="dialog" aria-modal="true">
+        <div class="exp-modal">
+
+            <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
+
+            <!-- 1. HERO -->
+            <div class="mcaja-hero">
+                <img class="mcaja-hero-img" src="assets/caja_fundadora.png" alt="La Caja Fundadora EZSENCIA">
+                <div class="mcaja-hero-overlay"></div>
+                <div class="mcaja-hero-text">
+                    <p class="mcaja-hero-eyebrow">Edici&oacute;n Fundadores &nbsp;&middot;&nbsp; 2026</p>
+                    <h2 class="mcaja-hero-title">La Caja Fundadora &middot; El origen de todo</h2>
+                    <p class="mcaja-hero-sub">No es un env&iacute;o.<br>Es el inicio.</p>
+                </div>
+            </div>
+
+            <!-- 2. INTRODUCCIÓN -->
+            <div class="mcaja-intro">
+                <p>La Caja Fundadora es la primera experiencia f&iacute;sica de Ezsencia.</p>
+                <p>El momento en el que entras en el club y todo lo que representamos —territorio, tiempo y selecci&oacute;n— se materializa por primera vez.</p>
+                <p>Cada caja est&aacute; numerada y asignada a uno de los miembros de esta edici&oacute;n limitada.</p>
+                <p class="mcaja-intro-frase">Una pieza &uacute;nica. Personal. Irrepetible.</p>
+            </div>
+
+            <!-- 3. GRID DE CONTENIDO -->
+            <div class="mcaja-grid">
+
+                <div class="mcaja-item">
+                    <img class="mcaja-item-img" src="assets/trufas.JPG" alt="Trufa negra Ezsencia">
+                    <div class="mcaja-item-body">
+                        <p class="mcaja-item-num">01</p>
+                        <h3 class="mcaja-item-title">250 g de trufa negra extra<br><em style="font-size:0.85em;opacity:0.7;">Tuber melanosporum</em></h3>
+                        <p class="mcaja-item-desc">Seleccionada en su punto &oacute;ptimo de maduraci&oacute;n y recolectada en nuestros campos de Alcotas. M&aacute;xima calidad, aroma profundo y frescura real.</p>
+                    </div>
+                </div>
+
+                <div class="mcaja-item">
+                    <img class="mcaja-item-img" src="assets/ritual.png" alt="Laminador profesional Ezsencia">
+                    <div class="mcaja-item-body">
+                        <p class="mcaja-item-num">02</p>
+                        <h3 class="mcaja-item-title">Laminador profesional Ezsencia</h3>
+                        <p class="mcaja-item-desc">Dise&ntilde;ado para el ritual. Preciso, elegante y pensado para elevar cada plato al nivel que la trufa exige.</p>
+                    </div>
+                </div>
+
+                <div class="mcaja-item">
+                    <img class="mcaja-item-img" src="assets/abuela.JPG" alt="Carta de bienvenida">
+                    <div class="mcaja-item-body">
+                        <p class="mcaja-item-num">03</p>
+                        <h3 class="mcaja-item-title">Carta de bienvenida personalizada</h3>
+                        <p class="mcaja-item-desc">Un mensaje directo, &iacute;ntimo, que marca tu entrada en Ezsencia y el comienzo de la experiencia.</p>
+                    </div>
+                </div>
+
+                <div class="mcaja-item">
+                    <img class="mcaja-item-img" src="assets/circulo.png" alt="Tarjeta de miembro">
+                    <div class="mcaja-item-body">
+                        <p class="mcaja-item-num">04</p>
+                        <h3 class="mcaja-item-title">Tarjeta de miembro &middot; Edici&oacute;n Fundadores</h3>
+                        <p class="mcaja-item-desc">Tu identificaci&oacute;n dentro del club. Numerada y exclusiva, representa tu pertenencia a un c&iacute;rculo limitado.</p>
+                    </div>
+                </div>
+
+                <div class="mcaja-item" style="grid-column: 1 / -1; border-right: none;">
+                    <img class="mcaja-item-img" src="assets/caja_abierta.png" alt="Presentación premium" style="height:260px;">
+                    <div class="mcaja-item-body">
+                        <p class="mcaja-item-num">05</p>
+                        <h3 class="mcaja-item-title">Presentaci&oacute;n premium</h3>
+                        <p class="mcaja-item-desc">Una caja dise&ntilde;ada como objeto, no como packaging. Materiales nobles, est&eacute;tica minimalista y una construcci&oacute;n pensada para conservarse en el tiempo.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 4. CIERRE -->
+            <div class="mcaja-cierre">
+                <p>
+                    La Caja Fundadora no es un conjunto de elementos.<br>
+                    Es una declaraci&oacute;n.<br>
+                    El primer gesto.<br>
+                    El inicio del v&iacute;nculo.<br><br>
+                    La se&ntilde;al de que ya formas parte de algo<br>
+                    que no est&aacute; al alcance de todos.
+                </p>
+                <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Edici&oacute;n Fundadores 2026</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal II: El Origen -->
+    <div class="exp-modal-overlay" id="modal-origen" role="dialog" aria-modal="true">
+        <div class="exp-modal">
+            <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
+            <img class="exp-modal-img" src="assets/pueblo.jpg" alt="El Origen — Alcotas">
+            <div class="exp-modal-body">
+                <p class="exp-modal-label">II &nbsp;&middot;&nbsp; El Encuentro Anual</p>
+                <h2 class="exp-modal-title">El Origen</h2>
+                <div class="exp-modal-sep"></div>
+                <p class="exp-modal-text">
+                    Una vez al a&ntilde;o. En temporada. En el campo.<br><br>
+                    Los miembros acceden a la finca de Alcotas en plena recolecci&oacute;n.
+                    Con los perros, entre encinares a m&aacute;s de 1.200 metros,
+                    el grupo participa en la b&uacute;squeda: la espera, el instinto del animal,
+                    el silencio antes del hallazgo.<br><br>
+                    El d&iacute;a cierra con una mesa gastron&oacute;mica en la finca.<br>
+                    Del suelo a la mesa en horas.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal III: La Mesa Esencia -->
+    <div class="exp-modal-overlay" id="modal-mesa" role="dialog" aria-modal="true">
+        <div class="exp-modal">
+            <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
+            <img class="exp-modal-img" src="assets/hotel.jpg" alt="La Mesa Esencia">
+            <div class="exp-modal-body">
+                <p class="exp-modal-label">III &nbsp;&middot;&nbsp; El Encuentro Gastron&oacute;mico</p>
+                <h2 class="exp-modal-title">La Mesa Esencia</h2>
+                <div class="exp-modal-sep"></div>
+                <p class="exp-modal-text">
+                    Un restaurante. Un men&uacute; &uacute;nico. Solo para el club.<br><br>
+                    Una vez al a&ntilde;o, fuera de temporada de cosecha,
+                    el club se re&uacute;ne en un espacio cuidadosamente elegido.
+                    Un chef trabaja un men&uacute; dise&ntilde;ado exclusivamente para la ocasi&oacute;n:
+                    la trufa Ezsencia como eje, cada plato como argumento.<br><br>
+                    No es una cena de clientes.<br>
+                    Es la celebraci&oacute;n de una comunidad.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal IV: El Ritual de Invierno -->
+    <div class="exp-modal-overlay" id="modal-ritual" role="dialog" aria-modal="true">
+        <div class="exp-modal">
+            <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
+            <img class="exp-modal-img" src="assets/trufas.JPG" alt="El Ritual de Invierno">
+            <div class="exp-modal-body">
+                <p class="exp-modal-label">IV &nbsp;&middot;&nbsp; La Temporada</p>
+                <h2 class="exp-modal-title">El Ritual de Invierno</h2>
+                <div class="exp-modal-sep"></div>
+                <p class="exp-modal-text">
+                    Diciembre a marzo. Cada mes. En casa.<br><br>
+                    Durante los cuatro meses de temporada alta, cada miembro recibe
+                    un env&iacute;o mensual de trufa negra fresca de Alcotas:
+                    reci&eacute;n recogida, calibrada, envasada en el mismo d&iacute;a.<br><br>
+                    El env&iacute;o incluye una nota de la cosecha &mdash; aroma, condiciones del suelo,
+                    sugerencia de uso.<br>
+                    No es un pedido. Es una continuaci&oacute;n del ritual.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const cursor = document.getElementById('cursor');
+        const ring   = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', function (e) {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top  = mouseY + 'px';
+        });
+
+        (function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            ring.style.left = ringX + 'px';
+            ring.style.top  = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+
+        document.querySelectorAll('a, button').forEach(function (el) {
+            el.addEventListener('mouseenter', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                ring.style.transform   = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            observer.observe(el);
+        });
+
+        const hamburger   = document.getElementById('navHamburger');
+        const drawer      = document.getElementById('navMobileDrawer');
+        const backdrop    = document.getElementById('navBackdrop');
+        const drawerClose = document.getElementById('navMobileClose');
+
+        function openMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'true');
+            drawer.setAttribute('aria-hidden', 'false');
+            drawer.classList.add('open');
+            backdrop.classList.add('open');
+            document.body.classList.add('menu-open');
+            document.body.style.overflow = 'hidden';
+            drawerClose.focus();
+        }
+
+        function closeMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'false');
+            drawer.setAttribute('aria-hidden', 'true');
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.classList.remove('menu-open');
+            document.body.style.overflow = '';
+            hamburger.focus();
+        }
+
+        hamburger.addEventListener('click', openMobileMenu);
+        drawerClose.addEventListener('click', closeMobileMenu);
+        backdrop.addEventListener('click', closeMobileMenu);
+        drawer.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) closeMobileMenu();
+        });
+
+        /* ── Modales ─────────────────────────────────────── */
+
+        function openModal(id) {
+            const overlay = document.getElementById(id);
+            if (!overlay) return;
+            overlay.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(overlay) {
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.club-descubrir').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openModal(btn.dataset.modal);
+            });
+        });
+
+        document.querySelectorAll('.exp-modal-close').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                closeModal(btn.closest('.exp-modal-overlay'));
+            });
+        });
+
+        document.querySelectorAll('.exp-modal-overlay').forEach(function (overlay) {
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeModal(overlay);
+            });
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.exp-modal-overlay.is-open').forEach(closeModal);
+            }
+        });
+
+    </script>
+
+
+</body>
+</html>

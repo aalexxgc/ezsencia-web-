@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eventos EZSENCIA — Experiencias privadas en el trufero de Alcotas, Teruel.">
+    <title>Eventos — EZSENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav id="navbar" class="scrolled">
+        <a href="index.html" class="nav-logo">EZSENCIA</a>
+        <ul class="nav-links">
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+        <a href="acceso.html" class="nav-cta">Solicitar Invitaci&oacute;n</a>
+    </nav>
+
+    <!-- CABECERA -->
+    <section class="eventos-header">
+        <div class="section-label">Eventos 2026</div>
+        <h1 class="eventos-title">Dos encuentros.<br>Un mismo origen.</h1>
+        <p class="eventos-sub">
+            Cada año, dos experiencias privadas en el trufero de Alcotas.<br>
+            Limitadas. Irrepetibles. Sin guión.
+        </p>
+    </section>
+
+    <!-- GRID DE EVENTOS -->
+    <section class="eventos-grid-section">
+        <div class="eventos-grid">
+
+            <!-- EVENTO I -->
+            <a href="evento-origen.html" class="evento-card reveal">
+                <div class="evento-card-num">I</div>
+                <div class="evento-card-body">
+                    <div class="section-label">Enero — Marzo 2026</div>
+                    <h2>El Origen</h2>
+                    <p>
+                        Un día real en el trufero. Sin escenografía.<br>
+                        Solo tierra, perros y silencio.
+                    </p>
+                    <div class="evento-card-meta">
+                        <span>Alcotas, Teruel</span>
+                        <span>·</span>
+                        <span>Plazas limitadas</span>
+                    </div>
+                    <span class="evento-card-cta">Conocer el evento →</span>
+                </div>
+                <div class="evento-card-tag">Disponible</div>
+            </a>
+
+            <!-- EVENTO II -->
+            <div class="evento-card evento-card--pronto reveal">
+                <div class="evento-card-num">II</div>
+                <div class="evento-card-body">
+                    <div class="section-label">Fecha por confirmar</div>
+                    <h2>Próximamente</h2>
+                    <p>
+                        El segundo encuentro del año se anunciará<br>
+                        en exclusiva a los miembros fundadores.
+                    </p>
+                    <div class="evento-card-meta">
+                        <span>Alcotas, Teruel</span>
+                    </div>
+                    <span class="evento-card-cta">Solo para miembros</span>
+                </div>
+                <div class="evento-card-tag evento-card-tag--pronto">Próximamente</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">EZSENCIA</div>
+        <ul class="footer-links">
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="index.html#invitacion">Contacto</a></li>
+        </ul>
+        <p class="footer-copy">&copy; 2026 EZSENCIA. Alcotas, Teruel.</p>
+    </footer>
+
+    <style>
+        /* ── Página Eventos ───────────────────────────────── */
+
+        .eventos-header {
+            padding:    10rem 3rem 5rem;
+            max-width:  800px;
+        }
+
+        .eventos-title {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(3rem, 6vw, 5.5rem);
+            font-weight:   300;
+            line-height:   1.05;
+            color:         var(--tinta);
+            margin-bottom: 2rem;
+        }
+
+        .eventos-sub {
+            font-family: 'EB Garamond', serif;
+            font-size:   1.15rem;
+            font-style:  italic;
+            font-weight: 300;
+            color:       var(--tinta-suave);
+            line-height: 1.8;
+        }
+
+        .eventos-grid-section {
+            padding: 3rem 3rem 9rem;
+        }
+
+        .eventos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap:     2px;
+        }
+
+        .evento-card {
+            position:        relative;
+            padding:         4rem 3.5rem 3.5rem;
+            border:          1px solid var(--borde);
+            display:         flex;
+            flex-direction:  column;
+            text-decoration: none;
+            background:      var(--fondo);
+            transition:      background 0.5s;
+            cursor:          pointer;
+        }
+
+        .evento-card:not(.evento-card--pronto):hover {
+            background: var(--fondo-alt);
+        }
+
+        .evento-card--pronto {
+            background: var(--fondo-oliva);
+            cursor:     default;
+            opacity:    0.7;
+        }
+
+        .evento-card-num {
+            font-family:   'EB Garamond', serif;
+            font-size:     5rem;
+            font-weight:   300;
+            color:         var(--dorado);
+            opacity:       0.18;
+            line-height:   1;
+            margin-bottom: 2.5rem;
+        }
+
+        .evento-card-body h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            color:         var(--tinta);
+            margin-bottom: 1.2rem;
+            line-height:   1.1;
+        }
+
+        .evento-card-body p {
+            font-size:     0.88rem;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 2rem;
+        }
+
+        .evento-card-meta {
+            display:        flex;
+            gap:            0.7rem;
+            font-size:      0.58rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            margin-bottom:  2.5rem;
+        }
+
+        .evento-card-cta {
+            font-size:      0.58rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+        }
+
+        .evento-card-tag {
+            position:       absolute;
+            top:            2rem;
+            right:          2rem;
+            font-size:      0.5rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            border:         1px solid var(--dorado-suave);
+            padding:        0.4rem 0.8rem;
+        }
+
+        .evento-card-tag--pronto {
+            color:        var(--tinta-fina);
+            border-color: var(--borde);
+        }
+
+        @media (max-width: 768px) {
+            .eventos-grid { grid-template-columns: 1fr; }
+            .eventos-header { padding: 8rem 1.5rem 4rem; }
+            .eventos-grid-section { padding: 2rem 1.5rem 6rem; }
+        }
+    </style>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const ring   = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top  = mouseY + 'px';
+        });
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            ring.style.left = ringX + 'px';
+            ring.style.top  = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(function(el) { observer.observe(el); });
+    </script>
+
+</body>
+</html>

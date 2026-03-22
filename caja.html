@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- ============================================================
+     EZSENCIA — La Caja Fundadora
+     Truffle Society · Edición Fundadores 2026
+     ============================================================ -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Caja Fundadora EZSENCIA. Una cápsula de origen. Limitada, numerada, personal. Edición Fundadores 2026.">
+
+    <meta property="og:title"       content="La Caja Fundadora — EZSENCIA">
+    <meta property="og:description" content="No es un packaging. Es el primer gesto.">
+    <meta property="og:image"       content="assets/og-image.jpg">
+    <meta property="og:type"        content="website">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <title>La Caja Fundadora — EZSENCIA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* ====================================================
+           CAJA HERO — imagen principal Caja_fundadora.png
+           Ocupa casi toda la pantalla, fondo oscuro + imagen
+           centrada con efecto editorial.
+           ==================================================== */
+
+        .caja-hero {
+            min-height:      100vh;
+            display:         flex;
+            flex-direction:  column;
+            justify-content: flex-end;
+            padding:         0 3rem 6rem;
+            position:        relative;
+            overflow:        hidden;
+            background:      #0e0d0b;
+        }
+
+        /* Imagen Caja_fundadora.png como fondo del hero */
+        .caja-hero-img {
+            position:   absolute;
+            inset:      0;
+            z-index:    0;
+        }
+
+        .caja-hero-img img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            object-position: center 40%;
+            display:    block;
+            opacity:    0.72;
+            transition: transform 10s ease, opacity 1.2s ease;
+        }
+
+        .caja-hero:hover .caja-hero-img img {
+            transform: scale(1.025);
+        }
+
+        /* Degradado inferior para que el texto respire */
+        .caja-hero-overlay {
+            position:   absolute;
+            inset:      0;
+            z-index:    1;
+            background: linear-gradient(
+                180deg,
+                rgba(14, 13, 11, 0.0)   0%,
+                rgba(14, 13, 11, 0.08) 35%,
+                rgba(14, 13, 11, 0.55) 60%,
+                rgba(14, 13, 11, 0.92) 100%
+            );
+        }
+
+        /* Línea dorada decorativa en el borde superior del hero */
+        .caja-hero::after {
+            content:    '';
+            position:   absolute;
+            bottom:     0;
+            left:       3rem;
+            right:      3rem;
+            height:     1px;
+            background: linear-gradient(90deg, transparent, rgba(154,125,74,0.4), transparent);
+            z-index:    3;
+        }
+
+        .caja-back {
+            position:        absolute;
+            top:             calc(5rem + 1.5rem);
+            left:            3rem;
+            z-index:         3;
+            font-size:       0.62rem;
+            letter-spacing:  0.28em;
+            text-transform:  uppercase;
+            color:           rgba(245, 240, 232, 0.38);
+            text-decoration: none;
+            transition:      color 0.3s;
+        }
+
+        .caja-back:hover { color: var(--dorado); }
+
+        .caja-hero-content {
+            position:  relative;
+            z-index:   2;
+            max-width: 680px;
+        }
+
+        /* Badge numerado — arriba derecha */
+        .caja-hero-badge {
+            position:        absolute;
+            top:             calc(5rem + 1.5rem);
+            right:           3rem;
+            z-index:         3;
+            text-align:      right;
+        }
+
+        .caja-hero-badge-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      0.64rem;
+            letter-spacing: 0.36em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.7;
+        }
+
+        .caja-hero-title {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(3.8rem, 8.5vw, 7.5rem);
+            font-weight:    300;
+            line-height:    0.92;
+            letter-spacing: -0.02em;
+            color:          #f5f0e8;
+            margin-bottom:  2rem;
+            opacity:        0;
+            animation:      fadeUp 1s 0.5s forwards;
+        }
+
+        .caja-hero-sub {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(1rem, 1.8vw, 1.3rem);
+            font-style:    italic;
+            font-weight:   300;
+            color:         rgba(245, 240, 232, 0.6);
+            line-height:   1.85;
+            max-width:     380px;
+            opacity:       0;
+            animation:     fadeUp 1s 0.9s forwards;
+            margin-bottom: 3rem;
+        }
+
+        .caja-hero-cta {
+            display:         inline-block;
+            font-size:       0.68rem;
+            letter-spacing:  0.28em;
+            text-transform:  uppercase;
+            color:           rgba(245, 240, 232, 0.75);
+            border:          1px solid rgba(245, 240, 232, 0.25);
+            padding:         0.95rem 2.4rem;
+            text-decoration: none;
+            opacity:         0;
+            animation:       fadeUp 1s 1.2s forwards;
+            transition:      color 0.35s, border-color 0.35s;
+        }
+
+        .caja-hero-cta:hover {
+            color:        var(--dorado);
+            border-color: var(--dorado);
+        }
+
+        /* Scroll hint */
+        .caja-hero-scroll {
+            position:       absolute;
+            right:          3rem;
+            bottom:         6.5rem;
+            z-index:        3;
+            writing-mode:   vertical-rl;
+            font-size:      0.6rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color:          rgba(245, 240, 232, 0.28);
+            display:        flex;
+            align-items:    center;
+            gap:            0.8rem;
+        }
+
+        .caja-hero-scroll::before {
+            content:          '';
+            width:            1px;
+            height:           50px;
+            background:       rgba(245, 240, 232, 0.18);
+            animation:        lineGrow 2s 2s forwards;
+            transform:        scaleY(0);
+            transform-origin: top;
+        }
+
+
+        /* ====================================================
+           SECCIÓN: QUÉ ES
+           ==================================================== */
+
+        .caja-identity {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            gap:                   7rem;
+            align-items:           start;
+            background:            var(--fondo);
+        }
+
+        .caja-identity-text h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2.2rem, 4vw, 3.2rem);
+            font-weight:   300;
+            line-height:   1.15;
+            color:         var(--tinta);
+            margin-bottom: 2.5rem;
+        }
+
+        .caja-identity-text p {
+            font-size:     1rem;
+            font-weight:   400;
+            line-height:   2.1;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.4rem;
+        }
+
+        .caja-identity-text p:last-child { margin-bottom: 0; }
+
+        .caja-frases {
+            display:        flex;
+            flex-direction: column;
+            padding-top:    0.5rem;
+        }
+
+        .caja-frase {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(1.6rem, 2.8vw, 2.2rem);
+            font-weight:   300;
+            color:         var(--tinta);
+            line-height:   1.3;
+            padding:       1.8rem 0;
+            border-bottom: 1px solid var(--borde);
+            transition:    color 0.3s;
+        }
+
+        .caja-frase:first-child { border-top: 1px solid var(--borde); }
+        .caja-frase:hover       { color: var(--dorado); }
+
+
+        /* ====================================================
+           SECCIÓN: GALERÍA DÍPTICO
+           Las dos imágenes caja_cerrada + caja_abierta
+           en composición editorial lado a lado con texto.
+           ==================================================== */
+
+        .caja-galeria {
+            background:  var(--fondo-alt);
+            padding:     0;
+            position:    relative;
+            overflow:    hidden;
+        }
+
+        /* Línea dorada decorativa superior */
+        .caja-galeria::before {
+            content:    '';
+            position:   absolute;
+            top:        0;
+            left:       0;
+            right:      0;
+            height:     1px;
+            background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+            z-index:    2;
+        }
+
+        /* Grid: texto intro | imagen cerrada | imagen abierta */
+        .caja-galeria-inner {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows:    auto auto;
+            gap:                   0;
+        }
+
+        /* Bloque de texto — columna izquierda, fila 1 */
+        .caja-galeria-text {
+            padding:        7rem 5rem 5rem 3rem;
+            display:        flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-right:   1px solid var(--borde);
+            border-bottom:  1px solid var(--borde);
+        }
+
+        .caja-galeria-text h2 {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2rem, 3.5vw, 3rem);
+            font-weight:   300;
+            line-height:   1.1;
+            color:         var(--tinta);
+            margin-bottom: 2rem;
+        }
+
+        .caja-galeria-text h2 em {
+            font-style: italic;
+            color:      var(--dorado);
+        }
+
+        .caja-galeria-text p {
+            font-size:     0.95rem;
+            font-weight:   400;
+            line-height:   2;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.2rem;
+            max-width:     380px;
+        }
+
+        .caja-galeria-caption {
+            margin-top:     auto;
+            padding-top:    2.5rem;
+            display:        flex;
+            align-items:    center;
+            gap:            1.2rem;
+        }
+
+        .caja-galeria-caption-line {
+            width:      28px;
+            height:     1px;
+            background: var(--dorado);
+            flex-shrink: 0;
+        }
+
+        .caja-galeria-caption-text {
+            font-size:      0.62rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+        }
+
+        /* Imagen cerrada — columna derecha, fila 1 */
+        .caja-galeria-img-cerrada {
+            position:     relative;
+            overflow:     hidden;
+            min-height:   480px;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .caja-galeria-img-cerrada img {
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center;
+            display:         block;
+            transition:      transform 0.8s ease;
+        }
+
+        .caja-galeria-img-cerrada:hover img { transform: scale(1.03); }
+
+        /* Etiqueta flotante sobre la imagen */
+        .caja-galeria-img-cerrada .img-tag {
+            position:       absolute;
+            bottom:         2rem;
+            left:           2rem;
+            z-index:        2;
+            font-size:      0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.7);
+            background:     rgba(14,13,11,0.45);
+            backdrop-filter: blur(8px);
+            border:         1px solid rgba(245,240,232,0.12);
+            padding:        0.5rem 1rem;
+        }
+
+        /* Imagen abierta — columna izquierda, fila 2 */
+        .caja-galeria-img-abierta {
+            position:   relative;
+            overflow:   hidden;
+            min-height: 480px;
+            border-right: 1px solid var(--borde);
+        }
+
+        .caja-galeria-img-abierta img {
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center 20%;
+            display:         block;
+            transition:      transform 0.8s ease;
+        }
+
+        .caja-galeria-img-abierta:hover img { transform: scale(1.03); }
+
+        .caja-galeria-img-abierta .img-tag {
+            position:       absolute;
+            bottom:         2rem;
+            left:           2rem;
+            z-index:        2;
+            font-size:      0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.7);
+            background:     rgba(14,13,11,0.45);
+            backdrop-filter: blur(8px);
+            border:         1px solid rgba(245,240,232,0.12);
+            padding:        0.5rem 1rem;
+        }
+
+        /* Bloque datos/detalles — columna derecha, fila 2 */
+        .caja-galeria-detalles {
+            padding:        5rem 3rem 5rem 4rem;
+            display:        flex;
+            flex-direction: column;
+            gap:            2rem;
+            justify-content: center;
+        }
+
+        .caja-galeria-detalles-title {
+            font-family:    'EB Garamond', serif;
+            font-size:      1rem;
+            font-weight:    400;
+            letter-spacing: 0.12em;
+            color:          var(--tinta);
+            margin-bottom:  0.5rem;
+        }
+
+        .caja-detalle-item {
+            display:     flex;
+            align-items: baseline;
+            gap:         1.2rem;
+            font-size:   0.88rem;
+            color:       var(--tinta-suave);
+            line-height: 1.6;
+            padding-bottom: 1.5rem;
+            border-bottom:  1px solid var(--borde);
+        }
+
+        .caja-detalle-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .caja-detalle-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      2.2rem;
+            font-weight:    300;
+            color:          var(--dorado);
+            opacity:        0.4;
+            line-height:    1;
+            flex-shrink:    0;
+            width:          2.5rem;
+        }
+
+        .caja-detalle-body strong {
+            display:        block;
+            font-family:    'EB Garamond', serif;
+            font-size:      1.1rem;
+            font-weight:    400;
+            color:          var(--tinta);
+            letter-spacing: 0.02em;
+            margin-bottom:  0.2rem;
+        }
+
+
+        /* ====================================================
+           SECCIÓN: CONTENIDO 01–04
+           ==================================================== */
+
+        .caja-contenido {
+            background: var(--fondo-oliva);
+            position:   relative;
+            overflow:   hidden;
+        }
+
+        .caja-contenido::before {
+            content:    '';
+            position:   absolute;
+            top:        0;
+            left:       0;
+            right:      0;
+            height:     1px;
+            background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+        }
+
+        .caja-contenido-header {
+            text-align: center;
+            max-width:  560px;
+            margin:     0 auto 6rem;
+        }
+
+        .caja-contenido-header h2 {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            color:       var(--tinta);
+            line-height: 1.1;
+        }
+
+        .caja-items {
+            display:               grid;
+            grid-template-columns: 1fr 1fr;
+            border:                1px solid var(--borde);
+        }
+
+        .caja-item {
+            padding:       3.5rem;
+            border-bottom: 1px solid var(--borde);
+            background:    var(--fondo-oliva);
+            transition:    background 0.5s;
+        }
+
+        .caja-item:nth-child(odd)  { border-right: 1px solid var(--borde); }
+        .caja-item:hover           { background: var(--fondo); }
+
+        .caja-item--full {
+            grid-column:   1 / -1;
+            border-right:  none !important;
+            border-bottom: none;
+        }
+
+        .caja-item-line {
+            width:         0;
+            height:        1px;
+            background:    var(--dorado);
+            margin-bottom: 1.4rem;
+            transition:    width 0.5s ease;
+        }
+
+        .caja-item:hover .caja-item-line { width: 28px; }
+
+        .caja-item-num {
+            font-family:   'EB Garamond', serif;
+            font-size:     3.5rem;
+            font-weight:   300;
+            color:         var(--dorado);
+            opacity:       0.2;
+            line-height:   1;
+            margin-bottom: 1.5rem;
+            transition:    opacity 0.4s;
+        }
+
+        .caja-item:hover .caja-item-num { opacity: 0.65; }
+
+        .caja-item-title {
+            font-family:   'EB Garamond', serif;
+            font-size:     1.65rem;
+            font-weight:   400;
+            color:         var(--tinta);
+            margin-bottom: 1.2rem;
+            line-height:   1.1;
+        }
+
+        .caja-item p {
+            font-size:   0.9rem;
+            font-weight: 400;
+            line-height: 2;
+            color:       var(--tinta-suave);
+        }
+
+
+        /* ====================================================
+           SECCIÓN: LA EXPERIENCIA
+           ==================================================== */
+
+        .caja-experiencia {
+            background:  var(--fondo);
+            text-align:  center;
+        }
+
+        .caja-experiencia-inner {
+            max-width: 620px;
+            margin:    0 auto;
+        }
+
+        .caja-experiencia-inner blockquote {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1.2rem, 2vw, 1.55rem);
+            font-style:     italic;
+            font-weight:    300;
+            color:          var(--tinta);
+            line-height:    2;
+            margin-bottom:  2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .caja-experiencia-inner p {
+            font-size:     1rem;
+            font-weight:   400;
+            line-height:   1.9;
+            color:         var(--tinta-suave);
+            margin-bottom: 0.8rem;
+        }
+
+        .caja-event-link {
+            display:         inline-block;
+            margin-top:      2.5rem;
+            font-size:       0.66rem;
+            letter-spacing:  0.35em;
+            text-transform:  uppercase;
+            color:           var(--dorado);
+            text-decoration: none;
+            border-bottom:   1px solid rgba(154, 125, 74, 0.35);
+            padding-bottom:  0.4rem;
+            transition:      border-color 0.3s, color 0.3s;
+        }
+
+        .caja-event-link:hover { border-color: var(--dorado); }
+
+
+        /* ====================================================
+           SECCIÓN: CIERRE
+           ==================================================== */
+
+        .caja-cierre {
+            background: var(--fondo-alt);
+            text-align: center;
+            position:   relative;
+        }
+
+        .caja-cierre::before {
+            content:    '';
+            position:   absolute;
+            top:        0;
+            left:       0;
+            right:      0;
+            height:     1px;
+            background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+        }
+
+        .caja-cierre-inner {
+            max-width: 520px;
+            margin:    0 auto;
+        }
+
+        .caja-cierre-nums {
+            display:         flex;
+            justify-content: center;
+            gap:             4rem;
+            margin-bottom:   4rem;
+            padding-bottom:  4rem;
+            border-bottom:   1px solid var(--borde);
+        }
+
+        .caja-cierre-stat {
+            display:        flex;
+            flex-direction: column;
+            align-items:    center;
+            gap:            0.6rem;
+        }
+
+        .caja-cierre-stat span {
+            display:     block;
+            font-family: 'EB Garamond', serif;
+            font-size:   3rem;
+            font-weight: 300;
+            color:       var(--dorado);
+            line-height: 1;
+        }
+
+        .caja-cierre-stat p {
+            font-size:      0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            margin:         0;
+        }
+
+        .caja-cierre-frase {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1.1rem, 2vw, 1.4rem);
+            font-style:     italic;
+            color:          var(--tinta-suave);
+            line-height:    1.8;
+            margin-bottom:  3.5rem;
+            letter-spacing: 0.03em;
+        }
+
+        .caja-cta {
+            display:         inline-block;
+            font-size:       0.72rem;
+            letter-spacing:  0.28em;
+            text-transform:  uppercase;
+            color:           #f5f0e8;
+            background:      var(--tinta);
+            border:          1px solid var(--tinta);
+            padding:         1.1rem 3rem;
+            text-decoration: none;
+            transition:      background 0.35s, color 0.35s, border-color 0.35s;
+        }
+
+        .caja-cta:hover {
+            background:   transparent;
+            color:        var(--tinta);
+            border-color: var(--tinta);
+        }
+
+        .caja-cierre-nota {
+            display:        block;
+            font-size:      0.7rem;
+            font-family:    'Lato', sans-serif;
+            font-style:     normal;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            margin-top:     0.9rem;
+        }
+
+        .caja-cta-firma {
+            font-size:      0.62rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color:          var(--borde);
+            margin-top:     2rem;
+        }
+
+
+        /* ====================================================
+           RESPONSIVE
+           ==================================================== */
+
+        @media (max-width: 900px) {
+
+            .caja-hero         { padding: 0 1.5rem 5rem; min-height: 85vh; }
+            .caja-back         { left: 1.5rem; }
+            .caja-hero-badge   { right: 1.5rem; }
+            .caja-hero-scroll  { display: none; }
+
+            .caja-identity {
+                grid-template-columns: 1fr;
+                gap:                   3.5rem;
+            }
+
+            /* Galería en mobile: stack vertical */
+            .caja-galeria-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .caja-galeria-text {
+                padding:      4rem 1.5rem 3rem;
+                border-right: none;
+            }
+
+            .caja-galeria-img-cerrada {
+                min-height:  320px;
+                border-right: none;
+            }
+
+            .caja-galeria-img-abierta {
+                min-height:   320px;
+                border-right: none;
+            }
+
+            .caja-galeria-detalles {
+                padding: 3.5rem 1.5rem;
+            }
+
+            .caja-items { grid-template-columns: 1fr; }
+
+            .caja-item,
+            .caja-item--full   { border-right: none !important; grid-column: auto; }
+            .caja-item         { border-bottom: 1px solid var(--borde); }
+            .caja-item:last-child { border-bottom: none; }
+
+            .caja-cierre-nums  { gap: 2rem; }
+
+        }
+
+        @media (max-width: 600px) {
+            .caja-hero-title { font-size: 3.2rem; }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="cursor"     id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- ========================================================
+         NAVEGACIÓN
+         ======================================================== -->
+
+    <nav id="navbar">
+
+        <a href="index.html" class="nav-logo">EZSENCIA</a>
+
+        <ul class="nav-links">
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-cta">Solicitar Invitaci&oacute;n</a>
+
+        <button class="nav-hamburger" id="navHamburger"
+                aria-label="Abrir men&uacute;"
+                aria-expanded="false"
+                aria-controls="navMobileDrawer">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </nav>
+
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <div class="nav-mobile-drawer"
+         id="navMobileDrawer"
+         role="dialog"
+         aria-modal="true"
+         aria-hidden="true"
+         aria-label="Men&uacute; de navegaci&oacute;n">
+
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+
+        <ul class="nav-mobile-links">
+            <li><a href="index.html">Ezsencia</a></li>
+            <li><a href="experiencia.html">La Experiencia</a></li>
+            <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        </ul>
+
+        <a href="acceso.html" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
+        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 25 miembros</p>
+
+    </div>
+
+
+    <!-- ========================================================
+         HERO — Imagen Caja_fundadora.png (cerrada + abierta)
+         La foto editorial que muestra ambas a la vez.
+         ======================================================== -->
+
+    <section class="caja-hero">
+
+        <a href="index.html#sociedad" class="caja-back">&larr; La Sociedad</a>
+
+        <div class="caja-hero-badge">
+            <span class="caja-hero-badge-num">Edici&oacute;n Fundadores &nbsp;·&nbsp; 2026</span>
+        </div>
+
+        <!-- Imagen principal: Caja_fundadora.png — vista díptico cerrada/abierta -->
+        <div class="caja-hero-img">
+            <img src="assets/Caja_fundadora.png"
+                 alt="La Caja Fundadora EZSENCIA — cerrada y abierta, Edición Fundadores 2026">
+        </div>
+
+        <div class="caja-hero-overlay"></div>
+
+        <div class="caja-hero-content">
+            <p class="hero-eyebrow">La Sociedad &middot; Edici&oacute;n Fundadores 2026</p>
+            <h1 class="caja-hero-title">La Caja<br>Fundadora</h1>
+            <p class="caja-hero-sub">
+                No es un packaging.<br>
+                Es el primer gesto.<br>
+                Una pieza pensada para conservar.
+            </p>
+            <a href="#caja-galeria" class="caja-hero-cta">Ver la pieza</a>
+        </div>
+
+        <div class="caja-hero-scroll">Descubrir</div>
+
+    </section>
+
+
+    <!-- ========================================================
+         QUÉ ES
+         ======================================================== -->
+
+    <section class="caja-identity reveal">
+
+        <div class="caja-identity-text">
+
+            <div class="section-label">La Pieza</div>
+
+            <h2>Una c&aacute;psula<br>de origen.</h2>
+
+            <p>
+                La caja que reciben quienes forman parte del c&iacute;rculo inicial de Ezsencia.
+                Un objeto f&iacute;sico que materializa la pertenencia.
+            </p>
+
+            <p>
+                No llega como producto.<br>
+                Llega como declaraci&oacute;n.
+            </p>
+
+            <p>
+                No para abrir y desechar.<br>
+                Para conservar.
+            </p>
+
+        </div>
+
+        <div class="caja-frases">
+            <p class="caja-frase">Limitada.</p>
+            <p class="caja-frase">Numerada.</p>
+            <p class="caja-frase">Personal.</p>
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         GALERÍA DÍPTICO — Caja cerrada · Caja abierta
+         ======================================================== -->
+
+    <section class="caja-galeria" id="caja-galeria">
+
+        <div class="caja-galeria-inner">
+
+            <!-- Fila 1, columna izquierda: texto introductorio -->
+            <div class="caja-galeria-text reveal">
+
+                <div class="section-label">La Caja</div>
+
+                <h2>
+                    Cuero negro.<br>
+                    Ribete <em>dorado</em>.<br>
+                    Un interior que sorprende.
+                </h2>
+
+                <p>
+                    Construida en cuero granulado negro con cierres y ribetes en latón
+                    dorado. Cada pieza se fabrica individualmente y lleva grabado
+                    el número de fundador en el interior.
+                </p>
+
+                <p>
+                    Cuando se abre, revela cinco piezas numeradas dispuestas sobre
+                    terciopelo crema. Una composición pensada hasta el último milímetro.
+                </p>
+
+                <div class="caja-galeria-caption">
+                    <div class="caja-galeria-caption-line"></div>
+                    <span class="caja-galeria-caption-text">N&ordm; 01 – 25 &nbsp;·&nbsp; &Uacute;nica edici&oacute;n</span>
+                </div>
+
+            </div>
+
+            <!-- Fila 1, columna derecha: imagen caja CERRADA -->
+            <div class="caja-galeria-img-cerrada reveal">
+                <img src="assets/caja_cerrada.png"
+                     alt="Caja Fundadora EZSENCIA cerrada — cuero negro con ribete dorado">
+                <span class="img-tag">Cerrada &nbsp;·&nbsp; Cuero negro &amp; lat&oacute;n</span>
+            </div>
+
+            <!-- Fila 2, columna izquierda: imagen caja ABIERTA -->
+            <div class="caja-galeria-img-abierta reveal">
+                <img src="assets/caja_abierta.png"
+                     alt="Caja Fundadora EZSENCIA abierta — interior con trufa negra, cápsula y cuchilla grabada">
+                <span class="img-tag">Abierta &nbsp;·&nbsp; Interior terciopelo</span>
+            </div>
+
+            <!-- Fila 2, columna derecha: detalles del contenido -->
+            <div class="caja-galeria-detalles reveal">
+
+                <p class="caja-galeria-detalles-title">Qué contiene</p>
+
+                <div class="caja-detalle-item">
+                    <span class="caja-detalle-num">I</span>
+                    <div class="caja-detalle-body">
+                        <strong>Trufa Negra Seleccionada</strong>
+                        Tuber melanosporum · cosechada en Alcotas
+                    </div>
+                </div>
+
+                <div class="caja-detalle-item">
+                    <span class="caja-detalle-num">II</span>
+                    <div class="caja-detalle-body">
+                        <strong>C&aacute;psula Premium Negra</strong>
+                        Alimentaria · edici&oacute;n limitada 2026
+                    </div>
+                </div>
+
+                <div class="caja-detalle-item">
+                    <span class="caja-detalle-num">III</span>
+                    <div class="caja-detalle-body">
+                        <strong>Cuchilla Grabada EZSENCIA</strong>
+                        Acero inoxidable · edici&oacute;n limitada
+                    </div>
+                </div>
+
+                <div class="caja-detalle-item">
+                    <span class="caja-detalle-num">IV</span>
+                    <div class="caja-detalle-body">
+                        <strong>Aroma Natural &mdash; Aceite de Trufa</strong>
+                        5 ml · producci&oacute;n exclusiva miembros
+                    </div>
+                </div>
+
+                <div class="caja-detalle-item">
+                    <span class="caja-detalle-num">V</span>
+                    <div class="caja-detalle-body">
+                        <strong>Documento Fundador Numerado</strong>
+                        N&ordm; 07 / 25 · numerado a mano
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         CONTENIDO 01 – 05
+         ======================================================== -->
+
+    <section class="caja-contenido">
+
+        <div class="caja-contenido-header reveal">
+            <div class="section-label" style="justify-content: center; margin-bottom: 1.5rem;">
+                Contenido
+            </div>
+            <h2>Cuatro piezas.<br>Una intenci&oacute;n.</h2>
+        </div>
+
+        <div class="caja-items reveal">
+
+            <div class="caja-item">
+                <p class="caja-item-num">I</p>
+                <h3 class="caja-item-title">Trufa negra fresca seleccionada</h3>
+                <div class="caja-item-line"></div>
+                <p>
+                    Tuber melanosporum de temporada alta, cosechada en los truferos
+                    de Alcotas y enviada en las 48 horas posteriores a su recolecci&oacute;n.
+                    Sin intermediarios. Con el certificado de origen del productor.
+                </p>
+            </div>
+
+            <div class="caja-item">
+                <p class="caja-item-num">II</p>
+                <h3 class="caja-item-title">C&aacute;psula negra alimentaria premium</h3>
+                <div class="caja-item-line"></div>
+                <p>
+                    Aceite virgen extra de oliva aromatizado con trufa negra Tuber
+                    melanosporum. Producci&oacute;n limitada, embotellada exclusivamente para
+                    los miembros de la edici&oacute;n 2026. Sin aditivos. Sin artificios.
+                </p>
+            </div>
+
+            <div class="caja-item">
+                <p class="caja-item-num">III</p>
+                <h3 class="caja-item-title">Cuchilla grabada EZSENCIA</h3>
+                <div class="caja-item-line"></div>
+                <p>
+                    Herramienta de limpieza y pelado de trufa en acero inoxidable
+                    con la firma EZSENCIA grabada. Dise&ntilde;ada para durar.
+                    Pensada para quien entiende que el detalle no es accesorio.
+                </p>
+            </div>
+
+            <div class="caja-item">
+                <p class="caja-item-num">IV</p>
+                <h3 class="caja-item-title">Documento numerado de fundador</h3>
+                <div class="caja-item-line"></div>
+                <p>
+                    Cuaderno editorial de la Edici&oacute;n Fundadores 2026. Impreso en papel
+                    de hilo, numerado a mano del 1 al 25. Contiene la historia del
+                    origen, fotograf&iacute;as de la finca y una carta personal del productor.
+                </p>
+            </div>
+
+            <div class="caja-item caja-item--full">
+                <p class="caja-item-num">V</p>
+                <h3 class="caja-item-title">Acceso prioritario a la temporada</h3>
+                <div class="caja-item-line"></div>
+                <p>
+                    Como miembro fundador, recibir&aacute;s acceso preferente a trufa fresca
+                    durante toda la temporada enero&nbsp;&mdash;&nbsp;marzo. Antes que nadie.
+                    Sin intermediarios. Con la garant&iacute;a de origen que solo puede ofrecer
+                    quien lleva doce a&ntilde;os cultivando la tierra.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         LA EXPERIENCIA
+         ======================================================== -->
+
+    <section class="caja-experiencia">
+
+        <div class="caja-experiencia-inner reveal">
+
+            <div class="section-label" style="justify-content: center; margin-bottom: 2rem;">
+                La Experiencia
+            </div>
+
+            <blockquote>
+                La caja no se env&iacute;a como producto.<br>
+                Se entrega como inicio.
+            </blockquote>
+
+            <p>
+                Marca el acceso al primer encuentro de la temporada.
+            </p>
+
+            <a href="evento-origen.html" class="caja-event-link">
+                Evento I &middot; El Origen &rarr;
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         CIERRE
+         ======================================================== -->
+
+    <section class="caja-cierre">
+
+        <div class="caja-cierre-inner reveal">
+
+            <div class="caja-cierre-nums">
+
+                <div class="caja-cierre-stat">
+                    <span>25</span>
+                    <p>Miembros</p>
+                </div>
+
+                <div class="caja-cierre-stat">
+                    <span>01</span>
+                    <p>Edici&oacute;n</p>
+                </div>
+
+                <div class="caja-cierre-stat">
+                    <span>01</span>
+                    <p>Origen</p>
+                </div>
+
+            </div>
+
+            <p class="caja-cierre-frase">
+                Solo 25 cajas fundadoras ser&aacute;n<br>
+                entregadas en 2026.<br>
+                <span class="caja-cierre-nota">Una vez asignadas, no se volverán a producir.</span>
+            </p>
+
+            <a href="index.html#invitacion" class="caja-cta">Solicitar invitaci&oacute;n</a>
+
+            <p class="caja-cta-firma">Alcotas, Teruel</p>
+
+        </div>
+
+    </section>
+
+
+    <div class="divider"></div>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <footer>
+
+        <div class="footer-logo">EZSENCIA</div>
+
+        <ul class="footer-links">
+            <li><a href="aviso-legal.html">Aviso legal</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="https://www.instagram.com/ezsencia.co" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="mailto:contacto@ezsencia.com">contacto@ezsencia.com</a></li>
+        </ul>
+
+        <p class="footer-copy">&copy; 2026 EZSENCIA. Alcotas, Teruel.</p>
+
+    </footer>
+
+
+    <!-- ========================================================
+         JAVASCRIPT
+         ======================================================== -->
+
+    <script>
+
+        /* ── Cursor personalizado ──────────────────────────── */
+
+        const cursor = document.getElementById('cursor');
+        const ring   = document.getElementById('cursorRing');
+
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', function (e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top  = mouseY + 'px';
+        });
+
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            ring.style.left = ringX + 'px';
+            ring.style.top  = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        document.querySelectorAll('a, button').forEach(function (el) {
+            el.addEventListener('mouseenter', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', function () {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                ring.style.transform   = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+
+        /* ── Navbar scrolled ───────────────────────────────── */
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+
+        /* ── Scroll reveal ─────────────────────────────────── */
+
+        const observer = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            observer.observe(el);
+        });
+
+
+        /* ── Menú hamburguesa móvil ─────────────────────────── */
+
+        const hamburger   = document.getElementById('navHamburger');
+        const drawer      = document.getElementById('navMobileDrawer');
+        const backdrop    = document.getElementById('navBackdrop');
+        const drawerClose = document.getElementById('navMobileClose');
+
+        function openMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'true');
+            drawer.setAttribute('aria-hidden', 'false');
+            drawer.classList.add('open');
+            backdrop.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            drawerClose.focus();
+        }
+
+        function closeMobileMenu() {
+            hamburger.setAttribute('aria-expanded', 'false');
+            drawer.setAttribute('aria-hidden', 'true');
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+            document.body.style.overflow = '';
+            hamburger.focus();
+        }
+
+        hamburger.addEventListener('click', openMobileMenu);
+        drawerClose.addEventListener('click', closeMobileMenu);
+        backdrop.addEventListener('click', closeMobileMenu);
+
+        drawer.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
