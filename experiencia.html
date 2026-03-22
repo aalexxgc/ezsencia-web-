@@ -35,15 +35,11 @@
            ==================================================== */
 
         .exp-page-hero {
-            height:          100vh;
-            min-height:      600px;
-            display:         flex;
-            flex-direction:  column;
-            justify-content: flex-end;
-            padding:         0 3rem 6rem;
-            position:        relative;
-            overflow:        hidden;
-            background:      #0e0d0b;
+            height:     100vh;
+            min-height: 600px;
+            position:   relative;
+            overflow:   hidden;
+            background: #0e0d0b;
         }
 
         .exp-page-hero-bg {
@@ -67,14 +63,13 @@
         }
 
         .exp-page-hero-overlay {
-            position:   absolute;
-            inset:      0;
-            background: linear-gradient(
-                180deg,
-                rgba(10,9,7,0.15) 0%,
-                rgba(10,9,7,0.48) 55%,
-                rgba(10,9,7,0.82) 100%
-            );
+            display: none;
+        }
+
+        .exp-page-hero-caption {
+            background:  var(--fondo);
+            padding:     5rem 3rem 5rem;
+            max-width:   700px;
         }
 
         .exp-page-hero-content {
@@ -106,7 +101,6 @@
             margin-bottom:  2.2rem;
             opacity:        0;
             animation:      fadeUp 1s 0.7s forwards;
-            text-shadow:    0 2px 30px rgba(0,0,0,0.5);
         }
 
         .exp-page-hero-sub {
@@ -119,7 +113,6 @@
             max-width:      480px;
             opacity:        0;
             animation:      fadeUp 1s 1s forwards;
-            text-shadow:    0 1px 14px rgba(0,0,0,0.5);
         }
 
         /* ====================================================
@@ -1028,15 +1021,15 @@
                 allow="autoplay; fullscreen"
                 allowfullscreen
                 title="Ezsencia experiencia"></iframe>
-        <div class="exp-page-hero-overlay"></div>
-        <div class="exp-page-hero-content">
-            <p class="exp-page-hero-eyebrow">Ezsencia &nbsp;&middot;&nbsp; Truffle Society</p>
-            <h1 class="exp-page-hero-title">La<br>Experiencia</h1>
-            <p class="exp-page-hero-sub">
-                No es un evento.<br>Es un instante que no puede simularse.
-            </p>
-        </div>
     </header>
+
+    <div class="exp-page-hero-caption">
+        <p class="exp-page-hero-eyebrow">Ezsencia &nbsp;&middot;&nbsp; Truffle Society</p>
+        <h1 class="exp-page-hero-title">La<br>Experiencia</h1>
+        <p class="exp-page-hero-sub">
+            No es un evento.<br>Es un instante que no puede simularse.
+        </p>
+    </div>
 
 
     <!-- ========================================================
