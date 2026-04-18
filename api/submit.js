@@ -27,7 +27,7 @@ export default async function handler(req) {
     const SUPABASE_URL    = process.env.SUPABASE_URL;
     const SUPABASE_ANON   = process.env.SUPABASE_ANON_KEY;
     const RESEND_KEY      = process.env.RESEND_API_KEY;
-    const NOTIFY_EMAIL    = process.env.NOTIFY_EMAIL || 'hola@ezsencia.com';
+    const NOTIFY_EMAIL    = process.env.NOTIFY_EMAIL || 'founder@ezsencia.com';
 
     // 1. Guardar en Supabase
     const dbRes = await fetch(`${SUPABASE_URL}/rest/v1/solicitudes`, {
