@@ -1202,8 +1202,6 @@
                 playerVars: {
                     autoplay:       1,
                     mute:           1,
-                    loop:           1,
-                    playlist:       'Lo49duDgsmI',
                     controls:       0,
                     rel:            0,
                     modestbranding: 1,
@@ -1215,6 +1213,12 @@
                         e.target.mute();
                         e.target.playVideo();
                         heroInterval = setInterval(updateProgress, 800);
+                    },
+                    onStateChange: function (e) {
+                        if (e.data === YT.PlayerState.ENDED) {
+                            heroPlayer.seekTo(113, true);
+                            heroPlayer.playVideo();
+                        }
                     }
                 }
             });
