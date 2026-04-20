@@ -58,13 +58,14 @@
         /* Contenedor: altura proporcional al viewport, nunca superior a 90vh.
            Con height real (no 0), height:100% en hijos absolutos funciona. */
         #inicio {
-            position:   relative;
-            width:      100%;
-            height:     min(56.25vw, 90vh);
-            min-height: 320px;
-            overflow:   hidden;
-            background: #0a0907;
-            margin:     0;
+            position:        relative;
+            width:           100%;
+            height:          min(56.25vw, 90vh);
+            min-height:      320px;
+            overflow:        hidden;
+            /* Poster = thumbnail YouTube — evita negro mientras carga el player */
+            background:      #0a0907 url('https://img.youtube.com/vi/Lo49duDgsmI/maxresdefault.jpg') center/cover no-repeat;
+            margin:          0;
         }
 
         /* Wrapper cover 16:9 — gestiona la geometría del iframe independientemente
@@ -78,8 +79,11 @@
             height:     56.25vw;
             min-width:  100%;
             min-height: 100%;
-            /* SIN pointer-events:none — el iframe dentro recibe clics del tap */
+            /* Fade-in al estar listo — oculta el negro inicial del iframe */
+            opacity:    0;
+            transition: opacity 1.2s ease;
         }
+        .hero-yt-wrap.ready { opacity: 1; }
 
         /* El div y el iframe que YT API crea: rellenan el wrapper */
         #heroPlayer,
@@ -1271,7 +1275,11 @@
             }, 3000);
         }
 
-        window.onYouTubeIframeAPIReady = function () {
+        /* initHeroPlayer — extraído para poder llamarlo tanto desde el callback
+           onYouTubeIframeAPIReady como directamente si la API ya estaba en caché.
+           El guard (heroPlayer !== null) evita doble inicialización. */
+        function initHeroPlayer() {
+            if (heroPlayer !== null) return;
             heroPlayer = new YT.Player('heroPlayer', {
                 width:   '100%',
                 height:  '100%',
@@ -1279,17 +1287,15 @@
                 playerVars: {
                     autoplay:       1,
                     mute:           1,
-                    controls:       0,   /* sin controles nativos YouTube */
+                    controls:       0,
                     rel:            0,
                     modestbranding: 1,
                     iv_load_policy: 3,
-                    playsinline:    1,   /* esencial en iOS */
+                    playsinline:    1,
                     start:          113
                 },
                 events: {
                     onReady: function (e) {
-                        /* Añadir permisos correctos al iframe generado por YT API
-                           (necesario en iOS Safari para autoplay y encrypted-media) */
                         var iframe = e.target.getIframe();
                         if (iframe) {
                             iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
@@ -1298,9 +1304,11 @@
                         e.target.setPlaybackQuality('hd1080');
                         e.target.playVideo();
                         heroTimer = setInterval(updateProgress, 800);
+                        /* Fade-in: revela el player sobre el poster */
+                        var wrap = document.querySelector('.hero-yt-wrap');
+                        if (wrap) wrap.classList.add('ready');
                     },
                     onStateChange: function (e) {
-                        /* loop desde 1:53 al terminar */
                         if (e.data === YT.PlayerState.ENDED) {
                             heroPlayer.seekTo(113, true);
                             heroPlayer.playVideo();
@@ -1314,7 +1322,38 @@
                     }
                 }
             });
-        };
+        }
+
+        /* FIX RACE CONDITION (refresh + caché):
+           Si la API de YouTube ya estaba cargada en caché del navegador, habrá
+           llamado a onYouTubeIframeAPIReady antes de que este script se ejecutara,
+           y el callback se perdió. Con el check siguiente lo capturamos. */
+        window.onYouTubeIframeAPIReady = initHeroPlayer;
+        if (window.YT && window.YT.Player) {
+            initHeroPlayer();
+        }
+
+        /* FIX BFCACHE (Safari "refresh" via Back-Forward Cache):
+           Safari restaura páginas desde un snapshot congelado. El iframe de YouTube
+           queda en estado roto. Al detectar e.persisted=true, reiniciamos el player. */
+        window.addEventListener('pageshow', function (e) {
+            if (!e.persisted) return;
+            if (heroPlayer && typeof heroPlayer.playVideo === 'function') {
+                try {
+                    heroPlayer.seekTo(113, true);
+                    heroPlayer.playVideo();
+                    var wrap = document.querySelector('.hero-yt-wrap');
+                    if (wrap) wrap.classList.add('ready');
+                } catch (err) {
+                    /* Si el player está corrupto tras bfcache, reinicializar */
+                    heroPlayer = null;
+                    initHeroPlayer();
+                }
+            } else {
+                heroPlayer = null;
+                initHeroPlayer();
+            }
+        });
 
         /* Devuelve true si el vídeo está en un estado que no es "reproduciendo".
            BUG ORIGINAL: heroPaused=false inicialmente, pero en móvil el autoplay
