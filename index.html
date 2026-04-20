@@ -138,6 +138,30 @@
             will-change:   width;
         }
 
+        /* ── Botón mute flotante ─────────────────────────── */
+        .hero-mute-btn {
+            position:        absolute;
+            bottom:          1.4rem;
+            right:           1.4rem;
+            z-index:         10;
+            width:           44px;
+            height:          44px;
+            border-radius:   50%;
+            background:      rgba(10,9,7,0.52);
+            border:          1px solid rgba(245,240,232,0.22);
+            color:           #f5f0e8;
+            cursor:          pointer;
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            transition:      background 0.2s, opacity 0.2s;
+            touch-action:    manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hero-mute-btn:hover { background: rgba(10,9,7,0.78); }
+        .hero-mute-btn svg   { pointer-events: none; display: block; }
+
         /* Caption block below the video */
         .hero-caption {
             background:  var(--fondo);
@@ -809,14 +833,23 @@
 
     <section id="inicio">
 
-        <iframe class="yt-bg"
-                src="https://www.youtube.com/embed/ylK3nQOcVkA?autoplay=1&mute=1&loop=1&playlist=ylK3nQOcVkA&controls=0&rel=0&modestbranding=1&playsinline=1"
+        <iframe id="heroIframe" class="yt-bg"
+                src="https://www.youtube.com/embed/Lo49duDgsmI?autoplay=1&mute=1&loop=1&playlist=Lo49duDgsmI&controls=0&rel=0&modestbranding=1&playsinline=1&start=113&enablejsapi=1"
                 frameborder="0"
                 allow="autoplay; fullscreen"
                 allowfullscreen
                 title="Ezsencia hero"></iframe>
 
         <div class="hero-overlay"></div>
+
+        <button id="heroMuteBtn" class="hero-mute-btn" aria-label="Activar sonido">
+            <!-- icono muted por defecto -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+        </button>
 
     </section>
 
@@ -1074,7 +1107,39 @@
          JAVASCRIPT
          ======================================================== -->
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+
+        /* ── Hero: botón mute/unmute ─────────────────────── */
+        var heroPlayer = null;
+        var heroMuted  = true;
+        var muteBtn    = document.getElementById('heroMuteBtn');
+
+        var SVG_MUTED = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>';
+        var SVG_SOUND = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>';
+
+        window.onYouTubeIframeAPIReady = function () {
+            heroPlayer = new YT.Player('heroIframe', {
+                events: { 'onReady': function (e) { e.target.mute(); } }
+            });
+        };
+
+        if (muteBtn) {
+            muteBtn.addEventListener('click', function () {
+                if (!heroPlayer || typeof heroPlayer.mute !== 'function') return;
+                if (heroMuted) {
+                    heroPlayer.unMute();
+                    heroMuted = false;
+                    muteBtn.innerHTML = SVG_SOUND;
+                    muteBtn.setAttribute('aria-label', 'Silenciar');
+                } else {
+                    heroPlayer.mute();
+                    heroMuted = true;
+                    muteBtn.innerHTML = SVG_MUTED;
+                    muteBtn.setAttribute('aria-label', 'Activar sonido');
+                }
+            });
+        }
 
         /* ── Cursor personalizado (solo escritorio) ──────── */
         var cursor = document.getElementById('cursor');
