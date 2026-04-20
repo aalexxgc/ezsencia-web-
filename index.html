@@ -41,6 +41,20 @@
             margin:     0;
         }
 
+        /* El iframe que crea YT API hereda el id heroPlayer pero no la clase yt-bg */
+        #heroPlayer {
+            position:       absolute;
+            top:            50%;
+            left:           50%;
+            transform:      translate(-50%, -50%);
+            width:          177.78vh;
+            height:         56.25vw;
+            min-width:      100%;
+            min-height:     100%;
+            border:         0;
+            pointer-events: none;
+        }
+
         /* Vídeo decorativo — fade in al cargar */
         .hero-video {
             opacity:        0;
@@ -1211,6 +1225,7 @@
                 events: {
                     onReady: function (e) {
                         e.target.mute();
+                        e.target.setPlaybackQuality('hd1080');
                         e.target.playVideo();
                         heroInterval = setInterval(updateProgress, 800);
                     },
