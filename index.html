@@ -30,247 +30,200 @@
     <style>
 
         /* ====================================================
-           1. HERO
-           ==================================================== */
+           1. HERO VIDEO
+           ====================================================
 
-        /*
-         * CAUSA DEL FALLO:
-         * La YouTube IFrame API reemplaza el <div id="heroPlayer"> con un <iframe>
-         * al que asigna width="640" height="360" como atributos Y como inline style.
-         * Si el contenedor padre no tiene dimensiones explícitas, height:100% en
-         * el iframe no se resuelve correctamente.
-         *
-         * SOLUCIÓN:
-         * Un wrapper (.hero-yt-wrap) con posicionamiento cover se encarga de toda
-         * la geometría 16:9. El iframe solo necesita rellenar ese wrapper (100%×100%).
-         * Al pasar width:'100%' height:'100%' al constructor de YT.Player, YouTube
-         * asigna esos valores como atributo y el iframe rellena correctamente su padre.
-         */
+           ARQUITECTURA:
+           #inicio                  → contenedor con altura real (no height:0)
+             .hero-yt-wrap          → wrapper cover 16:9, SIN pointer-events:none
+               #heroPlayer / iframe → rellena el wrapper, recibe clics del tap
+             .hero-overlay          → gradiente decorativo, pointer-events:none
+             .hero-yt-mask          → oculta logo YT, pointer-events:none
+             .hero-tap              → capa clicable z-index:4, dispara play/pause
+             .hero-controls         → controles custom z-index:8
 
-        /* 1. Contenedor hero — altura generosa, fondo negro para evitar flash */
+           PROBLEMA PREVIO QUE SE CORREGÍA AQUÍ:
+           • pointer-events:none en el iframe bloqueaba todos los toques en móvil
+           • height:0 en el contenedor hacía que height:100% en el iframe = 0px
+           • No había botón play/pause, solo mute
+           • .hero-overlay no tenía position:absolute
+
+           SOLUCIÓN:
+           • Contenedor con height real: min(56.25vw, 90vh)
+           • Iframe SIN pointer-events:none (el tap div gestiona la interacción)
+           • Capa .hero-tap sobre el iframe con pointer-events:auto
+           • Controles con z-index > tap para recibir sus propios clics
+        */
+
+        /* Contenedor: altura proporcional al viewport, nunca superior a 90vh.
+           Con height real (no 0), height:100% en hijos absolutos funciona. */
         #inicio {
             position:   relative;
             width:      100%;
-            height:     90vh;
-            min-height: 480px;
+            height:     min(56.25vw, 90vh);
+            min-height: 320px;
             overflow:   hidden;
-            margin:     0;
             background: #0a0907;
+            margin:     0;
         }
 
-        /* 2. Wrapper de cobertura 16:9
-              Centra y escala el iframe para cubrir #inicio sin recorte extraño.
-              min-width/min-height garantizan que siempre cubre el contenedor. */
+        /* Wrapper cover 16:9 — gestiona la geometría del iframe independientemente
+           de los inline styles que YouTube asigne al crear el iframe */
         .hero-yt-wrap {
             position:   absolute;
             top:        50%;
             left:       50%;
             transform:  translate(-50%, -50%);
-            /* cubre de forma 16:9 en cualquier viewport */
-            width:      177.78vh;   /* = 100vh × 16/9 */
-            height:     56.25vw;    /* = 100vw × 9/16 */
+            width:      177.78vh;
+            height:     56.25vw;
             min-width:  100%;
             min-height: 100%;
-            pointer-events: none;
+            /* SIN pointer-events:none — el iframe dentro recibe clics del tap */
         }
 
-        /* 3. El div y el iframe que YT crea dentro del wrapper — rellenan el wrapper */
+        /* El div y el iframe que YT API crea: rellenan el wrapper */
         #heroPlayer,
         #heroPlayer iframe {
-            position:       absolute;
-            top:            0;
-            left:           0;
-            width:          100%;
-            height:         100%;
-            border:         0;
-            pointer-events: none;
+            position: absolute;
+            inset:    0;
+            width:    100%;
+            height:   100%;
+            border:   0;
+            /* SIN pointer-events:none: el .hero-tap está encima con z-index */
         }
 
-        /* 4. Máscara esquina inferior derecha — oculta logo YouTube */
+        /* Gradiente cinematográfico — no bloquea interacción */
+        .hero-overlay {
+            position:       absolute;
+            inset:          0;
+            z-index:        2;
+            pointer-events: none;
+            background: linear-gradient(
+                180deg,
+                rgba(10,9,7,0.06)  0%,
+                rgba(10,9,7,0.00) 35%,
+                rgba(10,9,7,0.40) 100%
+            );
+        }
+
+        /* Máscara logo YouTube — esquina inferior derecha */
         .hero-yt-mask {
             position:       absolute;
             bottom:         0;
             right:          0;
-            width:          160px;
-            height:         56px;
-            background:     linear-gradient(135deg, transparent 30%, rgba(10,9,7,0.9) 100%);
+            width:          180px;
+            height:         60px;
             z-index:        6;
             pointer-events: none;
+            background:     linear-gradient(135deg, transparent 20%, rgba(10,9,7,0.95) 85%);
         }
 
-        /* Vídeo decorativo — fade in al cargar */
-        .hero-video {
-            opacity:        0;
-            transition:     opacity 1.8s ease;
-            pointer-events: none;
-        }
-        .hero-video.hero-loaded { opacity: 1; }
-
-        /* Overlay: solo visual, no bloquea toques */
-        .hero-overlay {
-            pointer-events: none;
-            background: linear-gradient(
-                180deg,
-                rgba(10,9,7,0.04)  0%,
-                rgba(10,9,7,0.12) 50%,
-                rgba(10,9,7,0.30) 100%
-            );
-        }
-
-        /* ── Área de tap — cubre todo el vídeo ──────────── */
-        /* cursor:pointer es obligatorio en iOS para recibir tap events en divs */
+        /* Capa tap — intercepta clics para play/pause SIN bloquear controles */
         .hero-tap {
             position: absolute;
             inset:    0;
-            z-index:  2;
+            z-index:  4;
             cursor:   pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ── Barra de controles integrada ─────────────────  */
-        .hero-bar {
+        /* Controles — z-index > tap, siempre reciben sus propios clics */
+        .hero-controls {
             position:    absolute;
             bottom:      0;
             left:        0;
             right:       0;
+            z-index:     8;
             display:     flex;
             align-items: center;
-            gap:         0.6rem;
-            padding:     2.5rem 2rem 1.6rem;
-            background:  linear-gradient(0deg, rgba(10,9,7,0.5) 0%, transparent 100%);
+            gap:         1rem;
+            padding:     3.5rem 2rem 1.6rem;
+            background:  linear-gradient(0deg, rgba(10,9,7,0.6) 0%, transparent 100%);
             opacity:     0;
-            transform:   translateY(4px);
-            transition:  opacity 0.35s ease, transform 0.35s ease;
-            pointer-events: none;
+            transition:  opacity 0.3s ease;
         }
-        .hero-bar.show {
-            opacity:        1;
-            transform:      translateY(0);
-            pointer-events: auto;
+        /* visible en hover (desktop) y tras tocar (móvil) */
+        #inicio:hover .hero-controls,
+        #inicio.touched .hero-controls { opacity: 1; }
+        /* siempre visible en móvil */
+        @media (max-width: 768px) {
+            .hero-controls { opacity: 1; padding: 2.5rem 1.2rem 1.2rem; gap: 0.7rem; }
         }
 
-        /* ── Botones play/mute ───────────────────────────── */
-        .hero-vbtn {
+        /* Botones play/pause y mute */
+        .hero-cbtn {
             flex-shrink:             0;
-            width:                   44px;
-            height:                  44px;
+            width:                   36px;
+            height:                  36px;
             display:                 flex;
             align-items:             center;
             justify-content:         center;
             background:              none;
             border:                  none;
-            padding:                 0;
+            color:                   rgba(245,240,232,0.7);
             cursor:                  pointer;
+            padding:                 0;
+            transition:              color 0.2s, transform 0.15s;
             touch-action:            manipulation;
             -webkit-tap-highlight-color: transparent;
-            -webkit-user-select:     none;
-            user-select:             none;
-            transition:              transform 0.15s ease, opacity 0.2s ease;
         }
-        .hero-vbtn:active  { transform: scale(0.85); }
-        .hero-vbtn svg     { pointer-events: none; display: block; }
+        .hero-cbtn:hover { color: #f5f0e8; transform: scale(1.1); }
+        .hero-cbtn svg   { pointer-events: none; display: block; }
 
-        /* ── Barra de progreso ───────────────────────────── */
-        .hero-pbar-wrap {
+        /* Barra de progreso */
+        .hero-prog-wrap {
             flex:         1;
-            height:       44px;
+            height:       36px;
             display:      flex;
             align-items:  center;
             cursor:       pointer;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
-        .hero-pbar-track {
-            width:         100%;
-            height:        2px;
-            background:    rgba(245,240,232,0.22);
-            border-radius: 2px;
-            overflow:      hidden;
+        .hero-prog-track {
+            position:   relative;
+            width:      100%;
+            height:     1px;
+            background: rgba(245,240,232,0.2);
         }
-        .hero-pbar-fill {
-            height:        100%;
-            width:         0%;
-            background:    rgba(245,240,232,0.82);
-            border-radius: 2px;
-            transition:    width 0.4s linear;
-            will-change:   width;
+        .hero-prog-fill {
+            position:   absolute;
+            inset:      0 auto 0 0;
+            width:      0%;
+            background: rgba(245,240,232,0.8);
+            transition: width 0.8s linear;
         }
-
-        /* ── Barra de controles del hero ─────────────────── */
-        .hero-controls {
-            position:    absolute;
-            bottom:      0;
-            left:        0;
-            right:       0;
-            z-index:     10;
-            display:     flex;
-            align-items: center;
-            gap:         1.2rem;
-            padding:     3rem 2.2rem 1.8rem;
-            background:  linear-gradient(0deg, rgba(10,9,7,0.5) 0%, transparent 100%);
-        }
-        .hero-ctrl-time {
-            font-family:    'Lato', sans-serif;
-            font-size:      0.65rem;
-            letter-spacing: 0.18em;
-            color:          rgba(245,240,232,0.5);
-            min-width:      36px;
-            text-align:     right;
-        }
-        .hero-ctrl-time.total { text-align: left; }
-        .hero-ctrl-bar {
-            flex:        1;
-            height:      40px;
-            display:     flex;
-            align-items: center;
-            cursor:      pointer;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .hero-ctrl-track {
-            width:         100%;
-            height:        1px;
-            background:    rgba(245,240,232,0.18);
-            position:      relative;
-        }
-        .hero-ctrl-fill {
-            position:      absolute;
-            left:          0; top: 0;
-            height:        100%;
-            width:         0%;
-            background:    rgba(245,240,232,0.75);
-            transition:    width 0.8s linear;
-        }
-        .hero-ctrl-dot {
+        .hero-prog-dot {
             position:      absolute;
             top:           50%;
             left:          0%;
             transform:     translate(-50%, -50%);
-            width:         5px;
-            height:        5px;
+            width:         6px;
+            height:        6px;
             border-radius: 50%;
             background:    #f5f0e8;
             opacity:       0;
-            transition:    left 0.8s linear, opacity 0.2s;
+            transition:    left 0.8s linear, opacity 0.15s;
         }
-        .hero-ctrl-bar:hover .hero-ctrl-dot { opacity: 1; }
-        .hero-ctrl-sound {
-            background:      none;
-            border:          none;
-            color:           rgba(245,240,232,0.55);
-            cursor:          pointer;
-            padding:         0;
-            width:           32px;
-            height:          32px;
-            display:         flex;
-            align-items:     center;
-            justify-content: center;
-            transition:      color 0.2s, transform 0.15s;
-            touch-action:    manipulation;
-            -webkit-tap-highlight-color: transparent;
-            flex-shrink:     0;
+        .hero-prog-wrap:hover .hero-prog-dot { opacity: 1; }
+
+        /* Tiempo */
+        .hero-ctime {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.62rem;
+            letter-spacing: 0.14em;
+            color:          rgba(245,240,232,0.5);
+            min-width:      30px;
+            flex-shrink:    0;
         }
-        .hero-ctrl-sound:hover     { color: #f5f0e8; transform: scale(1.12); }
-        .hero-ctrl-sound svg       { pointer-events: none; display: block; }
+
+        /* Móvil: hero proporcional a pantalla, vídeo visible completo */
+        @media (max-width: 640px) {
+            #inicio {
+                height:     56.25vw;
+                min-height: 200px;
+            }
+        }
 
         /* Caption block below the video */
         .hero-caption {
@@ -943,30 +896,51 @@
 
     <section id="inicio">
 
-        <!-- wrapper maneja el cover 16:9; el iframe solo rellena el wrapper -->
+        <!-- wrapper cover 16:9: gestiona geometría, independiente del iframe -->
         <div class="hero-yt-wrap">
             <div id="heroPlayer"></div>
         </div>
 
+        <!-- gradiente cinematográfico, no bloquea toques -->
         <div class="hero-overlay"></div>
+        <!-- oculta logo YouTube -->
         <div class="hero-yt-mask"></div>
 
-        <div class="hero-controls">
-            <span class="hero-ctrl-time" id="heroCurrent">0:00</span>
-            <div class="hero-ctrl-bar" id="heroBar">
-                <div class="hero-ctrl-track">
-                    <div class="hero-ctrl-fill" id="heroFill"></div>
-                    <div class="hero-ctrl-dot"  id="heroDot"></div>
-                </div>
-            </div>
-            <span class="hero-ctrl-time total" id="heroDuration">—</span>
-            <button class="hero-ctrl-sound" id="heroSound" aria-label="Activar sonido">
-                <svg id="heroSoundIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
+        <!-- capa tap z-index:4 — dispara play/pause al clicar/tocar el vídeo -->
+        <div class="hero-tap" id="heroTap"></div>
+
+        <!-- controles z-index:8 — por encima del tap, reciben sus propios clics -->
+        <div class="hero-controls" id="heroControls">
+
+            <!-- play / pause -->
+            <button class="hero-cbtn" id="heroPP" aria-label="Pausa">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="5"  y="3" width="5" height="18" rx="1"/>
+                    <rect x="14" y="3" width="5" height="18" rx="1"/>
                 </svg>
             </button>
+
+            <!-- barra de progreso -->
+            <div class="hero-prog-wrap" id="heroProgWrap">
+                <div class="hero-prog-track">
+                    <div class="hero-prog-fill" id="heroFill"></div>
+                    <div class="hero-prog-dot"  id="heroDot"></div>
+                </div>
+            </div>
+
+            <!-- tiempo actual -->
+            <span class="hero-ctime" id="heroTime">0:00</span>
+
+            <!-- mute / unmute -->
+            <button class="hero-cbtn" id="heroMuteBtn" aria-label="Activar sonido">
+                <svg id="heroMuteIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <line x1="23" y1="9"  x2="17" y2="15"/>
+                    <line x1="17" y1="9"  x2="23" y2="15"/>
+                </svg>
+            </button>
+
         </div>
 
     </section>
@@ -1228,17 +1202,32 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
 
-        /* ── Hero: controles de vídeo ────────────────────── */
-        var heroPlayer   = null;
-        var heroMuted    = true;
-        var heroInterval = null;
+        /* ── Hero video controls ─────────────────────────────────
+           Arquitectura de interacción:
+           • .hero-tap (z:4) detecta clics en el área del vídeo → play/pause
+           • .hero-controls (z:8) están por encima del tap → reciben sus propios clics
+           • El iframe NO tiene pointer-events:none, pero el tap está delante
+             → YouTube no muestra su botón central, los controles son los nuestros
+        ──────────────────────────────────────────────────────── */
 
-        var elFill     = document.getElementById('heroFill');
-        var elDot      = document.getElementById('heroDot');
-        var elCurrent  = document.getElementById('heroCurrent');
-        var elDuration = document.getElementById('heroDuration');
-        var elSound    = document.getElementById('heroSound');
-        var elBar      = document.getElementById('heroBar');
+        var heroPlayer  = null;
+        var heroPaused  = false;
+        var heroMuted   = true;
+        var heroTimer   = null;
+
+        var elFill    = document.getElementById('heroFill');
+        var elDot     = document.getElementById('heroDot');
+        var elTime    = document.getElementById('heroTime');
+        var elPP      = document.getElementById('heroPP');
+        var elMuteBtn = document.getElementById('heroMuteBtn');
+        var elMuteIco = document.getElementById('heroMuteIcon');
+        var elTap     = document.getElementById('heroTap');
+        var elInicio  = document.getElementById('inicio');
+
+        var ICO_PAUSE = '<rect x="5" y="3" width="5" height="18" rx="1"/><rect x="14" y="3" width="5" height="18" rx="1"/>';
+        var ICO_PLAY  = '<polygon points="5 3 19 12 5 21 5 3"/>';
+        var ICO_MUTED = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+        var ICO_SOUND = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
 
         function fmtTime(s) {
             s = Math.floor(s || 0);
@@ -1251,25 +1240,42 @@
             var dur = heroPlayer.getDuration();
             if (!dur) return;
             var pct = (cur / dur) * 100;
-            elFill.style.width    = pct + '%';
-            elDot.style.left      = pct + '%';
-            elCurrent.textContent = fmtTime(cur);
-            elDuration.textContent = fmtTime(dur);
+            elFill.style.width = pct + '%';
+            elDot.style.left   = pct + '%';
+            elTime.textContent = fmtTime(cur);
+        }
+
+        function setPPIcon(paused) {
+            if (!elPP) return;
+            var svg = paused
+                ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">' + ICO_PLAY  + '</svg>'
+                : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">' + ICO_PAUSE + '</svg>';
+            elPP.innerHTML = svg;
+            elPP.setAttribute('aria-label', paused ? 'Reproducir' : 'Pausa');
+        }
+
+        /* Muestra controles brevemente en móvil tras tocar */
+        function flashControls() {
+            elInicio.classList.add('touched');
+            clearTimeout(elInicio._ct);
+            elInicio._ct = setTimeout(function () {
+                elInicio.classList.remove('touched');
+            }, 3000);
         }
 
         window.onYouTubeIframeAPIReady = function () {
             heroPlayer = new YT.Player('heroPlayer', {
-                width:      '100%',   /* YouTube asigna width="100%" al iframe */
-                height:     '100%',   /* YouTube asigna height="100%" al iframe */
-                videoId:    'Lo49duDgsmI',
+                width:   '100%',
+                height:  '100%',
+                videoId: 'Lo49duDgsmI',
                 playerVars: {
                     autoplay:       1,
                     mute:           1,
-                    controls:       0,
+                    controls:       0,   /* sin controles nativos YouTube */
                     rel:            0,
                     modestbranding: 1,
                     iv_load_policy: 3,
-                    playsinline:    1,
+                    playsinline:    1,   /* esencial en iOS */
                     start:          113
                 },
                 events: {
@@ -1277,37 +1283,60 @@
                         e.target.mute();
                         e.target.setPlaybackQuality('hd1080');
                         e.target.playVideo();
-                        heroInterval = setInterval(updateProgress, 800);
+                        heroTimer = setInterval(updateProgress, 800);
                     },
                     onStateChange: function (e) {
+                        /* loop desde 1:53 al terminar */
                         if (e.data === YT.PlayerState.ENDED) {
                             heroPlayer.seekTo(113, true);
                             heroPlayer.playVideo();
+                        }
+                        if (e.data === YT.PlayerState.PLAYING) {
+                            heroPaused = false; setPPIcon(false);
+                        }
+                        if (e.data === YT.PlayerState.PAUSED) {
+                            heroPaused = true; setPPIcon(true);
                         }
                     }
                 }
             });
         };
 
-        if (elSound) {
-            elSound.addEventListener('click', function () {
-                if (!heroPlayer || typeof heroPlayer.mute !== 'function') return;
+        /* Tap sobre el vídeo → play/pause */
+        if (elTap) {
+            elTap.addEventListener('click', function () {
+                if (!heroPlayer || typeof heroPlayer.playVideo !== 'function') return;
+                if (heroPaused) { heroPlayer.playVideo(); }
+                else            { heroPlayer.pauseVideo(); }
+                flashControls();
+            });
+        }
+
+        /* Botón play/pause */
+        if (elPP) {
+            elPP.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (!heroPlayer) return;
+                if (heroPaused) { heroPlayer.playVideo(); }
+                else            { heroPlayer.pauseVideo(); }
+            });
+        }
+
+        /* Botón mute */
+        if (elMuteBtn) {
+            elMuteBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (!heroPlayer) return;
                 if (heroMuted) {
                     heroPlayer.unMute();
                     heroMuted = false;
-                    elSound.setAttribute('aria-label', 'Silenciar');
-                    document.getElementById('heroSoundIcon').innerHTML =
-                        '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>' +
-                        '<path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>' +
-                        '<path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
+                    elMuteIco.innerHTML = ICO_SOUND;
+                    elMuteBtn.setAttribute('aria-label', 'Silenciar');
                 } else {
                     heroPlayer.mute();
                     heroMuted = true;
-                    elSound.setAttribute('aria-label', 'Activar sonido');
-                    document.getElementById('heroSoundIcon').innerHTML =
-                        '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>' +
-                        '<line x1="23" y1="9" x2="17" y2="15"></line>' +
-                        '<line x1="17" y1="9" x2="23" y2="15"></line>';
+                    elMuteIco.innerHTML = ICO_MUTED;
+                    elMuteBtn.setAttribute('aria-label', 'Activar sonido');
                 }
             });
         }
