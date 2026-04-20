@@ -1280,6 +1280,12 @@
                 },
                 events: {
                     onReady: function (e) {
+                        /* Añadir permisos correctos al iframe generado por YT API
+                           (necesario en iOS Safari para autoplay y encrypted-media) */
+                        var iframe = e.target.getIframe();
+                        if (iframe) {
+                            iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+                        }
                         e.target.mute();
                         e.target.setPlaybackQuality('hd1080');
                         e.target.playVideo();
@@ -1302,12 +1308,22 @@
             });
         };
 
+        /* Devuelve true si el vídeo está en un estado que no es "reproduciendo".
+           BUG ORIGINAL: heroPaused=false inicialmente, pero en móvil el autoplay
+           falla y el estado es UNSTARTED(-1), no PAUSED(2). Con la variable
+           heroPaused siempre se llamaba pauseVideo() en lugar de playVideo(). */
+        function shouldPlay() {
+            if (!heroPlayer || typeof heroPlayer.getPlayerState !== 'function') return true;
+            var s = heroPlayer.getPlayerState();
+            return s !== 1; /* 1=PLAYING → todos los demás estados deben reproducir */
+        }
+
         /* Tap sobre el vídeo → play/pause */
         if (elTap) {
             elTap.addEventListener('click', function () {
                 if (!heroPlayer || typeof heroPlayer.playVideo !== 'function') return;
-                if (heroPaused) { heroPlayer.playVideo(); }
-                else            { heroPlayer.pauseVideo(); }
+                if (shouldPlay()) { heroPlayer.playVideo(); }
+                else              { heroPlayer.pauseVideo(); }
                 flashControls();
             });
         }
@@ -1317,8 +1333,8 @@
             elPP.addEventListener('click', function (e) {
                 e.stopPropagation();
                 if (!heroPlayer) return;
-                if (heroPaused) { heroPlayer.playVideo(); }
-                else            { heroPlayer.pauseVideo(); }
+                if (shouldPlay()) { heroPlayer.playVideo(); }
+                else              { heroPlayer.pauseVideo(); }
             });
         }
 
