@@ -34,36 +34,161 @@
            HERO — LA EXPERIENCIA
            ==================================================== */
 
+        /* Hero experiencia — misma arquitectura que el hero de index */
         .exp-page-hero {
-            height:     100vh;
-            min-height: 600px;
             position:   relative;
+            width:      100%;
+            height:     min(56.25vw, 90vh);
+            min-height: 320px;
             overflow:   hidden;
-            background: #0e0d0b;
+            background: #0e0d0b url('https://img.youtube.com/vi/3VS1aarcTxc/maxresdefault.jpg') center/cover no-repeat;
+            margin:     0;
         }
 
-        .exp-page-hero-bg {
+        .exp-yt-wrap {
             position:   absolute;
-            inset:      0;
-            background: radial-gradient(
-                ellipse 80% 60% at 30% 60%,
-                rgba(154, 125, 74, 0.08) 0%,
-                transparent 60%
+            top:        50%;
+            left:       50%;
+            transform:  translate(-50%, -50%);
+            width:      177.78vh;
+            height:     56.25vw;
+            min-width:  100%;
+            min-height: 100%;
+            opacity:    0;
+            transition: opacity 1.2s ease;
+        }
+        .exp-yt-wrap.ready { opacity: 1; }
+
+        #expPlayer,
+        #expPlayer iframe {
+            position: absolute;
+            inset:    0;
+            width:    100%;
+            height:   100%;
+            border:   0;
+        }
+
+        .exp-page-hero-bg { display: none; }
+        .exp-page-hero-video { display: none; }
+
+        .exp-page-hero-overlay {
+            position:       absolute;
+            inset:          0;
+            z-index:        2;
+            pointer-events: none;
+            background: linear-gradient(
+                180deg,
+                rgba(10,9,7,0.06)  0%,
+                rgba(10,9,7,0.00) 35%,
+                rgba(10,9,7,0.40) 100%
             );
         }
 
-        .exp-page-hero-video {
-            position:   absolute;
-            inset:      0;
-            width:      100%;
-            height:     100%;
-            object-fit: cover;
-            opacity:    0.9;
-            display:    block;
+        /* Máscara logo YouTube */
+        .exp-yt-mask {
+            position:       absolute;
+            bottom:         0;
+            right:          0;
+            width:          180px;
+            height:         60px;
+            z-index:        6;
+            pointer-events: none;
+            background:     linear-gradient(135deg, transparent 20%, rgba(10,9,7,0.95) 85%);
         }
 
-        .exp-page-hero-overlay {
-            display: none;
+        /* Capa tap — play/pause al clicar */
+        .exp-tap {
+            position: absolute;
+            inset:    0;
+            z-index:  4;
+            cursor:   pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Controles */
+        .exp-controls {
+            position:    absolute;
+            bottom:      0;
+            left:        0;
+            right:       0;
+            z-index:     8;
+            display:     flex;
+            align-items: center;
+            gap:         1rem;
+            padding:     3.5rem 2rem 1.6rem;
+            background:  linear-gradient(0deg, rgba(10,9,7,0.6) 0%, transparent 100%);
+            opacity:     0;
+            transition:  opacity 0.3s ease;
+        }
+        .exp-page-hero:hover .exp-controls,
+        .exp-page-hero.touched .exp-controls { opacity: 1; }
+        @media (max-width: 768px) {
+            .exp-controls { opacity: 1; padding: 2.5rem 1.2rem 1.2rem; gap: 0.7rem; }
+            .exp-page-hero { height: 56.25vw; min-height: 200px; }
+        }
+
+        .exp-cbtn {
+            flex-shrink:  0;
+            width:        36px;
+            height:       36px;
+            display:      flex;
+            align-items:  center;
+            justify-content: center;
+            background:   none;
+            border:       none;
+            color:        rgba(245,240,232,0.7);
+            cursor:       pointer;
+            padding:      0;
+            transition:   color 0.2s, transform 0.15s;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .exp-cbtn:hover { color: #f5f0e8; transform: scale(1.1); }
+        .exp-cbtn svg   { pointer-events: none; display: block; }
+
+        .exp-prog-wrap {
+            flex:         1;
+            height:       36px;
+            display:      flex;
+            align-items:  center;
+            cursor:       pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .exp-prog-track {
+            position:   relative;
+            width:      100%;
+            height:     1px;
+            background: rgba(245,240,232,0.2);
+        }
+        .exp-prog-fill {
+            position:   absolute;
+            inset:      0 auto 0 0;
+            width:      0%;
+            background: rgba(245,240,232,0.8);
+            transition: width 0.8s linear;
+        }
+        .exp-prog-dot {
+            position:      absolute;
+            top:           50%;
+            left:          0%;
+            transform:     translate(-50%, -50%);
+            width:         6px;
+            height:        6px;
+            border-radius: 50%;
+            background:    #f5f0e8;
+            opacity:       0;
+            transition:    left 0.8s linear, opacity 0.15s;
+        }
+        .exp-prog-wrap:hover .exp-prog-dot { opacity: 1; }
+
+        .exp-ctime {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.62rem;
+            letter-spacing: 0.14em;
+            color:          rgba(245,240,232,0.5);
+            min-width:      30px;
+            flex-shrink:    0;
         }
 
         .exp-page-hero-caption {
@@ -1026,12 +1151,39 @@
          ======================================================== -->
 
     <header class="exp-page-hero">
-        <iframe class="yt-bg"
-                src="https://www.youtube.com/embed/3VS1aarcTxc?autoplay=1&mute=1&loop=1&playlist=3VS1aarcTxc&controls=0&rel=0&modestbranding=1&playsinline=1"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                title="Ezsencia experiencia"></iframe>
+
+        <div class="exp-yt-wrap">
+            <div id="expPlayer"></div>
+        </div>
+
+        <div class="exp-page-hero-overlay"></div>
+        <div class="exp-yt-mask"></div>
+        <div class="exp-tap" id="expTap"></div>
+
+        <div class="exp-controls" id="expControls">
+            <button class="exp-cbtn" id="expPP" aria-label="Pausa">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="5"  y="3" width="5" height="18" rx="1"/>
+                    <rect x="14" y="3" width="5" height="18" rx="1"/>
+                </svg>
+            </button>
+            <div class="exp-prog-wrap" id="expProgWrap">
+                <div class="exp-prog-track">
+                    <div class="exp-prog-fill" id="expFill"></div>
+                    <div class="exp-prog-dot"  id="expDot"></div>
+                </div>
+            </div>
+            <span class="exp-ctime" id="expTime">0:00</span>
+            <button class="exp-cbtn" id="expMuteBtn" aria-label="Activar sonido">
+                <svg id="expMuteIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <line x1="23" y1="9"  x2="17" y2="15"/>
+                    <line x1="17" y1="9"  x2="23" y2="15"/>
+                </svg>
+            </button>
+        </div>
+
     </header>
 
     <div class="exp-page-hero-caption">
@@ -1387,7 +1539,146 @@
         </div>
     </div>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+
+        /* ── Experiencia hero player — misma lógica que index.html ── */
+        var expPlayer  = null;
+        var expMuted   = true;
+        var expTimer   = null;
+
+        var expFill    = document.getElementById('expFill');
+        var expDot     = document.getElementById('expDot');
+        var expTime    = document.getElementById('expTime');
+        var expPP      = document.getElementById('expPP');
+        var expMuteBtn = document.getElementById('expMuteBtn');
+        var expMuteIco = document.getElementById('expMuteIcon');
+        var expTap     = document.getElementById('expTap');
+        var expHero    = document.querySelector('.exp-page-hero');
+
+        var EXP_ICO_PAUSE = '<rect x="5" y="3" width="5" height="18" rx="1"/><rect x="14" y="3" width="5" height="18" rx="1"/>';
+        var EXP_ICO_PLAY  = '<polygon points="5 3 19 12 5 21 5 3"/>';
+        var EXP_ICO_MUTED = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+        var EXP_ICO_SOUND = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+
+        function expFmtTime(s) {
+            s = Math.floor(s || 0);
+            return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+        }
+
+        function expUpdateProgress() {
+            if (!expPlayer || typeof expPlayer.getCurrentTime !== 'function') return;
+            var cur = expPlayer.getCurrentTime();
+            var dur = expPlayer.getDuration();
+            if (!dur) return;
+            var pct = (cur / dur) * 100;
+            expFill.style.width = pct + '%';
+            expDot.style.left   = pct + '%';
+            expTime.textContent = expFmtTime(cur);
+        }
+
+        function expSetPPIcon(paused) {
+            if (!expPP) return;
+            expPP.innerHTML = paused
+                ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">' + EXP_ICO_PLAY  + '</svg>'
+                : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">' + EXP_ICO_PAUSE + '</svg>';
+            expPP.setAttribute('aria-label', paused ? 'Reproducir' : 'Pausa');
+        }
+
+        function expFlash() {
+            expHero.classList.add('touched');
+            clearTimeout(expHero._ct);
+            expHero._ct = setTimeout(function () { expHero.classList.remove('touched'); }, 3000);
+        }
+
+        function expShouldPlay() {
+            if (!expPlayer || typeof expPlayer.getPlayerState !== 'function') return true;
+            return expPlayer.getPlayerState() !== 1;
+        }
+
+        function initExpPlayer() {
+            if (expPlayer !== null) return;
+            expPlayer = new YT.Player('expPlayer', {
+                width:   '100%',
+                height:  '100%',
+                videoId: '3VS1aarcTxc',
+                playerVars: {
+                    autoplay:       1,
+                    mute:           1,
+                    controls:       0,
+                    rel:            0,
+                    modestbranding: 1,
+                    iv_load_policy: 3,
+                    playsinline:    1
+                },
+                events: {
+                    onReady: function (e) {
+                        var iframe = e.target.getIframe();
+                        if (iframe) iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+                        e.target.mute();
+                        e.target.setPlaybackQuality('hd1080');
+                        e.target.playVideo();
+                        expTimer = setInterval(expUpdateProgress, 800);
+                        var wrap = document.querySelector('.exp-yt-wrap');
+                        if (wrap) wrap.classList.add('ready');
+                    },
+                    onStateChange: function (e) {
+                        if (e.data === YT.PlayerState.ENDED) { expPlayer.seekTo(0, true); expPlayer.playVideo(); }
+                        if (e.data === YT.PlayerState.PLAYING) expSetPPIcon(false);
+                        if (e.data === YT.PlayerState.PAUSED)  expSetPPIcon(true);
+                    }
+                }
+            });
+        }
+
+        /* Fix race condition: API ya en caché al refrescar */
+        if (typeof window.onYouTubeIframeAPIReady === 'undefined') {
+            window.onYouTubeIframeAPIReady = initExpPlayer;
+        } else {
+            var _prevYTReady = window.onYouTubeIframeAPIReady;
+            window.onYouTubeIframeAPIReady = function () { _prevYTReady(); initExpPlayer(); };
+        }
+        if (window.YT && window.YT.Player) initExpPlayer();
+
+        /* Fix bfcache Safari */
+        window.addEventListener('pageshow', function (e) {
+            if (!e.persisted) return;
+            if (expPlayer && typeof expPlayer.playVideo === 'function') {
+                try { expPlayer.seekTo(0, true); expPlayer.playVideo();
+                    var wrap = document.querySelector('.exp-yt-wrap');
+                    if (wrap) wrap.classList.add('ready');
+                } catch (_) { expPlayer = null; initExpPlayer(); }
+            } else { expPlayer = null; initExpPlayer(); }
+        });
+
+        if (expTap) expTap.addEventListener('click', function () {
+            if (!expPlayer || typeof expPlayer.playVideo !== 'function') return;
+            if (expShouldPlay()) expPlayer.playVideo(); else expPlayer.pauseVideo();
+            expFlash();
+        });
+
+        if (expPP) expPP.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (!expPlayer) return;
+            if (expShouldPlay()) expPlayer.playVideo(); else expPlayer.pauseVideo();
+        });
+
+        if (expMuteBtn) expMuteBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (!expPlayer) return;
+            if (expMuted) {
+                expPlayer.unMute(); expMuted = false;
+                expMuteIco.innerHTML = EXP_ICO_SOUND;
+                expMuteBtn.setAttribute('aria-label', 'Silenciar');
+            } else {
+                expPlayer.mute(); expMuted = true;
+                expMuteIco.innerHTML = EXP_ICO_MUTED;
+                expMuteBtn.setAttribute('aria-label', 'Activar sonido');
+            }
+        });
+
+        /* touched class para controles en móvil */
+        /* (reutiliza la misma lógica que index) */
 
         const cursor = document.getElementById('cursor');
         const ring   = document.getElementById('cursorRing');
