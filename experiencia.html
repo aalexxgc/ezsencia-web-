@@ -773,6 +773,100 @@
             opacity:   1;
         }
 
+        /* Modal mesa — estructura extendida con fotos */
+        .exp-modal-hero-img {
+            width:      100%;
+            height:     380px;
+            object-fit: cover;
+            display:    block;
+            filter:     brightness(0.88);
+        }
+
+        .exp-modal-photo-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap:     2px;
+            margin:  2.5rem 0;
+        }
+
+        .exp-modal-photo-row img,
+        .exp-modal-photo-placeholder {
+            width:       100%;
+            aspect-ratio: 4 / 3;
+            object-fit:  cover;
+            display:     block;
+            background:  #e8e3da;
+        }
+
+        .exp-modal-photo-placeholder {
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.58rem;
+            letter-spacing:  0.28em;
+            text-transform:  uppercase;
+            color:           rgba(26,25,22,0.3);
+        }
+
+        .exp-modal-intro {
+            font-family:  'EB Garamond', serif;
+            font-size:    1.15rem;
+            font-style:   italic;
+            line-height:  1.85;
+            color:        var(--tinta);
+            margin-bottom: 2.5rem;
+        }
+
+        .exp-modal-curso-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color:          var(--dorado, #9a7d4a);
+            margin-bottom:  0.8rem;
+            display:        block;
+        }
+
+        .exp-modal-platos {
+            list-style:    none;
+            padding:       0;
+            margin:        0 0 2.5rem;
+        }
+
+        .exp-modal-platos li {
+            font-size:     0.93rem;
+            line-height:   1.7;
+            color:         var(--tinta-suave);
+            padding:       0.55rem 0;
+            border-bottom: 1px solid rgba(26,25,22,0.07);
+        }
+
+        .exp-modal-platos li:last-child { border-bottom: none; }
+
+        .exp-modal-bodega-item {
+            display:         flex;
+            justify-content: space-between;
+            font-size:       0.9rem;
+            line-height:     1.7;
+            color:           var(--tinta-suave);
+            padding:         0.45rem 0;
+            border-bottom:   1px solid rgba(26,25,22,0.07);
+        }
+        .exp-modal-bodega-item:last-child { border-bottom: none; }
+        .exp-modal-bodega-item span:first-child { color: var(--tinta); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+        .exp-modal-cierre {
+            margin-top:   2.5rem;
+            padding-top:  2rem;
+            border-top:   1px solid rgba(26,25,22,0.1);
+            font-family:  'EB Garamond', serif;
+            font-style:   italic;
+            font-size:    1rem;
+            line-height:  1.9;
+            color:        var(--tinta-suave);
+        }
+
         .exp-modal-img {
             width:      100%;
             height:     320px;
@@ -1501,49 +1595,90 @@
     <div class="exp-modal-overlay" id="modal-mesa" role="dialog" aria-modal="true">
         <div class="exp-modal">
             <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
-            <img class="exp-modal-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="La Mesa Esencia">
+
+            <!-- Imagen cabecera del modal -->
+            <img class="exp-modal-hero-img"
+                 src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg"
+                 alt="Mas&iacute;a El Molinete">
+
             <div class="exp-modal-body">
+
                 <p class="exp-modal-label">III &nbsp;&middot;&nbsp; El Encuentro Gastron&oacute;mico</p>
                 <h2 class="exp-modal-title">La Mesa Esencia</h2>
-                <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text">
-                    Mas&iacute;a El Molinete &nbsp;&middot;&nbsp; Mora de Rubielos &nbsp;&middot;&nbsp; Enero 2026<br>
-                    Veh&iacute;culos del evento desde Alcotas
+                <p class="exp-modal-text" style="font-size:0.72rem;letter-spacing:0.18em;color:var(--tinta-suave);margin-bottom:2.5rem;">
+                    Mas&iacute;a El Molinete &nbsp;&middot;&nbsp; Mora de Rubielos &nbsp;&middot;&nbsp; Enero 2026
                 </p>
+
+                <!-- Introducción -->
                 <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text" style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dorado,#9a7d4a);margin-bottom:0.6rem;">Entrantes</p>
-                <p class="exp-modal-text">
-                    Surtido de quesos de la Sierra de Albarrac&iacute;n<br>
-                    Jam&oacute;n de Teruel D.O.<br>
-                    Surtido de ib&eacute;ricos<br>
-                    Tosta de verduras escalivadas con bacalao confitado<br>
-                    Brochetas de vieira con panceta y aceite trufado<br>
-                    Volavent de solomillo de cerdo a la crema de quesos trufada<br>
-                    Montadito de pulpo da feira<br>
-                    Hojaldre de cebollita caramelizada y langostinos<br>
-                    Bolitas almendradas de chistorra y de queso de cabra<br>
-                    Bomb&oacute;n de foie al chocolate almendrado
+                <p class="exp-modal-intro">
+                    Despu&eacute;s de la jornada en los campos, de conocer el origen de Ezsencia
+                    de la mano de la familia y del territorio que lo hace posible,
+                    el club se desplaza en veh&iacute;culos del evento hasta Mora de Rubielos.
                 </p>
-                <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text" style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dorado,#9a7d4a);margin-bottom:0.6rem;">Plato principal</p>
-                <p class="exp-modal-text">
-                    Redondo de paletilla de Ternasco de Arag&oacute;n D.O. deshuesada y rellena de cebollita caramelizada y frutos deshidratados, con mil hojas de patata laminada, salsa trufada de ciruelas y brocheta de verduritas
+                <p class="exp-modal-text" style="margin-bottom:2.5rem;">
+                    All&iacute;, en la Mas&iacute;a El Molinete, tiene lugar la comida Ezsencia:
+                    un men&uacute; construido alrededor de la trufa negra de Alcotas,
+                    con producto de la tierra, bodega de Arag&oacute;n y una sala privada
+                    para quien quiera que la jornada no tenga hora de fin.
+                    No es una comida de cl&iacute;entes. Es el homenaje de una comunidad
+                    a lo que ha construido juntos.
                 </p>
-                <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text" style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dorado,#9a7d4a);margin-bottom:0.6rem;">Postre</p>
-                <p class="exp-modal-text">
-                    Coulant fr&iacute;o de queso curado con salsa de ar&aacute;ndanos y helado de yogur
+
+                <!-- Fila de fotos — espacio para 2 imágenes del lugar -->
+                <div class="exp-modal-photo-row">
+                    <div class="exp-modal-photo-placeholder">Foto del espacio</div>
+                    <div class="exp-modal-photo-placeholder">Foto del espacio</div>
+                </div>
+
+                <!-- Entrantes -->
+                <span class="exp-modal-curso-label">Entrantes</span>
+                <ul class="exp-modal-platos">
+                    <li>Surtido de quesos de la Sierra de Albarrac&iacute;n</li>
+                    <li>Jam&oacute;n de Teruel D.O.</li>
+                    <li>Surtido de ib&eacute;ricos</li>
+                    <li>Tosta de verduras escalivadas con bacalao confitado</li>
+                    <li>Brochetas de vieira con panceta y aceite trufado</li>
+                    <li>Volavent de solomillo de cerdo a la crema de quesos trufada</li>
+                    <li>Montadito de pulpo da feira</li>
+                    <li>Hojaldre de cebollita caramelizada y langostinos</li>
+                    <li>Bolitas almendradas de chistorra y de queso de cabra</li>
+                    <li>Bomb&oacute;n de foie al chocolate almendrado</li>
+                </ul>
+
+                <!-- Foto entre platos -->
+                <div class="exp-modal-photo-placeholder" style="margin-bottom:2.5rem;aspect-ratio:16/7;">Foto del menú</div>
+
+                <!-- Principal -->
+                <span class="exp-modal-curso-label">Plato principal</span>
+                <ul class="exp-modal-platos">
+                    <li>Redondo de paletilla de Ternasco de Arag&oacute;n D.O. deshuesada y rellena de cebollita caramelizada y frutos deshidratados, con mil hojas de patata laminada, salsa trufada de ciruelas y brocheta de verduritas</li>
+                </ul>
+
+                <!-- Postre -->
+                <span class="exp-modal-curso-label">Postre</span>
+                <ul class="exp-modal-platos">
+                    <li>Coulant fr&iacute;o de queso curado con salsa de ar&aacute;ndanos y helado de yogur</li>
+                </ul>
+
+                <!-- Bodega -->
+                <span class="exp-modal-curso-label">Bodega &nbsp;&middot;&nbsp; Bodegas San Valero, Cari&ntilde;ena</span>
+                <div style="margin-bottom:2.5rem;">
+                    <div class="exp-modal-bodega-item"><span>Blanco</span><span>Particular Chardonnay Barrica</span></div>
+                    <div class="exp-modal-bodega-item"><span>Tinto</span><span>Particular Garnacha Centenaria</span></div>
+                    <div class="exp-modal-bodega-item"><span>Cava</span><span>Particular Garnacha Blanc de Noir Reserva</span></div>
+                </div>
+
+                <p class="exp-modal-text" style="font-size:0.85rem;color:var(--tinta-suave);">
+                    Agua, cerveza, refrescos, caf&eacute; y copa de licor incluidos.
                 </p>
-                <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text" style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dorado,#9a7d4a);margin-bottom:0.6rem;">Bodega &nbsp;&middot;&nbsp; Bodegas San Valero, Cari&ntilde;ena</p>
-                <p class="exp-modal-text">
-                    Blanco &mdash; Particular Chardonnay Barrica<br>
-                    Tinto &mdash; Particular Garnacha Centenaria<br>
-                    Cava &mdash; Particular Garnacha Blanc de Noir Reserva<br>
-                    <br>
-                    Agua, cerveza, refrescos, caf&eacute; y copa de licor incluidos.<br>
-                    Sala privada disponible para el resto de la jornada.
+
+                <!-- Cierre -->
+                <p class="exp-modal-cierre">
+                    La sala privada queda para el club.<br>
+                    Sin hora de cierre.
                 </p>
+
             </div>
         </div>
     </div>
