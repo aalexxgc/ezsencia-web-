@@ -942,37 +942,82 @@
         }
 
         /* ====================================================
-           MODAL CAJA FUNDADORA — estructura editorial rica
+           MODAL CAJA FUNDADORA — experiencia full-screen de lujo
            ==================================================== */
 
-        /* Hero del modal */
+        #modal-caja {
+            padding:         0;
+            background:      rgba(5,4,3,0.97);
+            backdrop-filter: none;
+            align-items:     flex-start;
+        }
+
+        #modal-caja .exp-modal {
+            max-width:     100%;
+            max-height:    100vh;
+            background:    #080705;
+            border-radius: 0;
+            transform:     translateY(0) scale(1);
+            opacity:       0;
+            transition:    opacity 0.8s ease;
+        }
+
+        #modal-caja.is-open .exp-modal {
+            opacity:   1;
+            transform: translateY(0) scale(1);
+        }
+
+        #modal-caja .exp-modal-close {
+            position:   fixed;
+            top:        2rem;
+            right:      2.5rem;
+            z-index:    1000;
+            background: transparent;
+            color:      rgba(245,240,232,0.45);
+            border:     none;
+            font-size:  1.4rem;
+            cursor:     pointer;
+            transition: color 0.3s;
+            padding:    0.5rem;
+            line-height: 1;
+            width:      auto;
+            height:     auto;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        #modal-caja .exp-modal-close:hover { color: #f5f0e8; background: transparent; }
+
+        /* ─── HERO ─────────────────────────────── */
         .mcaja-hero {
-            position:   relative;
-            height:     52vh;
-            min-height: 340px;
-            overflow:   hidden;
+            position:    relative;
+            height:      100vh;
+            min-height:  500px;
+            overflow:    hidden;
         }
 
         .mcaja-hero-img {
-            position:   absolute;
-            inset:      0;
-            width:      100%;
-            height:     100%;
-            object-fit: cover;
+            position:        absolute;
+            inset:           0;
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
             object-position: center 40%;
-            filter:     brightness(0.62);
-            transition: transform 8s ease;
+            filter:          brightness(0.42);
+            transform:       scale(1.07);
+            transition:      transform 9s ease, filter 1.8s ease;
         }
 
-        .exp-modal-overlay.is-open .mcaja-hero-img { transform: scale(1.04); }
+        #modal-caja.is-open .mcaja-hero-img {
+            transform: scale(1);
+        }
 
         .mcaja-hero-overlay {
             position:   absolute;
             inset:      0;
             background: linear-gradient(
                 180deg,
-                rgba(20,18,14,0.1)  0%,
-                rgba(20,18,14,0.55) 100%
+                rgba(8,7,5,0.0) 50%,
+                rgba(8,7,5,1.0) 100%
             );
         }
 
@@ -982,55 +1027,82 @@
             display:         flex;
             flex-direction:  column;
             align-items:     center;
-            justify-content: flex-end;
-            padding:         3.5rem 3rem;
+            justify-content: center;
             text-align:      center;
             z-index:         2;
+            padding:         2rem;
+            opacity:         0;
+            transform:       translateY(20px);
+            transition:      opacity 1.4s ease 0.5s, transform 1.4s ease 0.5s;
+        }
+
+        #modal-caja.is-open .mcaja-hero-text {
+            opacity:   1;
+            transform: translateY(0);
         }
 
         .mcaja-hero-eyebrow {
             font-family:    'Lato', sans-serif;
-            font-size:      0.58rem;
-            letter-spacing: 0.4em;
+            font-size:      0.54rem;
+            letter-spacing: 0.48em;
             text-transform: uppercase;
-            color:          rgba(245,240,232,0.55);
-            margin-bottom:  1.2rem;
+            color:          #b8965a;
+            margin-bottom:  2.2rem;
         }
 
         .mcaja-hero-title {
-            font-family:    'Playfair Display', serif;
-            font-size:      clamp(1.6rem, 3.5vw, 2.8rem);
-            font-weight:    400;
-            font-style:     italic;
-            line-height:    1.15;
-            color:          #f5f0e8;
-            margin-bottom:  1.2rem;
+            font-family:   'Playfair Display', serif;
+            font-size:     clamp(3rem, 7.5vw, 6.5rem);
+            font-weight:   400;
+            font-style:    italic;
+            line-height:   1.08;
+            color:         #f5f0e8;
+            margin-bottom: 2.4rem;
         }
 
         .mcaja-hero-sub {
-            font-family:    'Lato', sans-serif;
-            font-size:      0.72rem;
-            font-weight:    300;
-            letter-spacing: 0.18em;
-            color:          rgba(245,240,232,0.65);
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(1rem, 1.8vw, 1.35rem);
+            font-style:     italic;
+            letter-spacing: 0.04em;
+            color:          rgba(245,240,232,0.55);
             line-height:    2;
         }
 
-        /* Intro */
+        .mcaja-hero-scroll {
+            position:       absolute;
+            bottom:         3rem;
+            left:           50%;
+            transform:      translateX(-50%);
+            font-family:    'Lato', sans-serif;
+            font-size:      0.48rem;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.28);
+            animation:      mcajaScrollPulse 2.8s ease infinite;
+            white-space:    nowrap;
+        }
+
+        @keyframes mcajaScrollPulse {
+            0%, 100% { opacity: 0.28; transform: translateX(-50%) translateY(0); }
+            50%       { opacity: 0.6;  transform: translateX(-50%) translateY(7px); }
+        }
+
+        /* ─── INTRO ─────────────────────────────── */
         .mcaja-intro {
-            padding:    4.5rem 5rem 4rem;
+            padding:    9rem 4rem 8rem;
             text-align: center;
-            border-bottom: 1px solid var(--borde);
+            background: #080705;
+            border-top: 1px solid rgba(184,150,90,0.14);
         }
 
         .mcaja-intro p {
             font-family: 'EB Garamond', serif;
-            font-size:   1.12rem;
-            font-weight: 400;
-            line-height: 2;
-            color:       var(--tinta-suave);
-            max-width:   580px;
-            margin:      0 auto 1.2rem;
+            font-size:   clamp(1.1rem, 1.6vw, 1.35rem);
+            line-height: 2.1;
+            color:       rgba(245,240,232,0.48);
+            max-width:   640px;
+            margin:      0 auto 1.4rem;
         }
 
         .mcaja-intro p:last-child { margin-bottom: 0; }
@@ -1038,135 +1110,234 @@
         .mcaja-intro-frase {
             font-family: 'Playfair Display', serif !important;
             font-style:  italic !important;
-            font-size:   1.25rem !important;
-            color:       var(--tinta) !important;
-            margin-top:  2rem !important;
-        }
-
-        /* Grid de contenido */
-        .mcaja-grid {
-            display:               grid;
-            grid-template-columns: 1fr 1fr;
-            border-top:            1px solid var(--borde);
-        }
-
-        .mcaja-item {
-            border-right:  1px solid var(--borde);
-            border-bottom: 1px solid var(--borde);
-            overflow:      hidden;
-        }
-
-        .mcaja-item:nth-child(even) { border-right: none; }
-
-        .mcaja-item-img {
-            width:      100%;
-            height:     200px;
-            object-fit: cover;
-            display:    block;
-            filter:     brightness(0.88);
-            transition: filter 0.6s ease, transform 0.7s ease;
-        }
-
-        .mcaja-item:hover .mcaja-item-img {
-            filter:    brightness(1);
-            transform: scale(1.03);
-        }
-
-        .mcaja-item-body {
-            padding: 2.2rem 2.5rem 2.8rem;
-        }
-
-        .mcaja-item-num {
-            font-family:    'EB Garamond', serif;
-            font-size:      0.75rem;
-            font-style:     italic;
-            color:          var(--dorado);
-            opacity:        0.6;
-            letter-spacing: 0.12em;
-            margin-bottom:  0.8rem;
-        }
-
-        .mcaja-item-title {
-            font-family:   'Playfair Display', serif;
-            font-size:     1rem;
-            font-weight:   400;
-            color:         var(--tinta);
-            line-height:   1.4;
-            margin-bottom: 1rem;
-        }
-
-        .mcaja-item-desc {
-            font-size:   0.88rem;
-            line-height: 1.9;
-            color:       var(--tinta-suave);
-        }
-
-        /* Cierre */
-        .mcaja-cierre {
-            padding:       5rem 5rem 5.5rem;
-            text-align:    center;
-            background:    var(--tinta);
-        }
-
-        .mcaja-cierre p {
-            font-family: 'Playfair Display', serif;
-            font-size:   clamp(1rem, 2vw, 1.35rem);
-            font-weight: 400;
-            font-style:  italic;
-            line-height: 1.9;
-            color:       rgba(245,240,232,0.75);
-            max-width:   520px;
-            margin:      0 auto;
-        }
-
-        .mcaja-cierre-final {
-            color:       rgba(245,240,232,0.4) !important;
-            font-size:   0.62rem !important;
-            font-family: 'Lato', sans-serif !important;
-            font-style:  normal !important;
-            letter-spacing: 0.32em;
-            text-transform: uppercase;
+            font-size:   clamp(1.3rem, 2.2vw, 1.8rem) !important;
+            color:       #f5f0e8 !important;
             margin-top:  2.8rem !important;
         }
 
-        /* ── Modal responsive ─────────────────────── */
+        /* ─── PIEZAS ─────────────────────────────── */
+        .mcaja-piece {
+            display:               grid;
+            grid-template-columns: 56% 44%;
+            min-height:            64vh;
+            background:            #080705;
+            border-top:            1px solid rgba(184,150,90,0.1);
+            overflow:              hidden;
+        }
 
-        @media (max-width: 700px) {
-            .mcaja-grid      { grid-template-columns: 1fr; }
-            .mcaja-item      { border-right: none; }
-            .mcaja-intro     { padding: 3rem 1.5rem; }
-            .mcaja-cierre    { padding: 3rem 1.5rem; }
-            .mcaja-item-body { padding: 1.8rem 1.5rem 2.2rem; }
-            .mcaja-item-img  { height: 180px; }
+        .mcaja-piece--rev {
+            grid-template-columns: 44% 56%;
+        }
+
+        .mcaja-piece-img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mcaja-piece--rev .mcaja-piece-img-wrap { order: 2; }
+        .mcaja-piece--rev .mcaja-piece-body     { order: 1; }
+
+        .mcaja-piece-img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+            filter:     brightness(0.6);
+            transform:  scale(1.06);
+            transition: transform 1.6s cubic-bezier(0.16,1,0.3,1),
+                        filter 1.6s ease;
+        }
+
+        .mcaja-piece.in-view .mcaja-piece-img {
+            transform: scale(1);
+            filter:    brightness(0.78);
+        }
+
+        .mcaja-piece-body {
+            display:         flex;
+            flex-direction:  column;
+            justify-content: center;
+            padding:         5rem 6rem;
+        }
+
+        .mcaja-piece-num {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.5rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color:          #b8965a;
+            margin-bottom:  2.4rem;
+            opacity:        0;
+            transform:      translateY(14px);
+            transition:     opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+        }
+
+        .mcaja-piece-title {
+            font-family:   'Playfair Display', serif;
+            font-size:     clamp(1.7rem, 3vw, 2.8rem);
+            font-weight:   400;
+            font-style:    italic;
+            line-height:   1.2;
+            color:         #f5f0e8;
+            margin-bottom: 2.4rem;
+            opacity:       0;
+            transform:     translateY(14px);
+            transition:    opacity 0.9s ease 0.24s, transform 0.9s ease 0.24s;
+        }
+
+        .mcaja-piece-sep {
+            width:            2.8rem;
+            height:           1px;
+            background:       #b8965a;
+            margin-bottom:    2.4rem;
+            opacity:          0;
+            transform:        scaleX(0);
+            transform-origin: left;
+            transition:       opacity 0.7s ease 0.38s, transform 0.7s ease 0.38s;
+        }
+
+        .mcaja-piece-desc {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(0.95rem, 1.25vw, 1.08rem);
+            line-height: 2.1;
+            color:       rgba(245,240,232,0.48);
+            max-width:   400px;
+            opacity:     0;
+            transform:   translateY(14px);
+            transition:  opacity 0.9s ease 0.5s, transform 0.9s ease 0.5s;
+        }
+
+        .mcaja-piece.in-view .mcaja-piece-num,
+        .mcaja-piece.in-view .mcaja-piece-title,
+        .mcaja-piece.in-view .mcaja-piece-desc {
+            opacity:   1;
+            transform: translateY(0);
+        }
+
+        .mcaja-piece.in-view .mcaja-piece-sep {
+            opacity:   1;
+            transform: scaleX(1);
+        }
+
+        /* Pieza V — pantalla completa */
+        .mcaja-piece--full {
+            grid-template-columns: 1fr;
+            min-height:            56vh;
+            position:              relative;
+        }
+
+        .mcaja-piece--full .mcaja-piece-img-wrap {
+            position: absolute;
+            inset:    0;
+        }
+
+        .mcaja-piece--full .mcaja-piece-img {
+            position: absolute;
+            inset:    0;
+            height:   100%;
+        }
+
+        .mcaja-piece--full .mcaja-piece-body {
+            position:   relative;
+            z-index:    2;
+            align-items: center;
+            text-align:  center;
+            padding:     8rem 3rem;
+            background:  linear-gradient(rgba(8,7,5,0.35), rgba(8,7,5,0.82));
+        }
+
+        .mcaja-piece--full .mcaja-piece-sep {
+            transform-origin: center;
+            margin-left:  auto;
+            margin-right: auto;
+        }
+
+        .mcaja-piece--full .mcaja-piece-desc {
+            max-width: 520px;
+        }
+
+        /* ─── CIERRE ─────────────────────────────── */
+        .mcaja-cierre {
+            padding:        16rem 2rem;
+            text-align:     center;
+            background:     #080705;
+            border-top:     1px solid rgba(184,150,90,0.14);
+            display:        flex;
+            flex-direction: column;
+            align-items:    center;
+            gap:            3rem;
+        }
+
+        .mcaja-cierre-linea {
+            width:      1px;
+            height:     72px;
+            background: linear-gradient(180deg, transparent, #b8965a, transparent);
+        }
+
+        .mcaja-cierre-frase {
+            font-family: 'Playfair Display', serif;
+            font-size:   clamp(1.8rem, 3.8vw, 3.2rem);
+            font-weight: 400;
+            font-style:  italic;
+            line-height: 1.5;
+            color:       #f5f0e8;
+            max-width:   660px;
+        }
+
+        .mcaja-cierre-edition {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.54rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color:          rgba(184,150,90,0.55);
+        }
+
+        .mcaja-cierre-cta {
+            display:         inline-block;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.54rem;
+            letter-spacing:  0.4em;
+            text-transform:  uppercase;
+            color:           #080705;
+            background:      #b8965a;
+            text-decoration: none;
+            padding:         1.3rem 4.5rem;
+            transition:      background 0.35s, color 0.35s;
+        }
+        .mcaja-cierre-cta:hover { background: #f5f0e8; }
+
+        .mcaja-cierre-final {
+            font-family:    'EB Garamond', serif;
+            font-size:      0.9rem;
+            font-style:     italic;
+            color:          rgba(245,240,232,0.18);
+            letter-spacing: 0.06em;
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────── */
+        @media (max-width: 900px) {
+            .mcaja-piece,
+            .mcaja-piece--rev {
+                grid-template-columns: 1fr;
+                min-height:            auto;
+            }
+            .mcaja-piece--rev .mcaja-piece-img-wrap { order: 1; }
+            .mcaja-piece--rev .mcaja-piece-body     { order: 2; }
+            .mcaja-piece-img-wrap { height: 58vw; min-height: 300px; }
+            .mcaja-piece-body     { padding: 4.5rem 3.5rem; }
+            .mcaja-piece--full    { min-height: 65vw; }
         }
 
         @media (max-width: 600px) {
-            /* Overlay sin padding lateral → modal fullscreen */
-            .exp-modal-overlay { padding: 0; align-items: flex-end; }
-            .exp-modal {
-                max-height:    94vh;
-                border-radius: 0;
-            }
-
-            /* Hero más compacto */
-            .mcaja-hero          { height: 36vh; min-height: 220px; }
-            .mcaja-hero-title    { font-size: clamp(1.2rem, 5.5vw, 1.8rem); }
-            .mcaja-hero-eyebrow  { font-size: 0.52rem; }
-            .mcaja-hero-sub      { font-size: 0.65rem; }
-
-            /* Intro */
-            .mcaja-intro         { padding: 2.5rem 1.2rem 2rem; }
-            .mcaja-intro p       { font-size: 0.98rem; }
-
-            /* Items */
-            .mcaja-item-img      { height: 160px; }
-            .mcaja-item-body     { padding: 1.4rem 1.2rem 1.8rem; }
-            .mcaja-item-title    { font-size: 0.92rem; }
-            .mcaja-item-desc     { font-size: 0.82rem; }
-
-            /* Cierre */
-            .mcaja-cierre        { padding: 2.5rem 1.2rem 3rem; }
-            .mcaja-cierre p      { font-size: 1rem; }
+            #modal-caja .exp-modal-close { top: 1.2rem; right: 1.4rem; }
+            .mcaja-hero         { height: 100svh; }
+            .mcaja-hero-title   { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+            .mcaja-intro        { padding: 6rem 1.8rem 5rem; }
+            .mcaja-piece-img-wrap { height: 64vw; }
+            .mcaja-piece-body   { padding: 4rem 1.8rem; }
+            .mcaja-piece-desc   { max-width: 100%; }
+            .mcaja-cierre       { padding: 9rem 1.8rem; }
+            .mcaja-cierre-frase { font-size: clamp(1.6rem, 7.5vw, 2.2rem); }
 
             /* Botón cerrar siempre visible */
             .exp-modal-close     { top: 1rem; right: 1rem; }
@@ -1484,18 +1655,19 @@
 
             <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
 
-            <!-- 1. HERO -->
+            <!-- HERO -->
             <div class="mcaja-hero">
                 <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_fundadora.png" alt="La Caja Fundadora EZSENCIA">
                 <div class="mcaja-hero-overlay"></div>
                 <div class="mcaja-hero-text">
                     <p class="mcaja-hero-eyebrow">Edici&oacute;n Fundadores &nbsp;&middot;&nbsp; 2026</p>
-                    <h2 class="mcaja-hero-title">La Caja Fundadora &middot; El origen de todo</h2>
+                    <h2 class="mcaja-hero-title">La Caja<br>Fundadora</h2>
                     <p class="mcaja-hero-sub">No es un env&iacute;o.<br>Es el inicio.</p>
                 </div>
+                <p class="mcaja-hero-scroll">Descubrir</p>
             </div>
 
-            <!-- 2. INTRODUCCIÓN -->
+            <!-- INTRO -->
             <div class="mcaja-intro">
                 <p>La Caja Fundadora es la primera experiencia f&iacute;sica de Ezsencia.</p>
                 <p>El momento en el que entras en el club y todo lo que representamos —territorio, tiempo y selecci&oacute;n— se materializa por primera vez.</p>
@@ -1503,67 +1675,83 @@
                 <p class="mcaja-intro-frase">Una pieza &uacute;nica. Personal. Irrepetible.</p>
             </div>
 
-            <!-- 3. GRID DE CONTENIDO -->
-            <div class="mcaja-grid">
-
-                <div class="mcaja-item">
-                    <img class="mcaja-item-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Trufa negra Ezsencia">
-                    <div class="mcaja-item-body">
-                        <p class="mcaja-item-num">I &nbsp;&middot;&nbsp; Trufa Negra</p>
-                        <h3 class="mcaja-item-title">Tuber melanosporum.<br>Alcotas, Teruel.</h3>
-                        <p class="mcaja-item-desc">La m&aacute;xima expresi&oacute;n del invierno. Recolectada en su punto &oacute;ptimo en los truferos de Alcotas y enviada en las 48 horas posteriores a la cosecha.<br><br>200&thinsp;g. Sin intermediarios. Con el origen de quien la ha cultivado.</p>
-                    </div>
+            <!-- I: TRUFA -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Trufa negra Ezsencia">
                 </div>
-
-                <div class="mcaja-item">
-                    <img class="mcaja-item-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/ritual.png" alt="Laminador de nogal">
-                    <div class="mcaja-item-body">
-                        <p class="mcaja-item-num">II &nbsp;&middot;&nbsp; Laminador de Nogal</p>
-                        <h3 class="mcaja-item-title">La herramienta que convierte el producto en ritual.</h3>
-                        <p class="mcaja-item-desc">Affettatartufi artesanal en madera de nogal macizo. Hoja de corte liso. Fabricaci&oacute;n italiana.<br><br>Laminar bien es el primer gesto. &Eacute;ste es el instrumento para hacerlo.</p>
-                    </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">I &nbsp;&middot;&nbsp; Trufa Negra</p>
+                    <h3 class="mcaja-piece-title">Tuber melanosporum.<br>Alcotas, Teruel.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">La m&aacute;xima expresi&oacute;n del invierno. Recolectada en su punto &oacute;ptimo en los truferos de Alcotas y enviada en las 48 horas posteriores a la cosecha.<br><br>200&thinsp;g. Sin intermediarios. Con el origen de quien la ha cultivado.</p>
                 </div>
-
-                <div class="mcaja-item">
-                    <img class="mcaja-item-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/abuela.JPG" alt="El sobre negro">
-                    <div class="mcaja-item-body">
-                        <p class="mcaja-item-num">III &nbsp;&middot;&nbsp; El Sobre Negro</p>
-                        <h3 class="mcaja-item-title">No es un mensaje.<br>Es una invitaci&oacute;n.</h3>
-                        <p class="mcaja-item-desc">Un manuscrito con la historia de Ezsencia. Las instrucciones de uso de cada pieza, escritas como un ritual.<br><br>Y una bienvenida personal, dirigida por nombre, firmada a mano por el fundador.</p>
-                    </div>
-                </div>
-
-                <div class="mcaja-item">
-                    <img class="mcaja-item-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png" alt="Tarjeta de metal">
-                    <div class="mcaja-item-body">
-                        <p class="mcaja-item-num">IV &nbsp;&middot;&nbsp; Tarjeta de Metal</p>
-                        <h3 class="mcaja-item-title">Founders Edition 2026.<br>N&ordm;&thinsp;01&thinsp;/&thinsp;20.</h3>
-                        <p class="mcaja-item-desc">Grabada con tu nombre y tu n&uacute;mero de fundador.<br><br>Tu acceso a lo que no est&aacute; disponible para todos. Una vez asignada, no se reproduce.</p>
-                    </div>
-                </div>
-
-                <div class="mcaja-item" style="grid-column: 1 / -1; border-right: none;">
-                    <img class="mcaja-item-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_abierta.png" alt="Caja de abedul Founders Edition 2026" style="height:260px;">
-                    <div class="mcaja-item-body">
-                        <p class="mcaja-item-num">V &nbsp;&middot;&nbsp; La Caja</p>
-                        <h3 class="mcaja-item-title">Madera de abedul.<br>Grabada a l&aacute;ser.</h3>
-                        <p class="mcaja-item-desc">24,5&thinsp;&times;&thinsp;35,5&thinsp;&times;&thinsp;9&thinsp;cm. Logo Ezsencia en la tapa. &laquo;Founders Edition 2026 &middot; N&ordm;&thinsp;XX&thinsp;/&thinsp;20&raquo; en el lateral.<br><br>Dise&ntilde;ada para ser conservada. No para ser abierta y olvidada.</p>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- 4. CIERRE -->
+            <!-- II: LAMINADOR -->
+            <div class="mcaja-piece mcaja-piece--rev">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/ritual.png" alt="Laminador de nogal">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">II &nbsp;&middot;&nbsp; Laminador de Nogal</p>
+                    <h3 class="mcaja-piece-title">La herramienta que convierte el producto en ritual.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Affettatartufi artesanal en madera de nogal macizo. Hoja de corte liso. Fabricaci&oacute;n italiana.<br><br>Laminar bien es el primer gesto. &Eacute;ste es el instrumento para hacerlo.</p>
+                </div>
+            </div>
+
+            <!-- III: SOBRE NEGRO -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/abuela.JPG" alt="El sobre negro">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">III &nbsp;&middot;&nbsp; El Sobre Negro</p>
+                    <h3 class="mcaja-piece-title">No es un mensaje.<br>Es una invitaci&oacute;n.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Un manuscrito con la historia de Ezsencia. Las instrucciones de uso de cada pieza, escritas como un ritual.<br><br>Y una bienvenida personal, dirigida por nombre, firmada a mano por el fundador.</p>
+                </div>
+            </div>
+
+            <!-- IV: TARJETA -->
+            <div class="mcaja-piece mcaja-piece--rev">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png" alt="Tarjeta de metal">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">IV &nbsp;&middot;&nbsp; Tarjeta de Metal</p>
+                    <h3 class="mcaja-piece-title">Founders Edition 2026.<br>N&ordm;&thinsp;01&thinsp;/&thinsp;20.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Grabada con tu nombre y tu n&uacute;mero de fundador.<br><br>Tu acceso a lo que no est&aacute; disponible para todos. Una vez asignada, no se reproduce.</p>
+                </div>
+            </div>
+
+            <!-- V: LA CAJA — pantalla completa -->
+            <div class="mcaja-piece mcaja-piece--full">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_abierta.png" alt="Caja de abedul Founders Edition 2026">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">V &nbsp;&middot;&nbsp; La Caja</p>
+                    <h3 class="mcaja-piece-title">Madera de abedul.<br>Grabada a l&aacute;ser.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">24,5&thinsp;&times;&thinsp;35,5&thinsp;&times;&thinsp;9&thinsp;cm. Logo Ezsencia en la tapa. &laquo;Founders Edition 2026 &middot; N&ordm;&thinsp;XX&thinsp;/&thinsp;20&raquo; en el lateral.<br><br>Dise&ntilde;ada para ser conservada. No para ser abierta y olvidada.</p>
+                </div>
+            </div>
+
+            <!-- CIERRE -->
             <div class="mcaja-cierre">
-                <p>
-                    La Caja Fundadora no es un conjunto de elementos.<br>
-                    Es una declaraci&oacute;n.<br>
-                    El primer gesto.<br>
-                    El inicio del v&iacute;nculo.<br><br>
-                    La se&ntilde;al de que ya formas parte de algo<br>
-                    que no est&aacute; al alcance de todos.
+                <div class="mcaja-cierre-linea"></div>
+                <p class="mcaja-cierre-frase">
+                    No es lo que recibes.<br>
+                    Es lo que empieza<br>
+                    a partir de ah&iacute;.
                 </p>
-                <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Edici&oacute;n Fundadores 2026</p>
+                <div class="mcaja-cierre-linea"></div>
+                <p class="mcaja-cierre-edition">Founders Edition 2026 &nbsp;&middot;&nbsp; 20&thinsp;/&thinsp;20</p>
+                <a href="acceso.html" class="mcaja-cierre-cta">Solicitar acceso</a>
+                <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
             </div>
 
         </div>
@@ -1959,6 +2147,25 @@
                 if (e.target === overlay) closeModal(overlay);
             });
         });
+
+        // IntersectionObserver para piezas del modal caja
+        (function () {
+            var cajaModal = document.getElementById('modal-caja');
+            var cajaScroll = cajaModal ? cajaModal.querySelector('.exp-modal') : null;
+            if (!cajaScroll) return;
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { root: cajaScroll, threshold: 0.2 });
+
+            cajaModal.querySelectorAll('.mcaja-piece').forEach(function (el) {
+                observer.observe(el);
+            });
+        }());
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
