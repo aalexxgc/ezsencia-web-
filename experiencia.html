@@ -947,7 +947,8 @@
 
         #modal-caja,
         #modal-origen,
-        #modal-mesa {
+        #modal-mesa,
+        #modal-ritual {
             padding:         0;
             background:      rgba(5,4,3,0.97);
             backdrop-filter: none;
@@ -956,7 +957,8 @@
 
         #modal-caja .exp-modal,
         #modal-origen .exp-modal,
-        #modal-mesa .exp-modal {
+        #modal-mesa .exp-modal,
+        #modal-ritual .exp-modal {
             max-width:     100%;
             max-height:    100vh;
             background:    #080705;
@@ -968,14 +970,16 @@
 
         #modal-caja.is-open .exp-modal,
         #modal-origen.is-open .exp-modal,
-        #modal-mesa.is-open .exp-modal {
+        #modal-mesa.is-open .exp-modal,
+        #modal-ritual.is-open .exp-modal {
             opacity:   1;
             transform: translateY(0) scale(1);
         }
 
         #modal-caja .exp-modal-close,
         #modal-origen .exp-modal-close,
-        #modal-mesa .exp-modal-close {
+        #modal-mesa .exp-modal-close,
+        #modal-ritual .exp-modal-close {
             position:   fixed;
             top:        2rem;
             right:      2.5rem;
@@ -995,7 +999,8 @@
         }
         #modal-caja .exp-modal-close:hover,
         #modal-origen .exp-modal-close:hover,
-        #modal-mesa .exp-modal-close:hover { color: #f5f0e8; background: transparent; }
+        #modal-mesa .exp-modal-close:hover,
+        #modal-ritual .exp-modal-close:hover { color: #f5f0e8; background: transparent; }
 
         /* ─── HERO ─────────────────────────────── */
         .mcaja-hero {
@@ -1019,7 +1024,8 @@
 
         #modal-caja.is-open .mcaja-hero-img,
         #modal-origen.is-open .mcaja-hero-img,
-        #modal-mesa.is-open .mcaja-hero-img {
+        #modal-mesa.is-open .mcaja-hero-img,
+        #modal-ritual.is-open .mcaja-hero-img {
             transform: scale(1);
         }
 
@@ -1050,7 +1056,8 @@
 
         #modal-caja.is-open .mcaja-hero-text,
         #modal-origen.is-open .mcaja-hero-text,
-        #modal-mesa.is-open .mcaja-hero-text {
+        #modal-mesa.is-open .mcaja-hero-text,
+        #modal-ritual.is-open .mcaja-hero-text {
             opacity:   1;
             transform: translateY(0);
         }
@@ -2136,22 +2143,80 @@
     <!-- Modal IV: El Ritual de Invierno -->
     <div class="exp-modal-overlay" id="modal-ritual" role="dialog" aria-modal="true">
         <div class="exp-modal">
+
             <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
-            <img class="exp-modal-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="El Ritual de Invierno">
-            <div class="exp-modal-body">
-                <p class="exp-modal-label">IV &nbsp;&middot;&nbsp; La Temporada</p>
-                <h2 class="exp-modal-title">El Ritual de Invierno</h2>
-                <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text">
-                    Diciembre a marzo. Cada mes. En casa.<br><br>
-                    Durante los cuatro meses de temporada alta, cada miembro recibe
-                    un env&iacute;o mensual de trufa negra fresca de Alcotas:
-                    reci&eacute;n recogida, calibrada, envasada en el mismo d&iacute;a.<br><br>
-                    El env&iacute;o incluye una nota de la cosecha &mdash; aroma, condiciones del suelo,
-                    sugerencia de uso.<br>
-                    No es un pedido. Es una continuaci&oacute;n del ritual.
-                </p>
+
+            <!-- HERO -->
+            <div class="mcaja-hero">
+                <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_cerrada.png" alt="El Ritual de Invierno — Ezsencia" style="object-position: center center;">
+                <div class="mcaja-hero-overlay"></div>
+                <div class="mcaja-hero-text">
+                    <p class="mcaja-hero-eyebrow">IV &nbsp;&middot;&nbsp; La Temporada</p>
+                    <h2 class="mcaja-hero-title">El Ritual<br>de Invierno</h2>
+                    <p class="mcaja-hero-sub">Diciembre a marzo.<br>Cada mes. En casa.</p>
+                </div>
+                <p class="mcaja-hero-scroll">Descubrir</p>
             </div>
+
+            <!-- INTRO -->
+            <div class="mcaja-intro">
+                <p>La temporada de la trufa negra dura cuatro meses.</p>
+                <p>Durante ese tiempo, Ezsencia llega a tu casa. No como un pedido. Como una continuaci&oacute;n del ritual que empez&oacute; en el campo.</p>
+                <p class="mcaja-intro-frase">Cada env&iacute;o es una extensi&oacute;n de Alcotas.</p>
+            </div>
+
+            <!-- I: LA TEMPORADA -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/experiencia.JPG" alt="La temporada de la trufa negra">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">I &nbsp;&middot;&nbsp; La Temporada</p>
+                    <h3 class="mcaja-piece-title">Cuatro meses.<br>Cuatro env&iacute;os.<br>Sin excepciones.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">La trufa negra es estrictamente estacional. Diciembre, enero, febrero, marzo.<br><br>Cada mes, en el momento &oacute;ptimo de la cosecha, preparamos y enviamos la selecci&oacute;n de cada miembro. Ni antes ni despu&eacute;s. Cuando toca. Como la propia trufa.</p>
+                </div>
+            </div>
+
+            <!-- II: EL ENVÍO -->
+            <div class="mcaja-piece mcaja-piece--rev">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/club.JPG" alt="El club Ezsencia">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">II &nbsp;&middot;&nbsp; El Env&iacute;o</p>
+                    <h3 class="mcaja-piece-title">Reci&eacute;n recogida.<br>Calibrada.<br>Envasada el mismo d&iacute;a.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Trufa negra fresca de Alcotas. Selecci&oacute;n manual por tama&ntilde;o y aroma. Envasada y expedida en las 24 horas siguientes a la recolecci&oacute;n.<br><br>No hay intermediarios. Del campo a tu cocina en el menor tiempo posible. La frescura es parte del producto.</p>
+                </div>
+            </div>
+
+            <!-- III: LA NOTA -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_cerrada.png" alt="La nota de cosecha Ezsencia" style="object-position: center 30%;">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">III &nbsp;&middot;&nbsp; La Nota de Cosecha</p>
+                    <h3 class="mcaja-piece-title">El contexto<br>que convierte<br>el uso en ritual.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Cada env&iacute;o incluye una nota escrita: aroma predominante de la cosecha, condiciones del suelo ese mes, y una sugerencia de uso pensada para ese lote concreto.<br><br>No es un folleto. Es la voz del truficultor hablando directamente a quien va a cocinar con su producto.</p>
+                </div>
+            </div>
+
+            <!-- CIERRE -->
+            <div class="mcaja-cierre">
+                <div class="mcaja-cierre-linea"></div>
+                <p class="mcaja-cierre-frase">
+                    No es un pedido.<br>
+                    Es una continuaci&oacute;n<br>del ritual.
+                </p>
+                <div class="mcaja-cierre-linea"></div>
+                <p class="mcaja-cierre-edition">Diciembre &nbsp;&middot;&nbsp; Enero &nbsp;&middot;&nbsp; Febrero &nbsp;&middot;&nbsp; Marzo</p>
+                <a href="acceso.html" class="mcaja-cierre-cta">Solicitar acceso</a>
+                <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
+            </div>
+
         </div>
     </div>
 
@@ -2411,7 +2476,7 @@
         });
 
         // IntersectionObserver para piezas de modales de lujo
-        ['modal-caja', 'modal-origen'].forEach(function (id) {
+        ['modal-caja', 'modal-origen', 'modal-ritual'].forEach(function (id) {
             var modal = document.getElementById(id);
             var scroller = modal ? modal.querySelector('.exp-modal') : null;
             if (!scroller) return;
