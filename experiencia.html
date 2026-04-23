@@ -945,14 +945,16 @@
            MODAL CAJA FUNDADORA — experiencia full-screen de lujo
            ==================================================== */
 
-        #modal-caja {
+        #modal-caja,
+        #modal-origen {
             padding:         0;
             background:      rgba(5,4,3,0.97);
             backdrop-filter: none;
             align-items:     flex-start;
         }
 
-        #modal-caja .exp-modal {
+        #modal-caja .exp-modal,
+        #modal-origen .exp-modal {
             max-width:     100%;
             max-height:    100vh;
             background:    #080705;
@@ -962,12 +964,14 @@
             transition:    opacity 0.8s ease;
         }
 
-        #modal-caja.is-open .exp-modal {
+        #modal-caja.is-open .exp-modal,
+        #modal-origen.is-open .exp-modal {
             opacity:   1;
             transform: translateY(0) scale(1);
         }
 
-        #modal-caja .exp-modal-close {
+        #modal-caja .exp-modal-close,
+        #modal-origen .exp-modal-close {
             position:   fixed;
             top:        2rem;
             right:      2.5rem;
@@ -985,7 +989,8 @@
             border-radius: 0;
             box-shadow: none;
         }
-        #modal-caja .exp-modal-close:hover { color: #f5f0e8; background: transparent; }
+        #modal-caja .exp-modal-close:hover,
+        #modal-origen .exp-modal-close:hover { color: #f5f0e8; background: transparent; }
 
         /* ─── HERO ─────────────────────────────── */
         .mcaja-hero {
@@ -1007,7 +1012,8 @@
             transition:      transform 9s ease, filter 1.8s ease;
         }
 
-        #modal-caja.is-open .mcaja-hero-img {
+        #modal-caja.is-open .mcaja-hero-img,
+        #modal-origen.is-open .mcaja-hero-img {
             transform: scale(1);
         }
 
@@ -1036,7 +1042,8 @@
             transition:      opacity 1.4s ease 0.5s, transform 1.4s ease 0.5s;
         }
 
-        #modal-caja.is-open .mcaja-hero-text {
+        #modal-caja.is-open .mcaja-hero-text,
+        #modal-origen.is-open .mcaja-hero-text {
             opacity:   1;
             transform: translateY(0);
         }
@@ -1313,6 +1320,34 @@
             color:          rgba(245,240,232,0.18);
             letter-spacing: 0.06em;
         }
+
+        /* Botón continuidad entre modales */
+        .mcaja-next {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             1.2rem;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.54rem;
+            letter-spacing:  0.4em;
+            text-transform:  uppercase;
+            color:           rgba(245,240,232,0.55);
+            background:      transparent;
+            border:          1px solid rgba(184,150,90,0.35);
+            padding:         1.2rem 3.5rem;
+            cursor:          pointer;
+            transition:      color 0.35s, border-color 0.35s;
+            margin-top:      1rem;
+        }
+        .mcaja-next:hover {
+            color:         #f5f0e8;
+            border-color:  #b8965a;
+        }
+        .mcaja-next-arrow {
+            font-size:   1rem;
+            line-height: 1;
+            transition:  transform 0.35s;
+        }
+        .mcaja-next:hover .mcaja-next-arrow { transform: translateX(5px); }
 
         /* ─── RESPONSIVE ─────────────────────────── */
         @media (max-width: 900px) {
@@ -1760,22 +1795,82 @@
     <!-- Modal II: El Origen -->
     <div class="exp-modal-overlay" id="modal-origen" role="dialog" aria-modal="true">
         <div class="exp-modal">
+
             <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
-            <img class="exp-modal-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="El Origen — Alcotas">
-            <div class="exp-modal-body">
-                <p class="exp-modal-label">II &nbsp;&middot;&nbsp; El Encuentro Anual</p>
-                <h2 class="exp-modal-title">El Origen</h2>
-                <div class="exp-modal-sep"></div>
-                <p class="exp-modal-text">
-                    Una vez al a&ntilde;o. En temporada. En el campo.<br><br>
-                    Los miembros acceden a la finca de Alcotas en plena recolecci&oacute;n.
-                    Con los perros, entre encinares a m&aacute;s de 1.200 metros,
-                    el grupo participa en la b&uacute;squeda: la espera, el instinto del animal,
-                    el silencio antes del hallazgo.<br><br>
-                    El d&iacute;a cierra con una mesa gastron&oacute;mica en la finca.<br>
-                    Del suelo a la mesa en horas.
-                </p>
+
+            <!-- HERO -->
+            <div class="mcaja-hero">
+                <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="El Origen — Alcotas">
+                <div class="mcaja-hero-overlay"></div>
+                <div class="mcaja-hero-text">
+                    <p class="mcaja-hero-eyebrow">II &nbsp;&middot;&nbsp; El Encuentro Anual</p>
+                    <h2 class="mcaja-hero-title">El Origen</h2>
+                    <p class="mcaja-hero-sub">Una vez al a&ntilde;o.<br>En temporada. En el campo.</p>
+                </div>
+                <p class="mcaja-hero-scroll">Descubrir</p>
             </div>
+
+            <!-- INTRO -->
+            <div class="mcaja-intro">
+                <p>Una ma&ntilde;ana en Alcotas no se explica. Se vive.</p>
+                <p>El grupo llega al pueblo, aparca, y desde ese momento el ritmo cambia. Todo lo que va a ocurrir durante las pr&oacute;ximas horas ha sido preparado con un solo objetivo: que cada miembro entienda de d&oacute;nde viene lo que consume.</p>
+                <p class="mcaja-intro-frase">Del suelo a la mesa, en un d&iacute;a.</p>
+            </div>
+
+            <!-- I: LA LLEGADA -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="Llegada a Alcotas">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">I &nbsp;&middot;&nbsp; La Llegada</p>
+                    <h3 class="mcaja-piece-title">Alcotas.<br>Las instalaciones.<br>El primer gesto.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Los miembros llegan a nuestras instalaciones en Alcotas. Les esperamos con un c&oacute;ctel de bienvenida —un aperitivo pensado con la misma filosof&iacute;a que todo lo que hacemos: producto de la tierra, nada superfluo.<br><br>Es el primer momento del d&iacute;a. El que marca el tono de todo lo que sigue.</p>
+                </div>
+            </div>
+
+            <!-- II: LA PREPARACIÓN -->
+            <div class="mcaja-piece mcaja-piece--rev">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/ritual.png" alt="Preparación para el campo">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">II &nbsp;&middot;&nbsp; La Preparaci&oacute;n</p>
+                    <h3 class="mcaja-piece-title">Antes de ir al campo,<br>hay que entender<br>a d&oacute;nde vas.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Una sesi&oacute;n introductoria en la que explicamos qu&eacute; es Ezsencia, qu&eacute; es la trufa negra y qu&eacute; vamos a hacer durante la jornada. El contexto que lo hace todo m&aacute;s intenso.<br><br>Despu&eacute;s, nos equipamos. Cada miembro sale al campo uniformado: la ropa, el calzado, el material. Listos para lo que viene.</p>
+                </div>
+            </div>
+
+            <!-- III: EL CAMPO -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Recolección de trufa en el campo">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">III &nbsp;&middot;&nbsp; El Campo</p>
+                    <h3 class="mcaja-piece-title">Los encinares.<br>Los perros.<br>Los secretos.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Los veh&iacute;culos nos llevan directamente a los truferos. Una vez all&iacute;, la ma&ntilde;ana transcurre entre encinares a m&aacute;s de 1.200 metros.<br><br>Explicamos cada detalle del proceso: la tierra, los ciclos, el trabajo con los perros, el momento exacto en que se decide cavar. Los secretos que no se aprenden en ning&uacute;n otro sitio.<br><br>Lo que encuentras ese d&iacute;a, lo llevas contigo para siempre.</p>
+                </div>
+            </div>
+
+            <!-- CIERRE + CONTINUIDAD -->
+            <div class="mcaja-cierre">
+                <div class="mcaja-cierre-linea"></div>
+                <p class="mcaja-cierre-frase">
+                    La ma&ntilde;ana termina en el campo.<br>
+                    La experiencia contin&uacute;a en la mesa.
+                </p>
+                <div class="mcaja-cierre-linea"></div>
+                <button class="mcaja-next" data-next="modal-mesa">
+                    <span>Continuar &mdash; La Mesa</span>
+                    <span class="mcaja-next-arrow">&#8594;</span>
+                </button>
+                <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
+            </div>
+
         </div>
     </div>
 
@@ -2148,24 +2243,32 @@
             });
         });
 
-        // IntersectionObserver para piezas del modal caja
-        (function () {
-            var cajaModal = document.getElementById('modal-caja');
-            var cajaScroll = cajaModal ? cajaModal.querySelector('.exp-modal') : null;
-            if (!cajaScroll) return;
+        // IntersectionObserver para piezas de modales de lujo
+        ['modal-caja', 'modal-origen'].forEach(function (id) {
+            var modal = document.getElementById(id);
+            var scroller = modal ? modal.querySelector('.exp-modal') : null;
+            if (!scroller) return;
 
             var observer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('in-view');
                 });
-            }, { root: cajaScroll, threshold: 0.2 });
+            }, { root: scroller, threshold: 0.18 });
 
-            cajaModal.querySelectorAll('.mcaja-piece').forEach(function (el) {
+            modal.querySelectorAll('.mcaja-piece').forEach(function (el) {
                 observer.observe(el);
             });
-        }());
+        });
+
+        // Botón continuidad entre modales
+        document.querySelectorAll('.mcaja-next').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var currentOverlay = btn.closest('.exp-modal-overlay');
+                var nextId = btn.dataset.next;
+                closeModal(currentOverlay);
+                setTimeout(function () { openModal(nextId); }, 400);
+            });
+        });
 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
