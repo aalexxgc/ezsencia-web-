@@ -346,18 +346,81 @@
         }
 
         /* ====================================================
-           2. CONCEPTO — split foto + texto
+           2. CONCEPTO — split texto + foto
            ==================================================== */
 
         .idx-concepto {
             display:               grid;
-            grid-template-columns: 1fr 1fr;
-            min-height:            620px;
+            grid-template-columns: 50% 50%;
+            min-height:            88vh;
         }
 
+        /* Texto a la izquierda */
+        .idx-concepto-text {
+            background:      var(--fondo);
+            padding:         7rem 7rem 7rem 9vw;
+            display:         flex;
+            flex-direction:  column;
+            justify-content: center;
+            position:        relative;
+            order:           1;
+            border-right:    1px solid var(--borde);
+            overflow:        hidden;
+        }
+
+        /* Número decorativo de fondo */
+        .idx-concepto-text::before {
+            content:        '';
+            position:       absolute;
+            right:          -1rem;
+            bottom:         2rem;
+            width:          22rem;
+            height:         22rem;
+            border-radius:  50%;
+            border:         1px solid rgba(154,125,74,0.07);
+            pointer-events: none;
+        }
+
+        .idx-concepto-text .section-label {
+            margin-bottom: 3.5rem;
+        }
+
+        .idx-concepto-text h2 {
+            font-family:   'Playfair Display', serif;
+            font-size:     clamp(2.8rem, 4.5vw, 4.8rem);
+            font-weight:   400;
+            font-style:    italic;
+            line-height:   1.08;
+            color:         var(--tinta);
+            margin-bottom: 0;
+            letter-spacing: -0.01em;
+        }
+
+        /* Regla dorada bajo el título */
+        .idx-concepto-sep {
+            width:         3.2rem;
+            height:        1px;
+            background:    var(--dorado);
+            margin:        2.8rem 0;
+            flex-shrink:   0;
+        }
+
+        .idx-concepto-text p {
+            font-family:   'EB Garamond', serif;
+            font-size:     1.08rem;
+            line-height:   2.15;
+            color:         var(--tinta-suave);
+            margin-bottom: 1.4rem;
+            max-width:     460px;
+        }
+
+        .idx-concepto-text p:last-child { margin-bottom: 0; }
+
+        /* Imagen a la derecha */
         .idx-concepto-img {
             position: relative;
             overflow: hidden;
+            order:    2;
         }
 
         .idx-concepto-img img {
@@ -366,42 +429,41 @@
             width:           100%;
             height:          100%;
             object-fit:      cover;
-            object-position: center;
+            object-position: center 30%;
             display:         block;
-            transition:      transform 1.4s ease;
+            filter:          brightness(0.88);
+            transition:      transform 1.6s ease, filter 1.6s ease;
         }
 
-        .idx-concepto-img:hover img { transform: scale(1.03); }
-
-        .idx-concepto-text {
-            background:      #f0ebe0;
-            padding:         8rem 6rem;
-            display:         flex;
-            flex-direction:  column;
-            justify-content: center;
+        .idx-concepto-img:hover img {
+            transform: scale(1.03);
+            filter:    brightness(0.95);
         }
 
-        .idx-concepto-text .section-label { margin-bottom: 3rem; }
-
-        .idx-concepto-text h2 {
-            font-family:   'EB Garamond', serif;
-            font-size:     clamp(1.9rem, 3vw, 2.8rem);
-            font-weight:   400;
-            font-style:    italic;
-            line-height:   1.25;
-            color:         #3a3228;
-            margin-bottom: 3rem;
+        /* Velo lateral izquierdo para suavizar el corte con el texto */
+        .idx-concepto-img::before {
+            content:    '';
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(
+                90deg,
+                rgba(245,240,232,0.18) 0%,
+                rgba(245,240,232,0)    25%
+            );
+            z-index:    1;
+            pointer-events: none;
         }
 
-        .idx-concepto-text p {
-            font-size:     0.92rem;
-            line-height:   2.2;
-            color:         #6b5e50;
-            margin-bottom: 1.4rem;
-            max-width:     400px;
+        /* Responsive */
+        @media (max-width: 860px) {
+            .idx-concepto {
+                grid-template-columns: 1fr;
+                min-height:            auto;
+            }
+            .idx-concepto-img  { order: 1; height: 56vw; min-height: 300px; }
+            .idx-concepto-text { order: 2; padding: 5rem 2rem 5rem 2rem; border-right: none; border-top: 1px solid var(--borde); }
+            .idx-concepto-text p { max-width: 100%; }
         }
-
-        .idx-concepto-text p:last-child { margin-bottom: 0; }
 
         /* ====================================================
            3. TRES PILARES — columnas de texto puro
@@ -973,15 +1035,10 @@
 
     <section class="idx-concepto">
 
-        <div class="idx-concepto-img reveal">
-            <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/club.JPG" alt="El Club EZSENCIA">
-        </div>
-
         <div class="idx-concepto-text reveal">
             <div class="section-label">El Club</div>
-            <h2>
-                Alcotas, 20
-            </h2>
+            <h2>Alcotas,&thinsp;20</h2>
+            <div class="idx-concepto-sep"></div>
             <p>
                 Ezsencia no naci&oacute; de una idea de negocio. Naci&oacute; de un sitio concreto:
                 Alcotas, la trufa negra, y la sensaci&oacute;n de que hay cosas que solo ocurren
@@ -1000,6 +1057,10 @@
                 territorio&mdash; no existe en ning&uacute;n otro formato porque nadie lo ha
                 montado as&iacute;. Todav&iacute;a.
             </p>
+        </div>
+
+        <div class="idx-concepto-img reveal">
+            <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/club.JPG" alt="El Club EZSENCIA">
         </div>
 
     </section>
