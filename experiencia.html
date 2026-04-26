@@ -524,13 +524,13 @@
             font-size:     clamp(1.1rem, 1.8vw, 1.4rem);
             font-style:    italic;
             font-weight:   300;
-            color:         rgba(245,240,232,0.45);
+            color:         var(--tinta-suave);
             margin-top:    1.5rem;
             line-height:   1.8;
         }
 
         .club-intro {
-            background:      #0e0d0b;
+            background:      var(--fondo);
             padding:         10rem 3rem;
             text-align:      center;
             position:        relative;
@@ -545,6 +545,16 @@
             pointer-events: none;
         }
 
+        .club-intro h2 {
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(2.5rem, 5vw, 4.5rem);
+            font-weight:    300;
+            color:          var(--tinta);
+            line-height:    1.1;
+            letter-spacing: -0.01em;
+            margin-bottom:  2.8rem;
+        }
+
         .club-intro-inner {
             max-width:  700px;
             margin:     0 auto;
@@ -556,7 +566,7 @@
             font-family:    'EB Garamond', serif;
             font-size:      clamp(2.5rem, 5vw, 4.5rem);
             font-weight:    300;
-            color:          rgba(245,240,232,0.88);
+            color:          var(--tinta);
             line-height:    1.1;
             letter-spacing: -0.01em;
             margin-bottom:  2.8rem;
@@ -565,7 +575,7 @@
         .club-intro-inner p {
             font-size:   0.95rem;
             line-height: 2;
-            color:       rgba(245,240,232,0.32);
+            color:       var(--tinta-suave);
             max-width:   520px;
             margin:      0 auto;
         }
@@ -980,27 +990,30 @@
         #modal-origen .exp-modal-close,
         #modal-mesa .exp-modal-close,
         #modal-ritual .exp-modal-close {
-            position:   fixed;
-            top:        2rem;
-            right:      2.5rem;
-            z-index:    1000;
-            background: transparent;
-            color:      rgba(245,240,232,0.45);
-            border:     none;
-            font-size:  1.4rem;
-            cursor:     pointer;
-            transition: color 0.3s;
-            padding:    0.5rem;
-            line-height: 1;
-            width:      auto;
-            height:     auto;
-            border-radius: 0;
-            box-shadow: none;
+            position:      fixed;
+            top:           1.6rem;
+            right:         2rem;
+            z-index:       1000;
+            background:    rgba(245,240,232,0.9);
+            color:         rgba(26,24,20,0.6);
+            border:        none;
+            font-size:     1rem;
+            cursor:        pointer;
+            transition:    color 0.3s, background 0.3s;
+            padding:       0;
+            line-height:   1;
+            width:         2.4rem;
+            height:        2.4rem;
+            border-radius: 50%;
+            box-shadow:    0 1px 8px rgba(26,24,20,0.12);
+            display:       flex;
+            align-items:   center;
+            justify-content: center;
         }
         #modal-caja .exp-modal-close:hover,
         #modal-origen .exp-modal-close:hover,
         #modal-mesa .exp-modal-close:hover,
-        #modal-ritual .exp-modal-close:hover { color: #f5f0e8; background: transparent; }
+        #modal-ritual .exp-modal-close:hover { color: #1a1814; background: #f5f0e8; }
 
         /* ─── HERO ─────────────────────────────── */
         .mcaja-hero {
@@ -1034,8 +1047,9 @@
             inset:      0;
             background: linear-gradient(
                 180deg,
-                rgba(8,7,5,0.0) 50%,
-                rgba(8,7,5,1.0) 100%
+                rgba(26,24,20,0.15)  0%,
+                rgba(26,24,20,0.0)   45%,
+                rgba(245,240,232,1)  100%
             );
         }
 
@@ -1067,7 +1081,7 @@
             font-size:      0.54rem;
             letter-spacing: 0.48em;
             text-transform: uppercase;
-            color:          #b8965a;
+            color:          #c9a96e;
             margin-bottom:  2.2rem;
         }
 
@@ -1092,36 +1106,36 @@
 
         .mcaja-hero-scroll {
             position:       absolute;
-            bottom:         3rem;
+            bottom:         2.5rem;
             left:           50%;
             transform:      translateX(-50%);
             font-family:    'Lato', sans-serif;
             font-size:      0.48rem;
             letter-spacing: 0.45em;
             text-transform: uppercase;
-            color:          rgba(245,240,232,0.28);
+            color:          #1a1814;
             animation:      mcajaScrollPulse 2.8s ease infinite;
             white-space:    nowrap;
         }
 
         @keyframes mcajaScrollPulse {
-            0%, 100% { opacity: 0.28; transform: translateX(-50%) translateY(0); }
-            50%       { opacity: 0.6;  transform: translateX(-50%) translateY(7px); }
+            0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+            50%       { opacity: 0.7;  transform: translateX(-50%) translateY(7px); }
         }
 
         /* ─── INTRO ─────────────────────────────── */
         .mcaja-intro {
             padding:    9rem 4rem 8rem;
             text-align: center;
-            background: #080705;
-            border-top: 1px solid rgba(184,150,90,0.14);
+            background: #f5f0e8;
+            border-top: none;
         }
 
         .mcaja-intro p {
             font-family: 'EB Garamond', serif;
             font-size:   clamp(1.1rem, 1.6vw, 1.35rem);
             line-height: 2.1;
-            color:       rgba(245,240,232,0.48);
+            color:       #4a4640;
             max-width:   640px;
             margin:      0 auto 1.4rem;
         }
@@ -1132,7 +1146,7 @@
             font-family: 'Playfair Display', serif !important;
             font-style:  italic !important;
             font-size:   clamp(1.3rem, 2.2vw, 1.8rem) !important;
-            color:       #f5f0e8 !important;
+            color:       #1a1814 !important;
             margin-top:  2.8rem !important;
         }
 
@@ -1141,10 +1155,12 @@
             display:               grid;
             grid-template-columns: 56% 44%;
             min-height:            64vh;
-            background:            #080705;
-            border-top:            1px solid rgba(184,150,90,0.1);
+            background:            #f5f0e8;
+            border-top:            1px solid #d8d0c4;
             overflow:              hidden;
         }
+
+        .mcaja-piece--rev { background: #ede8de; }
 
         .mcaja-piece--rev {
             grid-template-columns: 44% 56%;
@@ -1163,7 +1179,7 @@
             height:     100%;
             object-fit: cover;
             display:    block;
-            filter:     brightness(0.6);
+            filter:     brightness(0.75);
             transform:  scale(1.06);
             transition: transform 1.6s cubic-bezier(0.16,1,0.3,1),
                         filter 1.6s ease;
@@ -1171,7 +1187,7 @@
 
         .mcaja-piece.in-view .mcaja-piece-img {
             transform: scale(1);
-            filter:    brightness(0.78);
+            filter:    brightness(0.92);
         }
 
         .mcaja-piece-body {
@@ -1186,7 +1202,7 @@
             font-size:      0.5rem;
             letter-spacing: 0.5em;
             text-transform: uppercase;
-            color:          #b8965a;
+            color:          #9a7d4a;
             margin-bottom:  2.4rem;
             opacity:        0;
             transform:      translateY(14px);
@@ -1275,6 +1291,50 @@
 
         .mcaja-piece--full .mcaja-piece-desc {
             max-width: 520px;
+        }
+
+        /* ─── VISOR 360 — Tarjeta de Fundador ─────── */
+        .mcaja-visor360 {
+            background:  var(--fondo-alt);
+            padding:     6rem 3rem 7rem;
+            text-align:  center;
+            border-top:  1px solid var(--borde);
+        }
+
+        .mcaja-visor360-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.68rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            margin-bottom:  0.6rem;
+        }
+
+        .mcaja-visor360-title {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(1.6rem, 3vw, 2.4rem);
+            font-style:  italic;
+            color:       var(--tinta);
+            margin-bottom: 3.5rem;
+        }
+
+        .mcaja-visor360-wrap {
+            max-width:     760px;
+            margin:        0 auto;
+            height:        480px;
+            background:    #060e07;
+            border-radius: 14px;
+            overflow:      hidden;
+            position:      relative;
+            box-shadow:    0 24px 72px rgba(0,0,0,0.28);
+        }
+
+        @media (max-width: 860px) {
+            .mcaja-visor360        { padding: 5rem 2rem 6rem; }
+            .mcaja-visor360-wrap   { height: 380px; }
+        }
+        @media (max-width: 600px) {
+            .mcaja-visor360-wrap   { height: 300px; border-radius: 10px; }
         }
 
         /* ─── CIERRE ─────────────────────────────── */
@@ -1551,6 +1611,8 @@
         }
 
     </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 </head>
 
@@ -1923,6 +1985,20 @@
                     <h3 class="mcaja-piece-title">Founders Edition 2026.<br>N&ordm;&thinsp;01&thinsp;/&thinsp;20.</h3>
                     <div class="mcaja-piece-sep"></div>
                     <p class="mcaja-piece-desc">Grabada con tu nombre y tu n&uacute;mero de fundador.<br><br>Tu acceso a lo que no est&aacute; disponible para todos. Una vez asignada, no se reproduce.</p>
+                </div>
+            </div>
+
+            <!-- VISOR 3D — Tarjeta de Fundador -->
+            <div class="mcaja-visor360">
+                <p class="mcaja-visor360-label">IV &nbsp;&middot;&nbsp; Tu Tarjeta</p>
+                <p class="mcaja-visor360-title">Founders Edition 2026 &thinsp;&middot;&thinsp; N&ordm;&thinsp;01&thinsp;/&thinsp;20</p>
+                <div class="mcaja-visor360-wrap">
+                    <canvas id="c3d" style="width:100%;height:100%;display:block;"></canvas>
+                    <div id="visor-hint" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#C9A84C;opacity:0.55;font-size:11px;letter-spacing:2px;pointer-events:none;transition:opacity 1s;white-space:nowrap;">ARRASTRA &nbsp;&middot;&nbsp; DOBLE CLIC PARA GIRAR</div>
+                    <div style="position:absolute;top:14px;right:14px;display:flex;gap:8px;">
+                        <button id="btnAuto" onclick="toggleAuto()" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:10px;letter-spacing:2px;padding:5px 13px;border-radius:20px;cursor:pointer;font-family:sans-serif;">AUTO</button>
+                        <button id="btnFlip" onclick="flipCard()" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:10px;letter-spacing:2px;padding:5px 13px;border-radius:20px;cursor:pointer;font-family:sans-serif;">GIRAR</button>
+                    </div>
                 </div>
             </div>
 
@@ -2450,6 +2526,9 @@
             if (!overlay) return;
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';
+            if (id === 'modal-caja') {
+                requestAnimationFrame(initCardVisor);
+            }
         }
 
         function closeModal(overlay) {
@@ -2524,6 +2603,249 @@
                 document.querySelectorAll('.exp-modal-overlay.is-open').forEach(closeModal);
             }
         });
+
+        // ── Visor 3D — Tarjeta de Fundador ──────────────────────────
+        function initCardVisor() {
+            if (initCardVisor._done) return;
+            initCardVisor._done = true;
+
+            var canvas = document.getElementById('c3d');
+            var hint   = document.getElementById('visor-hint');
+            if (!canvas || typeof THREE === 'undefined') return;
+
+            var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.1;
+
+            var scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x060e07);
+            scene.fog = new THREE.Fog(0x060e07, 8, 22);
+
+            var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+            camera.position.set(0, 1.2, 5.5);
+            camera.lookAt(0, 0, 0);
+
+            function resize() {
+                var w = canvas.clientWidth, h = canvas.clientHeight;
+                if (w === 0 || h === 0) return;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Terciopelo
+            var velvetGeo = new THREE.PlaneGeometry(28, 18, 80, 60);
+            var velvetMat = new THREE.MeshStandardMaterial({color: 0x091a0b, roughness: 0.97, metalness: 0.0});
+            var velvet = new THREE.Mesh(velvetGeo, velvetMat);
+            velvet.rotation.x = -Math.PI / 2;
+            velvet.position.y = -1.05;
+            velvet.receiveShadow = true;
+            scene.add(velvet);
+
+            for (var i = 0; i < 18; i++) {
+                var pts = [];
+                var x0 = (Math.random() - 0.5) * 22, z0 = (Math.random() - 0.5) * 14;
+                for (var j = 0; j < 12; j++) {
+                    pts.push(new THREE.Vector3(x0 + j * 1.8 + (Math.random() - 0.5) * 0.6, -1.04, z0 + (Math.random() - 0.5) * 1.2));
+                }
+                var lGeo = new THREE.BufferGeometry().setFromPoints(pts);
+                var lMat = new THREE.LineBasicMaterial({color: 0x1a3020, transparent: true, opacity: 0.22});
+                scene.add(new THREE.Line(lGeo, lMat));
+            }
+
+            // Iluminación
+            scene.add(new THREE.AmbientLight(0x0d1a0f, 0.6));
+            var keyLight = new THREE.SpotLight(0xfff5e0, 3.5, 14, Math.PI / 5, 0.35, 1.8);
+            keyLight.position.set(2, 5, 3.5);
+            keyLight.castShadow = true;
+            keyLight.shadow.mapSize.set(1024, 1024);
+            scene.add(keyLight); scene.add(keyLight.target);
+            var rimLight = new THREE.SpotLight(0xc9a84c, 1.4, 10, Math.PI / 6, 0.5, 2);
+            rimLight.position.set(-3.5, 3, -2);
+            scene.add(rimLight);
+            scene.add(new THREE.PointLight(0x1a3a1a, 0.8, 8)).position.set(-2, 1, 2);
+            var goldSheen = new THREE.PointLight(0xc9a84c, 0.3, 5);
+            goldSheen.position.set(0, 2, 1);
+            scene.add(goldSheen);
+
+            // Texturas de la tarjeta
+            function makeCardTexture(side) {
+                var W = 1024, H = 640;
+                var cv = document.createElement('canvas');
+                cv.width = W; cv.height = H;
+                var ctx = cv.getContext('2d');
+                var bg = ctx.createRadialGradient(W * 0.5, H * 0.38, 0, W * 0.5, H * 0.38, W * 0.65);
+                bg.addColorStop(0, '#0f1f12'); bg.addColorStop(1, '#070c08');
+                ctx.fillStyle = bg;
+                ctx.beginPath(); ctx.roundRect(0, 0, W, H, 28); ctx.fill();
+                ctx.strokeStyle = '#9a7d4a'; ctx.lineWidth = 6;
+                ctx.beginPath(); ctx.roundRect(3, 3, W - 6, H - 6, 26); ctx.stroke();
+                ctx.strokeStyle = 'rgba(201,168,76,0.18)'; ctx.lineWidth = 1.5;
+                ctx.beginPath(); ctx.roundRect(22, 22, W - 44, H - 44, 20); ctx.stroke();
+
+                function goldLine(x1, y1, x2, y2) {
+                    var g = ctx.createLinearGradient(x1, y1, x2, y2);
+                    g.addColorStop(0, 'rgba(201,168,76,0)');
+                    g.addColorStop(0.5, 'rgba(201,168,76,0.75)');
+                    g.addColorStop(1, 'rgba(201,168,76,0)');
+                    return g;
+                }
+
+                if (side === 'front') {
+                    var halo = ctx.createRadialGradient(W/2, H*0.33, 0, W/2, H*0.33, 160);
+                    halo.addColorStop(0, 'rgba(201,168,76,0.10)'); halo.addColorStop(1, 'rgba(201,168,76,0)');
+                    ctx.fillStyle = halo; ctx.beginPath(); ctx.ellipse(W/2, H*0.33, 160, 150, 0, 0, Math.PI*2); ctx.fill();
+                    ctx.save();
+                    ctx.font = 'bold 190px Georgia, serif'; ctx.textAlign = 'center';
+                    ctx.fillStyle = 'rgba(201,168,76,0.9)'; ctx.fillText('E', W/2 - 38, H * 0.38);
+                    ctx.fillStyle = 'rgba(201,168,76,0.30)'; ctx.fillText('Z', W/2 + 38, H * 0.42);
+                    ctx.strokeStyle = 'rgba(201,168,76,0.85)'; ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    var cx = W/2, cy = H*0.35, r = 110;
+                    var p1 = [[0,-28],[18,-20],[26,-5],[20,13],[8,26],[-10,26],[-23,13],[-26,-5],[-18,-20]];
+                    p1.forEach(function(p, k){ var x=cx+p[0]*(r/28), y=cy+p[1]*(r/28); k===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+                    ctx.closePath(); ctx.stroke();
+                    ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(201,168,76,0.40)';
+                    ctx.beginPath();
+                    var p2 = [[0,-18],[11,-11],[15,-1],[10,10],[0,15],[-11,10],[-15,-1],[-10,-11]];
+                    p2.forEach(function(p, k){ var x=cx+p[0]*(r/28), y=cy+p[1]*(r/28); k===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+                    ctx.closePath(); ctx.stroke();
+                    ctx.restore();
+                    ctx.font = '400 52px Georgia, serif'; ctx.textAlign = 'center';
+                    ctx.fillStyle = '#C9A84C'; ctx.fillText('EZSENCIA', W/2, H*0.60);
+                    ctx.font = '400 20px Georgia, serif'; ctx.fillStyle = 'rgba(201,168,76,0.44)';
+                    ctx.fillText('TRUFFLE  SOCIETY', W/2, H*0.67);
+                    ctx.strokeStyle = goldLine(W*0.2, H*0.71, W*0.8, H*0.71); ctx.lineWidth = 1.5;
+                    ctx.beginPath(); ctx.moveTo(W*0.2, H*0.71); ctx.lineTo(W*0.8, H*0.71); ctx.stroke();
+                    ctx.font = 'italic 400 44px Georgia, serif'; ctx.fillStyle = '#f0e8d8';
+                    ctx.fillText('Alejandro Gil Cebrián', W/2, H*0.80);
+                    ctx.font = '400 17px Georgia, serif'; ctx.fillStyle = 'rgba(201,168,76,0.46)';
+                    ctx.fillText('FOUNDERS  EDITION  2026', W/2, H*0.87);
+                    ctx.font = '400 50px Georgia, serif'; ctx.fillStyle = '#C9A84C';
+                    ctx.fillText('01 / 20', W/2, H*0.96);
+                } else {
+                    var vg = ctx.createLinearGradient(0, H*0.1, 0, H*0.9);
+                    vg.addColorStop(0, 'rgba(201,168,76,0)'); vg.addColorStop(0.5, 'rgba(201,168,76,0.38)'); vg.addColorStop(1, 'rgba(201,168,76,0)');
+                    ctx.strokeStyle = vg; ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(90, H*0.1); ctx.lineTo(90, H*0.9); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(W-90, H*0.1); ctx.lineTo(W-90, H*0.9); ctx.stroke();
+                    ctx.font = '400 22px Georgia, serif'; ctx.textAlign = 'center';
+                    ctx.fillStyle = '#C9A84C'; ctx.fillText('TARJETA DE FUNDADOR', W/2, H*0.18);
+                    ctx.strokeStyle = goldLine(W*0.28, H*0.22, W*0.72, H*0.22); ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(W*0.28, H*0.22); ctx.lineTo(W*0.72, H*0.22); ctx.stroke();
+                    ctx.font = 'italic 400 26px Georgia, serif'; ctx.fillStyle = 'rgba(240,232,216,0.58)';
+                    ctx.fillText('Esta tarjeta acredita la membresía', W/2, H*0.38);
+                    ctx.fillText('en la Edición Fundadores 2026', W/2, H*0.48);
+                    ctx.fillText('de Ezsencia Truffle Society.', W/2, H*0.57);
+                    ctx.fillStyle = 'rgba(240,232,216,0.42)';
+                    ctx.fillText('Es personal, limitada e intransferible.', W/2, H*0.68);
+                    ctx.strokeStyle = goldLine(W*0.28, H*0.74, W*0.72, H*0.74); ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(W*0.28, H*0.74); ctx.lineTo(W*0.72, H*0.74); ctx.stroke();
+                    ctx.font = '400 17px Georgia, serif'; ctx.fillStyle = 'rgba(201,168,76,0.36)';
+                    ctx.fillText('ALCOTAS, TERUEL  ·  2026', W/2, H*0.83);
+                    ctx.font = 'italic 400 40px Georgia, serif'; ctx.fillStyle = 'rgba(201,168,76,0.50)';
+                    ctx.fillText('01 / 20', W/2, H*0.95);
+                }
+                var tex = new THREE.CanvasTexture(cv);
+                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                return tex;
+            }
+
+            var CW = 3.2, CH = 2.0, CD = 0.028;
+            var cardGeo = new THREE.BoxGeometry(CW, CH, CD, 1, 1, 1);
+            var frontTex = makeCardTexture('front');
+            var backTex  = makeCardTexture('back');
+            var goldEdge = new THREE.MeshStandardMaterial({color: 0x9a7d4a, roughness: 0.25, metalness: 0.92});
+            var frontMat = new THREE.MeshStandardMaterial({map: frontTex, roughness: 0.18, metalness: 0.05});
+            var backMat  = new THREE.MeshStandardMaterial({map: backTex,  roughness: 0.18, metalness: 0.05});
+            var card = new THREE.Mesh(cardGeo, [goldEdge, goldEdge, goldEdge, goldEdge, frontMat, backMat]);
+            card.castShadow = true; card.receiveShadow = true; card.rotation.x = 0.08;
+            scene.add(card);
+
+            var shadowMesh = new THREE.Mesh(
+                new THREE.PlaneGeometry(CW * 1.3, CH * 1.3),
+                new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, opacity: 0.45})
+            );
+            shadowMesh.rotation.x = -Math.PI / 2; shadowMesh.position.y = -1.04;
+            scene.add(shadowMesh);
+
+            var reflCard = new THREE.Mesh(cardGeo, [
+                new THREE.MeshStandardMaterial({color:0x9a7d4a, roughness:0.6, metalness:0.5, transparent:true, opacity:0.15}),
+                new THREE.MeshStandardMaterial({color:0x9a7d4a, roughness:0.6, metalness:0.5, transparent:true, opacity:0.15}),
+                new THREE.MeshStandardMaterial({color:0x9a7d4a, roughness:0.6, metalness:0.5, transparent:true, opacity:0.15}),
+                new THREE.MeshStandardMaterial({color:0x9a7d4a, roughness:0.6, metalness:0.5, transparent:true, opacity:0.15}),
+                new THREE.MeshStandardMaterial({map:frontTex, transparent:true, opacity:0.10, roughness:0.4}),
+                new THREE.MeshStandardMaterial({map:backTex,  transparent:true, opacity:0.10, roughness:0.4})
+            ]);
+            reflCard.rotation.x = Math.PI + 0.08; reflCard.position.y = -1.04 - CH / 2;
+            scene.add(reflCard);
+
+            // Partículas
+            var partCount = 60;
+            var partPos = new Float32Array(partCount * 3);
+            for (var p = 0; p < partCount; p++) {
+                partPos[p*3]   = (Math.random() - 0.5) * 10;
+                partPos[p*3+1] = (Math.random() - 0.5) * 4;
+                partPos[p*3+2] = (Math.random() - 0.5) * 8;
+            }
+            var partGeo = new THREE.BufferGeometry();
+            partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
+            var particles = new THREE.Points(partGeo, new THREE.PointsMaterial({color:0xC9A84C, size:0.025, transparent:true, opacity:0.55}));
+            scene.add(particles);
+
+            // Controles
+            var autoRotate = true, isDragging = false, prevX = 0, prevY = 0;
+            var rotY = 0, rotX = 0.08, targetRotY = 0, targetRotX = 0.08;
+            var flipTarget = 0, flipping = false;
+
+            window.toggleAuto = function() {
+                autoRotate = !autoRotate;
+                document.getElementById('btnAuto').style.opacity = autoRotate ? '1' : '0.45';
+            };
+            window.flipCard = function() {
+                if (flipping) return;
+                flipping = true; flipTarget = targetRotY + Math.PI;
+            };
+
+            canvas.addEventListener('mousedown',  function(e){ isDragging=true; prevX=e.clientX; prevY=e.clientY; autoRotate=false; if(hint) hint.style.opacity='0'; });
+            canvas.addEventListener('mousemove',  function(e){ if(!isDragging) return; targetRotY+=(e.clientX-prevX)*0.012; targetRotX+=(e.clientY-prevY)*0.008; targetRotX=Math.max(-0.6,Math.min(0.6,targetRotX)); prevX=e.clientX; prevY=e.clientY; });
+            canvas.addEventListener('mouseup',    function(){ isDragging=false; });
+            canvas.addEventListener('mouseleave', function(){ isDragging=false; });
+            canvas.addEventListener('touchstart', function(e){ isDragging=true; prevX=e.touches[0].clientX; prevY=e.touches[0].clientY; autoRotate=false; }, {passive:true});
+            canvas.addEventListener('touchmove',  function(e){ if(!isDragging) return; targetRotY+=(e.touches[0].clientX-prevX)*0.012; targetRotX+=(e.touches[0].clientY-prevY)*0.008; targetRotX=Math.max(-0.6,Math.min(0.6,targetRotX)); prevX=e.touches[0].clientX; prevY=e.touches[0].clientY; }, {passive:true});
+            canvas.addEventListener('touchend',   function(){ isDragging=false; });
+            canvas.addEventListener('dblclick',   function(){ autoRotate=!autoRotate; });
+
+            var t = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                t += 0.008;
+                if (autoRotate) targetRotY += 0.005;
+                if (flipping) {
+                    targetRotY += (flipTarget - targetRotY) * 0.08;
+                    if (Math.abs(flipTarget - targetRotY) < 0.01) { flipping = false; flipTarget = targetRotY; }
+                }
+                rotY += (targetRotY - rotY) * 0.07;
+                rotX += (targetRotX - rotX) * 0.07;
+                card.rotation.y = rotY; card.rotation.x = rotX;
+                reflCard.rotation.y = rotY; reflCard.rotation.x = Math.PI - rotX;
+                reflCard.position.y = -1.04 - Math.cos(rotX) * CH / 2;
+                card.position.y = Math.sin(t * 0.6) * 0.04;
+                var pa = partGeo.attributes.position.array;
+                for (var k = 0; k < partCount; k++) pa[k*3+1] += Math.sin(t + k*0.4) * 0.0008;
+                partGeo.attributes.position.needsUpdate = true;
+                particles.rotation.y = t * 0.03;
+                goldSheen.intensity = 0.25 + Math.sin(t * 0.7) * 0.1;
+                renderer.render(scene, camera);
+            }
+            animate();
+            if (hint) setTimeout(function(){ hint.style.opacity='0'; }, 4000);
+        }
 
     </script>
 
