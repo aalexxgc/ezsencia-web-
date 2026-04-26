@@ -1339,12 +1339,13 @@
 
         /* La tarjeta propiamente dicha */
         .card-flip {
-            width:        100%;
-            aspect-ratio: 85.6 / 54;
-            position:     relative;
-            perspective:  1200px;
-            cursor:       grab;
-            user-select:  none;
+            width:          100%;
+            aspect-ratio:   85.6 / 54;
+            position:       relative;
+            perspective:    1200px;
+            cursor:         grab;
+            user-select:    none;
+            container-type: inline-size;
         }
 
         .card-flip.dragging { cursor: grabbing; }
@@ -1358,217 +1359,229 @@
             will-change:     transform;
         }
 
+        /* ── Caras (base 3D) ── */
         .card-face {
-            position:          absolute;
-            inset:             0;
-            border-radius:     3.5%;
-            backface-visibility: hidden;
+            position:                absolute;
+            inset:                   0;
+            backface-visibility:     hidden;
             -webkit-backface-visibility: hidden;
-            overflow:          hidden;
-            box-shadow:        0 8px 32px rgba(0,0,0,0.38),
-                               0 2px 8px rgba(0,0,0,0.22),
-                               0 0 0 0.5px rgba(154,125,74,0.55);
+            overflow:                hidden;
+            box-shadow:              0 12px 40px rgba(0,0,0,0.5),
+                                     0 2px 8px  rgba(0,0,0,0.28);
         }
 
-        .card-face--back {
-            transform: rotateY(180deg);
-        }
+        .card-face--back { transform: rotateY(180deg); }
 
-        /* Fondo de la tarjeta */
-        .card-face-bg {
+        /* ── Valores exactos de tarjeta-fundador.html ──────────────
+           Conversión: 1mm = 100/85.6 cqi = 1.168cqi
+           Requiere container-type:inline-size en .card-flip        */
+
+        /* Fondo + overlay */
+        .cf-bg {
             position:   absolute;
             inset:      0;
-            background: radial-gradient(ellipse at 50% 30%, #0f1f12 0%, #070c08 100%);
+            background: #090c08;
+        }
+
+        .cf-overlay-front {
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(ellipse at 50% 30%,
+                            rgba(13,26,16,0.8) 0%, transparent 70%);
+            z-index:    1;
+            pointer-events: none;
+        }
+
+        .cf-overlay-back {
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(ellipse at 50% 50%,
+                            rgba(13,26,16,0.6) 0%, transparent 75%);
+            z-index:    1;
+            pointer-events: none;
         }
 
         /* Marco exterior dorado */
         .card-face::before {
-            content:       '';
-            position:      absolute;
-            inset:         0;
-            border-radius: 3.5%;
-            border:        1.5px solid rgba(154,125,74,0.75);
-            z-index:       2;
+            content:        '';
+            position:       absolute;
+            inset:          0;
+            border:         0.47cqi solid #9a7d4a;  /* 0.4mm */
+            z-index:        3;
             pointer-events: none;
         }
 
         /* Marco interior fino */
         .card-face::after {
-            content:       '';
-            position:      absolute;
-            inset:         4%;
-            border-radius: 2.5%;
-            border:        0.5px solid rgba(201,168,76,0.18);
-            z-index:       2;
+            content:        '';
+            position:       absolute;
+            inset:          2.34cqi;                 /* 2mm */
+            border:         0.18cqi solid rgba(201,169,110,0.2); /* 0.15mm */
+            z-index:        3;
             pointer-events: none;
         }
 
-        /* Contenido centrado */
-        .card-content {
+        /* ── ANVERSO ── */
+        .cf-front {
             position:        absolute;
             inset:           0;
             display:         flex;
             flex-direction:  column;
             align-items:     center;
             justify-content: space-between;
-            padding:         9% 8% 8%;
-            z-index:         1;
+            padding:         6.43cqi 7.01cqi 5.84cqi; /* 5.5mm 6mm 5mm */
+            z-index:         2;
         }
 
-        .card-top {
+        .cf-top {
             display:        flex;
             flex-direction: column;
             align-items:    center;
-            gap:            4%;
+            gap:            2.10cqi;                 /* 1.8mm */
         }
 
-        /* Emblema EZ */
-        .card-emblem {
-            position:   relative;
-            width:       28%;
-            aspect-ratio: 1;
-            display:     flex;
-            align-items: center;
-            justify-content: center;
+        .cf-emblem {
+            width:      11.68cqi;                    /* 10mm */
+            height:     11.68cqi;
+            object-fit: contain;
+            filter:     drop-shadow(0 0 1.75cqi rgba(201,169,110,0.4));
+            display:    block;
         }
 
-        .card-emblem-ring {
-            position:   absolute;
-            inset:      0;
-            border-radius: 50%;
-            border:     1px solid rgba(201,168,76,0.45);
-        }
-
-        .card-emblem-e {
-            font-family:    Georgia, serif;
-            font-size:      clamp(1rem, 5vw, 2.4rem);
-            font-weight:    bold;
-            color:          rgba(201,168,76,0.92);
-            position:       absolute;
-            left:           22%;
-            top:            50%;
-            transform:      translateY(-50%);
-            line-height:    1;
-            user-select:    none;
-        }
-
-        .card-emblem-z {
-            font-family:    Georgia, serif;
-            font-size:      clamp(1rem, 5vw, 2.4rem);
-            font-weight:    bold;
-            color:          rgba(201,168,76,0.28);
-            position:       absolute;
-            right:          18%;
-            top:            54%;
-            transform:      translateY(-50%);
-            line-height:    1;
-            user-select:    none;
-        }
-
-        .card-brand {
+        .cf-brand {
             font-family:    'Lato', sans-serif;
-            font-size:      clamp(0.45rem, 2vw, 0.9rem);
+            font-size:      5.84cqi;                 /* 5mm */
             font-weight:    700;
-            letter-spacing: 0.36em;
-            color:          #C9A84C;
+            letter-spacing: 0.38em;
+            color:          #c9a96e;
             text-transform: uppercase;
-            margin-top:     2%;
+            line-height:    1;
         }
 
-        .card-sub {
+        .cf-tagline {
             font-family:    'Lato', sans-serif;
-            font-size:      clamp(0.28rem, 1.1vw, 0.52rem);
-            letter-spacing: 0.28em;
-            color:          rgba(201,168,76,0.42);
+            font-size:      1.99cqi;                 /* 1.7mm */
+            font-weight:    300;
+            letter-spacing: 0.32em;
+            color:          rgba(201,169,110,0.5);
             text-transform: uppercase;
         }
 
-        .card-sep {
-            width:      32%;
+        .cf-sep {
+            width:      21.03cqi;                    /* 18mm */
             height:     1px;
-            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.6), transparent);
+            background: linear-gradient(90deg, transparent, #9a7d4a, transparent);
+            flex-shrink: 0;
         }
 
-        .card-bottom {
+        .cf-bottom {
             display:        flex;
             flex-direction: column;
             align-items:    center;
-            gap:            4%;
+            gap:            1.75cqi;                 /* 1.5mm */
         }
 
-        .card-name {
+        .cf-name {
             font-family:    'Playfair Display', serif;
-            font-size:      clamp(0.5rem, 2.2vw, 1.05rem);
+            font-size:      4.67cqi;                 /* 4mm */
+            font-weight:    400;
             font-style:     italic;
             color:          #f0e8d8;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
+            line-height:    1;
         }
 
-        .card-edition {
+        .cf-edition {
             font-family:    'Lato', sans-serif;
-            font-size:      clamp(0.28rem, 1vw, 0.46rem);
-            letter-spacing: 0.28em;
-            color:          rgba(201,168,76,0.44);
+            font-size:      1.81cqi;                 /* 1.55mm */
+            font-weight:    300;
+            letter-spacing: 0.3em;
+            color:          rgba(201,169,110,0.5);
             text-transform: uppercase;
         }
 
-        .card-number {
+        .cf-number {
             font-family:    'Playfair Display', serif;
-            font-size:      clamp(0.55rem, 2.4vw, 1.15rem);
-            color:          #C9A84C;
+            font-size:      5.26cqi;                 /* 4.5mm */
+            font-weight:    400;
+            color:          #c9a96e;
             letter-spacing: 0.18em;
+            line-height:    1;
         }
 
         /* ── REVERSO ── */
-        .card-back-content {
+        .cf-back {
             position:        absolute;
             inset:           0;
             display:         flex;
             flex-direction:  column;
             align-items:     center;
             justify-content: center;
-            gap:             5%;
-            padding:         8%;
-            z-index:         1;
+            padding:         5.84cqi 9.35cqi;        /* 5mm 8mm */
+            gap:             3.50cqi;                /* 3mm */
+            z-index:         2;
         }
 
-        .card-back-title {
+        .cf-back-vlines {
+            position:       absolute;
+            inset:          0;
+            z-index:        2;
+            pointer-events: none;
+        }
+
+        .cf-back-vline {
+            position:   absolute;
+            top:        10%;
+            bottom:     10%;
+            width:      1px;
+            background: linear-gradient(to bottom,
+                            transparent, rgba(201,169,110,0.38), transparent);
+        }
+
+        .cf-back-vline:first-child { left:  10.51cqi; } /* ~9mm */
+        .cf-back-vline:last-child  { right: 10.51cqi; }
+
+        .cf-back-title {
             font-family:    'Lato', sans-serif;
-            font-size:      clamp(0.3rem, 1.2vw, 0.56rem);
-            letter-spacing: 0.4em;
-            color:          #C9A84C;
+            font-size:      2.34cqi;                 /* 2mm */
+            font-weight:    400;
+            letter-spacing: 0.42em;
+            color:          #c9a96e;
             text-transform: uppercase;
         }
 
-        .card-back-sep {
-            width:      20%;
+        .cf-back-sep {
+            width:      14.02cqi;                    /* 12mm */
             height:     1px;
-            background: rgba(201,168,76,0.38);
+            background: rgba(201,169,110,0.4);
+            flex-shrink: 0;
         }
 
-        .card-back-text {
-            font-family:  'EB Garamond', serif;
-            font-size:    clamp(0.38rem, 1.5vw, 0.72rem);
-            font-style:   italic;
-            line-height:  1.7;
-            color:        rgba(240,232,216,0.58);
-            text-align:   center;
+        .cf-back-text {
+            font-family: 'EB Garamond', serif;
+            font-size:   2.80cqi;                    /* 2.4mm */
+            font-style:  italic;
+            line-height: 1.75;
+            color:       rgba(240,232,216,0.6);
+            text-align:  center;
+            max-width:   72.43cqi;                   /* 62mm */
         }
 
-        .card-back-legal {
+        .cf-back-legal {
             font-family:    'Lato', sans-serif;
-            font-size:      clamp(0.26rem, 0.9vw, 0.42rem);
-            letter-spacing: 0.22em;
-            color:          rgba(201,168,76,0.34);
+            font-size:      1.75cqi;                 /* 1.5mm */
+            font-weight:    300;
+            letter-spacing: 0.2em;
+            color:          rgba(201,169,110,0.38);
             text-transform: uppercase;
+            text-align:     center;
         }
 
-        .card-back-number {
+        .cf-back-num {
             font-family:    'Playfair Display', serif;
-            font-size:      clamp(0.42rem, 1.8vw, 0.85rem);
-            color:          rgba(201,168,76,0.52);
+            font-size:      4.09cqi;                 /* 3.5mm */
+            color:          rgba(201,169,110,0.55);
             letter-spacing: 0.15em;
-            font-style:     italic;
         }
 
         /* Indicador de arrastre */
@@ -2253,43 +2266,46 @@
                         <div class="card-flip" id="cardFlip" role="button" aria-label="Girar tarjeta">
                             <div class="card-inner">
 
-                                <!-- ANVERSO -->
+                                <!-- ANVERSO — réplica exacta tarjeta-fundador.html -->
                                 <div class="card-face card-face--front">
-                                    <div class="card-face-bg"></div>
-                                    <div class="card-content">
-                                        <div class="card-top">
-                                            <div class="card-emblem">
-                                                <div class="card-emblem-ring"></div>
-                                                <span class="card-emblem-e">E</span>
-                                                <span class="card-emblem-z">Z</span>
-                                            </div>
-                                            <p class="card-brand">Ezsencia</p>
-                                            <p class="card-sub">Truffle Society</p>
+                                    <div class="cf-bg"></div>
+                                    <div class="cf-overlay-front"></div>
+                                    <div class="cf-front">
+                                        <div class="cf-top">
+                                            <img class="cf-emblem"
+                                                 src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png"
+                                                 alt="Ezsencia emblema">
+                                            <p class="cf-brand">Ezsencia</p>
+                                            <p class="cf-tagline">Truffle Society</p>
                                         </div>
-                                        <div class="card-sep"></div>
-                                        <div class="card-bottom">
-                                            <p class="card-name">Alejandro Gil Cebri&aacute;n</p>
-                                            <p class="card-edition">Founders Edition 2026</p>
-                                            <p class="card-number">01 &thinsp;/&thinsp; 20</p>
+                                        <div class="cf-sep"></div>
+                                        <div class="cf-bottom">
+                                            <p class="cf-name">Alejandro Gil Cebri&aacute;n</p>
+                                            <p class="cf-edition">Founders Edition 2026</p>
+                                            <p class="cf-number">01 &nbsp;/&nbsp; 20</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- REVERSO -->
+                                <!-- REVERSO — réplica exacta tarjeta-fundador.html -->
                                 <div class="card-face card-face--back">
-                                    <div class="card-face-bg"></div>
-                                    <div class="card-back-content">
-                                        <p class="card-back-title">Tarjeta de Fundador</p>
-                                        <div class="card-back-sep"></div>
-                                        <p class="card-back-text">
-                                            Esta tarjeta acredita la membres&iacute;a<br>
-                                            en la Edici&oacute;n Fundadores 2026<br>
-                                            de Ezsencia Truffle Society.<br><br>
+                                    <div class="cf-bg"></div>
+                                    <div class="cf-overlay-back"></div>
+                                    <div class="cf-back-vlines">
+                                        <div class="cf-back-vline"></div>
+                                        <div class="cf-back-vline"></div>
+                                    </div>
+                                    <div class="cf-back">
+                                        <p class="cf-back-title">Tarjeta de Fundador</p>
+                                        <div class="cf-back-sep"></div>
+                                        <p class="cf-back-text">
+                                            Esta tarjeta acredita la membres&iacute;a en la Edici&oacute;n
+                                            Fundadores 2026 de Ezsencia Truffle Society.<br>
                                             Es personal, limitada e intransferible.
                                         </p>
-                                        <div class="card-back-sep"></div>
-                                        <p class="card-back-legal">Alcotas, Teruel &nbsp;&middot;&nbsp; 2026</p>
-                                        <p class="card-back-number">01 / 20</p>
+                                        <div class="cf-back-sep"></div>
+                                        <p class="cf-back-legal">Alcotas, Teruel &nbsp;&middot;&nbsp; 2026</p>
+                                        <p class="cf-back-num">01 / 20</p>
                                     </div>
                                 </div>
 
