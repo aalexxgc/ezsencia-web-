@@ -1293,20 +1293,15 @@
             max-width: 520px;
         }
 
-        /* ─── TARJETA DE FUNDADOR ─────────────────── */
-        .mcaja-tarjeta-section {
-            background:  var(--fondo-alt);
-            padding:     7rem 3rem 8rem;
-            text-align:  center;
-            border-top:  1px solid var(--borde);
+        /* ─── VISOR 360 TARJETA ─────────────────── */
+        .mcaja-visor360 {
+            background: var(--fondo-alt);
+            padding:    7rem 3rem 8rem;
+            text-align: center;
+            border-top: 1px solid var(--borde);
         }
 
-        .mcaja-tarjeta-section .mcaja-piece-num {
-            justify-content: center;
-            margin-bottom:   0.5rem;
-        }
-
-        .mcaja-tarjeta-eyebrow {
+        .mcaja-visor360-eyebrow {
             font-family:    'Lato', sans-serif;
             font-size:      0.65rem;
             letter-spacing: 0.42em;
@@ -1315,7 +1310,7 @@
             margin-bottom:  0.6rem;
         }
 
-        .mcaja-tarjeta-title {
+        .mcaja-visor360-title {
             font-family:   'EB Garamond', serif;
             font-size:     clamp(1.5rem, 2.8vw, 2.2rem);
             font-style:    italic;
@@ -1323,287 +1318,25 @@
             margin-bottom: 3.5rem;
         }
 
-        /* Contenedor centrado responsivo */
-        .card-section {
-            display:         flex;
-            justify-content: center;
-            align-items:     center;
-            width:           100%;
+        #visor3d-wrap {
+            width:         100%;
+            max-width:     760px;
+            height:        480px;
+            background:    #060e07;
+            border-radius: 16px;
+            overflow:      hidden;
+            position:      relative;
+            margin:        0 auto;
+            box-shadow:    0 24px 72px rgba(0,0,0,0.28);
         }
 
-        .card-container {
-            width:           55%;
-            max-width:       520px;
-            min-width:       280px;
-        }
-
-        /* La tarjeta propiamente dicha */
-        .card-flip {
-            width:          100%;
-            aspect-ratio:   85.6 / 54;
-            position:       relative;
-            perspective:    1200px;
-            cursor:         grab;
-            user-select:    none;
-            container-type: inline-size;
-        }
-
-        .card-flip.dragging { cursor: grabbing; }
-
-        .card-inner {
-            width:           100%;
-            height:          100%;
-            position:        relative;
-            transform-style: preserve-3d;
-            border-radius:   3.5%;
-            will-change:     transform;
-        }
-
-        /* ── Caras (base 3D) ── */
-        .card-face {
-            position:                absolute;
-            inset:                   0;
-            backface-visibility:     hidden;
-            -webkit-backface-visibility: hidden;
-            overflow:                hidden;
-            box-shadow:              0 12px 40px rgba(0,0,0,0.5),
-                                     0 2px 8px  rgba(0,0,0,0.28);
-        }
-
-        .card-face--back { transform: rotateY(180deg); }
-
-        /* ── Valores exactos de tarjeta-fundador.html ──────────────
-           Conversión: 1mm = 100/85.6 cqi = 1.168cqi
-           Requiere container-type:inline-size en .card-flip        */
-
-        /* Fondo + overlay */
-        .cf-bg {
-            position:   absolute;
-            inset:      0;
-            background: #090c08;
-        }
-
-        .cf-overlay-front {
-            position:   absolute;
-            inset:      0;
-            background: radial-gradient(ellipse at 50% 30%,
-                            rgba(13,26,16,0.8) 0%, transparent 70%);
-            z-index:    1;
-            pointer-events: none;
-        }
-
-        .cf-overlay-back {
-            position:   absolute;
-            inset:      0;
-            background: radial-gradient(ellipse at 50% 50%,
-                            rgba(13,26,16,0.6) 0%, transparent 75%);
-            z-index:    1;
-            pointer-events: none;
-        }
-
-        /* Marco exterior dorado */
-        .card-face::before {
-            content:        '';
-            position:       absolute;
-            inset:          0;
-            border:         0.47cqi solid #9a7d4a;  /* 0.4mm */
-            z-index:        3;
-            pointer-events: none;
-        }
-
-        /* Marco interior fino */
-        .card-face::after {
-            content:        '';
-            position:       absolute;
-            inset:          2.34cqi;                 /* 2mm */
-            border:         0.18cqi solid rgba(201,169,110,0.2); /* 0.15mm */
-            z-index:        3;
-            pointer-events: none;
-        }
-
-        /* ── ANVERSO ── */
-        .cf-front {
-            position:        absolute;
-            inset:           0;
-            display:         flex;
-            flex-direction:  column;
-            align-items:     center;
-            justify-content: space-between;
-            padding:         6.43cqi 7.01cqi 5.84cqi; /* 5.5mm 6mm 5mm */
-            z-index:         2;
-        }
-
-        .cf-top {
-            display:        flex;
-            flex-direction: column;
-            align-items:    center;
-            gap:            2.10cqi;                 /* 1.8mm */
-        }
-
-        .cf-emblem {
-            width:      11.68cqi;                    /* 10mm */
-            height:     11.68cqi;
-            object-fit: contain;
-            filter:     drop-shadow(0 0 1.75cqi rgba(201,169,110,0.4));
-            display:    block;
-        }
-
-        .cf-brand {
-            font-family:    'Lato', sans-serif;
-            font-size:      5.84cqi;                 /* 5mm */
-            font-weight:    700;
-            letter-spacing: 0.38em;
-            color:          #c9a96e;
-            text-transform: uppercase;
-            line-height:    1;
-        }
-
-        .cf-tagline {
-            font-family:    'Lato', sans-serif;
-            font-size:      1.99cqi;                 /* 1.7mm */
-            font-weight:    300;
-            letter-spacing: 0.32em;
-            color:          rgba(201,169,110,0.5);
-            text-transform: uppercase;
-        }
-
-        .cf-sep {
-            width:      21.03cqi;                    /* 18mm */
-            height:     1px;
-            background: linear-gradient(90deg, transparent, #9a7d4a, transparent);
-            flex-shrink: 0;
-        }
-
-        .cf-bottom {
-            display:        flex;
-            flex-direction: column;
-            align-items:    center;
-            gap:            1.75cqi;                 /* 1.5mm */
-        }
-
-        .cf-name {
-            font-family:    'Playfair Display', serif;
-            font-size:      4.67cqi;                 /* 4mm */
-            font-weight:    400;
-            font-style:     italic;
-            color:          #f0e8d8;
-            letter-spacing: 0.06em;
-            line-height:    1;
-        }
-
-        .cf-edition {
-            font-family:    'Lato', sans-serif;
-            font-size:      1.81cqi;                 /* 1.55mm */
-            font-weight:    300;
-            letter-spacing: 0.3em;
-            color:          rgba(201,169,110,0.5);
-            text-transform: uppercase;
-        }
-
-        .cf-number {
-            font-family:    'Playfair Display', serif;
-            font-size:      5.26cqi;                 /* 4.5mm */
-            font-weight:    400;
-            color:          #c9a96e;
-            letter-spacing: 0.18em;
-            line-height:    1;
-        }
-
-        /* ── REVERSO ── */
-        .cf-back {
-            position:        absolute;
-            inset:           0;
-            display:         flex;
-            flex-direction:  column;
-            align-items:     center;
-            justify-content: center;
-            padding:         5.84cqi 9.35cqi;        /* 5mm 8mm */
-            gap:             3.50cqi;                /* 3mm */
-            z-index:         2;
-        }
-
-        .cf-back-vlines {
-            position:       absolute;
-            inset:          0;
-            z-index:        2;
-            pointer-events: none;
-        }
-
-        .cf-back-vline {
-            position:   absolute;
-            top:        10%;
-            bottom:     10%;
-            width:      1px;
-            background: linear-gradient(to bottom,
-                            transparent, rgba(201,169,110,0.38), transparent);
-        }
-
-        .cf-back-vline:first-child { left:  10.51cqi; } /* ~9mm */
-        .cf-back-vline:last-child  { right: 10.51cqi; }
-
-        .cf-back-title {
-            font-family:    'Lato', sans-serif;
-            font-size:      2.34cqi;                 /* 2mm */
-            font-weight:    400;
-            letter-spacing: 0.42em;
-            color:          #c9a96e;
-            text-transform: uppercase;
-        }
-
-        .cf-back-sep {
-            width:      14.02cqi;                    /* 12mm */
-            height:     1px;
-            background: rgba(201,169,110,0.4);
-            flex-shrink: 0;
-        }
-
-        .cf-back-text {
-            font-family: 'EB Garamond', serif;
-            font-size:   2.80cqi;                    /* 2.4mm */
-            font-style:  italic;
-            line-height: 1.75;
-            color:       rgba(240,232,216,0.6);
-            text-align:  center;
-            max-width:   72.43cqi;                   /* 62mm */
-        }
-
-        .cf-back-legal {
-            font-family:    'Lato', sans-serif;
-            font-size:      1.75cqi;                 /* 1.5mm */
-            font-weight:    300;
-            letter-spacing: 0.2em;
-            color:          rgba(201,169,110,0.38);
-            text-transform: uppercase;
-            text-align:     center;
-        }
-
-        .cf-back-num {
-            font-family:    'Playfair Display', serif;
-            font-size:      4.09cqi;                 /* 3.5mm */
-            color:          rgba(201,169,110,0.55);
-            letter-spacing: 0.15em;
-        }
-
-        /* Indicador de arrastre */
-        .card-hint {
-            margin-top:     2rem;
-            font-family:    'Lato', sans-serif;
-            font-size:      0.62rem;
-            letter-spacing: 0.28em;
-            color:          rgba(154,125,74,0.42);
-            text-transform: uppercase;
-            transition:     opacity 1.5s ease;
-            pointer-events: none;
-        }
-
-        /* Responsivo */
         @media (max-width: 860px) {
-            .mcaja-tarjeta-section { padding: 5.5rem 2rem 6.5rem; }
-            .card-container        { width: 75%; }
+            .mcaja-visor360 { padding: 5.5rem 2rem 6.5rem; }
+            #visor3d-wrap   { height: 360px; }
         }
         @media (max-width: 600px) {
-            .mcaja-tarjeta-section { padding: 5rem 1.5rem 6rem; }
-            .card-container        { width: 92%; min-width: 0; }
+            .mcaja-visor360 { padding: 5rem 1.5rem 6rem; }
+            #visor3d-wrap   { height: 260px; border-radius: 10px; }
         }
 
         /* ─── CIERRE ─────────────────────────────── */
@@ -2028,7 +1761,7 @@
             </div>
         </div>
         <div class="club-moment-img">
-            <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_abierta.png" alt="La Caja Fundadora EZSENCIA &mdash; abierta">
+            <img src="assets/caja_abierta.png" alt="La Caja Fundadora EZSENCIA &mdash; abierta">
         </div>
     </section>
 
@@ -2186,7 +1919,7 @@
 
             <!-- HERO -->
             <div class="mcaja-hero">
-                <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_fundadora.png" alt="La Caja Fundadora EZSENCIA">
+                <img class="mcaja-hero-img" src="assets/caja_abierta.png" alt="La Caja Fundadora EZSENCIA">
                 <div class="mcaja-hero-overlay"></div>
                 <div class="mcaja-hero-text">
                     <p class="mcaja-hero-eyebrow">Edici&oacute;n Fundadores &nbsp;&middot;&nbsp; 2026</p>
@@ -2256,70 +1989,25 @@
                 </div>
             </div>
 
-            <!-- IV: TARJETA DE FUNDADOR — CSS card -->
-            <div class="mcaja-tarjeta-section">
-                <p class="mcaja-tarjeta-eyebrow">IV &nbsp;&middot;&nbsp; Tu Tarjeta</p>
-                <p class="mcaja-tarjeta-title">Founders Edition 2026 &thinsp;&middot;&thinsp; N&ordm;&thinsp;01&thinsp;/&thinsp;20</p>
+            <!-- IV: TARJETA DE FUNDADOR — visor 360° Three.js -->
+            <div class="mcaja-visor360">
+                <p class="mcaja-visor360-eyebrow">IV &nbsp;&middot;&nbsp; Tu Tarjeta</p>
+                <p class="mcaja-visor360-title">Founders Edition 2026 &thinsp;&middot;&thinsp; N&ordm;&thinsp;01&thinsp;/&thinsp;20</p>
 
-                <section class="card-section">
-                    <div class="card-container">
-                        <div class="card-flip" id="cardFlip" role="button" aria-label="Girar tarjeta">
-                            <div class="card-inner">
-
-                                <!-- ANVERSO — réplica exacta tarjeta-fundador.html -->
-                                <div class="card-face card-face--front">
-                                    <div class="cf-bg"></div>
-                                    <div class="cf-overlay-front"></div>
-                                    <div class="cf-front">
-                                        <div class="cf-top">
-                                            <img class="cf-emblem"
-                                                 src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png"
-                                                 alt="Ezsencia emblema">
-                                            <p class="cf-brand">Ezsencia</p>
-                                            <p class="cf-tagline">Truffle Society</p>
-                                        </div>
-                                        <div class="cf-sep"></div>
-                                        <div class="cf-bottom">
-                                            <p class="cf-name">Alejandro Gil Cebri&aacute;n</p>
-                                            <p class="cf-edition">Founders Edition 2026</p>
-                                            <p class="cf-number">01 &nbsp;/&nbsp; 20</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- REVERSO — réplica exacta tarjeta-fundador.html -->
-                                <div class="card-face card-face--back">
-                                    <div class="cf-bg"></div>
-                                    <div class="cf-overlay-back"></div>
-                                    <div class="cf-back-vlines">
-                                        <div class="cf-back-vline"></div>
-                                        <div class="cf-back-vline"></div>
-                                    </div>
-                                    <div class="cf-back">
-                                        <p class="cf-back-title">Tarjeta de Fundador</p>
-                                        <div class="cf-back-sep"></div>
-                                        <p class="cf-back-text">
-                                            Esta tarjeta acredita la membres&iacute;a en la Edici&oacute;n
-                                            Fundadores 2026 de Ezsencia Truffle Society.<br>
-                                            Es personal, limitada e intransferible.
-                                        </p>
-                                        <div class="cf-back-sep"></div>
-                                        <p class="cf-back-legal">Alcotas, Teruel &nbsp;&middot;&nbsp; 2026</p>
-                                        <p class="cf-back-num">01 / 20</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <p class="card-hint" id="cardHint">Arrastra &nbsp;&middot;&nbsp; Doble clic para girar</p>
+                <div id="visor3d-wrap">
+                    <canvas id="c3d" style="width:100%;height:100%;display:block;"></canvas>
+                    <div id="visor-hint" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#C9A84C;opacity:0.55;font-size:12px;letter-spacing:2px;pointer-events:none;transition:opacity 1s;font-family:sans-serif;white-space:nowrap;">ARRASTRA &nbsp;&middot;&nbsp; DOBLE CLIC PARA GIRAR</div>
+                    <div style="position:absolute;top:16px;right:16px;display:flex;gap:8px;">
+                        <button id="btnAuto" onclick="toggleAuto()" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:11px;letter-spacing:2px;padding:6px 14px;border-radius:20px;cursor:pointer;font-family:sans-serif;">AUTO</button>
+                        <button id="btnFlip" onclick="flipCard()" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:11px;letter-spacing:2px;padding:6px 14px;border-radius:20px;cursor:pointer;font-family:sans-serif;">GIRAR</button>
                     </div>
-                </section>
+                </div>
             </div>
 
             <!-- V: LA CAJA — pantalla completa -->
             <div class="mcaja-piece mcaja-piece--full">
                 <div class="mcaja-piece-img-wrap">
-                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/caja_abierta.png" alt="Caja de abedul Founders Edition 2026">
+                    <img class="mcaja-piece-img" src="assets/caja_abierta.png" alt="Caja de abedul Founders Edition 2026">
                 </div>
                 <div class="mcaja-piece-body">
                     <p class="mcaja-piece-num">V &nbsp;&middot;&nbsp; La Caja</p>
@@ -2610,6 +2298,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
 
@@ -2840,6 +2529,7 @@
             if (!overlay) return;
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';
+            if (id === 'modal-caja') setTimeout(initCardVisor, 120);
         }
 
         function closeModal(overlay) {
@@ -2915,76 +2605,349 @@
             }
         });
 
-        // ── Tarjeta de Fundador — rotación libre mouse/touch ────────
-        (function () {
-            var flip  = document.getElementById('cardFlip');
-            var hint  = document.getElementById('cardHint');
-            if (!flip) return;
+        // ── Visor 360° tarjeta — Three.js (lazy-init al abrir modal) ──
+        function initCardVisor() {
+            if (initCardVisor._done) return;
+            var canvas = document.getElementById('c3d');
+            if (!canvas) return;
+            var wrap = document.getElementById('visor3d-wrap');
+            if (!wrap || wrap.clientHeight === 0) return;
+            initCardVisor._done = true;
 
-            var inner = flip.querySelector('.card-inner');
+            var hint = document.getElementById('visor-hint');
 
-            var rotY = -18, rotX = 6;          // ángulo inicial con perspectiva
-            var targetRotY = -18, targetRotX = 6;
+            var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.1;
+
+            var scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x060e07);
+            scene.fog = new THREE.Fog(0x060e07, 8, 22);
+
+            var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+            camera.position.set(0, 0.7, 4.0);
+            camera.lookAt(0, 0, 0);
+
+            function resize() {
+                var w = canvas.clientWidth, h = canvas.clientHeight;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Terciopelo
+            var velvetGeo = new THREE.PlaneGeometry(28, 18, 80, 60);
+            var velvetMat = new THREE.MeshStandardMaterial({color: 0x091a0b, roughness: 0.97, metalness: 0.0});
+            var velvet = new THREE.Mesh(velvetGeo, velvetMat);
+            velvet.rotation.x = -Math.PI / 2;
+            velvet.position.y = -1.05;
+            velvet.receiveShadow = true;
+            scene.add(velvet);
+
+            for (var i = 0; i < 18; i++) {
+                var pts = [];
+                var x0 = (Math.random() - 0.5) * 22, z0 = (Math.random() - 0.5) * 14;
+                for (var j = 0; j < 12; j++) {
+                    pts.push(new THREE.Vector3(x0 + j * 1.8 + (Math.random() - 0.5) * 0.6, -1.04, z0 + (Math.random() - 0.5) * 1.2));
+                }
+                var geo = new THREE.BufferGeometry().setFromPoints(pts);
+                var mat = new THREE.LineBasicMaterial({color: 0x1a3020, transparent: true, opacity: 0.22});
+                scene.add(new THREE.Line(geo, mat));
+            }
+
+            // Iluminación de joyería
+            scene.add(new THREE.AmbientLight(0x0d1a0f, 0.6));
+            var keyLight = new THREE.SpotLight(0xfff5e0, 3.5, 14, Math.PI / 5, 0.35, 1.8);
+            keyLight.position.set(2, 5, 3.5);
+            keyLight.castShadow = true;
+            keyLight.shadow.mapSize.set(1024, 1024);
+            scene.add(keyLight);
+            scene.add(keyLight.target);
+            var rimLight = new THREE.SpotLight(0xc9a84c, 1.4, 10, Math.PI / 6, 0.5, 2);
+            rimLight.position.set(-3.5, 3, -2);
+            scene.add(rimLight);
+            var fillLight = new THREE.PointLight(0x1a3a1a, 0.8, 8);
+            fillLight.position.set(-2, 1, 2);
+            scene.add(fillLight);
+            var goldSheen = new THREE.PointLight(0xc9a84c, 0.3, 5);
+            goldSheen.position.set(0, 2, 1);
+            scene.add(goldSheen);
+
+            // Texturas canvas 2D
+            function makeCardTexture(side) {
+                var W = 1024, H = 640;
+                var cv = document.createElement('canvas');
+                cv.width = W; cv.height = H;
+                var ctx = cv.getContext('2d');
+
+                var bg = ctx.createRadialGradient(W * 0.5, H * 0.38, 0, W * 0.5, H * 0.38, W * 0.65);
+                bg.addColorStop(0, '#0f1f12');
+                bg.addColorStop(1, '#070c08');
+                ctx.fillStyle = bg;
+                ctx.beginPath();
+                ctx.roundRect(0, 0, W, H, 28);
+                ctx.fill();
+
+                ctx.strokeStyle = '#9a7d4a';
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.roundRect(3, 3, W - 6, H - 6, 26);
+                ctx.stroke();
+
+                ctx.strokeStyle = 'rgba(201,168,76,0.18)';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.roundRect(22, 22, W - 44, H - 44, 20);
+                ctx.stroke();
+
+                function goldGradLine(x1, y1, x2, y2) {
+                    var g = ctx.createLinearGradient(x1, y1, x2, y2);
+                    g.addColorStop(0, 'rgba(201,168,76,0)');
+                    g.addColorStop(0.5, 'rgba(201,168,76,0.75)');
+                    g.addColorStop(1, 'rgba(201,168,76,0)');
+                    return g;
+                }
+
+                if (side === 'front') {
+                    var halo = ctx.createRadialGradient(W / 2, H * 0.33, 0, W / 2, H * 0.33, 160);
+                    halo.addColorStop(0, 'rgba(201,168,76,0.10)');
+                    halo.addColorStop(1, 'rgba(201,168,76,0)');
+                    ctx.fillStyle = halo;
+                    ctx.beginPath();
+                    ctx.ellipse(W / 2, H * 0.33, 160, 150, 0, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.save();
+                    ctx.font = 'bold 190px Georgia, serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = 'rgba(201,168,76,0.9)';
+                    ctx.fillText('E', W / 2 - 38, H * 0.38);
+                    ctx.fillStyle = 'rgba(201,168,76,0.30)';
+                    ctx.fillText('Z', W / 2 + 38, H * 0.42);
+
+                    ctx.strokeStyle = 'rgba(201,168,76,0.85)';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    var cx = W / 2, cy = H * 0.35, r = 110;
+                    var pts1 = [[0,-28],[18,-20],[26,-5],[20,13],[8,26],[-10,26],[-23,13],[-26,-5],[-18,-20]];
+                    pts1.forEach(function(p, i) {
+                        var x = cx + p[0] * (r / 28), y = cy + p[1] * (r / 28);
+                        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                    });
+                    ctx.closePath(); ctx.stroke();
+                    ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(201,168,76,0.40)';
+                    ctx.beginPath();
+                    var pts2 = [[0,-18],[11,-11],[15,-1],[10,10],[0,15],[-11,10],[-15,-1],[-10,-11]];
+                    pts2.forEach(function(p, i) {
+                        var x = cx + p[0] * (r / 28), y = cy + p[1] * (r / 28);
+                        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                    });
+                    ctx.closePath(); ctx.stroke();
+                    ctx.restore();
+
+                    ctx.font = '400 52px Georgia, serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = '#C9A84C';
+                    ctx.letterSpacing = '16px';
+                    ctx.fillText('EZSENCIA', W / 2, H * 0.60);
+
+                    ctx.font = '400 20px Georgia, serif';
+                    ctx.fillStyle = 'rgba(201,168,76,0.44)';
+                    ctx.fillText('TRUFFLE  SOCIETY', W / 2, H * 0.67);
+
+                    ctx.strokeStyle = goldGradLine(W * 0.2, H * 0.71, W * 0.8, H * 0.71);
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath(); ctx.moveTo(W * 0.2, H * 0.71); ctx.lineTo(W * 0.8, H * 0.71); ctx.stroke();
+
+                    ctx.font = 'italic 400 44px Georgia, serif';
+                    ctx.fillStyle = '#f0e8d8';
+                    ctx.fillText('Alejandro Gil Cebrián', W / 2, H * 0.80);
+
+                    ctx.font = '400 17px Georgia, serif';
+                    ctx.fillStyle = 'rgba(201,168,76,0.46)';
+                    ctx.fillText('FOUNDERS  EDITION  2026', W / 2, H * 0.87);
+
+                    ctx.font = '400 50px Georgia, serif';
+                    ctx.fillStyle = '#C9A84C';
+                    ctx.fillText('01 / 20', W / 2, H * 0.96);
+
+                } else {
+                    var vg1 = ctx.createLinearGradient(0, H * 0.1, 0, H * 0.9);
+                    vg1.addColorStop(0, 'rgba(201,168,76,0)');
+                    vg1.addColorStop(0.5, 'rgba(201,168,76,0.38)');
+                    vg1.addColorStop(1, 'rgba(201,168,76,0)');
+                    ctx.strokeStyle = vg1; ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(90, H * 0.1); ctx.lineTo(90, H * 0.9); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(W - 90, H * 0.1); ctx.lineTo(W - 90, H * 0.9); ctx.stroke();
+
+                    ctx.font = '400 22px Georgia, serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = '#C9A84C';
+                    ctx.fillText('TARJETA DE FUNDADOR', W / 2, H * 0.18);
+
+                    ctx.strokeStyle = goldGradLine(W * 0.28, H * 0.22, W * 0.72, H * 0.22);
+                    ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(W * 0.28, H * 0.22); ctx.lineTo(W * 0.72, H * 0.22); ctx.stroke();
+
+                    ctx.font = 'italic 400 26px Georgia, serif';
+                    ctx.fillStyle = 'rgba(240,232,216,0.58)';
+                    ctx.fillText('Esta tarjeta acredita la membresía', W / 2, H * 0.38);
+                    ctx.fillText('en la Edición Fundadores 2026', W / 2, H * 0.48);
+                    ctx.fillText('de Ezsencia Truffle Society.', W / 2, H * 0.57);
+
+                    ctx.fillStyle = 'rgba(240,232,216,0.42)';
+                    ctx.fillText('Es personal, limitada e intransferible.', W / 2, H * 0.68);
+
+                    ctx.strokeStyle = goldGradLine(W * 0.28, H * 0.74, W * 0.72, H * 0.74);
+                    ctx.lineWidth = 1;
+                    ctx.beginPath(); ctx.moveTo(W * 0.28, H * 0.74); ctx.lineTo(W * 0.72, H * 0.74); ctx.stroke();
+
+                    ctx.font = '400 17px Georgia, serif';
+                    ctx.fillStyle = 'rgba(201,168,76,0.36)';
+                    ctx.fillText('ALCOTAS, TERUEL  ·  2026', W / 2, H * 0.83);
+
+                    ctx.font = 'italic 400 40px Georgia, serif';
+                    ctx.fillStyle = 'rgba(201,168,76,0.50)';
+                    ctx.fillText('01 / 20', W / 2, H * 0.95);
+                }
+
+                var tex = new THREE.CanvasTexture(cv);
+                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                return tex;
+            }
+
+            // Geometría tarjeta
+            var CW = 3.2, CH = 2.0, CD = 0.028;
+            var cardGeo = new THREE.BoxGeometry(CW, CH, CD, 1, 1, 1);
+            var frontTex = makeCardTexture('front');
+            var backTex  = makeCardTexture('back');
+
+            var goldEdge = new THREE.MeshStandardMaterial({color: 0x9a7d4a, roughness: 0.25, metalness: 0.92});
+            var frontMat = new THREE.MeshStandardMaterial({map: frontTex, roughness: 0.18, metalness: 0.05, envMapIntensity: 0.6});
+            var backMat  = new THREE.MeshStandardMaterial({map: backTex,  roughness: 0.18, metalness: 0.05, envMapIntensity: 0.6});
+
+            var card = new THREE.Mesh(cardGeo, [goldEdge, goldEdge, goldEdge, goldEdge, frontMat, backMat]);
+            card.castShadow = true;
+            card.receiveShadow = true;
+            card.rotation.x = 0.08;
+            scene.add(card);
+
+            var shadowMesh = new THREE.Mesh(
+                new THREE.PlaneGeometry(CW * 1.3, CH * 1.3),
+                new THREE.MeshBasicMaterial({color: 0x000000, transparent: true, opacity: 0.45})
+            );
+            shadowMesh.rotation.x = -Math.PI / 2;
+            shadowMesh.position.y = -1.04;
+            scene.add(shadowMesh);
+
+            var reflCard = new THREE.Mesh(cardGeo, [
+                new THREE.MeshStandardMaterial({color: 0x9a7d4a, roughness: 0.6, metalness: 0.5, transparent: true, opacity: 0.15}),
+                new THREE.MeshStandardMaterial({color: 0x9a7d4a, roughness: 0.6, metalness: 0.5, transparent: true, opacity: 0.15}),
+                new THREE.MeshStandardMaterial({color: 0x9a7d4a, roughness: 0.6, metalness: 0.5, transparent: true, opacity: 0.15}),
+                new THREE.MeshStandardMaterial({color: 0x9a7d4a, roughness: 0.6, metalness: 0.5, transparent: true, opacity: 0.15}),
+                new THREE.MeshStandardMaterial({map: frontTex, transparent: true, opacity: 0.10, roughness: 0.4}),
+                new THREE.MeshStandardMaterial({map: backTex,  transparent: true, opacity: 0.10, roughness: 0.4}),
+            ]);
+            reflCard.rotation.x = Math.PI + 0.08;
+            reflCard.position.y = -1.04 - CH / 2;
+            scene.add(reflCard);
+
+            // Partículas doradas
+            var partCount = 60;
+            var partGeo = new THREE.BufferGeometry();
+            var pos = new Float32Array(partCount * 3);
+            for (var pi = 0; pi < partCount; pi++) {
+                pos[pi * 3]     = (Math.random() - 0.5) * 10;
+                pos[pi * 3 + 1] = (Math.random() - 0.5) * 4;
+                pos[pi * 3 + 2] = (Math.random() - 0.5) * 8;
+            }
+            partGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            var particles = new THREE.Points(partGeo,
+                new THREE.PointsMaterial({color: 0xC9A84C, size: 0.025, transparent: true, opacity: 0.55})
+            );
+            scene.add(particles);
+
+            // Controles
+            var autoRotate = true;
             var isDragging = false;
             var prevX = 0, prevY = 0;
-            var autoRotate = true;
+            var rotY = 0, rotX = 0.08;
+            var targetRotY = 0, targetRotX = 0.08;
+            var flipTarget = 0, flipping = false;
 
-            // ── Loop de animación ──────────────────────────────────────
+            window.toggleAuto = function () {
+                autoRotate = !autoRotate;
+                document.getElementById('btnAuto').style.opacity = autoRotate ? '1' : '0.45';
+            };
+            window.flipCard = function () {
+                if (flipping) return;
+                flipping = true;
+                flipTarget = targetRotY + Math.PI;
+            };
+
+            canvas.addEventListener('mousedown', function (e) { isDragging = true; prevX = e.clientX; prevY = e.clientY; autoRotate = false; if (hint) hint.style.opacity = '0'; });
+            canvas.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+                targetRotY += (e.clientX - prevX) * 0.012;
+                targetRotX += (e.clientY - prevY) * 0.008;
+                targetRotX = Math.max(-0.6, Math.min(0.6, targetRotX));
+                prevX = e.clientX; prevY = e.clientY;
+            });
+            canvas.addEventListener('mouseup',    function () { isDragging = false; });
+            canvas.addEventListener('mouseleave', function () { isDragging = false; });
+            canvas.addEventListener('touchstart', function (e) { isDragging = true; prevX = e.touches[0].clientX; prevY = e.touches[0].clientY; autoRotate = false; }, {passive: true});
+            canvas.addEventListener('touchmove',  function (e) {
+                if (!isDragging) return;
+                targetRotY += (e.touches[0].clientX - prevX) * 0.012;
+                targetRotX += (e.touches[0].clientY - prevY) * 0.008;
+                targetRotX = Math.max(-0.6, Math.min(0.6, targetRotX));
+                prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+            }, {passive: true});
+            canvas.addEventListener('touchend',  function () { isDragging = false; });
+            canvas.addEventListener('dblclick',  function () { autoRotate = !autoRotate; });
+
+            // Loop de animación
+            var t = 0;
             function animate() {
                 requestAnimationFrame(animate);
-                if (autoRotate && !isDragging) targetRotY += 0.18;
-                rotY += (targetRotY - rotY) * 0.075;
-                rotX += (targetRotX - rotX) * 0.075;
-                inner.style.transform =
-                    'rotateY(' + rotY + 'deg) rotateX(' + rotX + 'deg)';
+                t += 0.008;
+
+                if (autoRotate) targetRotY += 0.005;
+                if (flipping) {
+                    targetRotY += (flipTarget - targetRotY) * 0.08;
+                    if (Math.abs(flipTarget - targetRotY) < 0.01) { flipping = false; flipTarget = targetRotY; }
+                }
+
+                rotY += (targetRotY - rotY) * 0.07;
+                rotX += (targetRotX - rotX) * 0.07;
+
+                card.rotation.y = rotY;
+                card.rotation.x = rotX;
+                reflCard.rotation.y = rotY;
+                reflCard.rotation.x = Math.PI - rotX;
+                reflCard.position.y = -1.04 - Math.cos(rotX) * CH / 2;
+                card.position.y = Math.sin(t * 0.6) * 0.04;
+
+                var pa = partGeo.attributes.position.array;
+                for (var pi = 0; pi < partCount; pi++) {
+                    pa[pi * 3 + 1] += Math.sin(t + pi * 0.4) * 0.0008;
+                }
+                partGeo.attributes.position.needsUpdate = true;
+                particles.rotation.y = t * 0.03;
+                goldSheen.intensity = 0.25 + Math.sin(t * 0.7) * 0.1;
+
+                renderer.render(scene, camera);
             }
             animate();
 
-            // ── Mouse ──────────────────────────────────────────────────
-            flip.addEventListener('mousedown', function (e) {
-                isDragging = true;
-                autoRotate = false;
-                prevX = e.clientX; prevY = e.clientY;
-                flip.classList.add('dragging');
-                if (hint) hint.style.opacity = '0';
-                e.preventDefault();
-            });
-            document.addEventListener('mousemove', function (e) {
-                if (!isDragging) return;
-                targetRotY += (e.clientX - prevX) * 0.55;
-                targetRotX -= (e.clientY - prevY) * 0.32;
-                targetRotX = Math.max(-40, Math.min(40, targetRotX));
-                prevX = e.clientX; prevY = e.clientY;
-            });
-            document.addEventListener('mouseup', function () {
-                isDragging = false;
-                flip.classList.remove('dragging');
-            });
-
-            // ── Touch ──────────────────────────────────────────────────
-            flip.addEventListener('touchstart', function (e) {
-                isDragging = true;
-                autoRotate = false;
-                prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
-                if (hint) hint.style.opacity = '0';
-            }, { passive: true });
-            flip.addEventListener('touchmove', function (e) {
-                if (!isDragging) return;
-                targetRotY += (e.touches[0].clientX - prevX) * 0.55;
-                targetRotX -= (e.touches[0].clientY - prevY) * 0.32;
-                targetRotX = Math.max(-40, Math.min(40, targetRotX));
-                prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
-            }, { passive: true });
-            flip.addEventListener('touchend', function () { isDragging = false; });
-
-            // ── Doble clic: girar 180° ─────────────────────────────────
-            flip.addEventListener('dblclick', function () {
-                targetRotY += 180;
-            });
-
-            // Ocultar hint tras 4 s
             if (hint) setTimeout(function () { hint.style.opacity = '0'; }, 4000);
-        }());
+        }
+        initCardVisor._done = false;
 
 
 
