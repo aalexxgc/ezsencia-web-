@@ -2527,7 +2527,7 @@
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';
             if (id === 'modal-caja') {
-                requestAnimationFrame(initCardVisor);
+                setTimeout(initCardVisor, 200);
             }
         }
 
@@ -2624,19 +2624,24 @@
             scene.background = new THREE.Color(0x060e07);
             scene.fog = new THREE.Fog(0x060e07, 8, 22);
 
-            var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-            camera.position.set(0, 1.2, 5.5);
+            var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+            camera.position.set(0, 0.3, 5.8);
             camera.lookAt(0, 0, 0);
 
             function resize() {
-                var w = canvas.clientWidth, h = canvas.clientHeight;
-                if (w === 0 || h === 0) return;
+                var wrap = canvas.parentElement;
+                var w = (wrap && wrap.offsetWidth)  || canvas.offsetWidth  || 760;
+                var h = (wrap && wrap.offsetHeight) || canvas.offsetHeight || 480;
                 renderer.setSize(w, h, false);
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
             }
             resize();
+            requestAnimationFrame(resize);
             window.addEventListener('resize', resize);
+            if (window.ResizeObserver) {
+                new ResizeObserver(resize).observe(canvas.parentElement);
+            }
 
             // Terciopelo
             var velvetGeo = new THREE.PlaneGeometry(28, 18, 80, 60);
@@ -2764,7 +2769,7 @@
             var frontMat = new THREE.MeshStandardMaterial({map: frontTex, roughness: 0.18, metalness: 0.05});
             var backMat  = new THREE.MeshStandardMaterial({map: backTex,  roughness: 0.18, metalness: 0.05});
             var card = new THREE.Mesh(cardGeo, [goldEdge, goldEdge, goldEdge, goldEdge, frontMat, backMat]);
-            card.castShadow = true; card.receiveShadow = true; card.rotation.x = 0.08;
+            card.castShadow = true; card.receiveShadow = true; card.rotation.x = 0.04;
             scene.add(card);
 
             var shadowMesh = new THREE.Mesh(
@@ -2800,7 +2805,7 @@
 
             // Controles
             var autoRotate = true, isDragging = false, prevX = 0, prevY = 0;
-            var rotY = 0, rotX = 0.08, targetRotY = 0, targetRotX = 0.08;
+            var rotY = 0, rotX = 0.04, targetRotY = 0, targetRotX = 0.04;
             var flipTarget = 0, flipping = false;
 
             window.toggleAuto = function() {
