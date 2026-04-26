@@ -1293,6 +1293,40 @@
             max-width: 520px;
         }
 
+        /* ─── CAPTION HERO ──────────────────────── */
+        .mcaja-hero-caption {
+            background:     #f5f0e8;
+            text-align:     center;
+            padding:        5rem 2rem 3rem;
+            font-family:    'Playfair Display', serif;
+            font-style:     italic;
+            font-size:      clamp(1.4rem, 2.5vw, 2rem);
+            color:          #1a1814;
+            letter-spacing: 0.01em;
+        }
+
+        /* ─── PIEZA SIN IMAGEN ───────────────────── */
+        .mcaja-piece-img-wrap--dark { background: #0a1a0c; }
+
+        /* ─── DESC BAJO VISOR ────────────────────── */
+        .mcaja-visor360-desc {
+            max-width:  560px;
+            margin:     3rem auto 0;
+            text-align: center;
+        }
+        .mcaja-visor360-desc .mcaja-piece-num {
+            justify-content: center;
+            opacity:         1;
+            transform:       none;
+        }
+        .mcaja-visor360-desc p {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(0.95rem, 1.3vw, 1.1rem);
+            line-height: 2;
+            color:       rgba(184,150,90,0.7);
+            margin-top:  0.8rem;
+        }
+
         /* ─── VISOR 360 TARJETA ─────────────────── */
         .mcaja-visor360 {
             background: var(--fondo-alt);
@@ -1917,81 +1951,87 @@
 
             <button class="exp-modal-close" aria-label="Cerrar">&#10005;</button>
 
-            <!-- HERO -->
+            <!-- HERO — imagen limpia, sin texto superpuesto -->
             <div class="mcaja-hero">
                 <img class="mcaja-hero-img" src="assets/caja_abierta.png" alt="La Caja Fundadora EZSENCIA">
                 <div class="mcaja-hero-overlay"></div>
-                <div class="mcaja-hero-text">
-                    <p class="mcaja-hero-eyebrow">Edici&oacute;n Fundadores &nbsp;&middot;&nbsp; 2026</p>
-                    <h2 class="mcaja-hero-title">La Caja<br>Fundadora</h2>
-                    <p class="mcaja-hero-sub">No es un env&iacute;o.<br>Es el inicio.</p>
-                </div>
                 <p class="mcaja-hero-scroll">Descubrir</p>
             </div>
 
+            <!-- CAPTION -->
+            <div class="mcaja-hero-caption">Dentro empieza todo.</div>
+
             <!-- INTRO -->
             <div class="mcaja-intro">
-                <p>La Caja Fundadora es la primera experiencia f&iacute;sica de Ezsencia.</p>
-                <p>El momento en el que entras en el club y todo lo que representamos —territorio, tiempo y selecci&oacute;n— se materializa por primera vez.</p>
-                <p>Cada caja est&aacute; numerada y asignada a uno de los miembros de esta edici&oacute;n limitada.</p>
-                <p class="mcaja-intro-frase">Una pieza &uacute;nica. Personal. Irrepetible.</p>
+                <p>La Caja Fundadora es la primera experiencia f&iacute;sica de Ezsencia. El momento en que el territorio, el tiempo y la selecci&oacute;n se materializan por primera vez. Cada caja est&aacute; numerada y asignada. Una pieza &uacute;nica. Personal. Irrepetible.</p>
             </div>
 
-            <!-- I: TRUFA -->
+            <!-- I: LA CAJA -->
             <div class="mcaja-piece">
                 <div class="mcaja-piece-img-wrap">
-                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Trufa negra Ezsencia">
+                    <img class="mcaja-piece-img" src="assets/caja_abierta.png" alt="La Caja Fundadora">
                 </div>
                 <div class="mcaja-piece-body">
-                    <p class="mcaja-piece-num">I &nbsp;&middot;&nbsp; Trufa Negra</p>
-                    <h3 class="mcaja-piece-title">Tuber melanosporum.<br>Alcotas, Teruel.</h3>
+                    <p class="mcaja-piece-num">I &nbsp;&middot;&nbsp; La Caja</p>
+                    <h3 class="mcaja-piece-title">Madera de abedul.<br>Grabada a l&aacute;ser.</h3>
                     <div class="mcaja-piece-sep"></div>
-                    <p class="mcaja-piece-desc">La m&aacute;xima expresi&oacute;n del invierno. Recolectada en su punto &oacute;ptimo en los truferos de Alcotas y enviada en las 48 horas posteriores a la cosecha.<br><br>200&thinsp;g. Sin intermediarios. Con el origen de quien la ha cultivado.</p>
+                    <p class="mcaja-piece-desc">24,5&thinsp;&times;&thinsp;35,5&thinsp;&times;&thinsp;9&thinsp;cm. Logo Ezsencia en la tapa. &laquo;Founders Edition 2026 &middot; N&ordm;&thinsp;XX&thinsp;/&thinsp;20&raquo; en el lateral.<br><br>Dise&ntilde;ada para ser conservada. No para ser abierta y olvidada.</p>
                 </div>
             </div>
 
-            <!-- II: LAMINADOR -->
+            <!-- II: LA TRUFA -->
             <div class="mcaja-piece mcaja-piece--rev">
                 <div class="mcaja-piece-img-wrap">
-                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/ritual.png" alt="Laminador de nogal">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Tuber melanosporum">
                 </div>
                 <div class="mcaja-piece-body">
-                    <p class="mcaja-piece-num">II &nbsp;&middot;&nbsp; Laminador de Nogal</p>
-                    <h3 class="mcaja-piece-title">La herramienta que convierte el producto en ritual.</h3>
+                    <p class="mcaja-piece-num">II &nbsp;&middot;&nbsp; Tuber melanosporum</p>
+                    <h3 class="mcaja-piece-title">Alcotas, Teruel.<br>Recolectada en su punto &oacute;ptimo.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">200&thinsp;g. Sin intermediarios. Enviada en las 48 horas posteriores a la cosecha. Con el origen de quien la ha cultivado.</p>
+                </div>
+            </div>
+
+            <!-- III: EL LAMINADOR -->
+            <div class="mcaja-piece">
+                <div class="mcaja-piece-img-wrap">
+                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/ritual.png" alt="Affettatartufi artesanal">
+                </div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">III &nbsp;&middot;&nbsp; El Laminador</p>
+                    <h3 class="mcaja-piece-title">El gesto que convierte<br>el producto en ritual.</h3>
                     <div class="mcaja-piece-sep"></div>
                     <p class="mcaja-piece-desc">Affettatartufi artesanal en madera de nogal macizo. Hoja de corte liso. Fabricaci&oacute;n italiana.<br><br>Laminar bien es el primer gesto. &Eacute;ste es el instrumento para hacerlo.</p>
                 </div>
             </div>
 
-            <!-- III: SOBRE NEGRO -->
+            <!-- IV: EL CEPILLO -->
+            <div class="mcaja-piece mcaja-piece--rev">
+                <div class="mcaja-piece-img-wrap mcaja-piece-img-wrap--dark"></div>
+                <div class="mcaja-piece-body">
+                    <p class="mcaja-piece-num">IV &nbsp;&middot;&nbsp; El Cepillo</p>
+                    <h3 class="mcaja-piece-title">Antes de laminar,<br>hay que limpiar.</h3>
+                    <div class="mcaja-piece-sep"></div>
+                    <p class="mcaja-piece-desc">Cerdas naturales. Artesanal. El primer contacto con la pieza. Un gesto menor que cambia la experiencia entera.</p>
+                </div>
+            </div>
+
+            <!-- V: EL SOBRE NEGRO -->
             <div class="mcaja-piece">
                 <div class="mcaja-piece-img-wrap">
                     <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/abuela.JPG" alt="El sobre negro">
                 </div>
                 <div class="mcaja-piece-body">
-                    <p class="mcaja-piece-num">III &nbsp;&middot;&nbsp; El Sobre Negro</p>
+                    <p class="mcaja-piece-num">V &nbsp;&middot;&nbsp; El Sobre Negro</p>
                     <h3 class="mcaja-piece-title">No es un mensaje.<br>Es una invitaci&oacute;n.</h3>
                     <div class="mcaja-piece-sep"></div>
-                    <p class="mcaja-piece-desc">Un manuscrito con la historia de Ezsencia. Las instrucciones de uso de cada pieza, escritas como un ritual.<br><br>Y una bienvenida personal, dirigida por nombre, firmada a mano por el fundador.</p>
+                    <p class="mcaja-piece-desc">Un manuscrito con la historia de Ezsencia. Las instrucciones escritas como un ritual. Una bienvenida personal, dirigida por nombre, firmada a mano por el fundador.</p>
                 </div>
             </div>
 
-            <!-- IV: TARJETA -->
-            <div class="mcaja-piece mcaja-piece--rev">
-                <div class="mcaja-piece-img-wrap">
-                    <img class="mcaja-piece-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png" alt="Tarjeta de metal">
-                </div>
-                <div class="mcaja-piece-body">
-                    <p class="mcaja-piece-num">IV &nbsp;&middot;&nbsp; Tarjeta de Metal</p>
-                    <h3 class="mcaja-piece-title">Founders Edition 2026.<br>N&ordm;&thinsp;01&thinsp;/&thinsp;20.</h3>
-                    <div class="mcaja-piece-sep"></div>
-                    <p class="mcaja-piece-desc">Grabada con tu nombre y tu n&uacute;mero de fundador.<br><br>Tu acceso a lo que no est&aacute; disponible para todos. Una vez asignada, no se reproduce.</p>
-                </div>
-            </div>
-
-            <!-- IV: TARJETA DE FUNDADOR — visor 360° Three.js -->
+            <!-- VI: TARJETA DE FUNDADOR — visor 360° Three.js -->
             <div class="mcaja-visor360">
-                <p class="mcaja-visor360-eyebrow">IV &nbsp;&middot;&nbsp; Tu Tarjeta</p>
+                <p class="mcaja-visor360-eyebrow">VI &nbsp;&middot;&nbsp; Tu Tarjeta</p>
                 <p class="mcaja-visor360-title">Founders Edition 2026 &thinsp;&middot;&thinsp; N&ordm;&thinsp;01&thinsp;/&thinsp;20</p>
 
                 <div id="visor3d-wrap">
@@ -2002,18 +2042,11 @@
                         <button id="btnFlip" onclick="flipCard()" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:11px;letter-spacing:2px;padding:6px 14px;border-radius:20px;cursor:pointer;font-family:sans-serif;">GIRAR</button>
                     </div>
                 </div>
-            </div>
 
-            <!-- V: LA CAJA — pantalla completa -->
-            <div class="mcaja-piece mcaja-piece--full">
-                <div class="mcaja-piece-img-wrap">
-                    <img class="mcaja-piece-img" src="assets/caja_abierta.png" alt="Caja de abedul Founders Edition 2026">
-                </div>
-                <div class="mcaja-piece-body">
-                    <p class="mcaja-piece-num">V &nbsp;&middot;&nbsp; La Caja</p>
-                    <h3 class="mcaja-piece-title">Madera de abedul.<br>Grabada a l&aacute;ser.</h3>
-                    <div class="mcaja-piece-sep"></div>
-                    <p class="mcaja-piece-desc">24,5&thinsp;&times;&thinsp;35,5&thinsp;&times;&thinsp;9&thinsp;cm. Logo Ezsencia en la tapa. &laquo;Founders Edition 2026 &middot; N&ordm;&thinsp;XX&thinsp;/&thinsp;20&raquo; en el lateral.<br><br>Dise&ntilde;ada para ser conservada. No para ser abierta y olvidada.</p>
+                <div class="mcaja-visor360-desc">
+                    <p class="mcaja-piece-num">VI &nbsp;&middot;&nbsp; Tarjeta de Fundador</p>
+                    <p>Founders Edition 2026 &middot; N&ordm;&thinsp;01&thinsp;/&thinsp;20.<br>
+                    Grabada con tu nombre y tu n&uacute;mero. Tu acceso a lo que no est&aacute; disponible para todos. Una vez asignada, no se reproduce.</p>
                 </div>
             </div>
 
@@ -2027,7 +2060,7 @@
                 </p>
                 <div class="mcaja-cierre-linea"></div>
                 <p class="mcaja-cierre-edition">Founders Edition 2026 &nbsp;&middot;&nbsp; 20&thinsp;/&thinsp;20</p>
-                <a href="acceso.html" class="mcaja-cierre-cta">Solicitar acceso</a>
+                <a href="acceso.html" class="mcaja-cierre-cta">Solicitar acceso &rarr;</a>
                 <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
             </div>
 
