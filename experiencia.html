@@ -1321,27 +1321,25 @@
         .mcaja-visor360-wrap {
             max-width:     760px;
             margin:        0 auto;
-            height:        480px;
             background:    #060e07;
             border-radius: 14px;
             overflow:      hidden;
             position:      relative;
             box-shadow:    0 24px 72px rgba(0,0,0,0.28);
+            line-height:   0;
         }
 
         .mcaja-visor360-wrap canvas {
-            position: absolute;
-            top:      0;
-            left:     0;
-            display:  block;
+            display:    block;
+            width:      100%;
+            height:     auto;
         }
 
         @media (max-width: 860px) {
-            .mcaja-visor360        { padding: 5rem 2rem 6rem; }
-            .mcaja-visor360-wrap   { height: 380px; }
+            .mcaja-visor360 { padding: 5rem 2rem 6rem; }
         }
         @media (max-width: 600px) {
-            .mcaja-visor360-wrap   { height: 300px; border-radius: 10px; }
+            .mcaja-visor360-wrap { border-radius: 10px; }
         }
 
         /* ─── CIERRE ─────────────────────────────── */
@@ -2000,7 +1998,7 @@
                 <p class="mcaja-visor360-label">IV &nbsp;&middot;&nbsp; Tu Tarjeta</p>
                 <p class="mcaja-visor360-title">Founders Edition 2026 &thinsp;&middot;&thinsp; N&ordm;&thinsp;01&thinsp;/&thinsp;20</p>
                 <div class="mcaja-visor360-wrap">
-                    <canvas id="c3d"></canvas>
+                    <canvas id="c3d" width="720" height="450"></canvas>
                     <div id="visor-hint" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#C9A84C;opacity:0.55;font-size:11px;letter-spacing:2px;pointer-events:none;transition:opacity 1s;white-space:nowrap;">ARRASTRA &nbsp;&middot;&nbsp; DOBLE CLIC PARA GIRAR</div>
                     <div style="position:absolute;top:14px;right:14px;display:flex;gap:8px;">
                         <button id="btnAuto" onclick="toggleAuto()" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:10px;letter-spacing:2px;padding:5px 13px;border-radius:20px;cursor:pointer;font-family:sans-serif;">AUTO</button>
@@ -2534,7 +2532,7 @@
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';
             if (id === 'modal-caja') {
-                setTimeout(initCardVisor, 500);
+                requestAnimationFrame(initCardVisor);
             }
         }
 
@@ -2635,28 +2633,20 @@
             camera.position.set(0, 0.3, 5.8);
             camera.lookAt(0, 0, 0);
 
-            var wrap = canvas.parentElement;
-
-            function getWrapSize() {
-                var r = wrap.getBoundingClientRect();
-                var w = r.width  || wrap.offsetWidth  || wrap.clientWidth  || 720;
-                var h = r.height || wrap.offsetHeight || wrap.clientHeight || 460;
-                return { w: Math.round(w), h: Math.round(h) };
-            }
-
+            // Canvas tiene width="720" height="450" como atributos fijos (16:9).
+            // CSS width:100%;height:auto lo escala al ancho del contenedor.
+            // Leemos el tamaño CSS real y ajustamos el buffer + cámara.
             function resize() {
-                var s = getWrapSize();
-                if (s.w < 10 || s.h < 10) return;
-                renderer.setSize(s.w, s.h, true);
-                camera.aspect = s.w / s.h;
+                var w = canvas.clientWidth  || 720;
+                var h = canvas.clientHeight || 450;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
                 camera.updateProjectionMatrix();
             }
             resize();
-            setTimeout(resize, 100);
-            setTimeout(resize, 400);
             window.addEventListener('resize', resize);
             if (window.ResizeObserver) {
-                new ResizeObserver(resize).observe(wrap);
+                new ResizeObserver(resize).observe(canvas);
             }
 
             // Terciopelo
