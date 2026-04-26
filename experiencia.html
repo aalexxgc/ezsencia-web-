@@ -1342,21 +1342,20 @@
             width:        100%;
             aspect-ratio: 85.6 / 54;
             position:     relative;
-            perspective:  1000px;
-            cursor:       pointer;
+            perspective:  1200px;
+            cursor:       grab;
+            user-select:  none;
         }
+
+        .card-flip.dragging { cursor: grabbing; }
 
         .card-inner {
-            width:            100%;
-            height:           100%;
-            position:         relative;
-            transform-style:  preserve-3d;
-            transition:       transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
-            border-radius:    3.5%;
-        }
-
-        .card-flip.flipped .card-inner {
-            transform: rotateY(180deg);
+            width:           100%;
+            height:          100%;
+            position:        relative;
+            transform-style: preserve-3d;
+            border-radius:   3.5%;
+            will-change:     transform;
         }
 
         .card-face {
@@ -1572,27 +1571,16 @@
             font-style:     italic;
         }
 
-        /* Hover en desktop */
-        @media (hover: hover) {
-            .card-flip:hover .card-inner {
-                box-shadow: 0 16px 56px rgba(0,0,0,0.45),
-                            0 0 32px rgba(201,168,76,0.10);
-                transform:  translateY(-2px) scale(1.015);
-            }
-            .card-flip.flipped:hover .card-inner {
-                transform: rotateY(180deg) translateY(-2px) scale(1.015);
-            }
-        }
-
-        /* Indicador de giro */
+        /* Indicador de arrastre */
         .card-hint {
             margin-top:     2rem;
             font-family:    'Lato', sans-serif;
             font-size:      0.62rem;
             letter-spacing: 0.28em;
-            color:          rgba(154,125,74,0.45);
+            color:          rgba(154,125,74,0.42);
             text-transform: uppercase;
-            transition:     opacity 0.4s;
+            transition:     opacity 1.5s ease;
+            pointer-events: none;
         }
 
         /* Responsivo */
@@ -2307,7 +2295,7 @@
 
                             </div>
                         </div>
-                        <p class="card-hint">Clic para girar</p>
+                        <p class="card-hint" id="cardHint">Arrastra &nbsp;&middot;&nbsp; Doble clic para girar</p>
                     </div>
                 </section>
             </div>
@@ -2911,13 +2899,75 @@
             }
         });
 
-        // ── Tarjeta de Fundador — flip al clic ──────────────────────
-        (function() {
-            var card = document.getElementById('cardFlip');
-            if (!card) return;
-            card.addEventListener('click', function() {
-                card.classList.toggle('flipped');
+        // ── Tarjeta de Fundador — rotación libre mouse/touch ────────
+        (function () {
+            var flip  = document.getElementById('cardFlip');
+            var hint  = document.getElementById('cardHint');
+            if (!flip) return;
+
+            var inner = flip.querySelector('.card-inner');
+
+            var rotY = -18, rotX = 6;          // ángulo inicial con perspectiva
+            var targetRotY = -18, targetRotX = 6;
+            var isDragging = false;
+            var prevX = 0, prevY = 0;
+            var autoRotate = true;
+
+            // ── Loop de animación ──────────────────────────────────────
+            function animate() {
+                requestAnimationFrame(animate);
+                if (autoRotate && !isDragging) targetRotY += 0.18;
+                rotY += (targetRotY - rotY) * 0.075;
+                rotX += (targetRotX - rotX) * 0.075;
+                inner.style.transform =
+                    'rotateY(' + rotY + 'deg) rotateX(' + rotX + 'deg)';
+            }
+            animate();
+
+            // ── Mouse ──────────────────────────────────────────────────
+            flip.addEventListener('mousedown', function (e) {
+                isDragging = true;
+                autoRotate = false;
+                prevX = e.clientX; prevY = e.clientY;
+                flip.classList.add('dragging');
+                if (hint) hint.style.opacity = '0';
+                e.preventDefault();
             });
+            document.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+                targetRotY += (e.clientX - prevX) * 0.55;
+                targetRotX -= (e.clientY - prevY) * 0.32;
+                targetRotX = Math.max(-40, Math.min(40, targetRotX));
+                prevX = e.clientX; prevY = e.clientY;
+            });
+            document.addEventListener('mouseup', function () {
+                isDragging = false;
+                flip.classList.remove('dragging');
+            });
+
+            // ── Touch ──────────────────────────────────────────────────
+            flip.addEventListener('touchstart', function (e) {
+                isDragging = true;
+                autoRotate = false;
+                prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+                if (hint) hint.style.opacity = '0';
+            }, { passive: true });
+            flip.addEventListener('touchmove', function (e) {
+                if (!isDragging) return;
+                targetRotY += (e.touches[0].clientX - prevX) * 0.55;
+                targetRotX -= (e.touches[0].clientY - prevY) * 0.32;
+                targetRotX = Math.max(-40, Math.min(40, targetRotX));
+                prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+            }, { passive: true });
+            flip.addEventListener('touchend', function () { isDragging = false; });
+
+            // ── Doble clic: girar 180° ─────────────────────────────────
+            flip.addEventListener('dblclick', function () {
+                targetRotY += 180;
+            });
+
+            // Ocultar hint tras 4 s
+            if (hint) setTimeout(function () { hint.style.opacity = '0'; }, 4000);
         }());
 
 
