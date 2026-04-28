@@ -1782,6 +1782,36 @@
             .mmesa-carta  { padding: 0 1.8rem 7rem; }
         }
 
+        /* Foto break dentro del modal-mesa */
+        .mmesa-foto {
+            position:   relative;
+            width:      100%;
+            height:     480px;
+            overflow:   hidden;
+        }
+        .mmesa-foto-img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            object-position: center 40%;
+            display:    block;
+            filter:     brightness(0.72);
+        }
+        .mmesa-foto-caption {
+            position:       absolute;
+            bottom:         2rem;
+            left:           50%;
+            transform:      translateX(-50%);
+            font-family:    'Lato', sans-serif;
+            font-size:      0.5rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.55);
+            white-space:    nowrap;
+        }
+        .mmesa-foto--club .mmesa-foto-img { object-position: center 30%; }
+        @media (max-width: 600px) { .mmesa-foto { height: 280px; } }
+
         /* Botón continuidad entre modales */
         .mcaja-next {
             display:         inline-flex;
@@ -2392,16 +2422,37 @@
                 <p class="mcaja-hero-scroll">El men&uacute;</p>
             </div>
 
-            <!-- EL LUGAR -->
+            <!-- INTRO: Del campo a la mesa -->
             <div class="mmesa-lugar">
                 <p class="mmesa-lugar-eyebrow">La mesa del club</p>
                 <h3 class="mmesa-lugar-nombre">Del campo a la mesa,<br>en el mismo d&iacute;a.</h3>
                 <div class="mmesa-sep"></div>
                 <p class="mmesa-lugar-texto">
-                    Despu&eacute;s de la ma&ntilde;ana en los truferos de Alcotas, el grupo se desplaza en los veh&iacute;culos del evento hasta Mora de Rubielos.<br><br>
-                    All&iacute;, en la Mas&iacute;a El Molinete, tiene lugar la comida Ezsencia: un men&uacute; construido alrededor de la trufa negra de Alcotas, con producto de la tierra, bodega de Arag&oacute;n y una sala privada para quien quiera que la jornada no tenga hora de fin.<br><br>
+                    Despu&eacute;s de la ma&ntilde;ana en los truferos de Alcotas, el grupo se desplaza en los veh&iacute;culos del evento hasta Mora de Rubielos. All&iacute;, en la Mas&iacute;a El Molinete, tiene lugar la comida Ezsencia: un men&uacute; construido alrededor de la trufa negra que el grupo ha cosechado esa misma ma&ntilde;ana, con producto de la tierra y bodega de Arag&oacute;n.<br><br>
                     No es una comida de clientes. Es el homenaje de una comunidad a lo que ha construido juntos.
                 </p>
+            </div>
+
+            <!-- DATOS DEL LUGAR: 3 columnas -->
+            <div class="mfase-datos">
+                <div class="mfase-dato">
+                    <p class="mfase-dato-label">El espacio</p>
+                    <p class="mfase-dato-text">Sala privada exclusiva para el club. Sin acceso exterior durante la jornada.</p>
+                </div>
+                <div class="mfase-dato">
+                    <p class="mfase-dato-label">El desplazamiento</p>
+                    <p class="mfase-dato-text">En los veh&iacute;culos del evento, desde Alcotas hasta Mora de Rubielos.</p>
+                </div>
+                <div class="mfase-dato">
+                    <p class="mfase-dato-label">La trufa</p>
+                    <p class="mfase-dato-text">La que el grupo ha cosechado esa ma&ntilde;ana, preparada en el mismo d&iacute;a.</p>
+                </div>
+            </div>
+
+            <!-- FOTO BREAK: trufas -->
+            <div class="mmesa-foto">
+                <img class="mmesa-foto-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Trufa negra de Alcotas">
+                <p class="mmesa-foto-caption">Tuber melanosporum &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
             </div>
 
             <!-- LA CARTA -->
@@ -2458,6 +2509,12 @@
                     <p class="mmesa-nota">Agua, cerveza, refrescos, caf&eacute; y copa de licor incluidos.</p>
                 </div>
 
+            </div>
+
+            <!-- FOTO BREAK: el club -->
+            <div class="mmesa-foto mmesa-foto--club">
+                <img class="mmesa-foto-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/club.JPG" alt="El club en la mesa">
+                <p class="mmesa-foto-caption">Mora de Rubielos &nbsp;&middot;&nbsp; Enero 2026</p>
             </div>
 
             <!-- CIERRE -->
