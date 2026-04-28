@@ -671,13 +671,12 @@
         .idx-territorio-img:hover img { transform: scale(1.02); }
 
         .idx-territorio-body {
-            background:            var(--fondo);
-            border-top:            1px solid var(--borde);
-            padding:               3rem 6vw 6rem;
-            display:               grid;
-            grid-template-columns: 1fr 1.8fr;
-            gap:                   0 7rem;
-            align-items:           start;
+            background:  var(--fondo);
+            border-top:  1px solid var(--borde);
+            padding:     3rem 6vw 6rem;
+            display:     flex;
+            flex-direction: column;
+            gap:         2.5rem;
         }
 
         .idx-territorio-body .section-label {
@@ -704,11 +703,9 @@
         }
 
         .idx-territorio-datos {
-            margin-top:            2.5rem;
             display:               grid;
             grid-template-columns: repeat(4, 1fr);
             gap:                   0;
-            grid-column:           1 / -1;
             border-top:            1px solid var(--borde);
             padding-top:           2rem;
         }
@@ -1067,69 +1064,7 @@
 
 
     <!-- ========================================================
-         3. TRES PILARES — Territorio · Ritual · Círculo
-         ======================================================== -->
-
-    <section class="idx-pilares">
-
-        <div class="idx-pilares-header reveal">
-            <div class="section-label" style="justify-content: center;">Ezsencia</div>
-        </div>
-
-        <div class="idx-pilares-grid reveal">
-
-            <div class="idx-pilar">
-                <div class="idx-pilar-img">
-                    <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="Alcotas, Teruel">
-                </div>
-                <span class="idx-pilar-num">I</span>
-                <div class="idx-pilar-sep"></div>
-                <p class="idx-pilar-titulo">Territorio</p>
-                <p class="idx-pilar-texto">
-                    Alcotas, Teruel. A m&aacute;s de 1.100 metros.
-                    Un suelo calizo que lleva d&eacute;cadas
-                    guardando uno de los ingredientes
-                    m&aacute;s valorados del mundo.
-                </p>
-            </div>
-
-            <div class="idx-pilar">
-                <div class="idx-pilar-img">
-                    <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/ritual.png" alt="El ritual de la trufa">
-                </div>
-                <span class="idx-pilar-num">II</span>
-                <div class="idx-pilar-sep"></div>
-                <p class="idx-pilar-titulo">Ritual</p>
-                <p class="idx-pilar-texto">
-                    La caza con perros al amanecer,
-                    la mesa en el campo, los env&iacute;os
-                    de temporada. Cada gesto repite
-                    una secuencia de siglos.
-                </p>
-            </div>
-
-            <div class="idx-pilar">
-                <div class="idx-pilar-img">
-                    <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png" alt="El círculo EZSENCIA">
-                </div>
-                <span class="idx-pilar-num">III</span>
-                <div class="idx-pilar-sep"></div>
-                <p class="idx-pilar-titulo">C&iacute;rculo</p>
-                <p class="idx-pilar-texto">
-                    20 miembros. El tama&ntilde;o exacto
-                    en el que todos se conocen
-                    y lo que se comparte
-                    a&uacute;n tiene peso real.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         4. EXPERIENCIA — bloque visual con enlace
+         3. EXPERIENCIA — bloque visual con enlace
          ======================================================== -->
 
     <div class="idx-experiencia reveal">
@@ -1153,21 +1088,15 @@
 
 
     <!-- ========================================================
-         VÍDEO ALCOTAS — separador editorial
-         ======================================================== -->
-
-    <div class="idx-video-alcotas">
-        <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg"
-             alt="Alcotas, Teruel"
-             style="width:100%;height:100%;object-fit:cover;display:block;">
-    </div>
-
-
-    <!-- ========================================================
-         5. TERRITORIO — imagen paisaje + texto
+         4. TERRITORIO — imagen + 4 datos
          ======================================================== -->
 
     <div class="idx-territorio">
+
+        <div class="idx-territorio-img">
+            <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg"
+                 alt="Alcotas, Teruel">
+        </div>
 
         <div class="idx-territorio-body reveal">
 
@@ -1178,12 +1107,6 @@
                     Teruel.
                 </h2>
             </div>
-
-            <p>
-                A m&aacute;s de 1.100 metros, entre encinares y suelos calizos,
-                existe un lugar donde el tiempo pertenece a quienes lo trabajan.
-                Doce a&ntilde;os cultivando la relaci&oacute;n entre la tierra y la trufa negra.
-            </p>
 
             <div class="idx-territorio-datos">
                 <div class="idx-territorio-dato">
