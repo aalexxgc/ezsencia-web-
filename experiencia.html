@@ -1839,8 +1839,17 @@
             border-top: 1px solid #d8d0c4;
         }
         #modal-mesa .mcaja-cierre-frase  { color: #1a1814; }
-        #modal-mesa .mcaja-cierre-edition { color: #9a7d4a; }
-        #modal-mesa .mcaja-cierre-final   { color: rgba(26,24,20,0.3); }
+        #modal-mesa .mcaja-cierre-edition {
+            color:          #5a5248;
+            font-family:    'EB Garamond', serif;
+            font-size:      clamp(0.95rem, 1.3vw, 1.08rem);
+            font-style:     italic;
+            letter-spacing: 0;
+            text-transform: none;
+            max-width:      520px;
+            line-height:    1.9;
+        }
+        #modal-mesa .mcaja-cierre-final   { color: rgba(26,24,20,0.38); }
         #modal-mesa .mcaja-cierre-linea   { background: linear-gradient(180deg, transparent, #9a7d4a, transparent); }
 
         /* Cierre modal-origen — fondo claro */
@@ -2441,66 +2450,60 @@
 
             <!-- HERO -->
             <div class="mcaja-hero">
-                <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="Mas&iacute;a El Molinete, Mora de Rubielos" style="object-position: center 60%;">
+                <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="El Encuentro Gastron&oacute;mico — Ezsencia" style="object-position: center 60%;">
                 <div class="mcaja-hero-overlay"></div>
                 <div class="mcaja-hero-text">
                     <p class="mcaja-hero-eyebrow">III &nbsp;&middot;&nbsp; El Encuentro Gastron&oacute;mico</p>
-                    <h2 class="mcaja-hero-title">La Mesa<br>Esencia</h2>
-                    <p class="mcaja-hero-sub">Mas&iacute;a El Molinete &nbsp;&middot;&nbsp; Mora de Rubielos<br>Enero 2026</p>
+                    <h2 class="mcaja-hero-title">La Mesa<br>Ezsencia</h2>
+                    <p class="mcaja-hero-sub">Ubicaci&oacute;n prevista &nbsp;&middot;&nbsp; Mora de Rubielos<br>Enero 2026</p>
                 </div>
                 <p class="mcaja-hero-scroll">El men&uacute;</p>
             </div>
 
-            <!-- INTRO: Del campo a la mesa -->
+            <!-- INTRO -->
             <div class="mmesa-lugar">
                 <p class="mmesa-lugar-eyebrow">La mesa del club</p>
                 <h3 class="mmesa-lugar-nombre">Del campo a la mesa,<br>en el mismo d&iacute;a.</h3>
                 <div class="mmesa-sep"></div>
                 <p class="mmesa-lugar-texto">
-                    Despu&eacute;s de la ma&ntilde;ana en los truferos de Alcotas, el grupo se desplaza en los veh&iacute;culos del evento hasta Mora de Rubielos. All&iacute;, en la Mas&iacute;a El Molinete, tiene lugar la comida Ezsencia: un men&uacute; construido alrededor de la trufa negra que el grupo ha cosechado esa misma ma&ntilde;ana, con producto de la tierra y bodega de Arag&oacute;n.<br><br>
-                    No es una comida de clientes. Es el homenaje de una comunidad a lo que ha construido juntos.
+                    Despu&eacute;s de la ma&ntilde;ana en los truferos de Alcotas, el grupo se desplaza hacia Mora de Rubielos. All&iacute;, en Mas&iacute;a El Molinete, tendr&aacute; lugar &mdash;una vez conformado el grupo&mdash; la mesa Ezsencia: un encuentro gastron&oacute;mico construido alrededor de la trufa negra recolectada esa misma ma&ntilde;ana, con producto de proximidad y una bodega seleccionada para la ocasi&oacute;n.<br><br>
+                    No es una comida de clientes. Es el homenaje de una comunidad a lo que ha vivido juntos.
                 </p>
             </div>
 
-            <!-- DATOS DEL LUGAR: 3 columnas -->
+            <!-- DATOS: 3 columnas -->
             <div class="mfase-datos">
                 <div class="mfase-dato">
                     <p class="mfase-dato-label">El espacio</p>
-                    <p class="mfase-dato-text">Sala privada exclusiva para el club. Sin acceso exterior durante la jornada.</p>
+                    <p class="mfase-dato-text">Sala privada reservada exclusivamente para el club. Sin accesos externos durante la jornada.</p>
                 </div>
                 <div class="mfase-dato">
                     <p class="mfase-dato-label">El desplazamiento</p>
-                    <p class="mfase-dato-text">En los veh&iacute;culos del evento, desde Alcotas hasta Mora de Rubielos.</p>
+                    <p class="mfase-dato-text">En los veh&iacute;culos del evento, desde Alcotas hasta Mora de Rubielos. Un trayecto breve donde la experiencia contin&uacute;a.</p>
                 </div>
                 <div class="mfase-dato">
                     <p class="mfase-dato-label">La trufa</p>
-                    <p class="mfase-dato-text">La que el grupo ha cosechado esa ma&ntilde;ana, preparada en el mismo d&iacute;a.</p>
+                    <p class="mfase-dato-text">La misma que el grupo ha encontrado esa ma&ntilde;ana. Seleccionada en campo y trabajada en el d&iacute;a, respetando su punto &oacute;ptimo.</p>
                 </div>
             </div>
 
-            <!-- FOTO BREAK: trufas -->
+            <!-- FOTO BREAK: transporte -->
             <div class="mmesa-foto">
-                <img class="mmesa-foto-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/trufas.JPG" alt="Trufa negra de Alcotas">
-                <p class="mmesa-foto-caption">Tuber melanosporum &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
+                <img class="mmesa-foto-img" src="assets/transporte.png" alt="Desplazamiento desde Alcotas hasta Mora de Rubielos" style="object-position: center 50%;">
+                <p class="mmesa-foto-caption">Alcotas &nbsp;&mdash;&nbsp; Mora de Rubielos</p>
             </div>
 
             <!-- LA CARTA -->
             <div class="mmesa-carta">
 
-                <!-- Entrantes -->
+                <!-- Recorrido gastronómico -->
                 <div class="mmesa-curso">
-                    <span class="mmesa-curso-label">Entrantes</span>
+                    <span class="mmesa-curso-label">El recorrido gastron&oacute;mico</span>
+                    <p class="mmesa-principal" style="font-style:normal;color:#5a5248;margin-bottom:2rem;">Un men&uacute; concebido en torno a la temporalidad, el producto y la trufa como hilo conductor. A modo de referencia, la experiencia podr&aacute; incluir:</p>
                     <ul class="mmesa-platos">
-                        <li>Surtido de quesos de la Sierra de Albarrac&iacute;n</li>
-                        <li>Jam&oacute;n de Teruel D.O.</li>
-                        <li>Surtido de ib&eacute;ricos</li>
-                        <li>Tosta de verduras escalivadas con bacalao confitado</li>
-                        <li>Brochetas de vieira con panceta y aceite trufado</li>
-                        <li>Volavent de solomillo de cerdo a la crema de quesos trufada</li>
-                        <li>Montadito de pulpo da feira</li>
-                        <li>Hojaldre de cebollita caramelizada y langostinos</li>
-                        <li>Bolitas almendradas de chistorra y de queso de cabra</li>
-                        <li>Bomb&oacute;n de foie al chocolate almendrado</li>
+                        <li>Selecci&oacute;n de quesos de la Sierra de Albarrac&iacute;n y jam&oacute;n de Teruel D.O.</li>
+                        <li>Bocados templados donde mar y tierra se encuentran con la trufa</li>
+                        <li>Preparaciones donde el producto local se eleva mediante t&eacute;cnicas tradicionales</li>
                     </ul>
                 </div>
 
@@ -2508,7 +2511,7 @@
                 <div class="mmesa-curso">
                     <span class="mmesa-curso-label">Plato principal</span>
                     <p class="mmesa-principal">
-                        Redondo de paletilla de Ternasco de Arag&oacute;n D.O. deshuesada y rellena de cebollita caramelizada y frutos deshidratados, con mil hojas de patata laminada, salsa trufada de ciruelas y brocheta de verduritas.
+                        Ternasco de Arag&oacute;n D.O., trabajado con profundidad y matices trufados.
                     </p>
                 </div>
 
@@ -2516,26 +2519,17 @@
                 <div class="mmesa-curso">
                     <span class="mmesa-curso-label">Postre</span>
                     <p class="mmesa-principal">
-                        Coulant fr&iacute;o de queso curado con salsa de ar&aacute;ndanos y helado de yogur.
+                        Un cierre dulce, equilibrado y sutil.
                     </p>
                 </div>
 
                 <!-- Bodega -->
                 <div class="mmesa-curso">
-                    <span class="mmesa-curso-label">Bodega &nbsp;&middot;&nbsp; Bodegas San Valero, Cari&ntilde;ena</span>
-                    <div class="mmesa-bodega-fila">
-                        <span class="mmesa-bodega-tipo">Blanco</span>
-                        <span class="mmesa-bodega-vino">Particular Chardonnay Barrica</span>
-                    </div>
-                    <div class="mmesa-bodega-fila">
-                        <span class="mmesa-bodega-tipo">Tinto</span>
-                        <span class="mmesa-bodega-vino">Particular Garnacha Centenaria</span>
-                    </div>
-                    <div class="mmesa-bodega-fila">
-                        <span class="mmesa-bodega-tipo">Cava</span>
-                        <span class="mmesa-bodega-vino">Particular Garnacha Blanc de Noir Reserva</span>
-                    </div>
-                    <p class="mmesa-nota">Agua, cerveza, refrescos, caf&eacute; y copa de licor incluidos.</p>
+                    <span class="mmesa-curso-label">La bodega</span>
+                    <p class="mmesa-principal" style="font-style:normal;color:#5a5248;">
+                        Una selecci&oacute;n de vinos de Arag&oacute;n elegida para acompa&ntilde;ar el recorrido gastron&oacute;mico. Blancos, tintos y espumosos que respetan el ritmo del men&uacute; y la intensidad de la trufa.
+                    </p>
+                    <p class="mmesa-nota">El men&uacute; definitivo se ajusta en cada edici&oacute;n seg&uacute;n el momento del producto y el criterio culinario del equipo responsable. Bebidas incluidas.</p>
                 </div>
 
             </div>
@@ -2550,13 +2544,14 @@
             <div class="mcaja-cierre">
                 <div class="mcaja-cierre-linea"></div>
                 <p class="mcaja-cierre-frase">
-                    La sala privada<br>queda para el club.<br>
-                    Sin hora de cierre.
+                    La sala queda para el club.<br>
+                    Sin hora de cierre.<br>
+                    Sin rotaci&oacute;n. Sin prisa.
                 </p>
                 <div class="mcaja-cierre-linea"></div>
-                <p class="mcaja-cierre-edition">Ezsencia &nbsp;&middot;&nbsp; Founders Edition 2026</p>
-                <a href="acceso.html" class="mcaja-cierre-cta">Solicitar acceso</a>
-                <p class="mcaja-cierre-final">Mas&iacute;a El Molinete &nbsp;&middot;&nbsp; Mora de Rubielos, Teruel</p>
+                <p class="mcaja-cierre-edition">La confirmaci&oacute;n definitiva de la ubicaci&oacute;n y del desarrollo completo de la experiencia se realiza una vez formado el grupo de miembros.</p>
+                <a href="acceso.html" class="mcaja-cierre-cta">Solicitar invitaci&oacute;n</a>
+                <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Founders Edition 2026 &nbsp;&middot;&nbsp; 20 miembros</p>
             </div>
 
         </div>
