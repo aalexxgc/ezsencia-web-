@@ -9,7 +9,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Solicita tu invitación a la Ezsencia Truffle Society. Edición Fundadores 2026. 25 miembros. Selección por afinidad.">
+    <meta name="description" content="Solicita tu invitación a la Ezsencia Truffle Society. Edición Fundadores 2026. 20 miembros. Selección por afinidad.">
 
     <meta property="og:title"       content="Solicitar Invitación — EZSENCIA">
     <meta property="og:description" content="El acceso no se compra. Se otorga. Edición Fundadores 2026.">
@@ -424,6 +424,83 @@
         }
 
         /* ====================================================
+           QUÉ INCLUYE
+           ==================================================== */
+
+        .acceso-incluye {
+            margin-top:    2.8rem;
+            margin-bottom: 0;
+        }
+
+        .acceso-incluye-header {
+            font-size:      0.62rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            margin-bottom:  1.4rem;
+        }
+
+        .acceso-incluye-item {
+            display:     flex;
+            align-items: flex-start;
+            gap:         1.4rem;
+            padding:     1.2rem 0;
+            border-top:  1px solid var(--borde);
+        }
+
+        .acceso-incluye-item:last-child { border-bottom: 1px solid var(--borde); }
+
+        .acceso-incluye-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      0.68rem;
+            letter-spacing: 0.22em;
+            color:          var(--dorado);
+            opacity:        0.75;
+            padding-top:    0.18rem;
+            min-width:      1.2rem;
+        }
+
+        .acceso-incluye-title {
+            font-family:   'EB Garamond', serif;
+            font-size:     1.05rem;
+            color:         var(--tinta);
+            margin-bottom: 0.2rem;
+        }
+
+        .acceso-incluye-desc {
+            font-size:      0.78rem;
+            color:          var(--tinta-fina);
+            letter-spacing: 0.04em;
+            margin-bottom:  0 !important;
+        }
+
+        /* ====================================================
+           INVERSIÓN
+           ==================================================== */
+
+        .acceso-inversion {
+            display:     flex;
+            align-items: baseline;
+            gap:         1.2rem;
+            padding:     2rem 0 0;
+        }
+
+        .acceso-inversion-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      2.2rem;
+            font-weight:    300;
+            color:          var(--tinta);
+            white-space:    nowrap;
+            letter-spacing: -0.01em;
+        }
+
+        .acceso-inversion-label {
+            font-size:   0.75rem;
+            color:       var(--tinta-fina);
+            line-height: 1.75;
+        }
+
+        /* ====================================================
            RESPONSIVE
            ==================================================== */
 
@@ -494,7 +571,7 @@
         </ul>
 
         <a href="#form" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
-        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 25 miembros</p>
+        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 20 miembros</p>
 
     </div>
 
@@ -513,7 +590,7 @@
                 <em style="font-style:italic; color: rgba(154,125,74,0.7);">Se otorga.</em>
             </h1>
             <p class="acceso-hero-sub">
-                Cada a&ntilde;o, 25 personas son invitadas a formar parte.
+                Cada a&ntilde;o, 20 personas son invitadas a formar parte.
                 La selecci&oacute;n no sigue un orden de solicitud.
                 Se hace por afinidad.
             </p>
@@ -536,17 +613,17 @@
                 precisamente porque es peque&ntilde;o.
             </h2>
             <p>
-                25 miembros es el tama&ntilde;o en el que todos saben el nombre de todos.
+                20 miembros es el tama&ntilde;o en el que todos saben el nombre de todos.
                 En el que el productor puede mantener una relaci&oacute;n real con cada persona.
                 En el que la exclusividad no es marketing, es consecuencia.
             </p>
             <p>
                 La Edici&oacute;n Fundadores 2026 es la primera edici&oacute;n del club.
-                Estas 25 personas definir&aacute;n su car&aacute;cter para siempre.
+                Estas 20 personas definir&aacute;n su car&aacute;cter para siempre.
             </p>
             <div class="acceso-pills">
                 <div class="acceso-pill">
-                    <span class="acceso-pill-num">25</span>
+                    <span class="acceso-pill-num">20</span>
                     <span class="acceso-pill-label">Plazas<br>disponibles</span>
                 </div>
                 <div class="acceso-pill">
@@ -579,10 +656,43 @@
                 <p>
                     El acceso a la Ezsencia Truffle Society no se compra.
                     Se solicita. Revisamos cada candidatura de forma personal
-                    y respondemos a todos los interesados en un plazo m&aacute;ximo de 7 d&iacute;as.
+                    y respondemos en un m&aacute;ximo de 7 d&iacute;as.
                 </p>
+
+                <!-- Qué incluye -->
+                <div class="acceso-incluye">
+                    <p class="acceso-incluye-header">Qu&eacute; incluye</p>
+                    <div class="acceso-incluye-item">
+                        <span class="acceso-incluye-num">I</span>
+                        <div>
+                            <p class="acceso-incluye-title">La Caja Fundadora</p>
+                            <p class="acceso-incluye-desc">Trufa negra Tuberpack&reg; en temporada</p>
+                        </div>
+                    </div>
+                    <div class="acceso-incluye-item">
+                        <span class="acceso-incluye-num">II</span>
+                        <div>
+                            <p class="acceso-incluye-title">El Encuentro</p>
+                            <p class="acceso-incluye-desc">Cena gastron&oacute;mica en Mora de Rubielos</p>
+                        </div>
+                    </div>
+                    <div class="acceso-incluye-item">
+                        <span class="acceso-incluye-num">III</span>
+                        <div>
+                            <p class="acceso-incluye-title">El C&iacute;rculo</p>
+                            <p class="acceso-incluye-desc">Comunidad privada de 20 miembros</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inversión -->
+                <div class="acceso-inversion">
+                    <span class="acceso-inversion-num">1.850&nbsp;&euro;</span>
+                    <span class="acceso-inversion-label">por temporada &nbsp;&middot;&nbsp; El desglose completo<br>se entrega con la candidatura aceptada</span>
+                </div>
+
                 <ul class="acceso-detail-list">
-                    <li>25 plazas disponibles por edici&oacute;n</li>
+                    <li>20 plazas disponibles por edici&oacute;n</li>
                     <li>Temporada activa: enero &mdash; marzo</li>
                     <li>Respuesta personalizada en 7 d&iacute;as</li>
                     <li>Sin compromiso de compra al solicitar</li>
@@ -622,8 +732,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="field-origen">&iquest;Qu&eacute; significa para ti el origen?</label>
-                            <textarea id="field-origen" rows="3" placeholder="Tu reflexi&oacute;n..."></textarea>
+                            <label for="field-referencia">&iquest;C&oacute;mo conociste Ezsencia?</label>
+                            <input id="field-referencia" type="text" placeholder="Instagram, un conocido, prensa&hellip;">
                         </div>
 
                         <button class="acceso-submit" id="submitBtn" onclick="handleSubmit()">Solicitar acceso</button>
@@ -728,17 +838,17 @@
 
         /* Formulario */
         async function handleSubmit() {
-            var nombre = document.getElementById('field-nombre').value.trim();
-            var email  = document.getElementById('field-email').value.trim();
-            var ciudad = document.getElementById('field-ciudad').value.trim();
-            var motivo = document.getElementById('field-motivo').value.trim();
-            var origen = document.getElementById('field-origen').value.trim();
-            var btn    = document.getElementById('submitBtn');
-            var errBox = document.getElementById('formError');
+            var nombre     = document.getElementById('field-nombre').value.trim();
+            var email      = document.getElementById('field-email').value.trim();
+            var ciudad     = document.getElementById('field-ciudad').value.trim();
+            var motivo     = document.getElementById('field-motivo').value.trim();
+            var referencia = document.getElementById('field-referencia').value.trim();
+            var btn        = document.getElementById('submitBtn');
+            var errBox     = document.getElementById('formError');
 
             errBox.style.display = 'none';
 
-            if (!nombre || !email || !ciudad || !motivo || !origen) {
+            if (!nombre || !email || !ciudad || !motivo) {
                 errBox.textContent   = 'Por favor, completa todos los campos antes de enviar.';
                 errBox.style.display = 'block';
                 return;
@@ -751,7 +861,7 @@
                 var res = await fetch('/api/submit', {
                     method:  'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body:    JSON.stringify({ nombre, email, ciudad, motivo, origen })
+                    body:    JSON.stringify({ nombre, email, ciudad, motivo, referencia })
                 });
 
                 if (!res.ok) throw new Error('Error del servidor');
