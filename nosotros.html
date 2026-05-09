@@ -43,23 +43,27 @@
             padding:         0 5rem 6rem;
         }
 
-        /* Foto de cabecera — imagen completa, sin recorte */
+        /* Foto de cabecera */
         .h-hero-foto {
             margin-top: 72px;
             width:      100%;
-            line-height: 0;
+            height:     62vh;
+            min-height: 360px;
+            overflow:   hidden;
         }
 
         .h-hero-foto img {
-            width:   100%;
-            height:  auto;
-            display: block;
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center 40%;
+            display:         block;
         }
 
         /* Texto debajo de la foto */
         .h-hero-texto {
             background:    var(--fondo-alt);
-            padding:       5rem 5rem 6rem;
+            padding:       3.5rem 5rem 4.5rem;
             border-bottom: 1px solid var(--borde);
         }
 
