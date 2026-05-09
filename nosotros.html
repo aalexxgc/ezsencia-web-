@@ -43,6 +43,15 @@
             padding:         0 5rem 6rem;
         }
 
+        .h-hero-img {
+            position:        absolute;
+            inset:           0;
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center 30%;
+        }
+
         .h-hero-overlay {
             position:   absolute;
             inset:      0;
@@ -438,12 +447,7 @@
          ======================================================== -->
 
     <header class="h-hero">
-        <iframe class="yt-bg"
-                src="https://www.youtube.com/embed/FR0oU4XlWII?autoplay=1&mute=1&loop=1&playlist=FR0oU4XlWII&controls=0&rel=0&modestbranding=1&playsinline=1"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                title="La familia Ezsencia"></iframe>
+        <img class="h-hero-img" src="assets/familia.jpg" alt="La familia Ezsencia — Alcotas, Teruel">
         <div class="h-hero-overlay"></div>
         <div class="h-hero-content">
             <p class="h-hero-eyebrow">Alcotas, Teruel &nbsp;&middot;&nbsp; Desde 2012</p>
