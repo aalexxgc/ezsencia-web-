@@ -894,6 +894,203 @@
             .idx-instagram-grid    { grid-template-columns: 1fr; gap: 2px; }
         }
 
+        /* ====================================================
+           LA EXPERIENCIA EZSENCIA — sección editorial nueva
+           ==================================================== */
+
+        .idx-exp {
+            background:  var(--fondo);
+            padding:     10rem 6vw 9rem;
+            border-top:  1px solid var(--borde);
+        }
+
+        .idx-exp-head {
+            max-width:     700px;
+            margin-bottom: 6.5rem;
+        }
+
+        .idx-exp-titulo {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(2.6rem, 4.5vw, 4.8rem);
+            font-weight:    400;
+            font-style:     italic;
+            line-height:    1.05;
+            color:          var(--tinta);
+            margin:         2rem 0 2.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .idx-exp-bajada {
+            font-family: 'EB Garamond', serif;
+            font-size:   1.08rem;
+            line-height: 2.15;
+            color:       var(--tinta-suave);
+            max-width:   500px;
+            margin:      0;
+        }
+
+        .idx-exp-lista {
+            border-top: 1px solid var(--borde);
+            max-width:  860px;
+        }
+
+        .idx-exp-item {
+            display:       grid;
+            grid-template-columns: 4.5rem 1fr;
+            gap:           0 2.5rem;
+            padding:       3.5rem 0;
+            border-bottom: 1px solid var(--borde);
+            align-items:   baseline;
+        }
+
+        .idx-exp-num {
+            font-family:    'EB Garamond', serif;
+            font-size:      0.92rem;
+            font-style:     italic;
+            letter-spacing: 0.06em;
+            color:          var(--dorado);
+            opacity:        0.5;
+            padding-top:    0.15rem;
+        }
+
+        .idx-exp-nombre {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.35rem;
+            font-weight:    400;
+            color:          var(--tinta);
+            margin-bottom:  0.55rem;
+            letter-spacing: 0.01em;
+        }
+
+        .idx-exp-desc {
+            font-size:   0.86rem;
+            line-height: 2;
+            color:       var(--tinta-suave);
+            margin:      0;
+        }
+
+        .idx-exp-pie {
+            margin-top: 4.5rem;
+        }
+
+        .idx-exp-cta {
+            font-family:     'Lato', sans-serif;
+            font-size:       0.62rem;
+            letter-spacing:  0.26em;
+            text-transform:  uppercase;
+            text-decoration: none;
+            color:           var(--tinta-suave);
+            border-bottom:   1px solid var(--borde);
+            padding-bottom:  0.3rem;
+            transition:      color 0.3s, border-color 0.3s;
+        }
+
+        .idx-exp-cta:hover {
+            color:        var(--tinta);
+            border-color: var(--tinta);
+        }
+
+        /* ====================================================
+           CIERRE EDITORIAL — bloque oscuro antes del footer
+           ==================================================== */
+
+        .idx-cierre {
+            background:  #0d0c09;
+            padding:     11rem 6vw 12rem;
+            text-align:  center;
+            position:    relative;
+            overflow:    hidden;
+        }
+
+        .idx-cierre::before {
+            content:        '';
+            position:       absolute;
+            top:            50%;
+            left:           50%;
+            transform:      translate(-50%, -50%);
+            width:          52rem;
+            height:         52rem;
+            border-radius:  50%;
+            border:         1px solid rgba(154,125,74,0.06);
+            pointer-events: none;
+        }
+
+        .idx-cierre-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.57rem;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.5;
+            display:        block;
+            margin-bottom:  4rem;
+        }
+
+        .idx-cierre-titulo {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(3rem, 6.5vw, 7rem);
+            font-weight:    400;
+            font-style:     italic;
+            line-height:    1.0;
+            color:          #f0ece3;
+            letter-spacing: -0.015em;
+            margin:         0 0 3rem;
+        }
+
+        .idx-cierre-sub {
+            font-family:  'EB Garamond', serif;
+            font-size:    1.05rem;
+            font-style:   italic;
+            color:        rgba(240,236,227,0.36);
+            line-height:  1.9;
+            margin:       0 auto 5.5rem;
+            max-width:    400px;
+        }
+
+        .idx-cierre-btn {
+            display:         block;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.65rem;
+            letter-spacing:  0.3em;
+            text-transform:  uppercase;
+            text-decoration: none;
+            color:           #0d0c09;
+            background:      #f0ece3;
+            border:          1px solid #f0ece3;
+            padding:         1.5rem 2rem;
+            max-width:       320px;
+            margin:          0 auto 3rem;
+            text-align:      center;
+            transition:      background 0.5s ease, color 0.5s ease;
+        }
+
+        .idx-cierre-btn:hover {
+            background: transparent;
+            color:      #f0ece3;
+        }
+
+        .idx-cierre-nota {
+            font-size:      0.56rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color:          rgba(240,236,227,0.18);
+            display:        block;
+        }
+
+        /* ── Nuevas secciones: responsive ─────────────────── */
+        @media (max-width: 900px) {
+            .idx-exp    { padding: 6rem 1.5rem 7rem; }
+            .idx-cierre { padding: 8rem 1.5rem 9rem; }
+        }
+
+        @media (max-width: 600px) {
+            .idx-exp         { padding: 4rem 1.2rem 5rem; }
+            .idx-exp-item    { grid-template-columns: 3.5rem 1fr; gap: 0 1.5rem; padding: 2.2rem 0; }
+            .idx-exp-head    { margin-bottom: 4rem; }
+            .idx-cierre      { padding: 6rem 1.2rem 7rem; }
+            .idx-cierre-btn  { max-width: 100%; }
+        }
+
     </style>
 
 </head>
@@ -1064,26 +1261,72 @@
 
 
     <!-- ========================================================
-         3. EXPERIENCIA — bloque visual con enlace
+         3.5  LA EXPERIENCIA EZSENCIA — sección editorial
+         ======================================================== -->
+
+    <section class="idx-exp reveal">
+
+        <div class="idx-exp-head">
+            <div class="section-label">La Experiencia</div>
+            <h2 class="idx-exp-titulo">La Experiencia<br>Ezsencia</h2>
+            <p class="idx-exp-bajada">
+                Cuatro momentos construidos alrededor de la trufa negra de Alcotas.<br>
+                La tierra. El invierno. La mesa. El origen.
+            </p>
+        </div>
+
+        <div class="idx-exp-lista">
+
+            <div class="idx-exp-item">
+                <span class="idx-exp-num">I</span>
+                <div>
+                    <p class="idx-exp-nombre">La Caja Fundadora</p>
+                    <p class="idx-exp-desc">Kit numerado para el fundador. La caja de abedul, el Tuberpack®, el laminador y la Tarjeta de Fundador. El inicio del ritual.</p>
+                </div>
+            </div>
+
+            <div class="idx-exp-item">
+                <span class="idx-exp-num">II</span>
+                <div>
+                    <p class="idx-exp-nombre">Entregas de Trufa Fresca</p>
+                    <p class="idx-exp-desc">Cuatro entregas de Tuber melanosporum recién recogida. Diciembre, enero, febrero, marzo. 200 gramos de primera calidad a domicilio.</p>
+                </div>
+            </div>
+
+            <div class="idx-exp-item">
+                <span class="idx-exp-num">III</span>
+                <div>
+                    <p class="idx-exp-nombre">El D&iacute;a en el Campo</p>
+                    <p class="idx-exp-desc">Alcotas al amanecer. La b&uacute;squeda entre carrascas con perro trufero. El silencio del campo antes de encontrar.</p>
+                </div>
+            </div>
+
+            <div class="idx-exp-item">
+                <span class="idx-exp-num">IV</span>
+                <div>
+                    <p class="idx-exp-nombre">La Mesa Ezsencia</p>
+                    <p class="idx-exp-desc">Mesa privada gastron&oacute;mica en Mora de Rubielos. La trufa de la ma&ntilde;ana, en el plato de la tarde.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="idx-exp-pie reveal">
+            <a href="experiencia.html" class="idx-exp-cta">Descubrir la Experiencia &rarr;</a>
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         3. EXPERIENCIA — imagen editorial
          ======================================================== -->
 
     <div class="idx-experiencia reveal">
-        <iframe class="yt-bg"
-                src="https://www.youtube.com/embed/3VS1aarcTxc?autoplay=1&mute=1&loop=1&playlist=3VS1aarcTxc&controls=0&rel=0&modestbranding=1&playsinline=1"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                title="Ezsencia experiencia"></iframe>
+        <img src="assets/experiencia.JPG"
+             class="idx-experiencia-video"
+             alt="La Experiencia Ezsencia — Alcotas, Teruel">
         <div class="idx-experiencia-overlay"></div>
-    </div>
-
-    <div class="idx-experiencia-content reveal">
-        <div class="section-label">La Experiencia</div>
-        <h2>
-            La caza. La mesa.<br>
-            El encuentro.
-        </h2>
-        <a href="experiencia.html" class="idx-experiencia-btn">Descubrir el club &rarr;</a>
     </div>
 
 
@@ -1119,7 +1362,7 @@
                 </div>
                 <div class="idx-territorio-dato">
                     <span class="idx-territorio-dato-key">Temporada</span>
-                    <span class="idx-territorio-dato-val">Enero &mdash; Marzo</span>
+                    <span class="idx-territorio-dato-val">Diciembre &mdash; Marzo</span>
                 </div>
                 <div class="idx-territorio-dato">
                     <span class="idx-territorio-dato-key">Plantaci&oacute;n</span>
@@ -1164,6 +1407,30 @@
         <a href="https://www.instagram.com/laezsencia"
            target="_blank" rel="noopener"
            class="idx-instagram-cta reveal">Ver perfil en Instagram</a>
+
+    </section>
+
+
+    <!-- ========================================================
+         CIERRE EDITORIAL — bloque oscuro antes del footer
+         ======================================================== -->
+
+    <section class="idx-cierre reveal">
+
+        <span class="idx-cierre-eyebrow">Ezsencia &nbsp;&middot;&nbsp; Alcotas, Teruel</span>
+
+        <h2 class="idx-cierre-titulo">
+            Edici&oacute;n<br>
+            Fundadores&nbsp;2026
+        </h2>
+
+        <p class="idx-cierre-sub">
+            Acceso mediante solicitud privada.
+        </p>
+
+        <a href="acceso.html" class="idx-cierre-btn">Solicitar Invitaci&oacute;n</a>
+
+        <span class="idx-cierre-nota">Respuesta en un plazo m&aacute;ximo de 7 d&iacute;as</span>
 
     </section>
 
