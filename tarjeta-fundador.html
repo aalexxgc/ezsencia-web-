@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Tarjeta Fundador — Ezsencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+
+    /* =====================================================
+       IMPRESIÓN — tamaño tarjeta de crédito exacto
+       Imprimir a: sin márgenes, escala 100%
+       ===================================================== */
+    @page {
+        size: 85.6mm 54mm;
+        margin: 0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+        --negro:   #090c08;
+        --verde:   #0d1a10;
+        --dorado:  #c9a96e;
+        --dorado2: #9a7d4a;
+        --crema:   #f0e8d8;
+        --opaco:   rgba(201,169,110,0.45);
+    }
+
+    body {
+        background: #1c1c1c;
+        display:    flex;
+        flex-direction: column;
+        align-items:    center;
+        gap:            32px;
+        padding:        48px 40px 60px;
+        font-family: 'Lato', sans-serif;
+    }
+
+    /* ── Etiquetas de pantalla (no se imprimen) ── */
+    .screen-label {
+        color:          rgba(255,255,255,0.3);
+        font-size:      10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-family:    sans-serif;
+        align-self:     flex-start;
+        margin-left:    calc(50vw - 42.8mm);
+    }
+
+    /* ── Tarjeta base ── */
+    .card {
+        width:     85.6mm;
+        height:    54mm;
+        position:  relative;
+        overflow:  hidden;
+        flex-shrink: 0;
+    }
+
+    /* =====================================================
+       ANVERSO
+       ===================================================== */
+    .card-front {
+        width:      100%;
+        height:     100%;
+        background: var(--negro);
+        border:     0.4mm solid var(--dorado2);
+        display:    flex;
+        flex-direction: column;
+        align-items:    center;
+        justify-content: space-between;
+        padding:    5.5mm 6mm 5mm;
+        position:   relative;
+    }
+
+    /* Marco interior fino */
+    .card-front::before {
+        content:  '';
+        position: absolute;
+        inset:    2mm;
+        border:   0.15mm solid rgba(201,169,110,0.2);
+        pointer-events: none;
+    }
+
+    /* Fondo con textura sutil */
+    .card-front::after {
+        content:    '';
+        position:   absolute;
+        inset:      0;
+        background: radial-gradient(ellipse at 50% 30%, rgba(13,26,16,0.8) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .front-top {
+        display:        flex;
+        flex-direction: column;
+        align-items:    center;
+        gap:            1.8mm;
+        position:       relative;
+        z-index:        2;
+    }
+
+    .front-emblem {
+        width:  10mm;
+        height: 10mm;
+        object-fit: contain;
+        filter: drop-shadow(0 0 1.5mm rgba(201,169,110,0.4));
+    }
+
+    .front-brand {
+        font-family:    'Lato', sans-serif;
+        font-size:      5mm;
+        font-weight:    700;
+        letter-spacing: 0.38em;
+        color:          var(--dorado);
+        text-transform: uppercase;
+        line-height:    1;
+    }
+
+    .front-tagline {
+        font-family:    'Lato', sans-serif;
+        font-size:      1.7mm;
+        font-weight:    300;
+        letter-spacing: 0.32em;
+        color:          rgba(201,169,110,0.5);
+        text-transform: uppercase;
+    }
+
+    .front-sep {
+        width:      18mm;
+        height:     0.2mm;
+        background: linear-gradient(90deg, transparent, var(--dorado2), transparent);
+        position:   relative;
+        z-index:    2;
+    }
+
+    .front-bottom {
+        display:        flex;
+        flex-direction: column;
+        align-items:    center;
+        gap:            1.5mm;
+        position:       relative;
+        z-index:        2;
+    }
+
+    .front-name {
+        font-family:    'Playfair Display', serif;
+        font-size:      4mm;
+        font-weight:    400;
+        font-style:     italic;
+        color:          var(--crema);
+        letter-spacing: 0.06em;
+        line-height:    1;
+    }
+
+    .front-edition {
+        font-family:    'Lato', sans-serif;
+        font-size:      1.55mm;
+        font-weight:    300;
+        letter-spacing: 0.3em;
+        color:          rgba(201,169,110,0.5);
+        text-transform: uppercase;
+    }
+
+    .front-number {
+        font-family:    'Playfair Display', serif;
+        font-size:      4.5mm;
+        font-weight:    400;
+        color:          var(--dorado);
+        letter-spacing: 0.18em;
+        line-height:    1;
+    }
+
+    /* =====================================================
+       REVERSO
+       ===================================================== */
+    .card-back {
+        width:      100%;
+        height:     100%;
+        background: var(--negro);
+        border:     0.4mm solid var(--dorado2);
+        display:    flex;
+        flex-direction: column;
+        align-items:    center;
+        justify-content: center;
+        padding:    5mm 8mm;
+        gap:        3mm;
+        position:   relative;
+    }
+
+    .card-back::before {
+        content:  '';
+        position: absolute;
+        inset:    2mm;
+        border:   0.15mm solid rgba(201,169,110,0.2);
+        pointer-events: none;
+    }
+
+    .card-back::after {
+        content:    '';
+        position:   absolute;
+        inset:      0;
+        background: radial-gradient(ellipse at 50% 50%, rgba(13,26,16,0.6) 0%, transparent 75%);
+        pointer-events: none;
+    }
+
+    .back-title {
+        font-family:    'Lato', sans-serif;
+        font-size:      2mm;
+        font-weight:    400;
+        letter-spacing: 0.42em;
+        color:          var(--dorado);
+        text-transform: uppercase;
+        position:       relative;
+        z-index:        2;
+    }
+
+    .back-sep {
+        width:      12mm;
+        height:     0.15mm;
+        background: rgba(201,169,110,0.4);
+        position:   relative;
+        z-index:    2;
+    }
+
+    .back-text {
+        font-family: 'EB Garamond', serif;
+        font-size:   2.4mm;
+        font-style:  italic;
+        line-height: 1.75;
+        color:       rgba(240,232,216,0.6);
+        text-align:  center;
+        max-width:   62mm;
+        position:    relative;
+        z-index:     2;
+    }
+
+    .back-legal {
+        font-family:    'Lato', sans-serif;
+        font-size:      1.5mm;
+        font-weight:    300;
+        letter-spacing: 0.2em;
+        color:          rgba(201,169,110,0.38);
+        text-transform: uppercase;
+        text-align:     center;
+        position:       relative;
+        z-index:        2;
+    }
+
+    .back-num {
+        font-family:    'Playfair Display', serif;
+        font-size:      3.5mm;
+        color:          rgba(201,169,110,0.55);
+        letter-spacing: 0.15em;
+        position:       relative;
+        z-index:        2;
+    }
+
+    /* =====================================================
+       INSTRUCCIONES DE PANTALLA
+       ===================================================== */
+    .instructions {
+        background:  rgba(255,255,255,0.05);
+        border:      1px solid rgba(255,255,255,0.08);
+        padding:     16px 24px;
+        max-width:   85.6mm;
+        color:       rgba(255,255,255,0.35);
+        font-size:   11px;
+        font-family: sans-serif;
+        line-height: 1.8;
+        letter-spacing: 0.02em;
+    }
+
+    .instructions strong {
+        color:       rgba(201,169,110,0.7);
+        font-weight: normal;
+    }
+
+    /* =====================================================
+       PRINT — ocultar todo excepto tarjetas
+       ===================================================== */
+    @media print {
+        body {
+            background: white;
+            padding:    0;
+            gap:        0;
+            display:    block;
+        }
+        .screen-label,
+        .instructions { display: none; }
+        .card {
+            page-break-after: always;
+            margin: 0;
+        }
+    }
+
+</style>
+</head>
+<body>
+
+    <p class="screen-label">Anverso</p>
+
+    <!-- ══════════════════ ANVERSO ══════════════════ -->
+    <div class="card">
+        <div class="card-front">
+
+            <div class="front-top">
+                <img class="front-emblem"
+                     src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/circulo.png"
+                     alt="Ezsencia emblema">
+                <p class="front-brand">Ezsencia</p>
+                <p class="front-tagline">Truffle Society</p>
+            </div>
+
+            <div class="front-sep"></div>
+
+            <div class="front-bottom">
+                <p class="front-name">Alejandro Gil Cebrián</p>
+                <p class="front-edition">Founders Edition 2026</p>
+                <p class="front-number">01 &nbsp;/&nbsp; 20</p>
+            </div>
+
+        </div>
+    </div>
+
+    <p class="screen-label">Reverso</p>
+
+    <!-- ══════════════════ REVERSO ══════════════════ -->
+    <div class="card">
+        <div class="card-back">
+
+            <p class="back-title">Tarjeta de Fundador</p>
+            <div class="back-sep"></div>
+            <p class="back-text">
+                Esta tarjeta acredita la membresía en la Edición Fundadores 2026
+                de Ezsencia Truffle Society.<br>
+                Es personal, limitada e intransferible.
+            </p>
+            <div class="back-sep"></div>
+            <p class="back-legal">Alcotas, Teruel &nbsp;·&nbsp; 2026</p>
+            <p class="back-num">01 / 20</p>
+
+        </div>
+    </div>
+
+    <div class="instructions">
+        <strong>Cómo imprimir:</strong><br>
+        Archivo → Imprimir → Sin márgenes → Escala 100%<br>
+        Tamaño: 85,6 × 54 mm (tarjeta de crédito estándar)<br><br>
+        <strong>Para las fotos:</strong> imprime en papel fotográfico 250g+,
+        recorta con cúter y regla, y pégala sobre una tarjeta rígida.
+    </div>
+
+</body>
+</html>

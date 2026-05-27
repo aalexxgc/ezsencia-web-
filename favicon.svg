@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+
+  <g transform="translate(150, 155)">
+    <text x="-22" y="22" font-family="Georgia, 'Times New Roman', serif" font-size="110" font-weight="400" text-anchor="middle" fill="#1A1A1A" opacity="0.9">E</text>
+    <text x="22" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="110" font-weight="400" text-anchor="middle" fill="#1A1A1A" opacity="0.35">Z</text>
+    <g transform="scale(3.2)">
+      <polygon points="0,-28 18,-20 26,-5 20,13 8,26 -10,26 -23,13 -26,-5 -18,-20" fill="none" stroke="#1A1A1A" stroke-width="0.9"/>
+      <polygon points="0,-18 11,-11 15,-1 10,10 0,15 -11,10 -15,-1 -10,-11" fill="none" stroke="#1A1A1A" stroke-width="0.35" opacity="0.45"/>
+      <line x1="0" y1="-28" x2="0" y2="-18" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="18" y1="-20" x2="11" y2="-11" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="26" y1="-5" x2="15" y2="-1" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="20" y1="13" x2="10" y2="10" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="8" y1="26" x2="0" y2="15" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="-10" y1="26" x2="-11" y2="10" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="-23" y1="13" x2="-15" y2="-1" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="-26" y1="-5" x2="-15" y2="-1" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+      <line x1="-18" y1="-20" x2="-10" y2="-11" stroke="#1A1A1A" stroke-width="0.35" opacity="0.4"/>
+    </g>
+  </g>
+</svg>
