@@ -270,8 +270,8 @@
 
     <!-- HERO -->
     <div class="s-hero">
-        <span class="s-eyebrow">Área de Socios &nbsp;&middot;&nbsp; Edición Fundadores 2026</span>
-        <h1>Bienvenido<br>al club.</h1>
+        <span class="s-eyebrow" id="heroEyebrow">Área de Socios &nbsp;&middot;&nbsp; Edición Fundadores 2026</span>
+        <h1 id="heroTitle">Bienvenido<br>al club.</h1>
         <p class="s-hero-sub">
             Todo lo que necesitas saber sobre la temporada, los env&iacute;os,
             el Encuentro en Alcotas y las recetas para sacarle partido a la trufa.
@@ -588,7 +588,22 @@
                 return;
             }
             document.body.classList.add('auth-ok');
-            document.getElementById('memberEmail').textContent = session.user.email;
+
+            const meta   = session.user.user_metadata || {};
+            const nombre = meta.nombre || '';
+            const plaza  = meta.plaza  || '';
+
+            // Nav: email o nombre
+            document.getElementById('memberEmail').textContent = nombre || session.user.email;
+
+            // Hero: saludo personalizado si hay nombre y plaza
+            if (nombre && plaza) {
+                document.getElementById('heroTitle').innerHTML =
+                    'Bienvenido,<br>' + nombre + '.';
+                document.getElementById('heroEyebrow').innerHTML =
+                    'Plaza&nbsp;#' + String(plaza).padStart(2,'0')
+                    + '&nbsp;&nbsp;&middot;&nbsp;&nbsp;Edición Fundadores 2026';
+            }
         })();
 
         document.getElementById('logoutBtn').addEventListener('click', async () => {
