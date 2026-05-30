@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Recetario Fundadores — EZSENCIA</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+
+        /* ── AUTH GUARD ─────────────────────────────── */
+        body { visibility: hidden; }
+        body.auth-ok { visibility: visible; }
+
+        /* ── NAV RECETARIO ──────────────────────────── */
+        .rec-nav {
+            position:        fixed;
+            top:             0;
+            left:            0;
+            right:           0;
+            z-index:         100;
+            display:         flex;
+            align-items:     center;
+            justify-content: space-between;
+            padding:         0 6vw;
+            height:          64px;
+            background:      var(--fondo);
+            border-bottom:   1px solid var(--borde);
+        }
+        .rec-nav-logo {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.62rem;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color:          var(--tinta);
+            text-decoration: none;
+            transition:     opacity 0.3s;
+        }
+        .rec-nav-logo:hover { opacity: 0.5; }
+        .rec-nav-right {
+            display:     flex;
+            align-items: center;
+            gap:         2rem;
+        }
+        .rec-nav-member {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.18em;
+            color:          var(--tinta-suave);
+            opacity:        0.45;
+        }
+        .rec-nav-logout {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.56rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+            opacity:        0.5;
+            background:     none;
+            border:         none;
+            cursor:         pointer;
+            padding:        0;
+            transition:     opacity 0.3s;
+        }
+        .rec-nav-logout:hover { opacity: 1; }
+
+        /* ── HERO ───────────────────────────────────── */
+        .rec-hero {
+            padding:     10rem 6vw 6rem;
+            background:  var(--fondo-alt);
+            border-bottom: 1px solid var(--borde);
+        }
+        .rec-hero-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.56rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.8;
+            display:        block;
+            margin-bottom:  1.5rem;
+        }
+        .rec-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size:   clamp(2.6rem, 5vw, 4rem);
+            font-weight: 400;
+            font-style:  italic;
+            color:       var(--tinta);
+            line-height: 1.08;
+            margin:      0 0 1.5rem;
+        }
+        .rec-hero-sub {
+            font-family: 'EB Garamond', serif;
+            font-size:   1.05rem;
+            color:       var(--tinta-suave);
+            opacity:     0.6;
+            line-height: 1.8;
+            max-width:   520px;
+        }
+
+        /* ── GRID DE RECETAS ────────────────────────── */
+        .rec-grid {
+            padding:    6rem 6vw 8rem;
+            background: var(--fondo);
+        }
+        .rec-grid-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.56rem;
+            letter-spacing: 0.36em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+            opacity:        0.5;
+            display:        block;
+            margin-bottom:  3rem;
+        }
+        .rec-cards {
+            display:               grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap:                   2px;
+        }
+        .rec-card {
+            background:  var(--fondo-alt);
+            padding:     2.5rem 2rem;
+            border:      1px solid var(--borde);
+            transition:  background 0.3s;
+            cursor:      pointer;
+        }
+        .rec-card:hover { background: var(--fondo); }
+        .rec-card-num {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.54rem;
+            letter-spacing: 0.3em;
+            color:          var(--dorado);
+            opacity:        0.7;
+            display:        block;
+            margin-bottom:  1.2rem;
+        }
+        .rec-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size:   1.3rem;
+            font-weight: 400;
+            font-style:  italic;
+            color:       var(--tinta);
+            line-height: 1.25;
+            margin:      0 0 1rem;
+        }
+        .rec-card-sep {
+            width:      24px;
+            height:     1px;
+            background: var(--dorado);
+            opacity:    0.4;
+            margin:     0 0 1rem;
+        }
+        .rec-card-desc {
+            font-family: 'EB Garamond', serif;
+            font-size:   0.95rem;
+            color:       var(--tinta-suave);
+            line-height: 1.85;
+            opacity:     0.75;
+            margin:      0 0 1.5rem;
+        }
+        .rec-card-tags {
+            display:    flex;
+            flex-wrap:  wrap;
+            gap:        0.5rem;
+        }
+        .rec-card-tag {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.52rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+            opacity:        0.45;
+            border:         1px solid var(--borde);
+            padding:        0.25rem 0.6rem;
+        }
+
+        /* ── PRÓXIMAMENTE ───────────────────────────── */
+        .rec-proximas {
+            padding:       4rem 6vw 8rem;
+            border-top:    1px solid var(--borde);
+            text-align:    center;
+        }
+        .rec-proximas p {
+            font-family: 'EB Garamond', serif;
+            font-size:   1rem;
+            font-style:  italic;
+            color:       var(--tinta-suave);
+            opacity:     0.4;
+        }
+
+        @media (max-width: 600px) {
+            .rec-hero    { padding: 8rem 1.5rem 4rem; }
+            .rec-grid    { padding: 4rem 1.5rem 6rem; }
+            .rec-cards   { grid-template-columns: 1fr; }
+            .rec-nav-member { display: none; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav class="rec-nav">
+        <a href="/" class="rec-nav-logo">EZSENCIA</a>
+        <div class="rec-nav-right">
+            <span class="rec-nav-member" id="memberEmail"></span>
+            <button class="rec-nav-logout" id="logoutBtn">Cerrar sesi&oacute;n</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="rec-hero">
+        <span class="rec-hero-eyebrow">Edici&oacute;n Fundadores 2026</span>
+        <h1>Recetario<br>de Trufa Negra</h1>
+        <p class="rec-hero-sub">
+            Recetas pensadas para los 20 socios. Tuber melanosporum de Alcotas,
+            cocinada en casa. Cada temporada iremos a&ntilde;adiendo m&aacute;s.
+        </p>
+    </div>
+
+    <!-- RECETAS -->
+    <div class="rec-grid">
+        <span class="rec-grid-label">Recetas &nbsp;&middot;&nbsp; Temporada 2026</span>
+        <div class="rec-cards">
+
+            <div class="rec-card">
+                <span class="rec-card-num">01</span>
+                <h2 class="rec-card-title">Huevos revueltos<br>con trufa negra</h2>
+                <div class="rec-card-sep"></div>
+                <p class="rec-card-desc">
+                    La receta m&aacute;s directa. La yema envuelve la trufa y la lleva al m&aacute;ximo.
+                    Tres ingredientes: huevos de campo, mantequilla, trufa. Nada m&aacute;s.
+                </p>
+                <div class="rec-card-tags">
+                    <span class="rec-card-tag">F&aacute;cil</span>
+                    <span class="rec-card-tag">10 min</span>
+                    <span class="rec-card-tag">5&ndash;8 g de trufa</span>
+                </div>
+            </div>
+
+            <div class="rec-card">
+                <span class="rec-card-num">02</span>
+                <h2 class="rec-card-title">Pasta fresca<br>con mantequilla y trufa</h2>
+                <div class="rec-card-sep"></div>
+                <p class="rec-card-desc">
+                    Tagliatelle o fettuccine hecho en casa. La mantequilla noisette
+                    es el fondo ideal para laminar la trufa en el &uacute;ltimo momento.
+                </p>
+                <div class="rec-card-tags">
+                    <span class="rec-card-tag">Media</span>
+                    <span class="rec-card-tag">40 min</span>
+                    <span class="rec-card-tag">8&ndash;12 g de trufa</span>
+                </div>
+            </div>
+
+            <div class="rec-card">
+                <span class="rec-card-num">03</span>
+                <h2 class="rec-card-title">Risotto de trufa<br>con parmesano</h2>
+                <div class="rec-card-sep"></div>
+                <p class="rec-card-desc">
+                    Arroz carnaroli, caldo de pollo casero, mantequilla y parmesano.
+                    La trufa se lamina en el plato, fuera del fuego.
+                </p>
+                <div class="rec-card-tags">
+                    <span class="rec-card-tag">Media</span>
+                    <span class="rec-card-tag">35 min</span>
+                    <span class="rec-card-tag">10&ndash;15 g de trufa</span>
+                </div>
+            </div>
+
+            <div class="rec-card">
+                <span class="rec-card-num">04</span>
+                <h2 class="rec-card-title">Carpaccio de trufa<br>con parmesano y rúcula</h2>
+                <div class="rec-card-sep"></div>
+                <p class="rec-card-desc">
+                    Sin cocinar. La trufa laminada fina sobre un fondo neutro,
+                    con aceite de oliva virgen y unas escamas de sal Maldon.
+                </p>
+                <div class="rec-card-tags">
+                    <span class="rec-card-tag">F&aacute;cil</span>
+                    <span class="rec-card-tag">10 min</span>
+                    <span class="rec-card-tag">6&ndash;10 g de trufa</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="rec-proximas">
+        <p>M&aacute;s recetas a&ntilde;adidas cada entrega &nbsp;&middot;&nbsp; Temporada diciembre&ndash;marzo</p>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+        const _sb = window.supabase.createClient(
+            'https://wclyxuxpezxksxcfsmpn.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbHl4dXhwZXp4a3N4Y2ZzbXBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTgwMTEsImV4cCI6MjA5MjA5NDAxMX0.BKEhBt5zZVqDCv81NqtAmjRODFUM6TWRs1e26kradL8'
+        );
+
+        // Guard: redirige al login si no hay sesión
+        (async () => {
+            const { data: { session } } = await _sb.auth.getSession();
+            if (!session) {
+                window.location.replace('/recetario/login');
+                return;
+            }
+            document.body.classList.add('auth-ok');
+            const email = session.user.email || '';
+            document.getElementById('memberEmail').textContent = email;
+        })();
+
+        // Cerrar sesión
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await _sb.auth.signOut();
+            window.location.replace('/recetario/login');
+        });
+    </script>
+
+</body>
+</html>
