@@ -240,6 +240,9 @@
 </head>
 <body>
 
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <!-- NAV -->
     <nav class="s-nav">
         <a href="/" class="s-nav-logo">EZSENCIA</a>
@@ -529,6 +532,37 @@
     <div class="s-footer">
         <p>Ezsencia &nbsp;&middot;&nbsp; &Aacute;rea de Socios &nbsp;&middot;&nbsp; Edici&oacute;n Fundadores 2026</p>
     </div>
+
+    <script>
+        (function () {
+            var cursor = document.getElementById('cursor');
+            var ring   = document.getElementById('cursorRing');
+            if (!cursor || !ring) return;
+            var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top  = mouseY + 'px';
+            });
+            (function animateRing() {
+                ringX += (mouseX - ringX) * 0.12;
+                ringY += (mouseY - ringY) * 0.12;
+                ring.style.left = ringX + 'px';
+                ring.style.top  = ringY + 'px';
+                requestAnimationFrame(animateRing);
+            })();
+            document.querySelectorAll('a, button').forEach(function (el) {
+                el.addEventListener('mouseenter', function () {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                    ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
+                });
+                el.addEventListener('mouseleave', function () {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    ring.style.transform   = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        })();
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script>

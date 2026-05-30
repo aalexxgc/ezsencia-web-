@@ -75,6 +75,9 @@
     </style>
 </head>
 <body>
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <div class="login-wrap">
         <a href="/" class="login-logo">EZSENCIA</a>
         <span class="login-eyebrow">Área de Socios</span>
@@ -96,6 +99,37 @@
         </form>
         <p class="login-footer">Ezsencia &nbsp;&middot;&nbsp; Alcotas, Teruel</p>
     </div>
+
+    <script>
+        (function () {
+            var cursor = document.getElementById('cursor');
+            var ring   = document.getElementById('cursorRing');
+            if (!cursor || !ring) return;
+            var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top  = mouseY + 'px';
+            });
+            (function animateRing() {
+                ringX += (mouseX - ringX) * 0.12;
+                ringY += (mouseY - ringY) * 0.12;
+                ring.style.left = ringX + 'px';
+                ring.style.top  = ringY + 'px';
+                requestAnimationFrame(animateRing);
+            })();
+            document.querySelectorAll('a, button, input').forEach(function (el) {
+                el.addEventListener('mouseenter', function () {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                    ring.style.transform   = 'translate(-50%, -50%) scale(1.5)';
+                });
+                el.addEventListener('mouseleave', function () {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    ring.style.transform   = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        })();
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script>
