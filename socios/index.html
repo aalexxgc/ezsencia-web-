@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Área de Socios — EZSENCIA</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+
+        /* ── AUTH GUARD ──────────────────────────────────────── */
+        body { visibility: hidden; }
+        body.auth-ok { visibility: visible; }
+
+        /* ── NAV ─────────────────────────────────────────────── */
+        .s-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 6vw; height: 62px;
+            background: var(--fondo); border-bottom: 1px solid var(--borde);
+        }
+        .s-nav-logo {
+            font-family: 'Lato', sans-serif; font-size: 0.62rem;
+            letter-spacing: 0.44em; text-transform: uppercase;
+            color: var(--tinta); text-decoration: none; transition: opacity 0.3s;
+        }
+        .s-nav-logo:hover { opacity: 0.5; }
+        .s-nav-links {
+            display: flex; align-items: center; gap: 2.5rem;
+            list-style: none; margin: 0; padding: 0;
+        }
+        .s-nav-links a {
+            font-family: 'Lato', sans-serif; font-size: 0.56rem;
+            letter-spacing: 0.26em; text-transform: uppercase;
+            color: var(--tinta-suave); opacity: 0.55; text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        .s-nav-links a:hover { opacity: 1; }
+        .s-nav-right {
+            display: flex; align-items: center; gap: 1.5rem;
+        }
+        .s-nav-member {
+            font-family: 'Lato', sans-serif; font-size: 0.56rem;
+            letter-spacing: 0.14em; color: var(--tinta-suave); opacity: 0.35;
+        }
+        .s-nav-logout {
+            font-family: 'Lato', sans-serif; font-size: 0.54rem;
+            letter-spacing: 0.24em; text-transform: uppercase;
+            color: var(--tinta-suave); opacity: 0.45; background: none;
+            border: none; cursor: pointer; padding: 0; transition: opacity 0.3s;
+        }
+        .s-nav-logout:hover { opacity: 1; }
+
+        /* ── HERO ────────────────────────────────────────────── */
+        .s-hero {
+            padding: 10rem 6vw 6rem;
+            background: var(--fondo-alt);
+            border-bottom: 1px solid var(--borde);
+        }
+        .s-eyebrow {
+            font-family: 'Lato', sans-serif; font-size: 0.56rem;
+            letter-spacing: 0.38em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0.8; display: block; margin-bottom: 1.5rem;
+        }
+        .s-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 400; font-style: italic;
+            color: var(--tinta); line-height: 1.1; margin: 0 0 1.5rem;
+        }
+        .s-hero-sub {
+            font-family: 'EB Garamond', serif; font-size: 1.05rem;
+            color: var(--tinta-suave); opacity: 0.65; line-height: 1.9; max-width: 560px;
+        }
+
+        /* ── SECCIONES — estructura común ───────────────────── */
+        .s-section {
+            padding: 6rem 6vw 7rem;
+            border-bottom: 1px solid var(--borde);
+        }
+        .s-section:nth-child(even) { background: var(--fondo-alt); }
+        .s-section:nth-child(odd)  { background: var(--fondo); }
+        .s-section-header { margin-bottom: 3.5rem; }
+        .s-section-num {
+            font-family: 'Lato', sans-serif; font-size: 0.54rem;
+            letter-spacing: 0.34em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0.6; display: block; margin-bottom: 0.8rem;
+        }
+        .s-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; font-style: italic;
+            color: var(--tinta); line-height: 1.15; margin: 0 0 1rem;
+        }
+        .s-section-sep {
+            width: 28px; height: 1px; background: var(--dorado); opacity: 0.4;
+        }
+
+        /* ── RECETARIO ───────────────────────────────────────── */
+        .s-recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2px; margin-top: 3rem;
+        }
+        .s-recipe {
+            background: var(--fondo); border: 1px solid var(--borde);
+            padding: 2.2rem 1.8rem; transition: background 0.3s;
+        }
+        .s-section:nth-child(even) .s-recipe { background: var(--fondo-alt); }
+        .s-section:nth-child(even) .s-recipe:hover { background: var(--fondo); }
+        .s-recipe:hover { background: var(--fondo-alt); }
+        .s-recipe-n {
+            font-family: 'Lato', sans-serif; font-size: 0.52rem;
+            letter-spacing: 0.28em; color: var(--dorado); opacity: 0.65;
+            display: block; margin-bottom: 1rem;
+        }
+        .s-recipe h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.2rem;
+            font-weight: 400; font-style: italic; color: var(--tinta);
+            line-height: 1.3; margin: 0 0 0.8rem;
+        }
+        .s-recipe-sep {
+            width: 20px; height: 1px; background: var(--dorado); opacity: 0.35; margin-bottom: 0.9rem;
+        }
+        .s-recipe p {
+            font-family: 'EB Garamond', serif; font-size: 0.92rem;
+            color: var(--tinta-suave); line-height: 1.85; opacity: 0.7; margin: 0 0 1.2rem;
+        }
+        .s-recipe-meta {
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
+        }
+        .s-recipe-tag {
+            font-family: 'Lato', sans-serif; font-size: 0.5rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--tinta-suave); opacity: 0.4;
+            border: 1px solid var(--borde); padding: 0.2rem 0.55rem;
+        }
+
+        /* ── TEMPORADA — timeline ────────────────────────────── */
+        .s-timeline { margin-top: 3rem; }
+        .s-tl-item {
+            display: grid; grid-template-columns: 120px 1fr;
+            gap: 0 2.5rem; padding: 2rem 0;
+            border-bottom: 1px solid var(--borde);
+        }
+        .s-tl-item:last-child { border-bottom: none; }
+        .s-tl-date {
+            font-family: 'Lato', sans-serif; font-size: 0.56rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0.7; padding-top: 0.2rem;
+        }
+        .s-tl-body h4 {
+            font-family: 'EB Garamond', serif; font-size: 1.1rem; font-weight: 500;
+            color: var(--tinta); margin: 0 0 0.5rem;
+        }
+        .s-tl-body p {
+            font-family: 'EB Garamond', serif; font-size: 0.95rem;
+            color: var(--tinta-suave); opacity: 0.65; line-height: 1.8; margin: 0;
+        }
+        .s-tl-badge {
+            display: inline-block; font-family: 'Lato', sans-serif;
+            font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--dorado); border: 1px solid var(--dorado);
+            opacity: 0.6; padding: 0.2rem 0.55rem; margin-bottom: 0.6rem;
+        }
+
+        /* ── ENVÍOS — info bloques ───────────────────────────── */
+        .s-info-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2px; margin-top: 3rem;
+        }
+        .s-info-block {
+            padding: 2rem 1.8rem; border: 1px solid var(--borde);
+            background: var(--fondo);
+        }
+        .s-section:nth-child(even) .s-info-block { background: var(--fondo-alt); }
+        .s-info-label {
+            font-family: 'Lato', sans-serif; font-size: 0.52rem; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--dorado); opacity: 0.65;
+            display: block; margin-bottom: 1rem;
+        }
+        .s-info-block h4 {
+            font-family: 'EB Garamond', serif; font-size: 1.05rem; font-weight: 500;
+            color: var(--tinta); margin: 0 0 0.7rem;
+        }
+        .s-info-block p {
+            font-family: 'EB Garamond', serif; font-size: 0.92rem;
+            color: var(--tinta-suave); line-height: 1.85; opacity: 0.68; margin: 0;
+        }
+
+        /* ── ENCUENTRO — programa ────────────────────────────── */
+        .s-program { margin-top: 3rem; }
+        .s-program-item {
+            display: grid; grid-template-columns: 80px 1fr;
+            gap: 0 2rem; padding: 1.8rem 0;
+            border-bottom: 1px solid var(--borde);
+        }
+        .s-program-item:last-child { border-bottom: none; }
+        .s-program-hora {
+            font-family: 'Lato', sans-serif; font-size: 0.7rem;
+            letter-spacing: 0.12em; color: var(--tinta-suave); opacity: 0.4;
+            padding-top: 0.15rem;
+        }
+        .s-program-body h4 {
+            font-family: 'EB Garamond', serif; font-size: 1.05rem; font-weight: 500;
+            color: var(--tinta); margin: 0 0 0.45rem;
+        }
+        .s-program-body p {
+            font-family: 'EB Garamond', serif; font-size: 0.92rem;
+            color: var(--tinta-suave); opacity: 0.65; line-height: 1.8; margin: 0;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        .s-footer {
+            padding: 4rem 6vw; background: var(--fondo);
+            border-top: 1px solid var(--borde); text-align: center;
+        }
+        .s-footer p {
+            font-family: 'Lato', sans-serif; font-size: 0.54rem;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--tinta-suave); opacity: 0.28;
+        }
+
+        /* ── RESPONSIVE ──────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .s-nav-links  { display: none; }
+            .s-nav-member { display: none; }
+            .s-tl-item    { grid-template-columns: 1fr; gap: 0.4rem; }
+            .s-tl-date    { font-size: 0.52rem; }
+            .s-program-item { grid-template-columns: 60px 1fr; }
+        }
+        @media (max-width: 600px) {
+            .s-hero { padding: 8rem 1.5rem 4rem; }
+            .s-section { padding: 4rem 1.5rem 5rem; }
+            .s-recipe-grid, .s-info-grid { grid-template-columns: 1fr; }
+            .s-footer { padding: 3rem 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav class="s-nav">
+        <a href="/" class="s-nav-logo">EZSENCIA</a>
+        <ul class="s-nav-links">
+            <li><a href="#recetario">Recetario</a></li>
+            <li><a href="#temporada">La Temporada</a></li>
+            <li><a href="#envios">Los Env&iacute;os</a></li>
+            <li><a href="#encuentro">El Encuentro</a></li>
+        </ul>
+        <div class="s-nav-right">
+            <span class="s-nav-member" id="memberEmail"></span>
+            <button class="s-nav-logout" id="logoutBtn">Salir</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="s-hero">
+        <span class="s-eyebrow">Área de Socios &nbsp;&middot;&nbsp; Edición Fundadores 2026</span>
+        <h1>Bienvenido<br>al club.</h1>
+        <p class="s-hero-sub">
+            Todo lo que necesitas saber sobre la temporada, los env&iacute;os,
+            el Encuentro en Alcotas y las recetas para sacarle partido a la trufa.
+            Esta p&aacute;gina es solo para los 20.
+        </p>
+    </div>
+
+    <!-- ══ SECCIÓN 1: RECETARIO ══════════════════════════════ -->
+    <section class="s-section" id="recetario">
+        <div class="s-section-header">
+            <span class="s-section-num">01 &nbsp;&middot;&nbsp; Recetario</span>
+            <h2>C&oacute;mo cocinar<br>la trufa en casa</h2>
+            <div class="s-section-sep"></div>
+        </div>
+        <p style="font-family:'EB Garamond',serif;font-size:1rem;color:var(--tinta-suave);line-height:1.9;opacity:0.7;max-width:600px;margin-bottom:0;">
+            La trufa no necesita cocinar. Solo necesita calor y grasa. Cuantos menos ingredientes,
+            mejor. Estas recetas est&aacute;n pensadas para los 100&thinsp;g que llegan cada env&iacute;o.
+        </p>
+        <div class="s-recipe-grid">
+
+            <div class="s-recipe">
+                <span class="s-recipe-n">01</span>
+                <h3>Huevos revueltos<br>con trufa negra</h3>
+                <div class="s-recipe-sep"></div>
+                <p>La receta m&aacute;s directa. La yema envuelve la trufa y lleva el aroma al m&aacute;ximo. Tres ingredientes: huevos de campo, mantequilla, trufa. Fuego bajo, paciencia y laminar al final.</p>
+                <div class="s-recipe-meta">
+                    <span class="s-recipe-tag">F&aacute;cil</span>
+                    <span class="s-recipe-tag">10 min</span>
+                    <span class="s-recipe-tag">5&ndash;8 g</span>
+                </div>
+            </div>
+
+            <div class="s-recipe">
+                <span class="s-recipe-n">02</span>
+                <h3>Pasta fresca<br>mantequilla y trufa</h3>
+                <div class="s-recipe-sep"></div>
+                <p>Tagliatelle hecho en casa o comprado fresco. Mantequilla noisette como fondo. La trufa se lamina en el plato, fuera del fuego. El calor residual hace el resto.</p>
+                <div class="s-recipe-meta">
+                    <span class="s-recipe-tag">Media</span>
+                    <span class="s-recipe-tag">40 min</span>
+                    <span class="s-recipe-tag">8&ndash;12 g</span>
+                </div>
+            </div>
+
+            <div class="s-recipe">
+                <span class="s-recipe-n">03</span>
+                <h3>Risotto de trufa<br>con parmesano</h3>
+                <div class="s-recipe-sep"></div>
+                <p>Arroz carnaroli, caldo de pollo casero, mantequilla y parmesano. La trufa solo al final, laminada sobre el plato. Nunca dentro del arroz caliente: el calor destruye el aroma.</p>
+                <div class="s-recipe-meta">
+                    <span class="s-recipe-tag">Media</span>
+                    <span class="s-recipe-tag">35 min</span>
+                    <span class="s-recipe-tag">10&ndash;15 g</span>
+                </div>
+            </div>
+
+            <div class="s-recipe">
+                <span class="s-recipe-n">04</span>
+                <h3>Tosta de pan de<br>masa madre con trufa</h3>
+                <div class="s-recipe-sep"></div>
+                <p>Pan de masa madre tostado, mantequilla de buena calidad a temperatura ambiente, sal Maldon y trufa laminada fina. El desayuno o la cena m&aacute;s sencilla de la temporada.</p>
+                <div class="s-recipe-meta">
+                    <span class="s-recipe-tag">F&aacute;cil</span>
+                    <span class="s-recipe-tag">5 min</span>
+                    <span class="s-recipe-tag">4&ndash;6 g</span>
+                </div>
+            </div>
+
+            <div class="s-recipe">
+                <span class="s-recipe-n">05</span>
+                <h3>Patatas panadera<br>con trufa y romero</h3>
+                <div class="s-recipe-sep"></div>
+                <p>Patata agria cortada fina, aceite de oliva virgen extra, romero fresco. Al horno a 180&deg; hasta dorar. La trufa se ralla en caliente, nada m&aacute;s sacar del horno.</p>
+                <div class="s-recipe-meta">
+                    <span class="s-recipe-tag">F&aacute;cil</span>
+                    <span class="s-recipe-tag">50 min</span>
+                    <span class="s-recipe-tag">6&ndash;10 g</span>
+                </div>
+            </div>
+
+            <div class="s-recipe">
+                <span class="s-recipe-n">06</span>
+                <h3>Carpaccio de trufa<br>con parmesano</h3>
+                <div class="s-recipe-sep"></div>
+                <p>Sin cocinar. Trufa laminada muy fina sobre r&uacute;cula, parmesano en l&aacute;minas, aceite de oliva virgen y escamas de sal. La receta m&aacute;s honesta: la trufa sola, sin nada que la tape.</p>
+                <div class="s-recipe-meta">
+                    <span class="s-recipe-tag">F&aacute;cil</span>
+                    <span class="s-recipe-tag">10 min</span>
+                    <span class="s-recipe-tag">8&ndash;12 g</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══ SECCIÓN 2: LA TEMPORADA ═══════════════════════════ -->
+    <section class="s-section" id="temporada">
+        <div class="s-section-header">
+            <span class="s-section-num">02 &nbsp;&middot;&nbsp; La Temporada</span>
+            <h2>Cuatro meses.<br>Cuatro env&iacute;os.</h2>
+            <div class="s-section-sep"></div>
+        </div>
+        <p style="font-family:'EB Garamond',serif;font-size:1rem;color:var(--tinta-suave);line-height:1.9;opacity:0.7;max-width:600px;margin-bottom:0;">
+            La Tuber melanosporum tiene temporada de diciembre a marzo. Los env&iacute;os salen
+            de Alcotas los lunes de cada mes, recogida esa misma ma&ntilde;ana.
+            Las fechas exactas se confirman con antelaci&oacute;n por email.
+        </p>
+        <div class="s-timeline">
+
+            <div class="s-tl-item">
+                <div class="s-tl-date">Diciembre<br>2026</div>
+                <div class="s-tl-body">
+                    <span class="s-tl-badge">Primer env&iacute;o</span>
+                    <h4>Apertura de temporada</h4>
+                    <p>Las primeras trufas del a&ntilde;o. El fr&iacute;o acaba de llegar a Alcotas y la trufa empieza a madurar. Aroma fresco, intenso. El mejor momento para las recetas m&aacute;s sencillas.</p>
+                </div>
+            </div>
+
+            <div class="s-tl-item">
+                <div class="s-tl-date">Enero<br>2027</div>
+                <div class="s-tl-body">
+                    <span class="s-tl-badge">Segundo env&iacute;o</span>
+                    <h4>Pleno invierno</h4>
+                    <p>El mes m&aacute;s fr&iacute;o del a&ntilde;o en la sierra. La trufa est&aacute; en su punto de mayor madurez. El aroma m&aacute;s profundo de toda la temporada. Tambi&eacute;n el mes del Encuentro en Alcotas.</p>
+                </div>
+            </div>
+
+            <div class="s-tl-item">
+                <div class="s-tl-date">Febrero<br>2027</div>
+                <div class="s-tl-body">
+                    <span class="s-tl-badge">Tercer env&iacute;o</span>
+                    <h4>Temporada alta</h4>
+                    <p>La cosecha sigue en su mejor momento. Las piezas son m&aacute;s grandes y el rendimiento mejora. El env&iacute;o perfecto para experimentar con recetas m&aacute;s elaboradas.</p>
+                </div>
+            </div>
+
+            <div class="s-tl-item">
+                <div class="s-tl-date">Marzo<br>2027</div>
+                <div class="s-tl-body">
+                    <span class="s-tl-badge">Cuarto env&iacute;o</span>
+                    <h4>Cierre de temporada</h4>
+                    <p>Las &uacute;ltimas trufas del ciclo. A medida que el fr&iacute;o remite, la cosecha se agota. Este env&iacute;o llega en el momento de mayor escasez. Despu&eacute;s, hasta diciembre.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══ SECCIÓN 3: LOS ENVÍOS ══════════════════════════════ -->
+    <section class="s-section" id="envios">
+        <div class="s-section-header">
+            <span class="s-section-num">03 &nbsp;&middot;&nbsp; Los Env&iacute;os</span>
+            <h2>C&oacute;mo llega<br>y c&oacute;mo usarla</h2>
+            <div class="s-section-sep"></div>
+        </div>
+        <p style="font-family:'EB Garamond',serif;font-size:1rem;color:var(--tinta-suave);line-height:1.9;opacity:0.7;max-width:600px;margin-bottom:0;">
+            Cada env&iacute;o sale de Alcotas el lunes por la ma&ntilde;ana, recogida esa misma madrugada.
+            En 24 horas est&aacute; en tu puerta. Dentro encontrar&aacute;s 100&thinsp;g de Tuber melanosporum,
+            un sobre con notas de esa semana y las instrucciones de conservaci&oacute;n.
+        </p>
+        <div class="s-info-grid">
+
+            <div class="s-info-block">
+                <span class="s-info-label">Al recibir</span>
+                <h4>Abre y comprueba</h4>
+                <p>Saca la trufa del embalaje en cuanto llegue. Comp&oacute;rtate con ella como con un buen queso: necesita respirar, no asfixiarse en pl&aacute;stico.</p>
+            </div>
+
+            <div class="s-info-block">
+                <span class="s-info-label">Conservaci&oacute;n</span>
+                <h4>Papel absorbente y nevera</h4>
+                <p>Envuelve cada trufa en papel absorbente seco. Cambia el papel cada d&iacute;a. Guarda en un recipiente tapado en la parte menos fr&iacute;a de la nevera. As&iacute; aguanta 7&ndash;10 d&iacute;as.</p>
+            </div>
+
+            <div class="s-info-block">
+                <span class="s-info-label">Truco</span>
+                <h4>Perfuma los huevos</h4>
+                <p>Mete 2&ndash;3 huevos en el mismo recipiente que la trufa, sin c&aacute;scara rota. En 48 horas los huevos absorben todo el aroma. Los mejores huevos revueltos que har&aacute;s en tu vida.</p>
+            </div>
+
+            <div class="s-info-block">
+                <span class="s-info-label">C&oacute;mo usarla</span>
+                <h4>Siempre al final, nunca con calor directo</h4>
+                <p>La trufa pierde el 80% de su aroma por encima de 60&deg;. Lamina o ralla siempre fuera del fuego, sobre el plato ya emplatado. El calor residual hace el trabajo.</p>
+            </div>
+
+            <div class="s-info-block">
+                <span class="s-info-label">Cantidad</span>
+                <h4>Entre 5 y 15 gramos por plato</h4>
+                <p>Para platos simples (huevos, tosta): 5&ndash;8&thinsp;g. Para pasta o risotto: 10&ndash;15&thinsp;g. Con 100&thinsp;g tienes para 8&ndash;12 raciones generosas.</p>
+            </div>
+
+            <div class="s-info-block">
+                <span class="s-info-label">Si sobra</span>
+                <h4>Se puede congelar</h4>
+                <p>Limpia, seca y envuelta individualmente en papel film. En el congelador aguanta hasta 6 meses. Pierde algo de textura pero no el aroma. Ralla directamente congelada.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══ SECCIÓN 4: EL ENCUENTRO ════════════════════════════ -->
+    <section class="s-section" id="encuentro">
+        <div class="s-section-header">
+            <span class="s-section-num">04 &nbsp;&middot;&nbsp; El Encuentro</span>
+            <h2>Un d&iacute;a en Alcotas.<br>Enero 2027.</h2>
+            <div class="s-section-sep"></div>
+        </div>
+        <p style="font-family:'EB Garamond',serif;font-size:1rem;color:var(--tinta-suave);line-height:1.9;opacity:0.7;max-width:600px;margin-bottom:0;">
+            Una vez al a&ntilde;o, los 20 socios se re&uacute;nen en las instalaciones de Ezsencia.
+            Se empieza por la ma&ntilde;ana, con los perros y el fr&iacute;o del invierno. El programa
+            exacto se env&iacute;a por email con cuatro semanas de antelaci&oacute;n.
+        </p>
+        <div class="s-program">
+
+            <div class="s-program-item">
+                <div class="s-program-hora">Ma&ntilde;ana</div>
+                <div class="s-program-body">
+                    <h4>Llegada y bienvenida</h4>
+                    <p>Los socios llegan a las instalaciones de Ezsencia en Alcotas. Bienvenida y primer caf&eacute;. Empieza lo que siempre empieza cuando la gente comparte algo que le importa: la conversaci&oacute;n.</p>
+                </div>
+            </div>
+
+            <div class="s-program-item">
+                <div class="s-program-hora"></div>
+                <div class="s-program-body">
+                    <h4>Visita a las instalaciones</h4>
+                    <p>Recorrido por las instalaciones: la zona de clasificaci&oacute;n, la c&aacute;mara de conservaci&oacute;n, el &aacute;rea de preparaci&oacute;n de env&iacute;os. Se explica c&oacute;mo funciona cada paso del proceso.</p>
+                </div>
+            </div>
+
+            <div class="s-program-item">
+                <div class="s-program-hora"></div>
+                <div class="s-program-body">
+                    <h4>Los secretos de la trufa</h4>
+                    <p>Charla antes de salir al campo: el suelo calizo, la encina micorrizada, por qu&eacute; este territorio y no otro, qu&eacute; decide que una campa&ntilde;a sea buena o un desastre.</p>
+                </div>
+            </div>
+
+            <div class="s-program-item">
+                <div class="s-program-hora"></div>
+                <div class="s-program-body">
+                    <h4>La b&uacute;squeda en el campo</h4>
+                    <p>El grupo sale en los veh&iacute;culos de Ezsencia hasta los truferos. Los perros marcan, se abre la tierra, aparece la trufa. Los socios pueden probar a buscarla ellos mismos. Una ma&ntilde;ana entera, sin prisa.</p>
+                </div>
+            </div>
+
+            <div class="s-program-item">
+                <div class="s-program-hora">Mediod&iacute;a</div>
+                <div class="s-program-body">
+                    <h4>La Mesa Ezsencia &mdash; Mas&iacute;a El Molinete</h4>
+                    <p>El grupo se desplaza a Mora de Rubielos. En Mas&iacute;a El Molinete, un men&uacute; construido alrededor de la trufa recogida esa misma ma&ntilde;ana. Producto de proximidad, bodega seleccionada. La sala es para el club.</p>
+                </div>
+            </div>
+
+            <div class="s-program-item">
+                <div class="s-program-hora">Tarde</div>
+                <div class="s-program-body">
+                    <h4>Sin hora de cierre</div>
+                    <p>El tiempo que haga falta. No hay otra reserva. No hay rotaci&oacute;n. Cada a&ntilde;o hay socios que se quedan hasta la noche.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="s-footer">
+        <p>Ezsencia &nbsp;&middot;&nbsp; &Aacute;rea de Socios &nbsp;&middot;&nbsp; Edici&oacute;n Fundadores 2026</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+        const _sb = window.supabase.createClient(
+            'https://wclyxuxpezxksxcfsmpn.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbHl4dXhwZXp4a3N4Y2ZzbXBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTgwMTEsImV4cCI6MjA5MjA5NDAxMX0.BKEhBt5zZVqDCv81NqtAmjRODFUM6TWRs1e26kradL8'
+        );
+
+        (async () => {
+            const { data: { session } } = await _sb.auth.getSession();
+            if (!session) {
+                window.location.replace('/socios/login');
+                return;
+            }
+            document.body.classList.add('auth-ok');
+            document.getElementById('memberEmail').textContent = session.user.email;
+        })();
+
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await _sb.auth.signOut();
+            window.location.replace('/socios/login');
+        });
+
+        // Scroll suave para los enlaces del nav
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+
+</body>
+</html>
