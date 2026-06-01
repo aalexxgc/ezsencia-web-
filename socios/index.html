@@ -98,43 +98,204 @@
             width: 28px; height: 1px; background: var(--dorado); opacity: 0.4;
         }
 
-        /* ── RECETARIO ───────────────────────────────────────── */
+        /* ── RECETARIO — tarjetas foto ───────────────────────── */
+        .s-month { margin-bottom: 5rem; }
+        .s-month:last-child { margin-bottom: 0; }
+        .s-month-label {
+            font-family: 'Lato', sans-serif; font-size: 0.54rem;
+            letter-spacing: 0.4em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0.65; display: block;
+            margin-bottom: 1.8rem; padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--borde);
+        }
         .s-recipe-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2px; margin-top: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
         }
         .s-recipe {
-            background: var(--fondo); border: 1px solid var(--borde);
-            padding: 2.2rem 1.8rem; transition: background 0.3s;
+            position: relative; overflow: hidden; cursor: pointer;
+            aspect-ratio: 2/3; border: none; display: block;
+            width: 100%; padding: 0; background: #0a0806; font: inherit;
         }
-        .s-section:nth-child(even) .s-recipe { background: var(--fondo-alt); }
-        .s-section:nth-child(even) .s-recipe:hover { background: var(--fondo); }
-        .s-recipe:hover { background: var(--fondo-alt); }
+        .s-recipe-img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s;
+            opacity: 0.82;
+        }
+        .s-recipe:hover .s-recipe-img { transform: scale(1.07); opacity: 0.6; }
+        .s-recipe-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(6,4,2,0.96) 0%, rgba(6,4,2,0.3) 55%, transparent 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 1.8rem 1.6rem;
+        }
         .s-recipe-n {
-            font-family: 'Lato', sans-serif; font-size: 0.52rem;
-            letter-spacing: 0.28em; color: var(--dorado); opacity: 0.65;
-            display: block; margin-bottom: 1rem;
+            font-family: 'Lato', sans-serif; font-size: 0.5rem;
+            letter-spacing: 0.32em; color: var(--dorado); opacity: 0.7;
+            display: block; margin-bottom: 0.55rem;
         }
         .s-recipe h3 {
-            font-family: 'Playfair Display', serif; font-size: 1.2rem;
-            font-weight: 400; font-style: italic; color: var(--tinta);
-            line-height: 1.3; margin: 0 0 0.8rem;
-        }
-        .s-recipe-sep {
-            width: 20px; height: 1px; background: var(--dorado); opacity: 0.35; margin-bottom: 0.9rem;
-        }
-        .s-recipe p {
-            font-family: 'EB Garamond', serif; font-size: 0.92rem;
-            color: var(--tinta-suave); line-height: 1.85; opacity: 0.7; margin: 0 0 1.2rem;
+            font-family: 'Playfair Display', serif; font-size: 1.08rem;
+            font-weight: 400; font-style: italic; color: #f5ede0;
+            line-height: 1.28; margin: 0 0 0.85rem;
         }
         .s-recipe-meta {
-            display: flex; flex-wrap: wrap; gap: 0.4rem;
+            display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.85rem;
         }
         .s-recipe-tag {
-            font-family: 'Lato', sans-serif; font-size: 0.5rem; letter-spacing: 0.2em;
-            text-transform: uppercase; color: var(--tinta-suave); opacity: 0.4;
-            border: 1px solid var(--borde); padding: 0.2rem 0.55rem;
+            font-family: 'Lato', sans-serif; font-size: 0.46rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: rgba(240,225,195,0.48);
+            border: 1px solid rgba(240,225,195,0.18); padding: 0.15rem 0.48rem;
+        }
+        .s-recipe-open {
+            font-family: 'Lato', sans-serif; font-size: 0.47rem;
+            letter-spacing: 0.26em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0; display: block;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(5px);
+        }
+        .s-recipe:hover .s-recipe-open { opacity: 0.85; transform: translateY(0); }
+
+        /* ── MODAL ────────────────────────────────────────────── */
+        .r-overlay {
+            position: fixed; inset: 0; z-index: 500;
+            background: rgba(6,4,2,0.82);
+            overflow-y: auto; overflow-x: hidden;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.35s;
+            padding-bottom: 5vh;
+        }
+        .r-overlay.open { opacity: 1; pointer-events: all; }
+        .r-modal {
+            background: var(--fondo); width: 100%; max-width: 1000px;
+            margin: 0 auto;
+            transform: translateY(30px); transition: transform 0.38s;
+        }
+        .r-overlay.open .r-modal { transform: translateY(0); }
+
+        /* Hero */
+        .r-hero {
+            position: relative; width: 100%; aspect-ratio: 16/8;
+            overflow: hidden; background: #0a0806;
+        }
+        .r-hero-img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block; opacity: 0.72;
+            transition: opacity 0.5s;
+        }
+        .r-hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(6,4,2,0.92) 0%, rgba(6,4,2,0.1) 60%, transparent 100%);
+        }
+        .r-close {
+            position: absolute; top: 1.4rem; right: 1.6rem; z-index: 20;
+            background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.18);
+            cursor: pointer; font-family: 'Lato', sans-serif; font-size: 0.5rem;
+            letter-spacing: 0.28em; text-transform: uppercase;
+            color: rgba(245,237,224,0.72); padding: 0.45rem 0.85rem;
+            transition: background 0.3s, color 0.3s;
+        }
+        .r-close:hover { background: rgba(255,255,255,0.15); color: #f5ede0; }
+        .r-hero-text {
+            position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+            padding: 2.5rem 3rem;
+        }
+        .r-eyebrow {
+            font-family: 'Lato', sans-serif; font-size: 0.52rem;
+            letter-spacing: 0.38em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0.9; display: block; margin-bottom: 0.75rem;
+        }
+        .r-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; font-style: italic;
+            color: #f5ede0; line-height: 1.08; margin: 0;
+        }
+
+        /* Intro */
+        .r-intro-bar {
+            padding: 2.5rem 3rem;
+            border-bottom: 1px solid var(--borde);
+        }
+        .r-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.4rem; }
+        .r-tag {
+            font-family: 'Lato', sans-serif; font-size: 0.5rem;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--tinta-suave); opacity: 0.45;
+            border: 1px solid var(--borde); padding: 0.28rem 0.72rem;
+        }
+        .r-intro {
+            font-family: 'EB Garamond', serif; font-size: 1.15rem; font-style: italic;
+            color: var(--tinta-suave); line-height: 1.85; opacity: 0.78;
+            margin: 0; max-width: 680px;
+        }
+
+        /* Contenido dos columnas */
+        .r-content {
+            display: grid; grid-template-columns: 260px 1fr;
+            align-items: start;
+        }
+        .r-sidebar {
+            padding: 3rem 2rem 3.5rem 3rem;
+            border-right: 1px solid var(--borde);
+            position: sticky; top: 0;
+        }
+        .r-col-label {
+            font-family: 'Lato', sans-serif; font-size: 0.5rem;
+            letter-spacing: 0.34em; text-transform: uppercase;
+            color: var(--dorado); opacity: 0.65; display: block; margin-bottom: 1.5rem;
+        }
+        .r-ingredients { list-style: none; margin: 0; padding: 0; }
+        .r-ingredients li {
+            font-family: 'EB Garamond', serif; font-size: 1rem;
+            color: var(--tinta-suave); line-height: 1.65; opacity: 0.82;
+            padding: 0.55rem 0; border-bottom: 1px solid var(--borde);
+            display: flex; align-items: baseline; gap: 0.55rem;
+        }
+        .r-ingredients li:last-child { border-bottom: none; }
+        .r-ingredients li::before {
+            content: '·'; color: var(--dorado); opacity: 0.6;
+            font-size: 1.1rem; flex-shrink: 0; line-height: 1;
+        }
+        .r-main { padding: 3rem 3rem 3.5rem 2.8rem; }
+        .r-steps { list-style: none; margin: 0; padding: 0; counter-reset: steps; }
+        .r-steps li {
+            font-family: 'EB Garamond', serif; font-size: 1.08rem;
+            color: var(--tinta-suave); line-height: 2; opacity: 0.85;
+            padding: 0 0 2.2rem 4.2rem; margin-bottom: 2.2rem;
+            border-bottom: 1px solid var(--borde);
+            counter-increment: steps; position: relative;
+        }
+        .r-steps li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .r-steps li::before {
+            content: counter(steps, decimal-leading-zero);
+            position: absolute; left: 0; top: -0.3rem;
+            font-family: 'Playfair Display', serif; font-size: 2.2rem; font-style: italic;
+            color: var(--dorado); opacity: 0.2; line-height: 1;
+        }
+        .r-mid-img {
+            width: calc(100% + 3rem); margin-left: -2.8rem;
+            aspect-ratio: 16/7; object-fit: cover;
+            display: block; margin-bottom: 2.5rem; opacity: 0.88;
+        }
+        .r-note {
+            font-family: 'EB Garamond', serif; font-size: 0.98rem; font-style: italic;
+            color: var(--tinta-suave); opacity: 0.5; line-height: 1.8;
+            padding-top: 2rem; border-top: 1px solid var(--borde); margin: 0;
+        }
+        @media (max-width: 780px) {
+            .s-recipe-grid { grid-template-columns: repeat(2, 1fr); }
+            .r-content { grid-template-columns: 1fr; }
+            .r-sidebar { position: static; padding: 2.5rem 1.5rem; border-right: none; border-bottom: 1px solid var(--borde); }
+            .r-main { padding: 2.5rem 1.5rem 3rem; }
+            .r-hero-text { padding: 1.5rem; }
+            .r-intro-bar { padding: 2rem 1.5rem; }
+            .r-hero { aspect-ratio: 4/3; }
+            .r-mid-img { width: 100%; margin-left: 0; }
+        }
+        @media (max-width: 480px) {
+            .s-recipe-grid { grid-template-columns: 1fr; }
+            .s-recipe { aspect-ratio: 3/2; }
         }
 
         /* ── TEMPORADA — timeline ────────────────────────────── */
@@ -214,37 +375,56 @@
         /* ── CARTA ───────────────────────────────────────────── */
         .s-carta {
             padding:    7rem 6vw 8rem;
-            background: var(--fondo-alt);
+            background: var(--fondo);
             border-bottom: 1px solid var(--borde);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 8vw;
+            align-items: start;
         }
-        .s-carta-inner {
-            max-width: 640px;
-        }
-        .s-carta-saludo {
+        .s-carta-left { }
+        .s-carta-quote {
             font-family: 'Playfair Display', serif;
-            font-size:   1.15rem; font-weight: 400;
-            color:       var(--tinta); margin: 0 0 2.5rem;
+            font-size:   clamp(1.9rem, 3.2vw, 2.9rem);
+            font-weight: 400; font-style: italic;
+            color:       var(--tinta); line-height: 1.18;
+            margin:      0; padding: 0; border: none;
+            position:    sticky; top: 5.5rem;
         }
-        .s-carta p {
+        .s-carta-right { }
+        .s-carta-eyebrow {
+            font-family:    'Lato', sans-serif; font-size: 0.54rem;
+            letter-spacing: 0.36em; text-transform: uppercase;
+            color:          var(--dorado); opacity: 0.65;
+            display:        block; margin-bottom: 2rem;
+        }
+        .s-carta-body p {
             font-family:   'EB Garamond', serif;
-            font-size:     1.12rem; line-height: 2.1;
-            color:         var(--tinta-suave);
-            margin-bottom: 1.6rem;
+            font-size:     1.08rem; line-height: 2;
+            color:         var(--tinta-suave); opacity: 0.75;
+            margin:        0 0 1.4rem;
         }
+        .s-carta-body p:last-child { margin-bottom: 0; }
         .s-carta-firma {
-            margin-top: 3.5rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--borde);
+            margin-top:  2.8rem; padding-top: 2rem;
+            border-top:  1px solid var(--borde);
         }
         .s-carta-firma-nombre {
             font-family: 'Playfair Display', serif;
-            font-size:   1.1rem; font-style: italic;
-            color:       var(--tinta); display: block; margin-bottom: 0.4rem;
+            font-size:   1.05rem; font-style: italic;
+            color:       var(--tinta); display: block; margin-bottom: 0.35rem;
         }
         .s-carta-firma-cargo {
-            font-family:    'Lato', sans-serif; font-size: 0.56rem;
+            font-family:    'Lato', sans-serif; font-size: 0.54rem;
             letter-spacing: 0.28em; text-transform: uppercase;
-            color:          var(--dorado); opacity: 0.7;
+            color:          var(--dorado); opacity: 0.65;
+        }
+        @media (max-width: 900px) {
+            .s-carta {
+                grid-template-columns: 1fr;
+                gap: 3rem 0;
+            }
+            .s-carta-quote { font-size: clamp(1.7rem, 5vw, 2.2rem); position: static; }
         }
 
         /* ── FOOTER ──────────────────────────────────────────── */
@@ -303,21 +483,23 @@
 
     <!-- ══ CARTA DE BIENVENIDA ══════════════════════════════ -->
     <div class="s-carta">
-        <div class="s-carta-inner">
-            <p class="s-carta-saludo">Bienvenido a Ezsencia.</p>
-            <p>Antes de nada, gracias.</p>
-            <p>Gracias por confiar en este proyecto y por formar parte de esta primera edición. Significa mucho más de lo que imaginas.</p>
-            <p>Ezsencia nace de un lugar muy pequeño llamado Alcotas, en las montañas de Teruel. Pero sobre todo nace de una historia. La historia de mi familia, de muchos años de trabajo, de madrugones, de incertidumbre y de una pasión compartida por el campo y por la trufa negra.</p>
-            <p>Durante mucho tiempo, todo esto formó parte únicamente de nuestra vida. Con el tiempo entendí que había algo demasiado valioso como para guardarlo solo para nosotros.</p>
-            <p>Por eso existe Ezsencia.</p>
-            <p>No para vender trufa, sino para compartir todo lo que hay detrás de ella.</p>
-            <p>A partir de hoy formas parte de este viaje. Tendrás acceso a un mundo que muy pocas personas llegan a conocer: el origen de la trufa negra, las personas que la hacen posible, los paisajes donde nace y las historias que han dado forma a este territorio generación tras generación.</p>
-            <p>Espero que disfrutes cada envío, cada experiencia y cada momento que compartamos durante esta temporada.</p>
-            <p>Y, sobre todo, espero que cuando pienses en la trufa, ya no veas únicamente un producto.</p>
-            <p>Espero que veas un lugar, unas personas y una historia.</p>
-            <p>Bienvenido.</p>
+        <div class="s-carta-left">
+            <blockquote class="s-carta-quote">
+                No para vender trufa.<br>
+                Para compartir<br>
+                todo lo que hay detr&aacute;s.
+            </blockquote>
+        </div>
+        <div class="s-carta-right">
+            <span class="s-carta-eyebrow">De Alejandro &nbsp;&middot;&nbsp; Fundador</span>
+            <div class="s-carta-body">
+                <p>Gracias por formar parte de esto. No me lo tomo a la ligera.</p>
+                <p>Ezsencia nace en Alcotas, un pueblo peque&ntilde;o en las monta&ntilde;as de Teruel. Nace de la historia de mi familia, de a&ntilde;os de trabajo en el campo y de una pasi&oacute;n por la trufa negra que durante mucho tiempo fue solo nuestra. Con el tiempo entend&iacute; que guardarlo para nosotros ser&iacute;a un error.</p>
+                <p>A partir de hoy formas parte de este viaje. El territorio, las personas, las temporadas, los perros que encuentran la trufa y la tierra que la crea.</p>
+                <p>Cuando acabe esta temporada, espero que ya no veas un producto. Espero que veas un lugar, unas personas y una historia.</p>
+            </div>
             <div class="s-carta-firma">
-                <span class="s-carta-firma-nombre">Alejandro Gil Cebrián</span>
+                <span class="s-carta-firma-nombre">Alejandro Gil Cebri&aacute;n</span>
                 <span class="s-carta-firma-cargo">Fundador &nbsp;&middot;&nbsp; Ezsencia</span>
             </div>
         </div>
@@ -327,88 +509,215 @@
     <section class="s-section" id="recetario">
         <div class="s-section-header">
             <span class="s-section-num">01 &nbsp;&middot;&nbsp; Recetario</span>
-            <h2>C&oacute;mo cocinar<br>la trufa en casa</h2>
+            <h2>Doce recetas.<br>Cuatro meses.</h2>
             <div class="s-section-sep"></div>
         </div>
-        <p style="font-family:'EB Garamond',serif;font-size:1rem;color:var(--tinta-suave);line-height:1.9;opacity:0.7;max-width:600px;margin-bottom:0;">
-            La trufa no necesita cocinar. Solo necesita calor y grasa. Cuantos menos ingredientes,
-            mejor. Estas recetas est&aacute;n pensadas para los 100&thinsp;g que llegan cada env&iacute;o.
+        <p style="font-family:'EB Garamond',serif;font-size:1rem;color:var(--tinta-suave);line-height:1.9;opacity:0.7;max-width:620px;margin-bottom:3rem;">
+            La trufa no necesita cocina. Necesita calor justo y grasa que transporte el aroma.
+            Cuantos menos ingredientes, mejor. Estas recetas est&aacute;n pensadas para los 100&thinsp;g
+            que llegan cada mes. Haz clic en cualquiera para ver ingredientes y elaboraci&oacute;n completa.
         </p>
-        <div class="s-recipe-grid">
 
-            <div class="s-recipe">
-                <span class="s-recipe-n">01</span>
-                <h3>Huevos revueltos<br>con trufa negra</h3>
-                <div class="s-recipe-sep"></div>
-                <p>La receta m&aacute;s directa. La yema envuelve la trufa y lleva el aroma al m&aacute;ximo. Tres ingredientes: huevos de campo, mantequilla, trufa. Fuego bajo, paciencia y laminar al final.</p>
-                <div class="s-recipe-meta">
-                    <span class="s-recipe-tag">F&aacute;cil</span>
-                    <span class="s-recipe-tag">10 min</span>
-                    <span class="s-recipe-tag">5&ndash;8 g</span>
-                </div>
+        <!-- ── DICIEMBRE ── -->
+        <div class="s-month">
+            <span class="s-month-label">Diciembre &nbsp;&middot;&nbsp; Navidad</span>
+            <div class="s-recipe-grid">
+
+                <button class="s-recipe" onclick="openRecipe('r01')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-HFkbbNPjjtQ?auto=format&fit=crop&w=600&q=80" alt="Huevos trufados de Nochebuena">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">01</span>
+                        <h3>Huevos trufados<br>de Nochebuena</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Muy f&aacute;cil</span>
+                            <span class="s-recipe-tag">15 min + 48h</span>
+                            <span class="s-recipe-tag">8&ndash;10 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r02')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-ZQky9B8oBmE?auto=format&fit=crop&w=600&q=80" alt="Foie gras a la plancha con trufa">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">02</span>
+                        <h3>Foie gras a la plancha<br>con trufa y manzana</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Media</span>
+                            <span class="s-recipe-tag">20 min</span>
+                            <span class="s-recipe-tag">8 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r03')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-zdXDWA6Py2k?auto=format&fit=crop&w=600&q=80" alt="Solomillo al horno con mantequilla de trufa">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">03</span>
+                        <h3>Solomillo al horno<br>con mantequilla de trufa</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Media</span>
+                            <span class="s-recipe-tag">45 min</span>
+                            <span class="s-recipe-tag">12 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
             </div>
-
-            <div class="s-recipe">
-                <span class="s-recipe-n">02</span>
-                <h3>Pasta fresca<br>mantequilla y trufa</h3>
-                <div class="s-recipe-sep"></div>
-                <p>Tagliatelle hecho en casa o comprado fresco. Mantequilla noisette como fondo. La trufa se lamina en el plato, fuera del fuego. El calor residual hace el resto.</p>
-                <div class="s-recipe-meta">
-                    <span class="s-recipe-tag">Media</span>
-                    <span class="s-recipe-tag">40 min</span>
-                    <span class="s-recipe-tag">8&ndash;12 g</span>
-                </div>
-            </div>
-
-            <div class="s-recipe">
-                <span class="s-recipe-n">03</span>
-                <h3>Risotto de trufa<br>con parmesano</h3>
-                <div class="s-recipe-sep"></div>
-                <p>Arroz carnaroli, caldo de pollo casero, mantequilla y parmesano. La trufa solo al final, laminada sobre el plato. Nunca dentro del arroz caliente: el calor destruye el aroma.</p>
-                <div class="s-recipe-meta">
-                    <span class="s-recipe-tag">Media</span>
-                    <span class="s-recipe-tag">35 min</span>
-                    <span class="s-recipe-tag">10&ndash;15 g</span>
-                </div>
-            </div>
-
-            <div class="s-recipe">
-                <span class="s-recipe-n">04</span>
-                <h3>Tosta de pan de<br>masa madre con trufa</h3>
-                <div class="s-recipe-sep"></div>
-                <p>Pan de masa madre tostado, mantequilla de buena calidad a temperatura ambiente, sal Maldon y trufa laminada fina. El desayuno o la cena m&aacute;s sencilla de la temporada.</p>
-                <div class="s-recipe-meta">
-                    <span class="s-recipe-tag">F&aacute;cil</span>
-                    <span class="s-recipe-tag">5 min</span>
-                    <span class="s-recipe-tag">4&ndash;6 g</span>
-                </div>
-            </div>
-
-            <div class="s-recipe">
-                <span class="s-recipe-n">05</span>
-                <h3>Patatas panadera<br>con trufa y romero</h3>
-                <div class="s-recipe-sep"></div>
-                <p>Patata agria cortada fina, aceite de oliva virgen extra, romero fresco. Al horno a 180&deg; hasta dorar. La trufa se ralla en caliente, nada m&aacute;s sacar del horno.</p>
-                <div class="s-recipe-meta">
-                    <span class="s-recipe-tag">F&aacute;cil</span>
-                    <span class="s-recipe-tag">50 min</span>
-                    <span class="s-recipe-tag">6&ndash;10 g</span>
-                </div>
-            </div>
-
-            <div class="s-recipe">
-                <span class="s-recipe-n">06</span>
-                <h3>Carpaccio de trufa<br>con parmesano</h3>
-                <div class="s-recipe-sep"></div>
-                <p>Sin cocinar. Trufa laminada muy fina sobre r&uacute;cula, parmesano en l&aacute;minas, aceite de oliva virgen y escamas de sal. La receta m&aacute;s honesta: la trufa sola, sin nada que la tape.</p>
-                <div class="s-recipe-meta">
-                    <span class="s-recipe-tag">F&aacute;cil</span>
-                    <span class="s-recipe-tag">10 min</span>
-                    <span class="s-recipe-tag">8&ndash;12 g</span>
-                </div>
-            </div>
-
         </div>
+
+        <!-- ── ENERO ── -->
+        <div class="s-month">
+            <span class="s-month-label">Enero &nbsp;&middot;&nbsp; Reyes y pleno invierno</span>
+            <div class="s-recipe-grid">
+
+                <button class="s-recipe" onclick="openRecipe('r04')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-avaSgV6uq_4?auto=format&fit=crop&w=600&q=80" alt="Pasta fresca con mantequilla noisette y trufa">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">04</span>
+                        <h3>Pasta fresca con<br>mantequilla noisette y trufa</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">F&aacute;cil</span>
+                            <span class="s-recipe-tag">25 min</span>
+                            <span class="s-recipe-tag">10 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r05')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-gzcWC8Ypzyk?auto=format&fit=crop&w=600&q=80" alt="Risotto de trufa y parmesano">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">05</span>
+                        <h3>Risotto de trufa<br>y parmesano</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Media</span>
+                            <span class="s-recipe-tag">35 min</span>
+                            <span class="s-recipe-tag">12 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r06')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-w1naEK9-JNg?auto=format&fit=crop&w=600&q=80" alt="Tosta de masa madre con mantequilla y trufa">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">06</span>
+                        <h3>Tosta de masa madre<br>con mantequilla y trufa</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Muy f&aacute;cil</span>
+                            <span class="s-recipe-tag">8 min</span>
+                            <span class="s-recipe-tag">5&ndash;6 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ── FEBRERO ── -->
+        <div class="s-month">
+            <span class="s-month-label">Febrero &nbsp;&middot;&nbsp; San Valent&iacute;n</span>
+            <div class="s-recipe-grid">
+
+                <button class="s-recipe" onclick="openRecipe('r07')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-vQNm-PtNhxs?auto=format&fit=crop&w=600&q=80" alt="Tagliatelle de trufa para dos">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">07</span>
+                        <h3>Tagliatelle de trufa<br>para dos</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">F&aacute;cil</span>
+                            <span class="s-recipe-tag">20 min</span>
+                            <span class="s-recipe-tag">12 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r08')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-xcN-PeF6Rvw?auto=format&fit=crop&w=600&q=80" alt="Crema de coliflor con trufa y parmesano">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">08</span>
+                        <h3>Crema de coliflor<br>con trufa y parmesano</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">F&aacute;cil</span>
+                            <span class="s-recipe-tag">40 min</span>
+                            <span class="s-recipe-tag">8 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r09')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-rap402Jrn64?auto=format&fit=crop&w=600&q=80" alt="Carpaccio de trufa con burrata y rúcula">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">09</span>
+                        <h3>Carpaccio de trufa<br>con burrata y r&uacute;cula</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Muy f&aacute;cil</span>
+                            <span class="s-recipe-tag">5 min</span>
+                            <span class="s-recipe-tag">10 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ── MARZO ── -->
+        <div class="s-month">
+            <span class="s-month-label">Marzo &nbsp;&middot;&nbsp; Cierre de temporada</span>
+            <div class="s-recipe-grid">
+
+                <button class="s-recipe" onclick="openRecipe('r10')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-RntvjdTs-j0?auto=format&fit=crop&w=600&q=80" alt="Tortilla española de trufa negra">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">10</span>
+                        <h3>Tortilla espa&ntilde;ola<br>de trufa negra</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Media</span>
+                            <span class="s-recipe-tag">45 min</span>
+                            <span class="s-recipe-tag">8 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r11')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-gtdOI3dFVd4?auto=format&fit=crop&w=600&q=80" alt="Patatas panadera con trufa y romero">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">11</span>
+                        <h3>Patatas panadera<br>con trufa y romero</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">F&aacute;cil</span>
+                            <span class="s-recipe-tag">55 min</span>
+                            <span class="s-recipe-tag">8 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+                <button class="s-recipe" onclick="openRecipe('r12')">
+                    <img class="s-recipe-img" src="https://images.unsplash.com/photo-uhivFiF34uY?auto=format&fit=crop&w=600&q=80" alt="Arroz meloso con trufa">
+                    <div class="s-recipe-overlay">
+                        <span class="s-recipe-n">12</span>
+                        <h3>Arroz meloso<br>con trufa</h3>
+                        <div class="s-recipe-meta">
+                            <span class="s-recipe-tag">Media</span>
+                            <span class="s-recipe-tag">40 min</span>
+                            <span class="s-recipe-tag">15 g</span>
+                        </div>
+                        <span class="s-recipe-open">Ver receta &rarr;</span>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+
     </section>
 
     <!-- ══ SECCIÓN 2: LA TEMPORADA ═══════════════════════════ -->
@@ -587,6 +896,43 @@
         <p>Ezsencia &nbsp;&middot;&nbsp; &Aacute;rea de Socios &nbsp;&middot;&nbsp; Edici&oacute;n Fundadores 2026</p>
     </div>
 
+    <!-- ══ MODAL DE RECETA ══════════════════════════════════ -->
+    <div id="recipeOverlay" class="r-overlay" role="dialog" aria-modal="true">
+        <article class="r-modal" id="recipeModal">
+
+            <!-- Hero con imagen + título superpuesto -->
+            <div class="r-hero">
+                <img class="r-hero-img" id="recipeImg" src="" alt="">
+                <button class="r-close" id="recipeClose">Cerrar &times;</button>
+                <div class="r-hero-text">
+                    <span class="r-eyebrow" id="recipeEyebrow"></span>
+                    <h2 class="r-title" id="recipeTitle"></h2>
+                </div>
+            </div>
+
+            <!-- Tags + intro -->
+            <div class="r-intro-bar">
+                <div class="r-tags" id="recipeTags"></div>
+                <p class="r-intro" id="recipeIntro"></p>
+            </div>
+
+            <!-- Contenido: ingredientes + pasos -->
+            <div class="r-content">
+                <aside class="r-sidebar">
+                    <span class="r-col-label">Ingredientes</span>
+                    <ul class="r-ingredients" id="recipeIngredients"></ul>
+                </aside>
+                <div class="r-main">
+                    <span class="r-col-label">Elaboraci&oacute;n paso a paso</span>
+                    <ol class="r-steps" id="recipeSteps"></ol>
+                    <img class="r-mid-img" id="recipeMidImg" src="" alt="">
+                    <p class="r-note" id="recipeNote"></p>
+                </div>
+            </div>
+
+        </article>
+    </div>
+
     <script>
         (function () {
             var cursor = document.getElementById('cursor');
@@ -663,6 +1009,342 @@
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+    </script>
+
+    <script>
+    // ── Datos de recetas ──────────────────────────────────────────
+    const RECIPES = {
+        r01: {
+            eyebrow: 'Diciembre · Navidad',
+            title: 'Huevos trufados de Nochebuena',
+            img: 'https://images.unsplash.com/photo-HFkbbNPjjtQ?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-LA0nKKY-SFo?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Empieza aquí. Antes de cocinar nada. Los huevos se perfuman con la trufa durante 48 horas solo por estar en el mismo recipiente — la cáscara porosa hace todo el trabajo.',
+            tags: ['Muy fácil', '15 min + 48h reposo', '8–10 g de trufa'],
+            ingredients: [
+                '4 huevos de campo frescos',
+                '8–10 g de trufa negra',
+                'Mantequilla de buena calidad',
+                'Sal fina',
+                'Pan de masa madre'
+            ],
+            steps: [
+                'Mete los huevos enteros junto con la trufa en un recipiente hermético. Cierra bien y deja reposar en nevera mínimo 48 horas —72 horas es ideal—. La trufa perfuma el huevo a través de la cáscara porosa. No hace falta nada más.',
+                'El día que vayas a cocinarlos, saca los huevos 20 minutos antes para que lleguen a temperatura ambiente.',
+                'En una sartén antiadherente, derrite una cucharada generosa de mantequilla a fuego muy bajo. Añade los huevos batidos con una pizca de sal. Revuelve con espátula de silicona, despacio. Aparta del fuego cuando todavía parezcan ligeramente líquidos.',
+                'Sirve sobre pan tostado. Lamina la trufa restante encima. Escamas de sal.'
+            ],
+            note: 'Regla de oro: los huevos se terminan de cuajar en el plato con el calor residual. Si parecen hechos en la sartén, ya van tarde.'
+        },
+        r02: {
+            eyebrow: 'Diciembre · Navidad',
+            title: 'Foie gras a la plancha con trufa y manzana',
+            img: 'https://images.unsplash.com/photo-ZQky9B8oBmE?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-NOiOdWc2Jpk?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Para una noche que merezca la pena. La grasa del foie es el lienzo más generoso que existe para recibir el aroma de la trufa — lo captura, lo amplifica, lo hace tuyo.',
+            tags: ['Media', '20 min', '8 g de trufa'],
+            ingredients: [
+                '2 escalopes de foie fresco (≈ 80 g cada uno)',
+                '1 manzana golden o reineta',
+                '8 g de trufa negra',
+                'Sal gruesa y pimienta negra',
+                'Un chorrito de Pedro Ximénez o Armagnac (opcional)'
+            ],
+            steps: [
+                'Pela y corta la manzana en gajos finos. En una sartén sin grasa a fuego medio, cocínalos hasta que estén ligeramente dorados y blandos. Reserva calientes.',
+                'Marca la sartén a fuego muy alto sin ninguna grasa. Cuando humee, coloca los escalopes de foie. 45 segundos por lado sin moverlos. El objetivo es costra exterior, interior cremoso.',
+                'Retira el foie a un plato caliente. En la misma sartén fuera del fuego, añade el chorrito de Pedro Ximénez si lo usas. El calor residual lo reducirá en 30 segundos.',
+                'Coloca los gajos de manzana, encima el foie. Lamina la trufa con mandolina. Sal gruesa y pimienta recién molida. Sirve de inmediato.'
+            ],
+            note: 'El foie pierde temperatura rápidamente. Platos al horno, trufa lista, todo preparado antes de poner el foie en la sartén.'
+        },
+        r03: {
+            eyebrow: 'Diciembre · Navidad',
+            title: 'Solomillo al horno con mantequilla de trufa',
+            img: 'https://images.unsplash.com/photo-zdXDWA6Py2k?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-U5lLwx17rWs?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Para la mesa de Navidad. La mantequilla de trufa se prepara el día anterior y perfuma la carne desde dentro durante el reposo. Elegante, sencillo y brutalmente bueno.',
+            tags: ['Media', '45 min', '12 g de trufa'],
+            ingredients: [
+                '1 solomillo de ternera (600–700 g)',
+                '12 g de trufa negra',
+                '80 g de mantequilla sin sal (a temperatura ambiente)',
+                'Sal gruesa',
+                'Pimienta negra',
+                'Aceite de oliva virgen'
+            ],
+            steps: [
+                'El día anterior: ralla 6 g de trufa sobre la mantequilla blanda. Mezcla bien, forma un cilindro con papel film y refrigera.',
+                'Saca el solomillo de nevera 30 minutos antes. Sécalo bien con papel de cocina. Sala generosamente.',
+                'En una sartén de hierro muy caliente con un hilo de aceite, marca la pieza entera: 2 minutos por cada cara para conseguir costra, no cocción. Retira del fuego.',
+                'Unta la mitad de la mantequilla de trufa sobre la pieza marcada. Mete al horno a 180° entre 12–16 minutos según grosor (55° interior para punto rosado).',
+                'Saca del horno, tapa con papel de aluminio y deja reposar 8 minutos. Durante el reposo la mantequilla se funde sobre la carne.',
+                'Corta en medallones. Lamina los 6 g de trufa restantes encima. Añade el resto de la mantequilla de trufa alrededor.'
+            ],
+            note: 'El reposo es tan importante como la cocción. Cortar antes de que repose es el error más común.'
+        },
+        r04: {
+            eyebrow: 'Enero · Reyes y pleno invierno',
+            title: 'Pasta fresca con mantequilla noisette y trufa',
+            img: 'https://images.unsplash.com/photo-avaSgV6uq_4?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-T6vI65xwoNA?auto=format&fit=crop&w=1600&q=80',
+            intro: 'La grasa perfecta para la trufa perfecta. La mantequilla noisette huele a avellana tostada — ninguna otra grasa trabaja mejor con el Tuber melanosporum.',
+            tags: ['Fácil', '25 min', '10 g de trufa'],
+            ingredients: [
+                '300 g de tagliatelle o fettuccine frescos (o 220 g secos)',
+                '10 g de trufa negra',
+                '60 g de mantequilla sin sal',
+                'Parmesano Reggiano recién rallado',
+                'Sal y pimienta negra'
+            ],
+            steps: [
+                'Cuece la pasta en abundante agua con sal. Si es fresca: 2–3 min. Si es seca: según el paquete menos 1 minuto. Guarda un vaso del agua de cocción antes de escurrir.',
+                'Mientras cuece, pon la mantequilla en una sartén amplia a fuego medio. Déjala fundir y continúa cocinando: primero burbujeará, luego hará espuma y finalmente se tornará dorada con aroma a nuez. En ese momento apaga el fuego.',
+                'Añade la pasta escurrida a la sartén con la mantequilla noisette, fuera del fuego. Añade 3 cucharadas del agua de cocción. Mezcla con movimiento circular para emulsionar.',
+                'Sirve en platos calientes. Ralla parmesano abundante. Lamina la trufa encima con mandolina. Pimienta negra.'
+            ],
+            note: 'La mantequilla noisette se quema en segundos después del punto óptimo. Ten la pasta lista justo antes de hacerla.'
+        },
+        r05: {
+            eyebrow: 'Enero · Reyes y pleno invierno',
+            title: 'Risotto de trufa y parmesano',
+            img: 'https://images.unsplash.com/photo-gzcWC8Ypzyk?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-D9fAmtjC284?auto=format&fit=crop&w=1600&q=80',
+            intro: 'El lienzo más neutro que existe. Carnaroli cremoso, sin ningún ingrediente que compita. La trufa al final, siempre al final, fuera del fuego.',
+            tags: ['Media', '35 min', '12 g de trufa'],
+            ingredients: [
+                '280 g de arroz carnaroli o arborio',
+                '12 g de trufa negra',
+                '1 litro de caldo de pollo casero (caliente)',
+                '1 cebolla pequeña',
+                '80 ml de vino blanco seco',
+                '40 g de mantequilla + 20 g para el mantecado',
+                '50 g de parmesano Reggiano rallado',
+                'Aceite de oliva virgen'
+            ],
+            steps: [
+                'Calienta el caldo en un cazo aparte y mantenlo caliente a fuego mínimo durante todo el proceso. El caldo frío arruina el risotto.',
+                'Sofríe la cebolla muy picada en aceite y un poco de mantequilla a fuego medio-bajo, 8 minutos sin que se dore. Añade el arroz y tuesta 2 minutos removiendo. Vierte el vino blanco y deja evaporar.',
+                'Añade el caldo caliente en tandas de un cucharón. No añadas más hasta que el anterior se haya absorbido. Remueve con frecuencia durante 18 minutos.',
+                'Cuando el arroz esté al dente, apaga el fuego. Añade los 20 g de mantequilla fría y el parmesano rallado. Bate con energía para emulsionar (mantecado). Tapa y reposa 2 minutos.',
+                'Sirve en platos calientes. Lamina la trufa encima. No remuevas más.'
+            ],
+            note: 'Un buen risotto espera a los comensales, no al revés. Prepáralo cuando todos estén listos para sentarse.'
+        },
+        r06: {
+            eyebrow: 'Enero · Reyes y pleno invierno',
+            title: 'Tosta de masa madre con mantequilla y trufa',
+            img: 'https://images.unsplash.com/photo-w1naEK9-JNg?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-5WxnlaNOdag?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Cuando no quieres cocinar pero quieres comer algo bueno. Pan, mantequilla, trufa. Sin técnica. La honestidad como receta.',
+            tags: ['Muy fácil', '8 min', '5–6 g de trufa'],
+            ingredients: [
+                '2 rebanadas gruesas de pan de masa madre',
+                '5–6 g de trufa negra',
+                '30 g de mantequilla de buena calidad (a temperatura ambiente)',
+                'Escamas de sal Maldon'
+            ],
+            steps: [
+                'Tuesta el pan en el horno o en una sartén sin grasa hasta que esté dorado y crujiente por fuera, ligeramente blando por dentro.',
+                'Extiende la mantequilla blanda sobre el pan caliente y deja que se funda ligeramente. La grasa de la mantequilla es el vehículo que captura y transporta el aroma.',
+                'Lamina la trufa muy fina directamente sobre la tosta con mandolina o cuchillo fino. Añade escamas de sal Maldon.'
+            ],
+            note: 'La calidad del pan importa más de lo que parece. La masa madre, con su miga abierta, absorbe bien la mantequilla y la trufa. El pan industrial no.'
+        },
+        r07: {
+            eyebrow: 'Febrero · San Valentín',
+            title: 'Tagliatelle de trufa para dos',
+            img: 'https://images.unsplash.com/photo-vQNm-PtNhxs?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-wTBGTwHlf0c?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Para dos personas. Para una noche que importe. La salsa de nata y vino blanco abraza la trufa sin taparla — discreta pero definitiva.',
+            tags: ['Fácil', '20 min', '12 g de trufa'],
+            ingredients: [
+                '250 g de tagliatelle frescos',
+                '12 g de trufa negra',
+                '40 g de mantequilla',
+                '100 ml de nata para cocinar',
+                '60 ml de vino blanco seco',
+                '1 chalota pequeña',
+                'Parmesano Reggiano',
+                'Sal y pimienta negra'
+            ],
+            steps: [
+                'Sofríe la chalota muy picada en mantequilla a fuego suave, 5 minutos. Añade el vino blanco y deja reducir a la mitad.',
+                'Incorpora la nata, sube ligeramente el fuego y deja reducir 3–4 minutos hasta que la salsa nape una cuchara. Sal y pimienta.',
+                'Cuece la pasta en agua con mucha sal. 2 minutos si es fresca. Escurre reservando un poco del agua de cocción.',
+                'Añade la pasta a la salsa fuera del fuego, mezcla bien. Sirve en los platos. Ralla parmesano. Lamina la trufa encima con mandolina.'
+            ],
+            note: 'Si tienes mandolina úsala para la trufa. Los cortes finos distribuyen el aroma en cada bocado. Si no, un cuchillo bien afilado sirve.'
+        },
+        r08: {
+            eyebrow: 'Febrero · San Valentín',
+            title: 'Crema de coliflor con trufa y parmesano',
+            img: 'https://images.unsplash.com/photo-xcN-PeF6Rvw?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-18YZ7zuQG4Q?auto=format&fit=crop&w=1600&q=80',
+            intro: 'La coliflor es la sorpresa. Su fondo lácteo y neutro potencia la trufa de manera que no esperas — la sopa más elegante del invierno.',
+            tags: ['Fácil', '40 min', '8 g de trufa'],
+            ingredients: [
+                '1 coliflor mediana (≈ 800 g)',
+                '8 g de trufa negra',
+                '1 cebolla',
+                '2 dientes de ajo',
+                '600 ml de caldo de verduras o pollo',
+                '100 ml de nata',
+                '30 g de parmesano',
+                'Mantequilla, aceite de oliva virgen',
+                'Sal y pimienta blanca'
+            ],
+            steps: [
+                'Separa la coliflor en ramilletes. Sofríe la cebolla y el ajo picados en mantequilla y aceite a fuego medio, 8 minutos. Añade la coliflor y saltea 5 minutos más.',
+                'Cubre con el caldo caliente. Lleva a ebullición, baja el fuego y cuece 20 minutos hasta que la coliflor esté muy tierna.',
+                'Tritura con batidora de mano al menos 3 minutos hasta obtener una crema muy fina. Si queda espesa, añade más caldo. Incorpora la nata y ajusta de sal. Calienta 2 minutos.',
+                'Sirve en bowls calientes. Ralla parmesano. Lamina la trufa encima. Un hilo de aceite de oliva virgen y pimienta blanca.'
+            ],
+            note: 'Triturar bien durante 3 minutos es la diferencia entre una crema ordinaria y una seda. Paciencia con la batidora.'
+        },
+        r09: {
+            eyebrow: 'Febrero · San Valentín',
+            title: 'Carpaccio de trufa con burrata y rúcula',
+            img: 'https://images.unsplash.com/photo-rap402Jrn64?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-pk9gP76t6aQ?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Sin fuego. Sin técnica. Ingredientes buenos en el orden correcto. La trufa fría sobre burrata cremosa es uno de los sabores más directos que existen.',
+            tags: ['Muy fácil', '5 min', '10 g de trufa'],
+            ingredients: [
+                '1 burrata fresca (125 g)',
+                '10 g de trufa negra',
+                'Un puñado de rúcula fresca',
+                'Aceite de oliva virgen extra de calidad',
+                'Escamas de sal Maldon',
+                'Pimienta negra'
+            ],
+            steps: [
+                'Seca bien la rúcula y distribúyela en el plato. Coloca la burrata en el centro. Ábrela ligeramente con las manos para que la stracciatella interior quede visible.',
+                'Lamina la trufa directamente sobre la burrata con mandolina. Los cortes deben ser finos pero que se noten en boca.',
+                'Añade un hilo generoso de aceite de oliva virgen extra. Escamas de sal y pimienta negra recién molida.'
+            ],
+            note: 'La burrata debe estar a temperatura ambiente, no fría de nevera. Sácala 15 minutos antes. El frío mata la textura y el sabor.'
+        },
+        r10: {
+            eyebrow: 'Marzo · Cierre de temporada',
+            title: 'Tortilla española de trufa negra',
+            img: 'https://images.unsplash.com/photo-RntvjdTs-j0?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-aIfV9vtoHn4?auto=format&fit=crop&w=1600&q=80',
+            intro: 'La tortilla española es una de las elaboraciones más difíciles de la cocina sencilla. Hacerla bien requiere paciencia, buena patata y mano. Con trufa, el resultado es imbatible.',
+            tags: ['Media', '45 min', '8 g de trufa'],
+            ingredients: [
+                '500 g de patatas (agria o monalisa)',
+                '6 huevos',
+                '8 g de trufa negra',
+                '1 cebolla dulce',
+                'Aceite de oliva virgen extra',
+                'Sal'
+            ],
+            steps: [
+                'Pela y corta la patata en láminas finas (2–3 mm). En una sartén amplia con aceite generoso a fuego medio-bajo, confita la patata y la cebolla durante 25 minutos. La patata no debe freírse: solo cocinarse lentamente hasta quedar tierna. Escurre bien.',
+                'Bate los huevos con sal. Añade la patata y cebolla confitada. Ralla la trufa sobre la mezcla y deja reposar 10 minutos para que el aroma penetre en el huevo.',
+                'En una sartén antiadherente de 22 cm con un poco del aceite de confitar, vierte la mezcla a fuego medio. Cuando los bordes empiecen a cuajar (3–4 min), da la vuelta con un plato.',
+                'Cocina el otro lado 2 minutos para tortilla jugosa —interior cremoso— o más según preferencia. Deja reposar 5 minutos antes de cortar.'
+            ],
+            note: 'El reposo antes de cortar es obligatorio. Una tortilla recién sacada del fuego no tiene el cuajado justo. 5 minutos marcan la diferencia.'
+        },
+        r11: {
+            eyebrow: 'Marzo · Cierre de temporada',
+            title: 'Patatas panadera con trufa y romero',
+            img: 'https://images.unsplash.com/photo-gtdOI3dFVd4?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-9DEggBoY8CY?auto=format&fit=crop&w=1600&q=80',
+            intro: 'Contundente, aromático, honesto. La trufa sobre el calor residual de las patatas recién salidas del horno — sin quemarla, sin perder nada.',
+            tags: ['Fácil', '55 min', '8 g de trufa'],
+            ingredients: [
+                '700 g de patata agria',
+                '8 g de trufa negra',
+                '2 ramas de romero fresco',
+                '4 dientes de ajo',
+                'Aceite de oliva virgen extra',
+                'Sal gruesa y pimienta negra'
+            ],
+            steps: [
+                'Precalienta el horno a 190°. Pela y corta las patatas en rodajas de 4–5 mm. Sécalas bien con papel de cocina.',
+                'En una fuente de horno, mezcla las patatas con aceite generoso, los ajos aplastados con piel, el romero, sal gruesa y pimienta. Extiende en una sola capa.',
+                'Hornea 40–45 minutos hasta que las patatas estén doradas y crujientes en los bordes. A mitad de cocción da la vuelta a las patatas sin romperlas.',
+                'Saca del horno y deja reposar 3 minutos fuera. Ralla o lamina la trufa directamente sobre las patatas calientes. Sirve de inmediato.'
+            ],
+            note: 'La trufa sobre las patatas calientes —no hirviendo— es el truco. El calor residual libera el aroma sin quemarlo.'
+        },
+        r12: {
+            eyebrow: 'Marzo · Cierre de temporada',
+            title: 'Arroz meloso con trufa',
+            img: 'https://images.unsplash.com/photo-uhivFiF34uY?auto=format&fit=crop&w=1400&q=80',
+            midImg: 'https://images.unsplash.com/photo-AWFJ8AntWRM?auto=format&fit=crop&w=1600&q=80',
+            intro: 'El último envío merece la receta más generosa. Con 15 g es la elaboración con más aroma de toda la temporada. Un cierre que está a la altura de lo que ha sido.',
+            tags: ['Media', '40 min', '15 g de trufa'],
+            ingredients: [
+                '300 g de arroz bomba o senia',
+                '15 g de trufa negra',
+                '1,2 litros de caldo de pollo o verduras (caliente)',
+                '1 cebolla',
+                '2 dientes de ajo',
+                '1 tomate maduro rallado',
+                'Aceite de oliva virgen extra',
+                'Sal, azafrán (opcional)'
+            ],
+            steps: [
+                'Sofríe la cebolla y el ajo muy picados en aceite generoso a fuego medio, 10 minutos. Añade el tomate rallado y cocina 5 minutos más hasta que pierda la acidez.',
+                'Añade el arroz y tuesta 2 minutos removiendo. Incorpora el azafrán si lo usas.',
+                'Vierte el caldo caliente de golpe. Lleva a ebullición, baja el fuego y cuece 16–18 minutos. El resultado debe quedar más caldoso que una paella. Si se seca antes, añade más caldo caliente.',
+                'Apaga el fuego. Tapa con un paño limpio y reposa 3 minutos.',
+                'Sirve en platos hondos. Lamina la trufa generosamente encima. El calor del arroz hará el resto.'
+            ],
+            note: 'El arroz meloso espera mal. Prepararlo y servirlo de inmediato. Si se enfría, el almidón se coagula y pierde la textura característica.'
+        }
+    };
+
+    // ── Modal logic ───────────────────────────────────────────────
+    const overlay = document.getElementById('recipeOverlay');
+
+    function openRecipe(id) {
+        const r = RECIPES[id];
+        if (!r) return;
+
+        document.getElementById('recipeImg').src          = r.img;
+        document.getElementById('recipeImg').alt          = r.title;
+        document.getElementById('recipeEyebrow').textContent  = r.eyebrow;
+        document.getElementById('recipeTitle').textContent    = r.title;
+        document.getElementById('recipeIntro').textContent    = r.intro  || '';
+        document.getElementById('recipeNote').textContent     = r.note   || '';
+
+        const midImg = document.getElementById('recipeMidImg');
+        midImg.src = r.midImg || r.img;
+        midImg.alt = r.title;
+        midImg.style.display = 'block';
+
+        document.getElementById('recipeTags').innerHTML =
+            r.tags.map(t => `<span class="r-tag">${t}</span>`).join('');
+
+        document.getElementById('recipeIngredients').innerHTML =
+            r.ingredients.map(i => `<li>${i}</li>`).join('');
+
+        document.getElementById('recipeSteps').innerHTML =
+            r.steps.map(s => `<li>${s}</li>`).join('');
+
+        document.getElementById('recipeNote').style.display = r.note ? 'block' : 'none';
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        overlay.scrollTop = 0;
+    }
+
+    function closeRecipe() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('recipeClose').addEventListener('click', closeRecipe);
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeRecipe();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeRecipe();
+    });
     </script>
 
 </body>
