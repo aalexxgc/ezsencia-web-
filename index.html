@@ -2235,7 +2235,7 @@
 
             <div class="idx-exp-lista">
 
-                <a class="idx-exp-item" href="/experiencia" data-open-modal="modal-caja">
+                <a class="idx-exp-item" href="/experiencia/caja-fundadora">
                     <span class="idx-exp-num">I</span>
                     <div>
                         <p class="idx-exp-nombre">La Caja Fundadora</p>
@@ -2244,7 +2244,7 @@
                     </div>
                 </a>
 
-                <a class="idx-exp-item" href="/experiencia" data-open-modal="modal-ritual">
+                <a class="idx-exp-item" href="/experiencia/ritual">
                     <span class="idx-exp-num">II</span>
                     <div>
                         <p class="idx-exp-nombre">Entregas de Trufa Fresca</p>
@@ -2253,7 +2253,7 @@
                     </div>
                 </a>
 
-                <a class="idx-exp-item" href="/experiencia" data-open-modal="modal-origen">
+                <a class="idx-exp-item" href="/experiencia/origen">
                     <span class="idx-exp-num">III</span>
                     <div>
                         <p class="idx-exp-nombre">El D&iacute;a en el Campo</p>
@@ -2262,7 +2262,7 @@
                     </div>
                 </a>
 
-                <a class="idx-exp-item" href="/experiencia" data-open-modal="modal-mesa">
+                <a class="idx-exp-item" href="/experiencia/mesa">
                     <span class="idx-exp-num">IV</span>
                     <div>
                         <p class="idx-exp-nombre">La Mesa Ezsencia</p>
@@ -2654,14 +2654,6 @@
 
         document.querySelectorAll('.reveal').forEach(function (el) {
             observer.observe(el);
-        });
-
-        // Experiencia items → abrir modal directamente
-        document.querySelectorAll('[data-open-modal]').forEach(function (el) {
-            el.addEventListener('click', function (e) {
-                e.preventDefault();
-                openModal(el.dataset.openModal);
-            });
         });
 
         const hamburger   = document.getElementById('navHamburger');

@@ -727,6 +727,7 @@
             border-bottom:   1px solid var(--borde);
             padding-bottom:  0.35rem;
             cursor:          pointer;
+            text-decoration: none;
             transition:      border-color 0.3s, color 0.3s, gap 0.3s;
         }
 
@@ -2090,7 +2091,7 @@
                     No se vende, no se repite. Es simplemente la forma que tenemos de decir
                     que esto va en serio.
                 </p>
-                <button class="club-descubrir" data-modal="modal-caja">Descubrir</button>
+                <a class="club-descubrir" href="/experiencia/caja-fundadora">Descubrir</a>
             </div>
         </div>
         <div class="club-moment-img">
@@ -2122,7 +2123,7 @@
                     El d&iacute;a termina en la mesa: la trufa de esa ma&ntilde;ana,
                     cocinada en el d&iacute;a, con gente con la que ya has estado en el campo.
                 </p>
-                <button class="club-descubrir" data-modal="modal-origen">Descubrir</button>
+                <a class="club-descubrir" href="/experiencia/origen">Descubrir</a>
             </div>
         </div>
         <div class="club-moment-img">
@@ -2152,7 +2153,7 @@
                     No es un restaurante.<br>
                     Es la mesa del club.
                 </p>
-                <button class="club-descubrir" data-modal="modal-mesa">Descubrir</button>
+                <a class="club-descubrir" href="/experiencia/mesa">Descubrir</a>
             </div>
         </div>
         <div class="club-moment-img">
@@ -2184,7 +2185,7 @@
                     condiciones del suelo esa semana, sugerencia de uso. No es un pedido.
                     Es una continuaci&oacute;n del ritual que empez&oacute; en el campo.
                 </p>
-                <button class="club-descubrir" data-modal="modal-ritual">Descubrir</button>
+                <a class="club-descubrir" href="/experiencia/ritual">Descubrir</a>
             </div>
         </div>
         <div class="club-moment-img">
@@ -2946,12 +2947,6 @@
             overlay.classList.remove('is-open');
             document.body.style.overflow = '';
         }
-
-        document.querySelectorAll('.club-descubrir').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                openModal(btn.dataset.modal);
-            });
-        });
 
         document.querySelectorAll('.exp-modal-close').forEach(function (btn) {
             btn.addEventListener('click', function () {

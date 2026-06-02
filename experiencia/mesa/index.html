@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La Mesa Ezsencia. Del campo a la mesa en el mismo d&iacute;a. Encuentro gastron&oacute;mico en Mas&iacute;a El Molinete, Mora de Rubielos.">
+    <meta property="og:title"       content="La Mesa Ezsencia — EZSENCIA">
+    <meta property="og:description" content="Despu&eacute;s del campo, la mesa. La trufa de esa ma&ntilde;ana, cocinada el mismo d&iacute;a. Mora de Rubielos, Enero 2026.">
+    <meta property="og:image"       content="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/og-image.jpg">
+    <meta property="og:type"        content="website">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>La Mesa Ezsencia — EZSENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* ── Hero con texto overlay ── */
+        .mcaja-hero {
+            position:   relative;
+            height:     100vh;
+            min-height: 500px;
+            overflow:   hidden;
+        }
+        .mcaja-hero-img {
+            position:        absolute;
+            inset:           0;
+            width:           100%;
+            height:          100%;
+            object-fit:      cover;
+            object-position: center 60%;
+            filter:          brightness(0.42);
+            transform:       scale(1.07);
+            transition:      transform 9s ease, filter 1.8s ease;
+        }
+        body.page-loaded .mcaja-hero-img { transform: scale(1); }
+        .mcaja-hero-overlay {
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(180deg,rgba(26,24,20,.25) 0%,rgba(26,24,20,0.5) 55%,rgba(26,24,20,0.7) 100%);
+        }
+        .mcaja-hero-text {
+            position:   absolute;
+            bottom:     8rem;
+            left:       50%;
+            transform:  translateX(-50%);
+            text-align: center;
+            white-space: nowrap;
+        }
+        .mcaja-hero-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.48rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color:          #c9a96e;
+            margin-bottom:  1.4rem;
+        }
+        .mcaja-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size:   clamp(3rem, 7vw, 6rem);
+            font-weight: 400;
+            font-style:  italic;
+            line-height: 1.1;
+            color:       #f5f0e8;
+            margin:      0 0 1.4rem;
+        }
+        .mcaja-hero-sub {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(0.9rem, 1.3vw, 1.1rem);
+            font-style:  italic;
+            color:       rgba(245,240,232,0.55);
+            line-height: 1.8;
+        }
+        .mcaja-hero-scroll {
+            position:       absolute;
+            bottom:         2.5rem;
+            left:           50%;
+            transform:      translateX(-50%);
+            font-family:    'Lato', sans-serif;
+            font-size:      0.48rem;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.5);
+            animation:      mcajaScrollPulse 2.8s ease infinite;
+            white-space:    nowrap;
+        }
+        @keyframes mcajaScrollPulse {
+            0%,100% { opacity:.35; transform:translateX(-50%) translateY(0); }
+            50%      { opacity:.7;  transform:translateX(-50%) translateY(7px); }
+        }
+        /* ── Intro: mmesa-lugar ── */
+        .mmesa-lugar {
+            padding:    10rem 4rem 8rem;
+            text-align: center;
+            background: #f5f0e8;
+        }
+        .mmesa-lugar-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.48rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color:          #9a7d4a;
+            margin-bottom:  1.8rem;
+        }
+        .mmesa-lugar-nombre {
+            font-family:   'Playfair Display', serif;
+            font-size:     clamp(2rem, 4vw, 3.4rem);
+            font-weight:   400;
+            font-style:    italic;
+            line-height:   1.25;
+            color:         #1a1814;
+            margin:        0 0 3rem;
+        }
+        .mmesa-sep {
+            width:     2.8rem;
+            height:    1px;
+            background: #b8965a;
+            margin:    0 auto 3rem;
+        }
+        .mmesa-lugar-texto {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(1.1rem, 1.5vw, 1.3rem);
+            line-height: 2.1;
+            color:       #4a4640;
+            max-width:   680px;
+            margin:      0 auto;
+        }
+        /* ── Datos 3 columnas ── */
+        .mfase-datos {
+            display:               grid;
+            grid-template-columns: repeat(3,1fr);
+            background:            #e8e2d6;
+            border-top:            1px solid #d8d0c4;
+        }
+        .mfase-dato {
+            padding:      4rem 3.5rem;
+            border-right: 1px solid #d8d0c4;
+        }
+        .mfase-dato:last-child { border-right: none; }
+        .mfase-dato-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.5rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color:          #9a7d4a;
+            margin-bottom:  1.2rem;
+        }
+        .mfase-dato-text {
+            font-family: 'EB Garamond', serif;
+            font-size:   clamp(0.95rem, 1.2vw, 1.05rem);
+            font-style:  italic;
+            line-height: 1.9;
+            color:       #4a4640;
+        }
+        /* ── Foto break ── */
+        .mmesa-foto {
+            position:   relative;
+            height:     55vh;
+            min-height: 340px;
+            overflow:   hidden;
+        }
+        .mmesa-foto-img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+            filter:     brightness(0.72);
+        }
+        .mmesa-foto-caption {
+            position:       absolute;
+            bottom:         2.4rem;
+            left:           50%;
+            transform:      translateX(-50%);
+            font-family:    'Lato', sans-serif;
+            font-size:      0.46rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.55);
+            white-space:    nowrap;
+        }
+        /* ── La carta ── */
+        .mmesa-carta {
+            background:  #f5f0e8;
+            border-top:  1px solid #d8d0c4;
+            padding:     8rem 0;
+            max-width:   720px;
+            margin:      0 auto;
+        }
+        .mmesa-curso {
+            padding:       4rem 4rem 3.5rem;
+            border-bottom: 1px solid #d8d0c4;
+        }
+        .mmesa-curso:last-child { border-bottom: none; }
+        .mmesa-curso-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.46rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color:          #9a7d4a;
+            display:        block;
+            margin-bottom:  1.6rem;
+        }
+        .mmesa-principal {
+            font-family:   'Playfair Display', serif;
+            font-size:     clamp(1.1rem, 1.6vw, 1.4rem);
+            font-style:    italic;
+            line-height:   1.7;
+            color:         #1a1814;
+            margin:        0 0 0.8rem;
+        }
+        .mmesa-platos {
+            list-style:  none;
+            padding:     0;
+            margin:      0;
+        }
+        .mmesa-platos li {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(0.95rem, 1.2vw, 1.1rem);
+            line-height:   2;
+            color:         #5a5248;
+            padding-left:  1.2rem;
+            position:      relative;
+        }
+        .mmesa-platos li::before {
+            content:  '—';
+            position: absolute;
+            left:     0;
+            color:    #c9a96e;
+        }
+        .mmesa-nota {
+            font-family: 'EB Garamond', serif;
+            font-size:   0.9rem;
+            font-style:  italic;
+            line-height: 1.8;
+            color:       rgba(26,24,20,0.35);
+            margin-top:  1.6rem;
+        }
+        /* ── Cierre ── */
+        .mcaja-cierre {
+            padding:        16rem 2rem;
+            text-align:     center;
+            background:     #ede8de;
+            border-top:     1px solid #d8d0c4;
+            display:        flex;
+            flex-direction: column;
+            align-items:    center;
+            gap:            3rem;
+        }
+        .mcaja-cierre-linea { width: 1px; height: 72px; background: linear-gradient(180deg,transparent,#9a7d4a,transparent); }
+        .mcaja-cierre-frase {
+            font-family: 'Playfair Display', serif;
+            font-size:   clamp(1.8rem, 3.8vw, 3.2rem);
+            font-weight: 400;
+            font-style:  italic;
+            line-height: 1.5;
+            color:       #1a1814;
+            max-width:   660px;
+        }
+        .mcaja-cierre-edition {
+            font-family: 'EB Garamond', serif;
+            font-style:  italic;
+            font-size:   clamp(1rem, 1.4vw, 1.2rem);
+            color:       #5a5248;
+            max-width:   520px;
+            line-height: 1.8;
+        }
+        .mcaja-cierre-cta {
+            display:         inline-block;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.54rem;
+            letter-spacing:  0.4em;
+            text-transform:  uppercase;
+            color:           #f5f0e8;
+            background:      #1a1814;
+            text-decoration: none;
+            padding:         1.3rem 4.5rem;
+            transition:      background 0.35s;
+        }
+        .mcaja-cierre-cta:hover { background: #9a7d4a; }
+        .mcaja-cierre-final { font-family: 'EB Garamond', serif; font-size: 0.9rem; font-style: italic; color: rgba(26,24,20,0.3); }
+        /* ── Nav prev/next ── */
+        .exp-page-nav { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+        .exp-page-nav-link {
+            display:         inline-flex;
+            align-items:     center;
+            gap:             0.8rem;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.52rem;
+            letter-spacing:  0.32em;
+            text-transform:  uppercase;
+            color:           rgba(26,24,20,0.45);
+            text-decoration: none;
+            border:          1px solid rgba(154,125,74,0.3);
+            padding:         1rem 2.5rem;
+            transition:      color 0.3s, border-color 0.3s;
+        }
+        .exp-page-nav-link:hover { color: #1a1814; border-color: rgba(154,125,74,0.7); }
+        /* ── Responsive ── */
+        @media (max-width: 860px) {
+            .mfase-datos { grid-template-columns: 1fr; }
+            .mfase-dato  { border-right: none; border-bottom: 1px solid #d8d0c4; }
+            .mfase-dato:last-child { border-bottom: none; }
+            .mmesa-carta  { padding: 5rem 0; }
+            .mmesa-curso  { padding: 3rem 2rem 2.5rem; }
+        }
+        @media (max-width: 600px) {
+            .mcaja-hero          { height: 100svh; }
+            .mcaja-hero-text     { white-space: normal; width: 90%; text-align: center; }
+            .mmesa-lugar         { padding: 6rem 1.8rem 5rem; }
+            .mcaja-cierre        { padding: 9rem 1.8rem; }
+            .mmesa-foto          { height: 50vw; min-height: 240px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav id="navbar">
+        <a href="/" class="nav-logo">EZSENCIA</a>
+        <ul class="nav-links">
+            <li><a href="/experiencia">La Experiencia</a></li>
+            <li><a href="/nosotros">Sobre Nosotros</a></li>
+            <li><a href="/socios">&Aacute;rea de Socios</a></li>
+        </ul>
+        <a href="/acceso" class="nav-cta">Solicitar Invitaci&oacute;n</a>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Abrir men&uacute;" aria-expanded="false" aria-controls="navMobileDrawer">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+    <div class="nav-mobile-drawer" id="navMobileDrawer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Men&uacute; de navegaci&oacute;n">
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+        <ul class="nav-mobile-links">
+            <li><a href="/">Ezsencia</a></li>
+            <li><a href="/experiencia">La Experiencia</a></li>
+            <li><a href="/nosotros">Sobre Nosotros</a></li>
+            <li><a href="/socios">&Aacute;rea de Socios</a></li>
+        </ul>
+        <a href="/acceso" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
+        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 20 miembros</p>
+    </div>
+
+    <!-- HERO -->
+    <div class="mcaja-hero">
+        <img class="mcaja-hero-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="La Mesa Ezsencia — Encuentro Gastron&oacute;mico">
+        <div class="mcaja-hero-overlay"></div>
+        <div class="mcaja-hero-text">
+            <p class="mcaja-hero-eyebrow">III &nbsp;&middot;&nbsp; El Encuentro Gastron&oacute;mico</p>
+            <h1 class="mcaja-hero-title">La Mesa<br>Ezsencia</h1>
+            <p class="mcaja-hero-sub">Ubicaci&oacute;n prevista &nbsp;&middot;&nbsp; Mora de Rubielos<br>Enero 2026</p>
+        </div>
+        <p class="mcaja-hero-scroll">El men&uacute;</p>
+    </div>
+
+    <!-- INTRO: del campo a la mesa -->
+    <div class="mmesa-lugar">
+        <p class="mmesa-lugar-eyebrow">La mesa del club</p>
+        <h2 class="mmesa-lugar-nombre">Del campo a la mesa,<br>en el mismo d&iacute;a.</h2>
+        <div class="mmesa-sep"></div>
+        <p class="mmesa-lugar-texto">
+            Despu&eacute;s de la ma&ntilde;ana en los truferos de Alcotas, el grupo se desplaza hacia Mora de Rubielos. All&iacute;, en Mas&iacute;a El Molinete, tendr&aacute; lugar &mdash;una vez conformado el grupo&mdash; la mesa Ezsencia: un encuentro gastron&oacute;mico construido alrededor de la trufa negra recolectada esa misma ma&ntilde;ana, con producto de proximidad y una bodega seleccionada para la ocasi&oacute;n.
+        </p>
+    </div>
+
+    <!-- DATOS: 3 columnas -->
+    <div class="mfase-datos">
+        <div class="mfase-dato">
+            <p class="mfase-dato-label">El espacio</p>
+            <p class="mfase-dato-text">Sala privada reservada exclusivamente para el club. Sin accesos externos durante la jornada.</p>
+        </div>
+        <div class="mfase-dato">
+            <p class="mfase-dato-label">El desplazamiento</p>
+            <p class="mfase-dato-text">En los veh&iacute;culos del evento, desde Alcotas hasta Mora de Rubielos. Unos cuarenta minutos entre los dos.</p>
+        </div>
+        <div class="mfase-dato">
+            <p class="mfase-dato-label">La trufa</p>
+            <p class="mfase-dato-text">La misma que el grupo ha encontrado esa ma&ntilde;ana. Seleccionada en campo, trabajada en el d&iacute;a.</p>
+        </div>
+    </div>
+
+    <!-- FOTO: transporte -->
+    <div class="mmesa-foto">
+        <img class="mmesa-foto-img" src="/assets/transporte.png" alt="Desplazamiento desde Alcotas hasta Mora de Rubielos">
+        <p class="mmesa-foto-caption">Alcotas &nbsp;&mdash;&nbsp; Mora de Rubielos</p>
+    </div>
+
+    <!-- LA CARTA -->
+    <div class="mmesa-carta">
+
+        <div class="mmesa-curso">
+            <span class="mmesa-curso-label">El recorrido gastron&oacute;mico</span>
+            <p class="mmesa-principal" style="font-style:normal;color:#5a5248;margin-bottom:2rem;">Un men&uacute; construido alrededor de la trufa recolectada esa ma&ntilde;ana. A modo de referencia:</p>
+            <ul class="mmesa-platos">
+                <li>Quesos de la Sierra de Albarrac&iacute;n y jam&oacute;n de Teruel D.O.</li>
+                <li>Aperitivos de la zona, con trufa</li>
+                <li>Platos del territorio cocinados en el d&iacute;a</li>
+            </ul>
+        </div>
+
+        <div class="mmesa-curso">
+            <span class="mmesa-curso-label">Plato principal</span>
+            <p class="mmesa-principal">
+                Ternasco de Arag&oacute;n D.O., con trufa negra de Alcotas.
+            </p>
+        </div>
+
+        <div class="mmesa-curso">
+            <span class="mmesa-curso-label">Postre</span>
+            <p class="mmesa-principal">
+                Postre de temporada.
+            </p>
+        </div>
+
+        <div class="mmesa-curso">
+            <span class="mmesa-curso-label">La bodega</span>
+            <p class="mmesa-principal" style="font-style:normal;color:#5a5248;">
+                Una selecci&oacute;n de vinos de Arag&oacute;n elegida para acompa&ntilde;ar el recorrido gastron&oacute;mico. Blancos, tintos y espumosos que respetan el ritmo del men&uacute; y la intensidad de la trufa.
+            </p>
+            <p class="mmesa-nota">El men&uacute; definitivo se ajusta en cada edici&oacute;n seg&uacute;n el momento del producto y el criterio culinario del equipo responsable. Bebidas incluidas.</p>
+        </div>
+
+    </div>
+
+    <!-- FOTO: el club -->
+    <div class="mmesa-foto">
+        <img class="mmesa-foto-img" src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/club.JPG" alt="El club en la mesa">
+        <p class="mmesa-foto-caption">Mora de Rubielos &nbsp;&middot;&nbsp; Enero 2026</p>
+    </div>
+
+    <!-- CIERRE -->
+    <div class="mcaja-cierre">
+        <div class="mcaja-cierre-linea"></div>
+        <p class="mcaja-cierre-frase">
+            El tiempo que haga falta.<br>
+            La sala es para el club.
+        </p>
+        <div class="mcaja-cierre-linea"></div>
+        <p class="mcaja-cierre-edition">La confirmaci&oacute;n definitiva de la ubicaci&oacute;n y del desarrollo completo de la experiencia se realiza una vez formado el grupo de miembros.</p>
+        <a href="/acceso" class="mcaja-cierre-cta">Solicitar invitaci&oacute;n</a>
+        <div class="exp-page-nav">
+            <a href="/experiencia/origen" class="exp-page-nav-link">&larr; El Encuentro</a>
+        </div>
+        <p class="mcaja-cierre-final">Ezsencia &nbsp;&middot;&nbsp; Founders Edition 2026 &nbsp;&middot;&nbsp; 20 miembros</p>
+    </div>
+
+    <footer>
+        <div class="footer-main">
+            <div class="footer-brand">
+                <span class="footer-brand-logo">EZSENCIA</span>
+                <p class="footer-brand-sub">Truffle Society<br>Alcotas, Teruel &nbsp;&middot;&nbsp; Desde 2012</p>
+            </div>
+            <div class="footer-nav">
+                <span class="footer-section-label">Navegar</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/experiencia">La Experiencia</a></li>
+                    <li><a href="/nosotros">Sobre Nosotros</a></li>
+                    <li><a href="/acceso">Solicitar Invitaci&oacute;n</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <span class="footer-section-label">Contacto</span>
+                <a href="mailto:founder@ezsencia.com" class="footer-contact-email">founder@ezsencia.com</a>
+                <a href="https://www.instagram.com/laezsencia" target="_blank" rel="noopener" class="footer-contact-ig">@laezsencia</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 EZSENCIA. Todos los derechos reservados.</p>
+            <ul class="footer-legal">
+                <li><a href="/aviso-legal">Aviso Legal</a></li>
+                <li><a href="/privacidad">Privacidad</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        var cursor = document.getElementById('cursor');
+        var ring   = document.getElementById('cursorRing');
+        var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+        document.addEventListener('mousemove', function (e) {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
+        });
+        (function animateRing() {
+            ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12;
+            ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        })();
+        document.querySelectorAll('a, button').forEach(function (el) {
+            el.addEventListener('mouseenter', function () {
+                cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+                ring.style.transform   = 'translate(-50%,-50%) scale(1.5)';
+            });
+            el.addEventListener('mouseleave', function () {
+                cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+                ring.style.transform   = 'translate(-50%,-50%) scale(1)';
+            });
+        });
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () { navbar.classList.toggle('scrolled', window.scrollY > 60); });
+        var hamburger   = document.getElementById('navHamburger');
+        var drawer      = document.getElementById('navMobileDrawer');
+        var backdrop    = document.getElementById('navBackdrop');
+        var drawerClose = document.getElementById('navMobileClose');
+        function openMobileMenu() {
+            hamburger.setAttribute('aria-expanded','true'); drawer.setAttribute('aria-hidden','false');
+            drawer.classList.add('open'); backdrop.classList.add('open');
+            document.body.classList.add('menu-open'); document.body.style.overflow='hidden'; drawerClose.focus();
+        }
+        function closeMobileMenu() {
+            hamburger.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true');
+            drawer.classList.remove('open'); backdrop.classList.remove('open');
+            document.body.classList.remove('menu-open'); document.body.style.overflow=''; hamburger.focus();
+        }
+        hamburger.addEventListener('click', openMobileMenu);
+        drawerClose.addEventListener('click', closeMobileMenu);
+        backdrop.addEventListener('click', closeMobileMenu);
+        drawer.querySelectorAll('a').forEach(function (l) { l.addEventListener('click', closeMobileMenu); });
+        document.addEventListener('keydown', function (e) { if (e.key==='Escape'&&drawer.classList.contains('open')) closeMobileMenu(); });
+        requestAnimationFrame(function () { document.body.classList.add('page-loaded'); });
+    })();
+    </script>
+</body>
+</html>
