@@ -2966,13 +2966,13 @@
         });
 
         // Auto-abrir modal si viene desde la home con sessionStorage
-        window.addEventListener('load', function () {
+        (function () {
             var pending = sessionStorage.getItem('ezModal');
             if (pending) {
                 sessionStorage.removeItem('ezModal');
-                openModal(pending);
+                setTimeout(function () { openModal(pending); }, 80);
             }
-        });
+        })();
 
         // IntersectionObserver para piezas de modales de lujo
         ['modal-caja', 'modal-origen', 'modal-ritual'].forEach(function (id) {
