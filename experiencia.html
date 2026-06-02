@@ -2965,12 +2965,12 @@
             });
         });
 
-        // Auto-abrir modal si la URL llega con hash (#modal-caja, etc.)
+        // Auto-abrir modal si viene desde la home con sessionStorage
         window.addEventListener('load', function () {
-            var hash = window.location.hash.replace('#', '');
-            var valid = ['modal-caja', 'modal-origen', 'modal-mesa', 'modal-ritual'];
-            if (valid.indexOf(hash) !== -1) {
-                openModal(hash);
+            var pending = sessionStorage.getItem('ezModal');
+            if (pending) {
+                sessionStorage.removeItem('ezModal');
+                openModal(pending);
             }
         });
 
