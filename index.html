@@ -1238,7 +1238,7 @@
         #modal-origen .exp-modal-close,
         #modal-mesa .exp-modal-close,
         #modal-ritual .exp-modal-close {
-            position:      fixed;
+            position:      absolute;
             top:           1.6rem;
             right:         2rem;
             z-index:       1000;
@@ -2710,11 +2710,31 @@
             overlay.querySelectorAll('.mcaja-piece, .mmesa-curso').forEach(function(el) {
                 el.classList.add('in-view');
             });
+            var scroller = overlay.querySelector('.exp-modal');
+            var closeBtn = overlay.querySelector('.exp-modal-close');
+            if (scroller && closeBtn) {
+                function trackClose() {
+                    closeBtn.style.top = (scroller.scrollTop + 26) + 'px';
+                }
+                scroller.removeEventListener('scroll', overlay._trackClose);
+                overlay._trackClose = trackClose;
+                scroller.addEventListener('scroll', trackClose);
+                scroller.scrollTop = 0;
+                closeBtn.style.top = '26px';
+            }
         }
 
         function closeModal(overlay) {
             overlay.classList.remove('is-open');
             document.body.style.overflow = '';
+            var scroller = overlay.querySelector('.exp-modal');
+            if (scroller && overlay._trackClose) {
+                scroller.removeEventListener('scroll', overlay._trackClose);
+                overlay._trackClose = null;
+                scroller.scrollTop = 0;
+            }
+            var closeBtn = overlay.querySelector('.exp-modal-close');
+            if (closeBtn) closeBtn.style.top = '1.6rem';
         }
 
         document.addEventListener('click', function (e) {
