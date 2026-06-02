@@ -1747,8 +1747,7 @@
         document.querySelectorAll('[data-open-modal]').forEach(function (el) {
             el.addEventListener('click', function (e) {
                 e.preventDefault();
-                sessionStorage.setItem('ezModal', el.dataset.openModal);
-                window.location.href = '/experiencia';
+                window.location.href = '/experiencia?modal=' + el.dataset.openModal;
             });
         });
 

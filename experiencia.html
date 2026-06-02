@@ -2965,13 +2965,10 @@
             });
         });
 
-        // Auto-abrir modal si viene desde la home con sessionStorage
+        // Auto-abrir modal si viene con ?modal=modal-caja desde la home
         (function () {
-            var pending = sessionStorage.getItem('ezModal');
-            if (pending) {
-                sessionStorage.removeItem('ezModal');
-                setTimeout(function () { openModal(pending); }, 80);
-            }
+            var modal = new URLSearchParams(window.location.search).get('modal');
+            if (modal) setTimeout(function () { openModal(modal); }, 80);
         })();
 
         // IntersectionObserver para piezas de modales de lujo
