@@ -2717,16 +2717,15 @@
             document.body.style.overflow = '';
         }
 
-        document.querySelectorAll('.exp-modal-close').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                closeModal(btn.closest('.exp-modal-overlay'));
-            });
-        });
-
-        document.querySelectorAll('.exp-modal-overlay').forEach(function (overlay) {
-            overlay.addEventListener('click', function (e) {
-                if (e.target === overlay) closeModal(overlay);
-            });
+        document.addEventListener('click', function (e) {
+            var closeBtn = e.target.closest('.exp-modal-close');
+            if (closeBtn) {
+                closeModal(closeBtn.closest('.exp-modal-overlay'));
+                return;
+            }
+            if (e.target.classList.contains('exp-modal-overlay') && e.target.classList.contains('is-open')) {
+                closeModal(e.target);
+            }
         });
 
         document.addEventListener('keydown', function (e) {
