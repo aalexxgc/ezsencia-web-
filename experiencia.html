@@ -2965,6 +2965,14 @@
             });
         });
 
+        // Auto-abrir modal si la URL llega con hash (#modal-caja, etc.)
+        (function () {
+            var hash = window.location.hash.slice(1);
+            if (hash && document.getElementById(hash)) {
+                setTimeout(function () { openModal(hash); }, 250);
+            }
+        })();
+
         // IntersectionObserver para piezas de modales de lujo
         ['modal-caja', 'modal-origen', 'modal-ritual'].forEach(function (id) {
             var modal = document.getElementById(id);

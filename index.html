@@ -956,13 +956,30 @@
         }
 
         .idx-exp-item {
-            display:       grid;
+            display:         grid;
             grid-template-columns: 4.5rem 1fr;
-            gap:           0 2.5rem;
-            padding:       3.5rem 0;
-            border-bottom: 1px solid var(--borde);
-            align-items:   baseline;
+            gap:             0 2.5rem;
+            padding:         3.5rem 0;
+            border-bottom:   1px solid var(--borde);
+            align-items:     baseline;
+            text-decoration: none;
+            cursor:          pointer;
         }
+        .idx-exp-item .idx-exp-nombre { transition: color 0.3s; }
+        .idx-exp-item:hover .idx-exp-nombre { color: var(--dorado); }
+        .idx-exp-arrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.52rem;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0;
+            display:        block;
+            margin-top:     0.7rem;
+            transition:     opacity 0.3s, transform 0.3s;
+            transform:      translateX(-4px);
+        }
+        .idx-exp-item:hover .idx-exp-arrow { opacity: 0.85; transform: translateX(0); }
 
         .idx-exp-num {
             font-family:    'EB Garamond', serif;
@@ -1306,37 +1323,41 @@
 
             <div class="idx-exp-lista">
 
-                <div class="idx-exp-item">
+                <a class="idx-exp-item" href="/experiencia#modal-caja">
                     <span class="idx-exp-num">I</span>
                     <div>
                         <p class="idx-exp-nombre">La Caja Fundadora</p>
-                        <p class="idx-exp-desc">Kit numerado para el fundador. La caja de abedul, el Tuberpack®, el laminador y la Tarjeta de Fundador. El inicio del ritual.</p>
+                        <p class="idx-exp-desc">Kit numerado para el fundador. La caja de abedul, el Tuberpack&reg;, el laminador y la Tarjeta de Fundador. El inicio del ritual.</p>
+                        <span class="idx-exp-arrow">Descubrir &rarr;</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="idx-exp-item">
+                <a class="idx-exp-item" href="/experiencia#modal-ritual">
                     <span class="idx-exp-num">II</span>
                     <div>
                         <p class="idx-exp-nombre">Entregas de Trufa Fresca</p>
-                        <p class="idx-exp-desc">Cuatro entregas de Tuber melanosporum recién recogida. Diciembre, enero, febrero, marzo. 400 gramos de primera calidad a domicilio.</p>
+                        <p class="idx-exp-desc">Cuatro entregas de Tuber melanosporum reci&eacute;n recogida. Diciembre, enero, febrero, marzo. 400 gramos de primera calidad a domicilio.</p>
+                        <span class="idx-exp-arrow">Descubrir &rarr;</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="idx-exp-item">
+                <a class="idx-exp-item" href="/experiencia#modal-origen">
                     <span class="idx-exp-num">III</span>
                     <div>
                         <p class="idx-exp-nombre">El D&iacute;a en el Campo</p>
                         <p class="idx-exp-desc">Alcotas al amanecer. La b&uacute;squeda entre carrascas con perro trufero. El silencio del campo antes de encontrar.</p>
+                        <span class="idx-exp-arrow">Descubrir &rarr;</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="idx-exp-item">
+                <a class="idx-exp-item" href="/experiencia#modal-mesa">
                     <span class="idx-exp-num">IV</span>
                     <div>
                         <p class="idx-exp-nombre">La Mesa Ezsencia</p>
                         <p class="idx-exp-desc">Despu&eacute;s del campo. Mesa privada gastron&oacute;mica en Mora de Rubielos. La trufa de la ma&ntilde;ana, en el plato de la tarde.</p>
+                        <span class="idx-exp-arrow">Descubrir &rarr;</span>
                     </div>
-                </div>
+                </a>
 
             </div>
 
