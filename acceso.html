@@ -817,9 +817,9 @@
             btn.textContent = 'Enviando...';
 
             try {
-                var res = await fetch('/api/submit', {
+                var res = await fetch('https://formspree.io/f/mkoawogn', {
                     method:  'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body:    JSON.stringify({ nombre, email, ciudad, motivo, referencia })
                 });
 
@@ -841,7 +841,7 @@
             } catch (err) {
                 btn.disabled    = false;
                 btn.textContent = 'Solicitar acceso';
-                errBox.textContent   = 'Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a hola@ezsencia.com.';
+                errBox.textContent   = 'Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a founder@ezsencia.com.';
                 errBox.style.display = 'block';
             }
         }
