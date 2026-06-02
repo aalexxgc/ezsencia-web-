@@ -2707,6 +2707,9 @@
             overlay.classList.add('is-open');
             document.body.style.overflow = 'hidden';
             if (id === 'modal-caja') setTimeout(initCardVisor, 120);
+            overlay.querySelectorAll('.mcaja-piece, .mmesa-curso').forEach(function(el) {
+                el.classList.add('in-view');
+            });
         }
 
         function closeModal(overlay) {
