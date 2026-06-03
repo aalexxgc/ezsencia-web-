@@ -291,6 +291,40 @@
 
         .h-club-inner p:last-of-type { margin-bottom: 0; }
 
+        .h-club-cta {
+            margin-top:     4.5rem;
+            padding-top:    3.5rem;
+            border-top:     1px solid var(--borde);
+            display:        flex;
+            flex-direction: column;
+            align-items:    flex-start;
+            gap:            1.6rem;
+        }
+
+        .h-club-cta-frase {
+            font-family: 'EB Garamond', serif;
+            font-size:   1.15rem;
+            font-style:  italic;
+            line-height: 1.6;
+            color:       var(--tinta-suave);
+        }
+
+        .h-club-cta-btn {
+            font-size:       0.6rem;
+            letter-spacing:  0.3em;
+            text-transform:  uppercase;
+            color:           var(--tinta);
+            text-decoration: none;
+            border-bottom:   1px solid var(--borde);
+            padding-bottom:  0.3rem;
+            transition:      color 0.3s, border-color 0.3s;
+        }
+
+        .h-club-cta-btn:hover {
+            color:        var(--dorado);
+            border-color: var(--dorado);
+        }
+
         /* ====================================================
            CTA CIERRE
            ==================================================== */
@@ -576,6 +610,11 @@
                 Es la forma que hemos encontrado de compartir lo que llevamos
                 a&ntilde;os construyendo con gente que sabe valorarlo.
             </p>
+
+            <div class="h-club-cta">
+                <p class="h-club-cta-frase">Veinte plazas. Edici&oacute;n Fundadores 2026.</p>
+                <a href="/acceso" class="h-club-cta-btn">Solicitar invitaci&oacute;n &rarr;</a>
+            </div>
         </div>
     </section>
 
