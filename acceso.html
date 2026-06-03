@@ -78,6 +78,52 @@
             margin:      0 auto;
         }
 
+        .acceso-plazas {
+            display:        inline-flex;
+            align-items:    center;
+            gap:            0.7rem;
+            margin-top:     2.2rem;
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+        }
+
+        .acceso-plazas-dot {
+            width:         6px;
+            height:        6px;
+            border-radius: 50%;
+            background:    var(--dorado);
+            flex-shrink:   0;
+            animation:     plazasPulse 2.2s ease infinite;
+        }
+
+        @keyframes plazasPulse {
+            0%,100% { opacity: 1;   transform: scale(1);   }
+            50%     { opacity: 0.3; transform: scale(0.6); }
+        }
+
+        .acceso-plazas strong {
+            color:       var(--dorado);
+            font-weight: 400;
+        }
+
+        .acceso-plazas-submit {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            text-align:     center;
+            margin-bottom:  1.2rem;
+        }
+
+        .acceso-plazas-submit strong {
+            color:       var(--dorado);
+            font-weight: 400;
+        }
+
         /* ====================================================
            BLOQUE DE EXCLUSIVIDAD
            ==================================================== */
@@ -543,6 +589,11 @@
             <p class="acceso-hero-sub">
                 20 personas. Un a&ntilde;o completo de trufa negra en Alcotas.
             </p>
+            <!-- PLAZAS: actualizar al aceptar miembros -->
+            <div class="acceso-plazas">
+                <span class="acceso-plazas-dot"></span>
+                <span><strong>14</strong> plazas disponibles &nbsp;&middot;&nbsp; de 20</span>
+            </div>
         </div>
     </header>
 
@@ -682,6 +733,8 @@
                             <input id="field-referencia" type="text" placeholder="Instagram, un conocido, prensa&hellip;">
                         </div>
 
+                        <!-- PLAZAS: actualizar al aceptar miembros -->
+                        <p class="acceso-plazas-submit">Quedan <strong>14</strong> plazas &nbsp;&middot;&nbsp; Temporada 2026&ndash;27</p>
                         <button class="acceso-submit" id="submitBtn" onclick="handleSubmit()">Solicitar acceso</button>
 
                         <div class="acceso-error" id="formError"></div>
