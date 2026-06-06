@@ -2193,6 +2193,20 @@ footer {
     .cta-closing                      { padding: 6rem 1.5rem; }
 }
 
+@media (max-width: 600px) {
+    .manifesto            { padding: 5rem 1.2rem; }
+    .editorial-split-body { padding: 3.5rem 1.2rem; }
+    .editorial-centered   { padding: 5rem 1.2rem; }
+    .fundadora-body       { padding: 3rem 1.2rem; }
+    .cta-closing          { padding: 5rem 1.2rem; }
+    .cta-closing-btn {
+        min-height:      44px;
+        display:         inline-flex;
+        align-items:     center;
+        justify-content: center;
+    }
+}
+
 /* ====================================================
    UNIVERSAL VIDEO PLAYER — .vp-*
    Usado por video-player.js en heroes secundarios
