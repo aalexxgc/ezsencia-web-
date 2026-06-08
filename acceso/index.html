@@ -637,6 +637,114 @@
             .acceso-submit       { min-height: 44px; }
         }
 
+        /* ====================================================
+           LISTA DE ESPERA
+           ==================================================== */
+
+        .acceso-espera {
+            background:  var(--fondo-alt);
+            border-top:  1px solid var(--borde);
+            padding:     7rem 3rem;
+            text-align:  center;
+        }
+
+        .acceso-espera-inner {
+            max-width: 480px;
+            margin:    0 auto;
+        }
+
+        .acceso-espera-eyebrow {
+            font-size:      0.58rem;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.75;
+            margin-bottom:  2rem;
+            display:        block;
+        }
+
+        .acceso-espera-titulo {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(1.8rem, 3vw, 2.6rem);
+            font-weight:   300;
+            font-style:    italic;
+            line-height:   1.15;
+            color:         var(--tinta);
+            margin-bottom: 1.2rem;
+        }
+
+        .acceso-espera-sub {
+            font-size:     0.9rem;
+            line-height:   1.9;
+            color:         var(--tinta-suave);
+            margin-bottom: 2.8rem;
+        }
+
+        .acceso-espera-campo {
+            display:   flex;
+            gap:       0;
+            border-bottom: 1px solid var(--borde);
+            margin-bottom: 1.2rem;
+            transition: border-color 0.3s;
+        }
+
+        .acceso-espera-campo:focus-within {
+            border-color: var(--dorado);
+        }
+
+        .acceso-espera-campo input {
+            flex:        1;
+            background:  transparent;
+            border:      none;
+            padding:     0.9rem 0;
+            font-family: 'Lato', sans-serif;
+            font-size:   0.9rem;
+            font-weight: 300;
+            color:       var(--tinta);
+            outline:     none;
+        }
+
+        .acceso-espera-campo input::placeholder {
+            color: var(--tinta-fina);
+        }
+
+        .acceso-espera-btn {
+            background:     transparent;
+            border:         none;
+            font-family:    'Lato', sans-serif;
+            font-size:      0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+            cursor:         pointer;
+            padding:        0.9rem 0 0.9rem 1.2rem;
+            transition:     color 0.3s;
+            white-space:    nowrap;
+        }
+
+        .acceso-espera-btn:hover { color: var(--dorado); }
+
+        .acceso-espera-ok {
+            display:        none;
+            font-family:    'EB Garamond', serif;
+            font-size:      1rem;
+            font-style:     italic;
+            color:          var(--dorado);
+            margin-bottom:  0.8rem;
+        }
+
+        .acceso-espera-nota {
+            font-size:      0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color:          var(--tinta-fina);
+            opacity:        0.55;
+        }
+
+        @media (max-width: 600px) {
+            .acceso-espera { padding: 5rem 1.2rem; }
+        }
+
     </style>
 
 </head>
@@ -887,6 +995,34 @@
 
 
     <!-- ========================================================
+         LISTA DE ESPERA
+         ======================================================== -->
+
+    <section class="acceso-espera">
+        <div class="acceso-espera-inner reveal">
+            <span class="acceso-espera-eyebrow">Pr&oacute;xima temporada</span>
+            <h2 class="acceso-espera-titulo">&iquest;No es el momento?</h2>
+            <p class="acceso-espera-sub">
+                Apúntate y te avisamos cuando abra<br>la siguiente edici&oacute;n.
+            </p>
+            <form id="esperaForm">
+                <input type="hidden" name="_subject" value="Lista de espera — Ezsencia">
+                <input type="hidden" name="tipo" value="lista-espera">
+                <div class="acceso-espera-campo">
+                    <input type="email" name="email" id="esperaEmail"
+                           placeholder="tu@correo.com" required>
+                    <button type="submit" class="acceso-espera-btn">Avisar &rarr;</button>
+                </div>
+                <p class="acceso-espera-ok" id="esperaOk">
+                    Anotado. Te escribimos cuando llegue el momento.
+                </p>
+            </form>
+            <p class="acceso-espera-nota">Sin compromiso &nbsp;&middot;&nbsp; Sin spam</p>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
          FOOTER
          ======================================================== -->
 
@@ -1033,6 +1169,36 @@
                 errBox.style.display = 'block';
             }
         }
+
+        /* Lista de espera */
+        document.getElementById('esperaForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var email = document.getElementById('esperaEmail').value.trim();
+            var btn   = this.querySelector('.acceso-espera-btn');
+            var ok    = document.getElementById('esperaOk');
+
+            btn.disabled    = true;
+            btn.textContent = '…';
+
+            try {
+                var res = await fetch('https://formspree.io/f/mkoawogn', {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body:    JSON.stringify({ email: email, tipo: 'lista-espera', _subject: 'Lista de espera — Ezsencia' })
+                });
+
+                if (!res.ok) throw new Error();
+
+                this.querySelector('.acceso-espera-campo').style.display = 'none';
+                ok.style.display = 'block';
+
+            } catch (err) {
+                btn.disabled    = false;
+                btn.textContent = 'Avisar →';
+                ok.textContent  = 'Ha ocurrido un error. Inténtalo de nuevo.';
+                ok.style.display = 'block';
+            }
+        });
 
         /* Menú hamburguesa */
         const hamburger   = document.getElementById('navHamburger');
