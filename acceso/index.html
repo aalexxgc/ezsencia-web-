@@ -967,13 +967,13 @@
 
                         <!-- PLAZAS: actualizar al aceptar miembros -->
                         <p class="acceso-plazas-submit">Quedan <strong>14</strong> plazas &nbsp;&middot;&nbsp; Temporada 2026&ndash;27</p>
-                        <button class="acceso-submit" id="submitBtn" onclick="handleSubmit()">Solicitar acceso</button>
+                        <button class="acceso-submit" id="submitBtn" onclick="handleSubmit()">Reservar plaza &nbsp;&middot;&nbsp; 1.400&thinsp;&euro;</button>
 
                         <div class="acceso-error" id="formError"></div>
 
                         <p class="acceso-notice">
-                            Tu candidatura es tratada con absoluta confidencialidad.
-                            Recibir&aacute;s una respuesta en m&aacute;ximo 7 d&iacute;as.
+                            Ser&aacute;s redirigido a Stripe para completar el pago de forma segura.
+                            Tu candidatura queda registrada con el pago.
                             <a href="/privacidad">Pol&iacute;tica de privacidad</a>.
                         </p>
                     </div>
@@ -1149,22 +1149,11 @@
 
                 if (!res.ok) throw new Error('Error del servidor');
 
-                var content = document.getElementById('formContent');
-                var success = document.getElementById('formSuccess');
-
-                content.style.transition = 'opacity 0.5s';
-                content.style.opacity    = 0;
-                setTimeout(function () {
-                    content.style.display    = 'none';
-                    success.style.display    = 'block';
-                    success.style.opacity    = 0;
-                    success.style.transition = 'opacity 1s';
-                    setTimeout(function () { success.style.opacity = 1; }, 50);
-                }, 500);
+                window.location.href = 'https://buy.stripe.com/test_5kQfZ9apufSMgR1brk67S00';
 
             } catch (err) {
                 btn.disabled    = false;
-                btn.textContent = 'Solicitar acceso';
+                btn.textContent = 'Reservar plaza · 1.400 €';
                 errBox.textContent   = 'Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a founder@ezsencia.com.';
                 errBox.style.display = 'block';
             }
