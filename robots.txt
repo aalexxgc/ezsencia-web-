@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /socios/
+Disallow: /recetario/
+
+Sitemap: https://ezsencia.com/sitemap.xml
