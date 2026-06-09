@@ -1221,19 +1221,12 @@
         /* ── Teaser Área de Socios ────────────────────────── */
 
         .idx-socios {
-            background:  var(--tinta);
+            background:  var(--fondo-alt);
+            border-top:  1px solid var(--borde);
             padding:     8rem 3rem;
             text-align:  center;
             position:    relative;
             overflow:    hidden;
-        }
-
-        .idx-socios::before {
-            content:    '';
-            position:   absolute;
-            inset:      0;
-            background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(154,125,74,0.08) 0%, transparent 70%);
-            pointer-events: none;
         }
 
         .idx-socios-inner {
@@ -1243,11 +1236,11 @@
         }
 
         .idx-socios-lock {
-            font-size:     1.4rem;
-            color:         var(--dorado);
-            opacity:       0.5;
-            margin-bottom: 2.2rem;
-            display:       block;
+            font-size:      1.4rem;
+            color:          var(--dorado);
+            opacity:        0.45;
+            margin-bottom:  2.2rem;
+            display:        block;
             letter-spacing: 0;
         }
 
@@ -1256,7 +1249,7 @@
             letter-spacing: 0.44em;
             text-transform: uppercase;
             color:          var(--dorado);
-            opacity:        0.65;
+            opacity:        0.75;
             display:        block;
             margin-bottom:  2rem;
         }
@@ -1267,7 +1260,7 @@
             font-weight:   300;
             font-style:    italic;
             line-height:   1.15;
-            color:         #f5f0e8;
+            color:         var(--tinta);
             margin-bottom: 1.8rem;
         }
 
@@ -1283,29 +1276,28 @@
             font-size:      0.65rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color:          rgba(245,240,232,0.38);
+            color:          var(--tinta-fina);
         }
 
         .idx-socios-item::before {
             content: '— ';
             color:   var(--dorado);
-            opacity: 0.5;
         }
 
         .idx-socios-cta {
-            display:        inline-block;
-            font-family:    'Lato', sans-serif;
-            font-size:      0.65rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
+            display:         inline-block;
+            font-family:     'Lato', sans-serif;
+            font-size:       0.65rem;
+            letter-spacing:  0.3em;
+            text-transform:  uppercase;
             text-decoration: none;
-            color:          #1a1814;
-            background:     var(--dorado);
-            padding:        1.1rem 2.4rem;
-            transition:     opacity 0.3s;
+            color:           var(--fondo);
+            background:      var(--tinta);
+            padding:         1.1rem 2.4rem;
+            transition:      background 0.3s;
         }
 
-        .idx-socios-cta:hover { opacity: 0.82; }
+        .idx-socios-cta:hover { background: var(--dorado); }
 
         .idx-socios-nota {
             display:        block;
@@ -1313,7 +1305,8 @@
             font-size:      0.58rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color:          rgba(245,240,232,0.2);
+            color:          var(--tinta-fina);
+            opacity:        0.45;
         }
 
         @media (max-width: 600px) {
