@@ -1045,14 +1045,14 @@
         }
 
         .idx-exp-item {
-            display:         grid;
-            grid-template-columns: 4.5rem 1fr;
-            gap:             0 2.5rem;
-            padding:         3.5rem 0;
-            border-bottom:   1px solid var(--borde);
-            align-items:     baseline;
-            text-decoration: none;
-            cursor:          pointer;
+            display:               grid;
+            grid-template-columns: 4.5rem 1fr 80px;
+            gap:                   0 2.5rem;
+            padding:               3.5rem 0;
+            border-bottom:         1px solid var(--borde);
+            align-items:           center;
+            text-decoration:       none;
+            cursor:                pointer;
         }
         .idx-exp-item .idx-exp-nombre { transition: color 0.3s; }
         .idx-exp-item:hover .idx-exp-nombre { color: var(--dorado); }
@@ -1062,13 +1062,32 @@
             letter-spacing: 0.26em;
             text-transform: uppercase;
             color:          var(--dorado);
-            opacity:        0;
-            display:        block;
-            margin-top:     0.7rem;
-            transition:     opacity 0.3s, transform 0.3s;
-            transform:      translateX(-4px);
+            opacity:        0.55;
+            display:        inline-block;
+            margin-top:     0.9rem;
+            padding:        0.45rem 0.9rem;
+            border:         1px solid var(--dorado-suave);
+            transition:     opacity 0.3s, background 0.3s, color 0.3s;
         }
-        .idx-exp-item:hover .idx-exp-arrow { opacity: 0.85; transform: translateX(0); }
+        .idx-exp-item:hover .idx-exp-arrow {
+            opacity:    1;
+            background: var(--dorado);
+            color:      var(--fondo);
+        }
+        .idx-exp-thumb {
+            width:       80px;
+            height:      100px;
+            overflow:    hidden;
+            flex-shrink: 0;
+        }
+        .idx-exp-thumb img {
+            width:      100%;
+            height:     100%;
+            object-fit: cover;
+            display:    block;
+            transition: transform 0.5s;
+        }
+        .idx-exp-item:hover .idx-exp-thumb img { transform: scale(1.06); }
 
         .idx-exp-num {
             font-family:    'EB Garamond', serif;
@@ -1212,7 +1231,8 @@
 
         @media (max-width: 600px) {
             .idx-exp-body   { padding: 3.5rem 1.2rem 4.5rem; }
-            .idx-exp-item   { grid-template-columns: 3.5rem 1fr; gap: 0 1.5rem; padding: 2.2rem 0; }
+            .idx-exp-item   { grid-template-columns: 3.5rem 1fr 60px; gap: 0 1.2rem; padding: 2.2rem 0; }
+            .idx-exp-thumb  { width: 60px; height: 75px; }
             .idx-exp-head   { margin-bottom: 4rem; }
             .idx-cierre     { padding: 6rem 1.2rem 7rem; }
             .idx-cierre-btn { max-width: 100%; }
@@ -1594,6 +1614,9 @@
                         <p class="idx-exp-desc">Kit numerado para el fundador. La caja de abedul, el Tuberpack&reg;, el laminador y la Tarjeta de Fundador. El inicio del ritual.</p>
                         <span class="idx-exp-arrow">Descubrir &rarr;</span>
                     </div>
+                    <div class="idx-exp-thumb">
+                        <img src="/assets/caja_abierta.png" alt="La Caja Fundadora" loading="lazy">
+                    </div>
                 </a>
 
                 <a class="idx-exp-item" href="/experiencia/ritual">
@@ -1602,6 +1625,9 @@
                         <p class="idx-exp-nombre">Entregas de Trufa Fresca</p>
                         <p class="idx-exp-desc">Cuatro entregas de Tuber melanosporum reci&eacute;n recogida. Diciembre, enero, febrero, marzo. 400 gramos de primera calidad a domicilio.</p>
                         <span class="idx-exp-arrow">Descubrir &rarr;</span>
+                    </div>
+                    <div class="idx-exp-thumb">
+                        <img src="/assets/awela.JPG" alt="Ritual de Invierno" loading="lazy">
                     </div>
                 </a>
 
@@ -1612,6 +1638,9 @@
                         <p class="idx-exp-desc">Alcotas al amanecer. La b&uacute;squeda entre carrascas con perro trufero. El silencio del campo antes de encontrar.</p>
                         <span class="idx-exp-arrow">Descubrir &rarr;</span>
                     </div>
+                    <div class="idx-exp-thumb">
+                        <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="El Encuentro en Alcotas" loading="lazy">
+                    </div>
                 </a>
 
                 <a class="idx-exp-item" href="/experiencia/mesa">
@@ -1620,6 +1649,9 @@
                         <p class="idx-exp-nombre">La Mesa Ezsencia</p>
                         <p class="idx-exp-desc">Despu&eacute;s del campo. Mesa privada gastron&oacute;mica en Mora de Rubielos. La trufa de la ma&ntilde;ana, en el plato de la tarde.</p>
                         <span class="idx-exp-arrow">Descubrir &rarr;</span>
+                    </div>
+                    <div class="idx-exp-thumb">
+                        <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="La Mesa Ezsencia" loading="lazy">
                     </div>
                 </a>
 
