@@ -1231,11 +1231,32 @@
 
         @media (max-width: 600px) {
             .idx-exp-body   { padding: 3.5rem 1.2rem 4.5rem; }
-            .idx-exp-item   { grid-template-columns: 3.5rem 1fr 60px; gap: 0 1.2rem; padding: 2.2rem 0; }
-            .idx-exp-thumb  { width: 60px; height: 75px; }
             .idx-exp-head   { margin-bottom: 4rem; }
             .idx-cierre     { padding: 6rem 1.2rem 7rem; }
             .idx-cierre-btn { max-width: 100%; }
+
+            /* Experience items — mobile layout */
+            .idx-exp-item  {
+                grid-template-columns: 2.8rem 1fr;
+                grid-template-rows:    auto auto;
+                gap:                   0 1.2rem;
+                padding:               2rem 0;
+            }
+            .idx-exp-num   { grid-column: 1; grid-row: 1; }
+            .idx-exp-thumb {
+                grid-column: 1 / -1;
+                grid-row:    2;
+                width:       100%;
+                height:      140px;
+                margin-top:  1.2rem;
+            }
+            .idx-exp-thumb img { object-position: center 30%; }
+            .idx-exp-arrow {
+                border: none;
+                padding: 0;
+                margin-top: 0.6rem;
+                font-size: 0.5rem;
+            }
         }
 
         /* ── Teaser Área de Socios ────────────────────────── */
