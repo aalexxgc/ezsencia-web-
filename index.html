@@ -1218,6 +1218,109 @@
             .idx-cierre-btn { max-width: 100%; }
         }
 
+        /* ── Teaser Área de Socios ────────────────────────── */
+
+        .idx-socios {
+            background:  var(--tinta);
+            padding:     8rem 3rem;
+            text-align:  center;
+            position:    relative;
+            overflow:    hidden;
+        }
+
+        .idx-socios::before {
+            content:    '';
+            position:   absolute;
+            inset:      0;
+            background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(154,125,74,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .idx-socios-inner {
+            max-width: 580px;
+            margin:    0 auto;
+            position:  relative;
+        }
+
+        .idx-socios-lock {
+            font-size:     1.4rem;
+            color:         var(--dorado);
+            opacity:       0.5;
+            margin-bottom: 2.2rem;
+            display:       block;
+            letter-spacing: 0;
+        }
+
+        .idx-socios-eyebrow {
+            font-size:      0.58rem;
+            letter-spacing: 0.44em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.65;
+            display:        block;
+            margin-bottom:  2rem;
+        }
+
+        .idx-socios-titulo {
+            font-family:   'EB Garamond', serif;
+            font-size:     clamp(2.2rem, 4vw, 3.6rem);
+            font-weight:   300;
+            font-style:    italic;
+            line-height:   1.15;
+            color:         #f5f0e8;
+            margin-bottom: 1.8rem;
+        }
+
+        .idx-socios-items {
+            display:         flex;
+            justify-content: center;
+            gap:             2.4rem;
+            margin-bottom:   3.5rem;
+            flex-wrap:       wrap;
+        }
+
+        .idx-socios-item {
+            font-size:      0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.38);
+        }
+
+        .idx-socios-item::before {
+            content: '— ';
+            color:   var(--dorado);
+            opacity: 0.5;
+        }
+
+        .idx-socios-cta {
+            display:        inline-block;
+            font-family:    'Lato', sans-serif;
+            font-size:      0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color:          #1a1814;
+            background:     var(--dorado);
+            padding:        1.1rem 2.4rem;
+            transition:     opacity 0.3s;
+        }
+
+        .idx-socios-cta:hover { opacity: 0.82; }
+
+        .idx-socios-nota {
+            display:        block;
+            margin-top:     1.8rem;
+            font-size:      0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color:          rgba(245,240,232,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .idx-socios       { padding: 5.5rem 1.2rem; }
+            .idx-socios-items { gap: 1.4rem; }
+        }
+
     </style>
 
 </head>
@@ -1537,6 +1640,28 @@
            target="_blank" rel="noopener"
            class="idx-instagram-cta reveal">Ver perfil en Instagram</a>
 
+    </section>
+
+
+    <!-- ========================================================
+         TEASER ÁREA DE SOCIOS
+         ======================================================== -->
+
+    <section class="idx-socios">
+        <div class="idx-socios-inner reveal">
+            <span class="idx-socios-lock">&#9632;</span>
+            <span class="idx-socios-eyebrow">Área de Socios</span>
+            <h2 class="idx-socios-titulo">
+                Lo que viene<br>después del acceso.
+            </h2>
+            <div class="idx-socios-items">
+                <span class="idx-socios-item">Recetario privado</span>
+                <span class="idx-socios-item">Gu&iacute;as de temporada</span>
+                <span class="idx-socios-item">La comunidad de los&nbsp;20</span>
+            </div>
+            <a href="/acceso" class="idx-socios-cta">Solicitar acceso</a>
+            <span class="idx-socios-nota">Solo visible para miembros activos</span>
+        </div>
     </section>
 
 
