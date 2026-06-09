@@ -967,14 +967,17 @@
 
         .idx-exp-item {
             display:               grid;
-            grid-template-columns: 4.5rem 1fr 80px;
+            grid-template-columns: 4.5rem 1fr;
+            grid-template-rows:    auto auto;
             gap:                   0 2.5rem;
             padding:               3.5rem 0;
             border-bottom:         1px solid var(--borde);
-            align-items:           center;
+            align-items:           start;
             text-decoration:       none;
             cursor:                pointer;
         }
+        .idx-exp-num   { grid-column: 1; grid-row: 1; }
+        .idx-exp-item > div { grid-column: 2; grid-row: 1; }
         .idx-exp-item .idx-exp-nombre { transition: color 0.3s; }
         .idx-exp-item:hover .idx-exp-nombre { color: var(--dorado); }
         .idx-exp-arrow {
@@ -996,19 +999,21 @@
             color:      var(--fondo);
         }
         .idx-exp-thumb {
-            width:       80px;
-            height:      100px;
+            grid-column: 1 / -1;
+            grid-row:    2;
+            width:       100%;
+            height:      260px;
             overflow:    hidden;
-            flex-shrink: 0;
+            margin-top:  2rem;
         }
         .idx-exp-thumb img {
             width:      100%;
             height:     100%;
             object-fit: cover;
             display:    block;
-            transition: transform 0.5s;
+            transition: transform 0.6s;
         }
-        .idx-exp-item:hover .idx-exp-thumb img { transform: scale(1.06); }
+        .idx-exp-item:hover .idx-exp-thumb img { transform: scale(1.04); }
 
         .idx-exp-num {
             font-family:    'EB Garamond', serif;
@@ -1156,28 +1161,11 @@
             .idx-cierre     { padding: 6rem 1.2rem 7rem; }
             .idx-cierre-btn { max-width: 100%; }
 
-            /* Experience items — mobile layout */
-            .idx-exp-item  {
-                grid-template-columns: 2.8rem 1fr;
-                grid-template-rows:    auto auto;
-                gap:                   0 1.2rem;
-                padding:               2rem 0;
-            }
-            .idx-exp-num   { grid-column: 1; grid-row: 1; }
-            .idx-exp-thumb {
-                grid-column: 1 / -1;
-                grid-row:    2;
-                width:       100%;
-                height:      140px;
-                margin-top:  1.2rem;
-            }
+            /* Experience items — mobile */
+            .idx-exp-item  { grid-template-columns: 2.8rem 1fr; gap: 0 1.2rem; padding: 2rem 0; }
+            .idx-exp-thumb { height: 160px; margin-top: 1.2rem; }
             .idx-exp-thumb img { object-position: center 30%; }
-            .idx-exp-arrow {
-                border: none;
-                padding: 0;
-                margin-top: 0.6rem;
-                font-size: 0.5rem;
-            }
+            .idx-exp-arrow { border: none; padding: 0; margin-top: 0.6rem; font-size: 0.5rem; }
         }
 
         /* ── Teaser Área de Socios ────────────────────────── */
