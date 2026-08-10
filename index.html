@@ -906,309 +906,219 @@
         }
 
         /* ====================================================
-           LA EXPERIENCIA EZSENCIA — sección editorial nueva
+           LA EXPERIENCIA — carrusel editorial
            ==================================================== */
 
         .idx-exp {
             background: var(--fondo);
-            padding:    0;
             border-top: 1px solid var(--borde);
+            overflow:   hidden;
         }
 
-        .idx-exp-cover { display: none; }
-
-        .idx-exp-cover:hover img { transform: scale(1.02); }
-
-        .idx-exp-body {
-            padding: 8rem 6vw 9rem;
+        .idx-exp-layout {
+            display:    flex;
+            min-height: 660px;
         }
 
-        .idx-exp-head {
-            max-width:     700px;
-            margin-bottom: 6.5rem;
+        /* Panel izquierdo */
+        .idx-exp-left {
+            width:           36%;
+            flex-shrink:     0;
+            position:        relative;
+            padding:         6rem 4rem 5rem;
+            display:         flex;
+            flex-direction:  column;
+            border-right:    1px solid var(--borde);
         }
-
+        .idx-exp-left::before {
+            content:          '';
+            position:         absolute;
+            inset:            0;
+            background-image: linear-gradient(var(--borde) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--borde) 1px, transparent 1px);
+            background-size:  48px 48px;
+            opacity:          0.45;
+            pointer-events:   none;
+        }
+        .idx-exp-left-inner {
+            position:       relative;
+            z-index:        1;
+            height:         100%;
+            display:        flex;
+            flex-direction: column;
+        }
+        .idx-exp-label {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.54rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.7;
+            display:        block;
+            margin-bottom:  2.5rem;
+        }
         .idx-exp-titulo {
             font-family:    'Playfair Display', serif;
-            font-size:      clamp(2.6rem, 4.5vw, 4.8rem);
+            font-size:      clamp(2.2rem, 3vw, 3.8rem);
             font-weight:    400;
             font-style:     italic;
             line-height:    1.05;
             color:          var(--tinta);
-            margin:         2rem 0 2.5rem;
-            letter-spacing: -0.01em;
+            margin:         0 0 2rem;
         }
-
         .idx-exp-bajada {
             font-family: 'EB Garamond', serif;
-            font-size:   1.08rem;
-            line-height: 2.15;
+            font-size:   1rem;
+            line-height: 2;
             color:       var(--tinta-suave);
-            max-width:   500px;
-            margin:      0;
+            opacity:     0.7;
+            flex:        1;
+        }
+        .idx-exp-nav {
+            display:     flex;
+            align-items: center;
+            gap:         1.5rem;
+            margin-top:  3rem;
+        }
+        .idx-exp-nav-btn {
+            width:           44px;
+            height:          44px;
+            border:          1px solid var(--borde);
+            background:      none;
+            cursor:          pointer;
+            display:         flex;
+            align-items:     center;
+            justify-content: center;
+            color:           var(--tinta);
+            font-size:       1rem;
+            transition:      border-color 0.3s, background 0.3s, color 0.3s;
+            flex-shrink:     0;
+        }
+        .idx-exp-nav-btn:hover:not(:disabled) {
+            border-color: var(--tinta);
+            background:   var(--tinta);
+            color:        var(--fondo);
+        }
+        .idx-exp-nav-btn:disabled { opacity: 0.22; cursor: default; }
+        .idx-exp-counter {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.22em;
+            color:          var(--tinta-suave);
+            opacity:        0.45;
+            min-width:      3rem;
         }
 
-        .idx-exp-lista {
-            border-top: 1px solid var(--borde);
-            max-width:  860px;
+        /* Panel derecho */
+        .idx-exp-track-wrap {
+            flex:     1;
+            overflow: hidden;
+            position: relative;
+        }
+        .idx-exp-track {
+            display:     flex;
+            gap:         3px;
+            height:      100%;
+            transition:  transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+            will-change: transform;
         }
 
-        .idx-exp-item {
+        /* Tarjeta */
+        .idx-exp-card {
+            flex-shrink:     0;
+            width:           28vw;
             position:        relative;
-            height:          380px;
             overflow:        hidden;
-            border-bottom:   1px solid var(--borde);
             display:         block;
             text-decoration: none;
             cursor:          pointer;
+            min-height:      660px;
+            background:      #0a0806;
         }
-        .idx-exp-item::before {
-            content:    '';
-            position:   absolute;
-            inset:      0;
-            background: linear-gradient(to top,
-                rgba(10,9,8,0.92) 0%,
-                rgba(10,9,8,0.5)  45%,
-                rgba(10,9,8,0.08) 100%);
-            z-index: 1;
-        }
-        .idx-exp-thumb {
+        .idx-exp-card-img {
             position: absolute;
             inset:    0;
-            z-index:  0;
         }
-        .idx-exp-thumb img {
+        .idx-exp-card-img img {
             width:      100%;
             height:     100%;
             object-fit: cover;
             display:    block;
-            transition: transform 0.7s;
+            opacity:    0.85;
+            transition: transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s;
         }
-        .idx-exp-item:hover .idx-exp-thumb img { transform: scale(1.05); }
-        .idx-exp-content {
-            position: absolute;
-            bottom:   0; left: 0; right: 0;
-            padding:  2.8rem 3.5rem;
-            z-index:  2;
-            display:  grid;
-            grid-template-columns: 4rem 1fr;
-            gap:      0 2rem;
-            align-items: end;
+        .idx-exp-card:hover .idx-exp-card-img img {
+            transform: scale(1.04);
+            opacity:   0.68;
         }
-        .idx-exp-num {
-            padding-bottom: 0.2rem;
+        .idx-exp-card::before {
+            content:    '';
+            position:   absolute;
+            inset:      0;
+            background: linear-gradient(to top,
+                rgba(8,7,5,0.92) 0%,
+                rgba(8,7,5,0.38) 42%,
+                transparent      68%);
+            z-index: 1;
         }
-        .idx-exp-item .idx-exp-nombre {
-            color:      #f5f0e8;
-            transition: color 0.3s;
+        .idx-exp-card-text {
+            position:   absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index:    2;
+            padding:    2.4rem 2rem 2.8rem;
+            text-align: center;
         }
-        .idx-exp-item:hover .idx-exp-nombre { color: var(--dorado); }
-        .idx-exp-desc {
-            color: rgba(245,240,232,0.68);
-        }
-        .idx-exp-arrow {
+        .idx-exp-card-num {
             font-family:    'Lato', sans-serif;
-            font-size:      0.52rem;
-            letter-spacing: 0.26em;
+            font-size:      0.5rem;
+            letter-spacing: 0.38em;
             text-transform: uppercase;
-            color:          rgba(245,240,232,0.75);
-            opacity:        1;
-            display:        inline-block;
-            margin-top:     0.9rem;
-            padding:        0.45rem 0.9rem;
-            border:         1px solid rgba(245,240,232,0.3);
-            transition:     background 0.3s, border-color 0.3s;
-        }
-        .idx-exp-item:hover .idx-exp-arrow {
-            background:   rgba(245,240,232,0.15);
-            border-color: rgba(245,240,232,0.7);
-        }
-
-        .idx-exp-num {
-            font-family:    'EB Garamond', serif;
-            font-size:      0.92rem;
-            font-style:     italic;
-            letter-spacing: 0.06em;
             color:          var(--dorado);
-            opacity:        0.5;
-            padding-top:    0.15rem;
+            opacity:        0.65;
+            display:        block;
+            margin-bottom:  0.9rem;
         }
-
-        .idx-exp-nombre {
-            font-family:    'EB Garamond', serif;
-            font-size:      1.35rem;
+        .idx-exp-card-title {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(1.05rem, 1.5vw, 1.5rem);
             font-weight:    400;
-            color:          var(--tinta);
-            margin-bottom:  0.55rem;
-            letter-spacing: 0.01em;
+            font-style:     italic;
+            color:          #f5f0e8;
+            line-height:    1.2;
+            margin:         0 0 1.3rem;
+            transition:     color 0.3s;
         }
-
-        .idx-exp-desc {
-            font-size:   0.86rem;
-            line-height: 2;
-            color:       var(--tinta-suave);
-            margin:      0;
-        }
-
-        .idx-exp-pie {
-            margin-top: 4.5rem;
-        }
-
-        .idx-exp-cta {
+        .idx-exp-card-cta {
             font-family:     'Lato', sans-serif;
-            font-size:       0.62rem;
-            letter-spacing:  0.26em;
+            font-size:       0.56rem;
+            letter-spacing:  0.22em;
             text-transform:  uppercase;
-            text-decoration: none;
-            color:           var(--tinta-suave);
-            border-bottom:   1px solid var(--borde);
-            padding-bottom:  0.3rem;
+            color:           rgba(245,240,232,0.6);
+            border-bottom:   1px solid rgba(245,240,232,0.3);
+            padding-bottom:  0.25rem;
+            display:         inline-block;
             transition:      color 0.3s, border-color 0.3s;
         }
-
-        .idx-exp-cta:hover {
-            color:        var(--tinta);
-            border-color: var(--tinta);
+        .idx-exp-card:hover .idx-exp-card-cta {
+            color:        rgba(245,240,232,1);
+            border-color: rgba(245,240,232,0.85);
         }
 
-        /* ====================================================
-           CIERRE EDITORIAL — bloque oscuro antes del footer
-           ==================================================== */
-
-        .idx-cierre {
-            background:  #0d0c09;
-            padding:     11rem 6vw 12rem;
-            text-align:  center;
-            position:    relative;
-            overflow:    hidden;
-        }
-
-        .idx-cierre::before {
-            content:        '';
-            position:       absolute;
-            top:            50%;
-            left:           50%;
-            transform:      translate(-50%, -50%);
-            width:          52rem;
-            height:         52rem;
-            border-radius:  50%;
-            border:         1px solid rgba(154,125,74,0.06);
-            pointer-events: none;
-        }
-
-        .idx-cierre-eyebrow {
-            font-family:    'Lato', sans-serif;
-            font-size:      0.57rem;
-            letter-spacing: 0.44em;
-            text-transform: uppercase;
-            color:          var(--dorado);
-            opacity:        0.5;
-            display:        block;
-            margin-bottom:  4rem;
-        }
-
-        .idx-cierre-titulo {
-            font-family:    'Playfair Display', serif;
-            font-size:      clamp(3rem, 6.5vw, 7rem);
-            font-weight:    400;
-            font-style:     italic;
-            line-height:    1.0;
-            color:          #f0ece3;
-            letter-spacing: -0.015em;
-            margin:         0 0 3rem;
-        }
-
-        .idx-cierre-sub {
-            font-family:  'EB Garamond', serif;
-            font-size:    1.05rem;
-            font-style:   italic;
-            color:        rgba(240,236,227,0.36);
-            line-height:  1.9;
-            margin:       0 auto 5.5rem;
-            max-width:    400px;
-        }
-
-        .idx-cierre-btn {
-            display:         block;
-            font-family:     'Lato', sans-serif;
-            font-size:       0.65rem;
-            letter-spacing:  0.3em;
-            text-transform:  uppercase;
-            text-decoration: none;
-            color:           #0d0c09;
-            background:      #f0ece3;
-            border:          1px solid #f0ece3;
-            padding:         1.5rem 2rem;
-            max-width:       320px;
-            margin:          0 auto 3rem;
-            text-align:      center;
-            transition:      background 0.5s ease, color 0.5s ease;
-        }
-
-        .idx-cierre-btn:hover {
-            background: transparent;
-            color:      #f0ece3;
-        }
-
-        .idx-cierre-nota {
-            font-size:      0.56rem;
-            letter-spacing: 0.24em;
-            text-transform: uppercase;
-            color:          rgba(240,236,227,0.18);
-            display:        block;
-        }
-
-        /* ── Nuevas secciones: responsive ─────────────────── */
+        /* Responsive */
         @media (max-width: 900px) {
-            .idx-exp-body   { padding: 5rem 1.5rem 6rem; }
-            .idx-cierre     { padding: 8rem 1.5rem 9rem; }
+            .idx-exp-layout     { flex-direction: column; min-height: auto; }
+            .idx-exp-left       { width: 100%; border-right: none; border-bottom: 1px solid var(--borde); padding: 4rem 1.8rem 3rem; }
+            .idx-exp-track-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .idx-exp-track      { transform: none !important; gap: 3px; }
+            .idx-exp-card       { width: 60vw; min-height: 420px; }
+            .idx-exp-nav        { display: none; }
         }
-
         @media (max-width: 600px) {
-            .idx-exp-body   { padding: 3.5rem 1.2rem 4.5rem; }
-            .idx-exp-head   { margin-bottom: 4rem; }
-            .idx-cierre     { padding: 6rem 1.2rem 7rem; }
-            .idx-cierre-btn { max-width: 100%; }
-
-            /* Experience items — mobile layout */
-            .idx-exp-item {
-                height:   auto;
-                display:  grid;
-                grid-template-columns: 2.8rem 1fr;
-                grid-template-rows:    auto auto;
-                gap:      0 1.2rem;
-                padding:  2rem 0;
-                overflow: visible;
-            }
-            .idx-exp-item::before { display: none; }
-            .idx-exp-thumb {
-                position:   static;
-                grid-column: 1 / -1;
-                grid-row:    2;
-                width:       100%;
-                height:      140px;
-                margin-top:  1.2rem;
-            }
-            .idx-exp-thumb img { object-position: center 30%; }
-            .idx-exp-content {
-                display: contents;
-                padding: 0;
-            }
-            .idx-exp-num  { grid-column: 1; grid-row: 1; padding-bottom: 0; }
-            .idx-exp-text { grid-column: 2; grid-row: 1; }
-            .idx-exp-item .idx-exp-nombre { color: var(--tinta); }
-            .idx-exp-desc  { color: var(--tinta-suave); }
-            .idx-exp-arrow {
-                color:        var(--dorado);
-                border-color: var(--dorado-suave);
-                border:       none;
-                padding:      0;
-                margin-top:   0.6rem;
-                font-size:    0.5rem;
-            }
+            .idx-exp-left { padding: 3.5rem 1.2rem 2.5rem; }
+            .idx-exp-card { width: 78vw; min-height: 360px; }
         }
 
-        /* ── Teaser Área de Socios ────────────────────────── */
+        /* ── Teaser Área de Socios        /* ── Teaser Área de Socios ────────────────────────── */
 
         .idx-socios {
             position:   relative;
@@ -1560,83 +1470,76 @@
 
     <section class="idx-exp reveal" id="experiencia">
 
-        <div class="idx-exp-cover">
-            <img src="assets/portada.JPG" alt="Experiencia trufa negra Tuber melanosporum — Ezsencia, Alcotas, Teruel" loading="lazy">
-        </div>
+        <div class="idx-exp-layout">
 
-        <div class="idx-exp-body">
-
-            <div class="idx-exp-head">
-                <div class="section-label">La Experiencia</div>
-                <h2 class="idx-exp-titulo">La Experiencia<br>Ezsencia</h2>
-                <p class="idx-exp-bajada">
-                    Cuatro momentos construidos alrededor de la trufa negra de Alcotas.<br>
-                    La tierra. El invierno. La mesa. El origen.
-                </p>
+            <!-- Panel izquierdo: título + nav -->
+            <div class="idx-exp-left">
+                <div class="idx-exp-left-inner">
+                    <div>
+                        <span class="idx-exp-label">La Experiencia</span>
+                        <h2 class="idx-exp-titulo">La Experiencia<br>Ezsencia</h2>
+                        <p class="idx-exp-bajada">
+                            Cuatro momentos construidos alrededor de la trufa negra de Alcotas.<br>
+                            La tierra. El invierno. La mesa. El origen.
+                        </p>
+                    </div>
+                    <div class="idx-exp-nav">
+                        <button class="idx-exp-nav-btn" id="expPrev" aria-label="Anterior" disabled>&#8592;</button>
+                        <span class="idx-exp-counter" id="expCounter">1 / 4</span>
+                        <button class="idx-exp-nav-btn" id="expNext" aria-label="Siguiente">&#8594;</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="idx-exp-lista">
+            <!-- Panel derecho: carrusel -->
+            <div class="idx-exp-track-wrap">
+                <div class="idx-exp-track" id="expTrack">
 
-                <a class="idx-exp-item" href="/experiencia/caja-fundadora">
-                    <div class="idx-exp-thumb">
-                        <img src="/assets/caja_abierta.png" alt="La Caja Fundadora" loading="lazy">
-                    </div>
-                    <div class="idx-exp-content">
-                        <span class="idx-exp-num">I</span>
-                        <div class="idx-exp-text">
-                            <p class="idx-exp-nombre">La Caja Fundadora</p>
-                            <p class="idx-exp-desc">Kit numerado para el fundador. La caja de abedul, el Tuberpack&reg;, el laminador y la Tarjeta de Fundador. El inicio del ritual.</p>
-                            <span class="idx-exp-arrow">Descubrir &rarr;</span>
+                    <a class="idx-exp-card" href="/experiencia/caja-fundadora">
+                        <div class="idx-exp-card-img">
+                            <img src="/assets/caja_abierta.png" alt="La Caja Fundadora" loading="lazy">
                         </div>
-                    </div>
-                </a>
-
-                <a class="idx-exp-item" href="/experiencia/ritual">
-                    <div class="idx-exp-thumb">
-                        <img src="/assets/awela.JPG" alt="Ritual de Invierno" loading="lazy">
-                    </div>
-                    <div class="idx-exp-content">
-                        <span class="idx-exp-num">II</span>
-                        <div class="idx-exp-text">
-                            <p class="idx-exp-nombre">Entregas de Trufa Fresca</p>
-                            <p class="idx-exp-desc">Cuatro entregas de Tuber melanosporum reci&eacute;n recogida. Diciembre, enero, febrero, marzo. 400 gramos de primera calidad a domicilio.</p>
-                            <span class="idx-exp-arrow">Descubrir &rarr;</span>
+                        <div class="idx-exp-card-text">
+                            <span class="idx-exp-card-num">I</span>
+                            <p class="idx-exp-card-title">La Caja Fundadora</p>
+                            <span class="idx-exp-card-cta">Descubrir</span>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <a class="idx-exp-item" href="/experiencia/origen">
-                    <div class="idx-exp-thumb">
-                        <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="El Encuentro en Alcotas" loading="lazy">
-                    </div>
-                    <div class="idx-exp-content">
-                        <span class="idx-exp-num">III</span>
-                        <div class="idx-exp-text">
-                            <p class="idx-exp-nombre">El D&iacute;a en el Campo</p>
-                            <p class="idx-exp-desc">Alcotas al amanecer. La b&uacute;squeda entre carrascas con perro trufero. El silencio del campo antes de encontrar.</p>
-                            <span class="idx-exp-arrow">Descubrir &rarr;</span>
+                    <a class="idx-exp-card" href="/experiencia/ritual">
+                        <div class="idx-exp-card-img">
+                            <img src="/assets/awela.JPG" alt="Entregas de Trufa Fresca" loading="lazy">
                         </div>
-                    </div>
-                </a>
-
-                <a class="idx-exp-item" href="/experiencia/mesa">
-                    <div class="idx-exp-thumb">
-                        <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="La Mesa Ezsencia" loading="lazy">
-                    </div>
-                    <div class="idx-exp-content">
-                        <span class="idx-exp-num">IV</span>
-                        <div class="idx-exp-text">
-                            <p class="idx-exp-nombre">La Mesa Ezsencia</p>
-                            <p class="idx-exp-desc">Despu&eacute;s del campo. Mesa privada gastron&oacute;mica en Mora de Rubielos. La trufa de la ma&ntilde;ana, en el plato de la tarde.</p>
-                            <span class="idx-exp-arrow">Descubrir &rarr;</span>
+                        <div class="idx-exp-card-text">
+                            <span class="idx-exp-card-num">II</span>
+                            <p class="idx-exp-card-title">Entregas de Trufa Fresca</p>
+                            <span class="idx-exp-card-cta">Descubrir</span>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-            </div>
+                    <a class="idx-exp-card" href="/experiencia/origen">
+                        <div class="idx-exp-card-img">
+                            <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/pueblo.jpg" alt="El D&iacute;a en el Campo" loading="lazy">
+                        </div>
+                        <div class="idx-exp-card-text">
+                            <span class="idx-exp-card-num">III</span>
+                            <p class="idx-exp-card-title">El D&iacute;a en el Campo</p>
+                            <span class="idx-exp-card-cta">Descubrir</span>
+                        </div>
+                    </a>
 
-            <div class="idx-exp-pie reveal">
-                <a href="/#experiencia" class="idx-exp-cta">Descubrir la Experiencia &rarr;</a>
+                    <a class="idx-exp-card" href="/experiencia/mesa">
+                        <div class="idx-exp-card-img">
+                            <img src="https://raw.githubusercontent.com/aalexxgc/ezsencia-web-/main/assets/hotel.jpg" alt="La Mesa Ezsencia" loading="lazy">
+                        </div>
+                        <div class="idx-exp-card-text">
+                            <span class="idx-exp-card-num">IV</span>
+                            <p class="idx-exp-card-title">La Mesa Ezsencia</p>
+                            <span class="idx-exp-card-cta">Descubrir</span>
+                        </div>
+                    </a>
+
+                </div>
             </div>
 
         </div>
@@ -2084,6 +1987,42 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && drawer.classList.contains('open')) closeMobileMenu();
         });
+
+
+        // ── Carrusel de Experiencias ────────────────────────────────────
+        (function () {
+            var track   = document.getElementById('expTrack');
+            var prevBtn = document.getElementById('expPrev');
+            var nextBtn = document.getElementById('expNext');
+            var counter = document.getElementById('expCounter');
+            if (!track || !prevBtn || !nextBtn) return;
+
+            var cards   = track.querySelectorAll('.idx-exp-card');
+            var total   = cards.length;
+            var current = 0;
+
+            function cardW() { return cards[0].offsetWidth + 3; }
+
+            function goTo(idx) {
+                if (window.innerWidth <= 900) return;
+                current = Math.max(0, Math.min(total - 1, idx));
+                track.style.transform = 'translateX(-' + (current * cardW()) + 'px)';
+                counter.textContent   = (current + 1) + ' / ' + total;
+                prevBtn.disabled = current === 0;
+                nextBtn.disabled = current === total - 1;
+            }
+
+            prevBtn.addEventListener('click', function () { goTo(current - 1); });
+            nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+            var resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () { goTo(current); }, 120);
+            });
+
+            goTo(0);
+        })();
 
 
     </script>
