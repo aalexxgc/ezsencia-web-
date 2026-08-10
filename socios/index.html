@@ -7,14 +7,35 @@
     <title>Área de Socios — EZSENCIA</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://wclyxuxpezxksxcfsmpn.supabase.co" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <style>
+        html, body { background: #f5f0e8; }
 
-        /* ── PALETA OSCURA — misma familia, distinto tono ───── */
         /* ── AUTH GUARD ──────────────────────────────────────── */
         body { visibility: hidden; }
         body.auth-ok { visibility: visible; }
+
+        /* ── PANTALLA DE CARGA ───────────────────────────────── */
+        #authLoading {
+            position: fixed; inset: 0; background: #f5f0e8;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; transition: opacity 0.5s;
+            visibility: visible; /* overrides body { visibility: hidden } */
+        }
+        #authLoading span {
+            font-family: 'Lato', sans-serif; font-size: 0.54rem;
+            letter-spacing: 0.44em; text-transform: uppercase;
+            color: #9a7d4a; opacity: 0.6;
+            animation: authPulse 1.4s ease-in-out infinite;
+        }
+        @keyframes authPulse {
+            0%, 100% { opacity: 0.35; }
+            50%       { opacity: 0.8; }
+        }
+        body.auth-ok #authLoading { opacity: 0; pointer-events: none; }
 
         /* ── NAV ─────────────────────────────────────────────── */
         .s-nav {
@@ -456,6 +477,8 @@
     </style>
 </head>
 <body>
+
+    <div id="authLoading"><span>EZSENCIA</span></div>
 
     <div class="cursor"      id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
