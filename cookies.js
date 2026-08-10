@@ -24,6 +24,11 @@
         setTimeout(function () { b.style.display = 'none'; }, 400);
     }
 
+    window.resetCookies = function () {
+        localStorage.removeItem(STORE_KEY);
+        location.reload();
+    };
+
     window.acceptCookies = function () {
         localStorage.setItem(STORE_KEY, 'accepted');
         hideBanner();

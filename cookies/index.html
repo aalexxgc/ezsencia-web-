@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Pol&iacute;tica de Cookies &mdash; EZSENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .legal-hero {
+            background:    var(--fondo-alt);
+            border-bottom: 1px solid var(--borde);
+            padding:       9rem 6vw 6rem;
+        }
+        .legal-hero-eyebrow {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.6rem;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.7;
+            display:        block;
+            margin-bottom:  2rem;
+        }
+        .legal-hero h1 {
+            font-family:    'Playfair Display', serif;
+            font-size:      clamp(2.4rem, 4vw, 3.8rem);
+            font-weight:    400;
+            font-style:     italic;
+            color:          var(--tinta);
+            line-height:    1.08;
+            margin:         0 0 1.5rem;
+        }
+        .legal-hero-date {
+            font-size:      0.68rem;
+            letter-spacing: 0.14em;
+            color:          var(--tinta-suave);
+            opacity:        0.5;
+        }
+        .legal-body {
+            max-width:  760px;
+            margin:     0 auto;
+            padding:    6rem 6vw 8rem;
+        }
+        .legal-section {
+            margin-bottom:  4rem;
+            padding-bottom: 4rem;
+            border-bottom:  1px solid var(--borde);
+        }
+        .legal-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .legal-section h2 {
+            font-family:    'EB Garamond', serif;
+            font-size:      1.15rem;
+            letter-spacing: 0.04em;
+            color:          var(--tinta);
+            margin:         0 0 1.4rem;
+            font-weight:    400;
+        }
+        .legal-section p,
+        .legal-section li {
+            font-family: 'EB Garamond', serif;
+            font-size:   1rem;
+            line-height: 1.9;
+            color:       var(--tinta-suave);
+            opacity:     0.75;
+        }
+        .legal-section ul {
+            padding-left: 1.4rem;
+            margin:       0.8rem 0 1.2rem;
+        }
+        .legal-section li { margin-bottom: 0.5rem; }
+        .legal-table {
+            width:           100%;
+            border-collapse: collapse;
+            margin:          1.5rem 0;
+            font-family:     'EB Garamond', serif;
+            font-size:       0.95rem;
+        }
+        .legal-table th {
+            font-family:    'Lato', sans-serif;
+            font-size:      0.54rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color:          var(--dorado);
+            opacity:        0.7;
+            text-align:     left;
+            padding:        0.8rem 1rem 0.8rem 0;
+            border-bottom:  1px solid var(--borde);
+        }
+        .legal-table td {
+            color:          var(--tinta-suave);
+            opacity:        0.75;
+            padding:        0.9rem 1rem 0.9rem 0;
+            border-bottom:  1px solid var(--borde);
+            line-height:    1.6;
+            vertical-align: top;
+        }
+        .legal-table tr:last-child td { border-bottom: none; }
+        .cookies-reset-btn {
+            display:        inline-block;
+            margin-top:     1.5rem;
+            padding:        0.7rem 1.6rem;
+            background:     transparent;
+            border:         1px solid var(--borde);
+            font-family:    'Lato', sans-serif;
+            font-size:      0.58rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color:          var(--tinta-suave);
+            cursor:         pointer;
+            transition:     border-color 0.3s, color 0.3s;
+        }
+        .cookies-reset-btn:hover {
+            border-color: var(--dorado);
+            color:        var(--tinta);
+        }
+        @media (max-width: 600px) {
+            .legal-hero  { padding: 7rem 1.5rem 4rem; }
+            .legal-body  { padding: 4rem 1.5rem 6rem; }
+            .legal-table { font-size: 0.88rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav id="mainNav">
+        <a href="/" class="nav-logo">EZSENCIA</a>
+        <ul class="nav-links">
+            <li><a href="/#experiencia">La Experiencia</a></li>
+            <li><a href="/nosotros">Nosotros</a></li>
+        </ul>
+        <a href="/acceso" class="nav-cta">Solicitar Acceso</a>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Men&uacute;">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="legal-hero">
+        <span class="legal-hero-eyebrow">Legal &nbsp;&middot;&nbsp; EZSENCIA</span>
+        <h1>Pol&iacute;tica<br>de Cookies</h1>
+        <span class="legal-hero-date">Actualizado: agosto 2026</span>
+    </div>
+
+    <div class="legal-body">
+
+        <div class="legal-section">
+            <h2>1. Qu&eacute; son las cookies</h2>
+            <p>Las cookies son peque&ntilde;os archivos de texto que un sitio web almacena en tu dispositivo cuando lo visitas. Sirven para que el sitio funcione correctamente, recuerde tus preferencias y, en su caso, para medir el uso de la web con fines anal&iacute;ticos.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>2. Cookies que utilizamos</h2>
+            <p>Esta web utiliza &uacute;nicamente dos tipos de cookies:</p>
+
+            <table class="legal-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Finalidad</th>
+                        <th>Duraci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>ezsencia_cookies</code></td>
+                        <td>Esencial</td>
+                        <td>Guarda tu respuesta al banner de consentimiento de cookies para no volverte a preguntar.</td>
+                        <td>Persistente (localStorage)</td>
+                    </tr>
+                    <tr>
+                        <td><code>_ga, _ga_*</code></td>
+                        <td>Anal&iacute;tica</td>
+                        <td>Google Analytics 4 (G-88T7H6RYPE). Mide n&uacute;mero de visitas, p&aacute;ginas vistas y comportamiento de navegaci&oacute;n de forma an&oacute;nima. Solo se activa si aceptas cookies.</td>
+                        <td>2 a&ntilde;os</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>No utilizamos cookies de publicidad, seguimiento entre sitios ni cookies de terceros distintos a Google Analytics.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>3. Gesti&oacute;n del consentimiento</h2>
+            <p>Cuando visitas esta web por primera vez, aparece un banner que te permite aceptar o rechazar las cookies anal&iacute;ticas. Tu elecci&oacute;n se guarda localmente en tu dispositivo.</p>
+            <p>Puedes retirar tu consentimiento o cambiar tu preferencia en cualquier momento pulsando el bot&oacute;n siguiente:</p>
+            <button class="cookies-reset-btn" onclick="resetCookies()">Gestionar mis preferencias de cookies</button>
+        </div>
+
+        <div class="legal-section">
+            <h2>4. C&oacute;mo desactivar las cookies desde el navegador</h2>
+            <p>Tambi&eacute;n puedes bloquear o eliminar cookies directamente desde la configuraci&oacute;n de tu navegador:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Configuraci&oacute;n &rarr; Privacidad y seguridad &rarr; Cookies y otros datos de sitios</li>
+                <li><strong>Safari:</strong> Preferencias &rarr; Privacidad &rarr; Administrar datos de sitios web</li>
+                <li><strong>Firefox:</strong> Opciones &rarr; Privacidad y seguridad &rarr; Cookies y datos del sitio</li>
+            </ul>
+            <p>Ten en cuenta que desactivar todas las cookies puede afectar al funcionamiento de algunos sitios web.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>5. Transferencias internacionales</h2>
+            <p>Google Analytics puede transferir datos a servidores ubicados en Estados Unidos. Google dispone de mecanismos de transferencia conformes al RGPD (Cl&aacute;usulas Contractuales Tipo). Para m&aacute;s informaci&oacute;n consulta la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Pol&iacute;tica de Privacidad de Google</a>.</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>6. Contacto</h2>
+            <p>Si tienes cualquier duda sobre esta pol&iacute;tica, puedes escribirnos a <a href="mailto:founder@ezsencia.com">founder@ezsencia.com</a>.</p>
+        </div>
+
+    </div>
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <span class="footer-brand-logo">EZSENCIA</span>
+                <p class="footer-brand-sub">
+                    Truffle Society<br>
+                    Alcotas, Teruel &nbsp;&middot;&nbsp; Desde 2012
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-section-label">Navegar</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/nosotros">Sobre Nosotros</a></li>
+                    <li><a href="/acceso">Solicitar Acceso</a></li>
+                    <li><a href="/socios/login">&Aacute;rea de Socios</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-section-label">La Experiencia</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/experiencia/caja-fundadora">La Caja Fundadora</a></li>
+                    <li><a href="/experiencia/mesa">La Mesa</a></li>
+                    <li><a href="/experiencia/origen">El Origen</a></li>
+                    <li><a href="/experiencia/ritual">El Ritual</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <span class="footer-section-label">Contacto</span>
+                <a href="mailto:founder@ezsencia.com" class="footer-contact-email">founder@ezsencia.com</a>
+                <a href="https://www.instagram.com/laezsencia" target="_blank" rel="noopener" class="footer-contact-ig">@laezsencia</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 EZSENCIA. Todos los derechos reservados.</p>
+            <ul class="footer-legal">
+                <li><a href="/aviso-legal">Aviso Legal</a></li>
+                <li><a href="/privacidad">Privacidad</a></li>
+                <li><a href="/cookies">Cookies</a></li>
+                <li><button class="footer-cookies-btn" onclick="resetCookies()">Gestionar cookies</button></li>
+            </ul>
+        </div>
+
+    </footer>
+
+    <script src="/nav-active.js"></script>
+    <script src="/cookies.js"></script>
+    <script>
+        (function () {
+            var cursor = document.getElementById('cursor');
+            var ring   = document.getElementById('cursorRing');
+            if (!cursor || !ring) return;
+            var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+            document.addEventListener('mousemove', function (e) {
+                mouseX = e.clientX; mouseY = e.clientY;
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top  = mouseY + 'px';
+            });
+            (function animateRing() {
+                ringX += (mouseX - ringX) * 0.12;
+                ringY += (mouseY - ringY) * 0.12;
+                ring.style.left = ringX + 'px';
+                ring.style.top  = ringY + 'px';
+                requestAnimationFrame(animateRing);
+            })();
+        })();
+    </script>
+
+</body>
+</html>

@@ -1466,8 +1466,8 @@ footer {
 .footer-main {
     padding:               5rem 6vw 4.5rem;
     display:               grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap:                   3rem 5rem;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap:                   3rem 4rem;
     align-items:           start;
 }
 
@@ -1575,6 +1575,21 @@ footer {
 }
 
 .footer-legal a:hover { opacity: 0.9; }
+
+.footer-cookies-btn {
+    background:      none;
+    border:          none;
+    cursor:          pointer;
+    font-family:     'Lato', sans-serif;
+    font-size:       0.6rem;
+    letter-spacing:  0.14em;
+    text-transform:  uppercase;
+    color:           var(--tinta-suave);
+    opacity:         0.45;
+    padding:         0;
+    transition:      opacity 0.3s;
+}
+.footer-cookies-btn:hover { opacity: 0.9; }
 
 /* ====================================================
    ANIMACIÓN DE SCROLL REVEAL
@@ -1748,8 +1763,9 @@ footer {
 
     .exp-intro { grid-template-columns: 1fr; }
 
-    .footer-main  { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 1.5rem 3rem; }
+    .footer-main  { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; padding: 3.5rem 1.5rem 3rem; }
     .footer-bottom { padding: 1.2rem 1.5rem; }
+    .footer-legal  { flex-wrap: wrap; gap: 1.2rem 2rem; }
 
 }
 
@@ -1817,7 +1833,7 @@ footer {
     .origen-visual { height: 280px; }
 
     /* Footer */
-    .footer-main    { padding: 3rem 1.2rem 2.5rem; gap: 2rem; }
+    .footer-main    { grid-template-columns: 1fr; padding: 3rem 1.2rem 2.5rem; gap: 2rem; }
     .footer-bottom  { padding: 1rem 1.2rem; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
 
 }
