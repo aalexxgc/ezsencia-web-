@@ -1003,12 +1003,23 @@
         );
 
         (async () => {
-            const { data: { session } } = await _sb.auth.getSession();
-            if (!session) {
+            try {
+                const timeout = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('timeout')), 5000)
+                );
+                const { data: { session } } = await Promise.race([
+                    _sb.auth.getSession(),
+                    timeout
+                ]);
+                if (!session) {
+                    window.location.replace('/socios/login');
+                    return;
+                }
+                document.body.classList.add('auth-ok');
+            } catch {
                 window.location.replace('/socios/login');
                 return;
             }
-            document.body.classList.add('auth-ok');
 
             const meta   = session.user.user_metadata || {};
             const nombre = meta.nombre || '';

@@ -7,6 +7,8 @@
     <title>Área de Socios — EZSENCIA</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://wclyxuxpezxksxcfsmpn.supabase.co" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <style>
@@ -145,14 +147,26 @@
             const btn = document.getElementById('loginBtn');
             const errEl = document.getElementById('loginError');
             btn.disabled = true; btn.textContent = '···'; errEl.style.display = 'none';
-            const { error } = await _sb.auth.signInWithPassword({
-                email:    document.getElementById('email').value.trim(),
-                password: document.getElementById('password').value
-            });
-            if (error) {
+            try {
+                const timeout = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('timeout')), 8000)
+                );
+                const { error } = await Promise.race([
+                    _sb.auth.signInWithPassword({
+                        email:    document.getElementById('email').value.trim(),
+                        password: document.getElementById('password').value
+                    }),
+                    timeout
+                ]);
+                if (error) {
+                    errEl.textContent = 'Email o contraseña incorrectos.';
+                    errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Entrar';
+                } else {
+                    window.location.replace('/socios');
+                }
+            } catch {
+                errEl.textContent = 'Error de conexión. Inténtalo de nuevo.';
                 errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Entrar';
-            } else {
-                window.location.replace('/socios');
             }
         });
     </script>
