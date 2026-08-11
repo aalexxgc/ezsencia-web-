@@ -2118,6 +2118,27 @@
                 else                              goTo(current);
             });
 
+            // ── Trackpad swipe (wheel deltaX) ────────────────────────────
+            var wheelLocked  = false;
+            var wheelAccum   = 0;
+
+            wrap.addEventListener('wheel', function (e) {
+                if (window.innerWidth <= 900) return;
+                if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return; // scroll vertical → ignorar
+                e.preventDefault();
+                if (wheelLocked) return;
+                wheelAccum += e.deltaX;
+                if (wheelAccum > 40) {
+                    goTo(current + 1);
+                    wheelLocked = true; wheelAccum = 0;
+                    setTimeout(function () { wheelLocked = false; }, 700);
+                } else if (wheelAccum < -40) {
+                    goTo(current - 1);
+                    wheelLocked = true; wheelAccum = 0;
+                    setTimeout(function () { wheelLocked = false; }, 700);
+                }
+            }, { passive: false });
+
             // ── Resize ───────────────────────────────────────────────────
             var resizeTimer;
             window.addEventListener('resize', function () {
