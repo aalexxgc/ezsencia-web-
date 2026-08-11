@@ -1077,7 +1077,10 @@
             flex:     1;
             overflow: hidden;
             position: relative;
+            cursor:   grab;
         }
+        .idx-exp-track-wrap.is-dragging { cursor: grabbing; }
+        .idx-exp-track-wrap.is-dragging .idx-exp-card { pointer-events: none; }
         .idx-exp-track {
             display:     flex;
             gap:         3px;
@@ -2078,6 +2081,44 @@
             prevBtn.addEventListener('click', function () { goTo(current - 1); });
             nextBtn.addEventListener('click', function () { goTo(current + 1); });
 
+            // ── Drag con ratón ───────────────────────────────────────────
+            var wrap         = track.parentElement;
+            var isDragging   = false;
+            var dragStartX   = 0;
+            var dragDelta    = 0;
+            var baseTranslate = 0;
+
+            function getTranslate() { return -(current * cardW()); }
+
+            wrap.addEventListener('mousedown', function (e) {
+                if (window.innerWidth <= 900) return;
+                isDragging    = true;
+                dragStartX    = e.clientX;
+                dragDelta     = 0;
+                baseTranslate = getTranslate();
+                track.style.transition = 'none';
+                wrap.classList.add('is-dragging');
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+                dragDelta = e.clientX - dragStartX;
+                track.style.transform = 'translateX(' + (baseTranslate + dragDelta) + 'px)';
+            });
+
+            window.addEventListener('mouseup', function () {
+                if (!isDragging) return;
+                isDragging = false;
+                wrap.classList.remove('is-dragging');
+                track.style.transition = '';
+                var threshold = cardW() * 0.18;
+                if      (dragDelta < -threshold) goTo(current + 1);
+                else if (dragDelta >  threshold)  goTo(current - 1);
+                else                              goTo(current);
+            });
+
+            // ── Resize ───────────────────────────────────────────────────
             var resizeTimer;
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimer);
