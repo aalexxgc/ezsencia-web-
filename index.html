@@ -1074,13 +1074,13 @@
 
         /* Panel derecho */
         .idx-exp-track-wrap {
-            flex:     1;
-            overflow: hidden;
-            position: relative;
-            cursor:   grab;
+            flex:        1;
+            overflow:    hidden;
+            position:    relative;
+            cursor:      grab;
+            user-select: none;
         }
         .idx-exp-track-wrap.is-dragging { cursor: grabbing; }
-        .idx-exp-track-wrap.is-dragging .idx-exp-card { pointer-events: none; }
         .idx-exp-track {
             display:     flex;
             gap:         3px;
@@ -2082,29 +2082,38 @@
             nextBtn.addEventListener('click', function () { goTo(current + 1); });
 
             // ── Drag con ratón ───────────────────────────────────────────
-            var wrap         = track.parentElement;
-            var isDragging   = false;
-            var dragStartX   = 0;
-            var dragDelta    = 0;
+            var wrap          = track.parentElement;
+            var isDragging    = false;
+            var didDrag       = false;
+            var dragStartX    = 0;
+            var dragDelta     = 0;
             var baseTranslate = 0;
+            var DRAG_THRESHOLD = 6; // px antes de considerar arrastre real
 
             function getTranslate() { return -(current * cardW()); }
 
             wrap.addEventListener('mousedown', function (e) {
                 if (window.innerWidth <= 900) return;
+                if (e.button !== 0) return; // solo botón izquierdo
                 isDragging    = true;
+                didDrag       = false;
                 dragStartX    = e.clientX;
                 dragDelta     = 0;
                 baseTranslate = getTranslate();
                 track.style.transition = 'none';
-                wrap.classList.add('is-dragging');
-                e.preventDefault();
+                // SIN e.preventDefault() → los clicks en <a> funcionan
             });
 
             window.addEventListener('mousemove', function (e) {
                 if (!isDragging) return;
                 dragDelta = e.clientX - dragStartX;
-                track.style.transform = 'translateX(' + (baseTranslate + dragDelta) + 'px)';
+                if (!didDrag && Math.abs(dragDelta) > DRAG_THRESHOLD) {
+                    didDrag = true;
+                    wrap.classList.add('is-dragging');
+                }
+                if (didDrag) {
+                    track.style.transform = 'translateX(' + (baseTranslate + dragDelta) + 'px)';
+                }
             });
 
             window.addEventListener('mouseup', function () {
@@ -2112,11 +2121,18 @@
                 isDragging = false;
                 wrap.classList.remove('is-dragging');
                 track.style.transition = '';
-                var threshold = cardW() * 0.18;
-                if      (dragDelta < -threshold) goTo(current + 1);
-                else if (dragDelta >  threshold)  goTo(current - 1);
-                else                              goTo(current);
+                if (didDrag) {
+                    var threshold = cardW() * 0.18;
+                    if      (dragDelta < -threshold) goTo(current + 1);
+                    else if (dragDelta >  threshold)  goTo(current - 1);
+                    else                              goTo(current);
+                }
             });
+
+            // Cancela navegación solo si hubo arrastre real
+            wrap.addEventListener('click', function (e) {
+                if (didDrag) { e.preventDefault(); didDrag = false; }
+            }, true);
 
             // ── Trackpad swipe (wheel deltaX) ────────────────────────────
             var wheelLocked  = false;
