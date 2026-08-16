@@ -962,21 +962,20 @@
            por eso puede sobrescribir height:80vh del bloque tablet. */
         @media (max-width: 600px) {
             /* Hero móvil:
-               La navbar es position:fixed y tapa ~58px del vídeo por arriba.
-               Solución: altura del contenedor = vídeo 16:9 + espacio navbar.
-               El wrapper usa cover (escala por altura) para rellenarlo sin barras. */
+               80vw da un vídeo grande en portrait; el cover (ancho = 80vw×16/9)
+               rellena sin barras y la navbar fija queda absorbida por la altura. */
             #inicio {
-                height:     calc(56.25vw + 58px);
-                min-height: 265px;
+                height:     80vw;
+                min-height: 300px;
             }
             .hero-yt-wrap {
                 position:   absolute;
                 top:        50%;
                 left:       50%;
                 transform:  translate(-50%, -50%);
-                /* cover: ancho = altura × (16/9) */
-                width:      calc((56.25vw + 58px) / 9 * 16);
-                height:     calc(56.25vw + 58px);
+                /* cover: escala por altura para rellenar el contenedor */
+                width:      calc(80vw / 9 * 16);
+                height:     80vw;
                 min-width:  unset;
                 min-height: unset;
             }
