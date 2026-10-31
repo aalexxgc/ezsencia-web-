@@ -140,6 +140,9 @@
 
 .d-foto--wide   { aspect-ratio: 3 / 2; }
 .d-foto--square { aspect-ratio: 1 / 1; }
+.d-foto--banda  { aspect-ratio: 21 / 9; }
+
+.d-banda { margin-top: 5rem; }
 
 .d-foto-label {
     padding:        1.5rem;
