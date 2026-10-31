@@ -208,7 +208,7 @@
 
     <!-- NAV -->
     <nav class="rec-nav">
-        <a href="/" class="rec-nav-logo">EZSENCIA</a>
+        <a href="/club" class="rec-nav-logo">EZSENCIA</a>
         <div class="rec-nav-right">
             <span class="rec-nav-member" id="memberEmail"></span>
             <button class="rec-nav-logout" id="logoutBtn">Cerrar sesi&oacute;n</button>
@@ -309,7 +309,7 @@
         (async () => {
             const { data: { session } } = await _sb.auth.getSession();
             if (!session) {
-                window.location.replace('/recetario/login');
+                window.location.replace('/club/recetario/login');
                 return;
             }
             document.body.classList.add('auth-ok');
@@ -320,7 +320,7 @@
         // Cerrar sesión
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             await _sb.auth.signOut();
-            window.location.replace('/recetario/login');
+            window.location.replace('/club/recetario/login');
         });
     </script>
 

@@ -553,7 +553,7 @@
 
     <!-- NAV -->
     <nav class="s-nav">
-        <a href="/" class="s-nav-logo">EZSENCIA</a>
+        <a href="/club" class="s-nav-logo">EZSENCIA</a>
         <ul class="s-nav-links">
             <li><a href="#recetario">Recetario</a></li>
             <li><a href="#temporada">La Temporada</a></li>
@@ -1132,12 +1132,12 @@
                     timeout
                 ]);
                 if (!session) {
-                    window.location.replace('/socios/login');
+                    window.location.replace('/club/socios/login');
                     return;
                 }
                 document.body.classList.add('auth-ok');
             } catch {
-                window.location.replace('/socios/login');
+                window.location.replace('/club/socios/login');
                 return;
             }
 
@@ -1162,7 +1162,7 @@
 
         async function doLogout() {
             await _sb.auth.signOut();
-            window.location.replace('/socios/login');
+            window.location.replace('/club/socios/login');
         }
         document.getElementById('logoutBtn').addEventListener('click', doLogout);
         document.getElementById('drawerLogoutBtn').addEventListener('click', doLogout);

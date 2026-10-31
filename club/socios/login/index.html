@@ -81,7 +81,7 @@
     <div class="cursor-ring" id="cursorRing"></div>
 
     <div class="login-wrap">
-        <a href="/" class="login-logo">EZSENCIA</a>
+        <a href="/club" class="login-logo">EZSENCIA</a>
         <span class="login-eyebrow">Área de Socios</span>
         <h1 class="login-title">Edición<br>Fundadores 2026</h1>
         <div class="login-sep"></div>
@@ -140,7 +140,7 @@
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbHl4dXhwZXp4a3N4Y2ZzbXBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTgwMTEsImV4cCI6MjA5MjA5NDAxMX0.BKEhBt5zZVqDCv81NqtAmjRODFUM6TWRs1e26kradL8'
         );
         _sb.auth.getSession().then(({ data: { session } }) => {
-            if (session) window.location.replace('/socios');
+            if (session) window.location.replace('/club/socios');
         });
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -162,7 +162,7 @@
                     errEl.textContent = 'Email o contraseña incorrectos.';
                     errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Entrar';
                 } else {
-                    window.location.replace('/socios');
+                    window.location.replace('/club/socios');
                 }
             } catch {
                 errEl.textContent = 'Error de conexión. Inténtalo de nuevo.';

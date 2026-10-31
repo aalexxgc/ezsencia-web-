@@ -134,7 +134,7 @@
 
     <div class="login-wrap">
 
-        <a href="/" class="login-logo">EZSENCIA</a>
+        <a href="/club" class="login-logo">EZSENCIA</a>
 
         <span class="login-eyebrow">Área de socios</span>
         <h1 class="login-title">Recetario<br>Fundadores</h1>
@@ -168,7 +168,7 @@
 
         // Si ya hay sesión activa, ir directo al recetario
         _sb.auth.getSession().then(({ data: { session } }) => {
-            if (session) window.location.replace('/recetario');
+            if (session) window.location.replace('/club/recetario');
         });
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -189,7 +189,7 @@
                 btn.disabled        = false;
                 btn.textContent     = 'Entrar';
             } else {
-                window.location.replace('/recetario');
+                window.location.replace('/club/recetario');
             }
         });
     </script>
