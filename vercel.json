@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    { "source": "/experiencia/?",                  "destination": "/club#experiencia",        "statusCode": 301 },
+    { "source": "/experiencia/(.+)",               "destination": "/club/experiencia/$1",     "statusCode": 301 },
+    { "source": "/nosotros(/.*)?",                 "destination": "/club/nosotros$1",         "statusCode": 301 },
+    { "source": "/acceso(/.*)?",                   "destination": "/club/acceso$1",           "statusCode": 301 },
+    { "source": "/socios(/.*)?",                   "destination": "/club/socios$1",           "statusCode": 301 },
+    { "source": "/recetario(/.*)?",                "destination": "/club/recetario$1",        "statusCode": 301 },
+    { "source": "/(home|experiencia|eventos|evento-origen|tarjeta-fundador)\\.html", "destination": "/club", "statusCode": 301 }
+  ],
+  "headers": [
+    {
+      "source": "/club(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "index, follow" }
+      ]
+    }
+  ]
+}
