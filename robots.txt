@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
 
-Disallow: /socios/
-Disallow: /recetario/
+Disallow: /club/socios/
+Disallow: /club/recetario/
+Disallow: /clientes
+Disallow: /alta
 
 Sitemap: https://ezsencia.com/sitemap.xml
