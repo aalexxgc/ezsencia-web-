@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- ============================================================
+     EZSENCIA — Distribución de trufa negra fresca
+     Portada. El club vive en /club.
+     ============================================================ -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f0e8">
+    <title>Trufa negra fresca para restaurantes — Ezsencia Distribución</title>
+    <meta name="description" content="Trufa negra fresca (Tuber melanosporum) para restaurantes. De una explotación familiar de Alcotas, recogida y entregada el mismo día. Entregas de lunes a viernes en Segorbe y alrededores.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ezsencia.com/">
+
+    <meta property="og:title"       content="Trufa negra fresca para restaurantes — Ezsencia Distribución">
+    <meta property="og:description" content="De una explotación familiar de Alcotas. Recogida y entregada el mismo día. Albarán con lote en cada entrega.">
+    <meta property="og:image"       content="https://ezsencia.com/assets/distribucion/og-distribucion.jpg">
+    <meta property="og:url"         content="https://ezsencia.com/">
+    <meta property="og:type"        content="website">
+    <meta property="og:locale"      content="es_ES">
+    <meta property="og:site_name"   content="EZSENCIA">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Trufa negra fresca para restaurantes — Ezsencia Distribución">
+    <meta name="twitter:description" content="De una explotación familiar de Alcotas. Recogida y entregada el mismo día.">
+    <meta name="twitter:image"       content="https://ezsencia.com/assets/distribucion/og-distribucion.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ezsencia Distribución",
+      "url": "https://ezsencia.com/",
+      "description": "Distribución de trufa negra fresca (Tuber melanosporum) para restaurantes.",
+      "areaServed": "Segorbe y alrededores",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "name": "Alejandro Gil Cebrián",
+        "telephone": "+34 662 02 40 39",
+        "email": "gilcebrianalex@gmail.com",
+        "availableLanguage": "es"
+      }
+    }
+    </script>
+
+    <!-- Enlaces antiguos tipo ezsencia.com/#experiencia: el club ahora está en /club -->
+    <script>
+        if (location.hash === '#experiencia') location.replace('/club' + location.hash);
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/distribucion.css">
+
+</head>
+
+<body class="d-page">
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- ========================================================
+         NAVEGACIÓN
+         ======================================================== -->
+
+    <nav id="navbar">
+        <a href="/" class="nav-logo">EZSENCIA</a>
+        <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+            <li><a href="/#trazabilidad">Trazabilidad</a></li>
+            <li><a href="/#condiciones">Condiciones</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="/clientes" class="nav-cta">Acceso clientes</a>
+            <button class="nav-hamburger" id="navHamburger"
+                    aria-label="Abrir men&uacute;" aria-expanded="false"
+                    aria-controls="navMobileDrawer">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <div class="nav-mobile-drawer" id="navMobileDrawer"
+         role="dialog" aria-modal="true" aria-hidden="true"
+         aria-label="Men&uacute; de navegaci&oacute;n">
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+        <ul class="nav-mobile-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+            <li><a href="/#trazabilidad">Trazabilidad</a></li>
+            <li><a href="/#condiciones">Condiciones</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+        <a href="/clientes" class="nav-mobile-cta">Acceso clientes</a>
+        <p class="nav-mobile-sub">Trufa negra fresca para restaurantes</p>
+        <a href="/club" class="nav-mobile-club">El Club Ezsencia</a>
+    </div>
+
+
+    <!-- ========================================================
+         1. HERO
+         ======================================================== -->
+
+    <header class="d-hero">
+        <div class="d-split">
+            <div>
+                <p class="d-hero-eyebrow">Ezsencia Distribuci&oacute;n &nbsp;&middot;&nbsp; Segorbe</p>
+                <h1 class="d-hero-title">Trufa negra fresca para restaurantes</h1>
+                <p class="d-hero-sub">De una explotaci&oacute;n familiar de Alcotas. Recogida y entregada el mismo d&iacute;a.</p>
+                <div class="d-btns">
+                    <a href="/alta" class="d-btn">Solicitar alta como cliente</a>
+                    <a href="/#como-trabajamos" class="d-link">C&oacute;mo trabajamos &rarr;</a>
+                </div>
+            </div>
+            <div class="d-foto" data-src="/assets/distribucion/trufa-entera.jpg" data-alt="Trufa negra fresca entera">
+                <span class="d-foto-label">FOTO: trufa entera</span>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ========================================================
+         2. EL PRODUCTO
+         ======================================================== -->
+
+    <section class="d-section" id="producto">
+        <div class="d-inner d-split">
+            <div class="reveal">
+                <div class="section-label">El producto</div>
+                <h2 class="d-h2">Tal como la entrega el productor.</h2>
+                <p class="d-lead">
+                    Trufa negra fresca (<em>Tuber melanosporum</em>), entera, tal como la entrega
+                    el productor, en recipiente cerrado que no se abre durante el transporte.
+                </p>
+                <p class="d-lead">
+                    La inspecci&oacute;n y la aceptaci&oacute;n se hacen en la recepci&oacute;n del cliente.
+                </p>
+                <ul class="d-ficha">
+                    <li><span class="d-ficha-k">Especie</span><span class="d-ficha-v"><em>Tuber melanosporum</em></span></li>
+                    <li><span class="d-ficha-k">Formato</span><span class="d-ficha-v">Entera, fresca</span></li>
+                    <li><span class="d-ficha-k">Transporte</span><span class="d-ficha-v">Recipiente cerrado, sin abrir hasta la entrega</span></li>
+                    <li><span class="d-ficha-k">Aceptaci&oacute;n</span><span class="d-ficha-v">En la recepci&oacute;n del cliente</span></li>
+                </ul>
+            </div>
+            <div class="d-fotos-pair reveal">
+                <div class="d-foto" data-src="/assets/distribucion/trufa-cortada.jpg" data-alt="Trufa negra fresca cortada por la mitad">
+                    <span class="d-foto-label">FOTO: trufa cortada</span>
+                </div>
+                <div class="d-foto" data-src="/assets/distribucion/recipiente-lote.jpg" data-alt="Recipiente cerrado con pegatina de lote">
+                    <span class="d-foto-label">FOTO: recipiente cerrado con su pegatina de lote</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         3. CÓMO FUNCIONA CADA SEMANA
+         ======================================================== -->
+
+    <section class="d-section d-section--alt" id="como-trabajamos">
+        <div class="d-inner">
+            <div class="reveal">
+                <div class="section-label">C&oacute;mo trabajamos</div>
+                <h2 class="d-h2">C&oacute;mo funciona cada semana.</h2>
+            </div>
+
+            <ol class="d-pasos reveal">
+                <li class="d-paso">
+                    <span class="d-paso-num">01</span>
+                    <h3>Tarifa</h3>
+                    <p>El lunes publicamos la tarifa de la semana para los clientes dados de alta.</p>
+                </li>
+                <li class="d-paso">
+                    <span class="d-paso-num">02</span>
+                    <h3>Pedido</h3>
+                    <p>Hasta las 11:00 de la v&iacute;spera de la entrega.</p>
+                </li>
+                <li class="d-paso">
+                    <span class="d-paso-num">03</span>
+                    <h3>Confirmaci&oacute;n</h3>
+                    <p>Te confirmamos los kilos de tu pedido.</p>
+                </li>
+                <li class="d-paso">
+                    <span class="d-paso-num">04</span>
+                    <h3>Entrega</h3>
+                    <p>El mismo d&iacute;a de la recogida.</p>
+                </li>
+                <li class="d-paso">
+                    <span class="d-paso-num">05</span>
+                    <h3>Recepci&oacute;n</h3>
+                    <p>Inspeccionas y aceptas la trufa en tu recepci&oacute;n.</p>
+                </li>
+                <li class="d-paso">
+                    <span class="d-paso-num">06</span>
+                    <h3>Factura</h3>
+                    <p>Una factura semanal con todas las entregas.</p>
+                </li>
+            </ol>
+
+            <div class="d-fotos-pair reveal">
+                <div class="d-foto d-foto--wide" data-src="/assets/distribucion/nevera-termometro.jpg" data-alt="Nevera portátil con termómetro">
+                    <span class="d-foto-label">FOTO: nevera port&aacute;til con term&oacute;metro</span>
+                </div>
+                <div class="d-foto d-foto--wide" data-src="/assets/distribucion/entrega-recepcion.jpg" data-alt="Entrega en la recepción de un restaurante">
+                    <span class="d-foto-label">FOTO: entrega en la recepci&oacute;n de un restaurante</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         4. TRAZABILIDAD
+         ======================================================== -->
+
+    <section class="d-section" id="trazabilidad">
+        <div class="d-inner d-split">
+            <div class="reveal">
+                <div class="section-label">Trazabilidad</div>
+                <h2 class="d-h2">Cada entrega, con su albar&aacute;n y su lote.</h2>
+                <p class="d-lead">Cada entrega lleva albar&aacute;n con:</p>
+                <ul class="d-albaran">
+                    <li>Especie</li>
+                    <li>Lote</li>
+                    <li>Origen</li>
+                    <li>Peso</li>
+                    <li>Fecha</li>
+                    <li>Responsable de la identificaci&oacute;n de la especie</li>
+                </ul>
+                <p class="d-lead">Y el recipiente lleva la pegatina de su lote.</p>
+                <p class="d-norma">
+                    As&iacute; el restaurante puede acreditar que compra por un canal autorizado
+                    y que conoce el lote (RD&nbsp;30/2009, art.&nbsp;6).
+                </p>
+            </div>
+            <div class="d-foto reveal" data-src="/assets/distribucion/albaran.jpg" data-alt="Albarán de entrega de ejemplo">
+                <span class="d-foto-label">FOTO: albar&aacute;n (sin datos reales)</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         5. CONDICIONES
+         ======================================================== -->
+
+    <section class="d-section d-section--alt" id="condiciones">
+        <div class="d-inner">
+            <div class="reveal">
+                <div class="section-label">Condiciones</div>
+                <h2 class="d-h2">Condiciones, en resumen.</h2>
+            </div>
+            <ul class="d-condiciones reveal">
+                <li>
+                    <h3>Precio</h3>
+                    <p>Semanal, seg&uacute;n mercado y calidad. Sin IVA. Solo visible para clientes dados de alta.</p>
+                </li>
+                <li>
+                    <h3>Pedido m&iacute;nimo</h3>
+                    <p>100&nbsp;g.</p>
+                </li>
+                <li>
+                    <h3>Entregas</h3>
+                    <p>De lunes a viernes.</p>
+                </li>
+                <li>
+                    <h3>Zona</h3>
+                    <p>Segorbe y alrededores. Valencia y resto, a consultar.</p>
+                </li>
+                <li>
+                    <h3>Factura y pago</h3>
+                    <p>Factura semanal. Pago a 7 d&iacute;as.</p>
+                </li>
+                <li>
+                    <h3>Reclamaciones</h3>
+                    <p>En un plazo de 24&nbsp;horas.</p>
+                </li>
+                <li>
+                    <h3>Exclusividad</h3>
+                    <p>Sin exclusividad.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         6. CONTACTO
+         ======================================================== -->
+
+    <section class="d-section" id="contacto">
+        <div class="d-inner d-contacto">
+            <div class="reveal">
+                <div class="section-label">Contacto</div>
+                <h2 class="d-h2">Hablemos de tu cocina.</h2>
+                <div class="d-btns">
+                    <a href="/alta" class="d-btn">Solicitar alta como cliente</a>
+                </div>
+            </div>
+            <ul class="d-contacto-datos reveal">
+                <li><span class="d-ficha-k">Responsable</span><span class="d-ficha-v">Alejandro Gil Cebri&aacute;n</span></li>
+                <li><span class="d-ficha-k">Tel&eacute;fono</span><a href="tel:+34662024039">662 02 40 39</a></li>
+                <li><span class="d-ficha-k">Email</span><a href="mailto:gilcebrianalex@gmail.com">gilcebrianalex@gmail.com</a></li>
+                <li><span class="d-ficha-k">Base</span><span class="d-ficha-v">Segorbe</span></li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         7. EL CLUB — discreto
+         ======================================================== -->
+
+    <section class="d-club" id="el-club">
+        <a href="/club" class="d-club-card reveal">
+            <img src="/assets/alcotas20.JPG" alt="El Club Ezsencia en Alcotas" loading="lazy">
+            <div>
+                <p class="d-club-eyebrow">Ezsencia tambi&eacute;n es</p>
+                <p class="d-club-title">El Club Ezsencia</p>
+                <p class="d-club-text">Un club privado en Alcotas.</p>
+                <span class="d-link">Conocer el club &rarr;</span>
+            </div>
+        </a>
+    </section>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <span class="footer-brand-logo">EZSENCIA</span>
+                <p class="footer-brand-sub">
+                    Distribuci&oacute;n de trufa negra fresca<br>
+                    Segorbe
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-section-label">Navegar</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+                    <li><a href="/#trazabilidad">Trazabilidad</a></li>
+                    <li><a href="/#condiciones">Condiciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-section-label">Clientes</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/clientes">Acceso clientes</a></li>
+                    <li><a href="/alta">Solicitar alta</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <span class="footer-section-label">Contacto</span>
+                <a href="mailto:gilcebrianalex@gmail.com" class="footer-contact-email">gilcebrianalex@gmail.com</a>
+                <a href="tel:+34662024039" class="footer-contact-email">662 02 40 39</a>
+            </div>
+
+        </div>
+
+        <div class="footer-club">
+            <a href="/club">Ezsencia tambi&eacute;n es un club privado en Alcotas &rarr;</a>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 EZSENCIA. Todos los derechos reservados.</p>
+            <ul class="footer-legal">
+                <li><a href="/aviso-legal">Aviso Legal</a></li>
+                <li><a href="/privacidad">Privacidad</a></li>
+                <li><a href="/cookies">Cookies</a></li>
+                <li><button class="footer-cookies-btn" onclick="resetCookies()">Gestionar cookies</button></li>
+            </ul>
+        </div>
+
+    </footer>
+
+
+    <script src="/distribucion.js"></script>
+    <script src="/cookies.js"></script>
+</body>
+</html>

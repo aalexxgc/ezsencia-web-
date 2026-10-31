@@ -1,0 +1,530 @@
+/* ====================================================
+   EZSENCIA DISTRIBUCIÓN
+   Se carga después de styles.css y reutiliza sus
+   variables, navegación, menú lateral, pie y reveal.
+   Solo afecta a páginas con <body class="d-page">.
+   ==================================================== */
+
+
+/* ====================================================
+   NAVEGACIÓN — menú desplegable también en escritorio
+   ==================================================== */
+
+.d-page .nav-links       { gap: 2.8rem; }
+.d-page .nav-right       { display: flex; align-items: center; gap: 2rem; }
+.d-page .nav-hamburger   { display: flex; }
+
+.d-page .nav-mobile-links { gap: 1.8rem; }
+.d-page .nav-mobile-links a { font-size: 1.7rem; }
+
+.nav-mobile-club {
+    margin-top:      2.6rem;
+    padding-top:     1.8rem;
+    border-top:      1px solid var(--borde);
+    font-family:     'EB Garamond', serif;
+    font-size:       1.25rem;
+    font-style:      italic;
+    color:           var(--tinta-suave);
+    text-decoration: none;
+    transition:      color 0.3s;
+}
+
+.nav-mobile-club:hover { color: var(--dorado); }
+
+@media (max-width: 1200px) {
+    .d-page .nav-links { display: none; }
+}
+
+
+/* ====================================================
+   BLOQUES GENERALES
+   ==================================================== */
+
+.d-section {
+    padding:    8rem 6vw;
+    border-top: 1px solid var(--borde);
+}
+
+.d-section--alt { background: var(--fondo-alt); }
+
+.d-inner {
+    max-width: 1180px;
+    margin:    0 auto;
+}
+
+.d-h2 {
+    font-family:    'EB Garamond', serif;
+    font-weight:    400;
+    font-size:      clamp(2rem, 3.6vw, 3rem);
+    line-height:    1.15;
+    letter-spacing: 0.01em;
+    color:          var(--tinta);
+    margin-bottom:  2rem;
+    max-width:      22ch;
+}
+
+.d-lead {
+    font-family: 'EB Garamond', serif;
+    font-size:   1.25rem;
+    line-height: 1.75;
+    color:       var(--tinta-suave);
+    max-width:   58ch;
+}
+
+.d-lead + .d-lead { margin-top: 1.2rem; }
+
+.d-split {
+    display:               grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap:                   5rem;
+    align-items:           center;
+}
+
+.d-btns {
+    display:     flex;
+    align-items: center;
+    gap:         2.2rem;
+    flex-wrap:   wrap;
+    margin-top:  3rem;
+}
+
+.d-btn {
+    display:         inline-block;
+    font-family:     'Lato', sans-serif;
+    font-size:       0.66rem;
+    letter-spacing:  0.24em;
+    text-transform:  uppercase;
+    text-decoration: none;
+    padding:         1rem 2.6rem;
+    background:      var(--tinta);
+    border:          1px solid var(--tinta);
+    color:           var(--fondo);
+    transition:      background 0.4s ease, color 0.4s ease, transform 0.2s ease;
+}
+
+.d-btn:hover {
+    background: transparent;
+    color:      var(--tinta);
+    transform:  translateY(-1px);
+}
+
+.d-link {
+    font-family:     'Lato', sans-serif;
+    font-size:       0.66rem;
+    letter-spacing:  0.22em;
+    text-transform:  uppercase;
+    text-decoration: none;
+    color:           var(--tinta-suave);
+    transition:      color 0.3s, transform 0.2s;
+}
+
+.d-link:hover { color: var(--tinta); }
+
+
+/* ====================================================
+   HUECOS DE FOTO
+   Muestran un marcador hasta que existe el archivo
+   indicado en data-src (lo carga distribucion.js).
+   ==================================================== */
+
+.d-foto {
+    position:        relative;
+    aspect-ratio:    4 / 5;
+    background:      var(--fondo-oliva);
+    border:          1px dashed var(--borde);
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    overflow:        hidden;
+}
+
+.d-foto--wide   { aspect-ratio: 3 / 2; }
+.d-foto--square { aspect-ratio: 1 / 1; }
+
+.d-foto-label {
+    padding:        1.5rem;
+    text-align:     center;
+    font-size:      0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color:          var(--tinta-fina);
+    line-height:    1.9;
+}
+
+.d-foto img {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+}
+
+.d-foto.has-img { border: none; }
+.d-foto.has-img .d-foto-label { display: none; }
+
+.d-fotos-pair {
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   1.2rem;
+}
+
+
+/* ====================================================
+   1. HERO
+   ==================================================== */
+
+.d-hero {
+    min-height:  100svh;
+    padding:     11rem 6vw 6rem;
+    display:     flex;
+    align-items: center;
+}
+
+.d-hero .d-split { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+.d-hero-eyebrow {
+    font-size:      0.66rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color:          var(--dorado);
+    margin-bottom:  2.4rem;
+}
+
+.d-hero-title {
+    font-family:    'EB Garamond', serif;
+    font-weight:    400;
+    font-size:      clamp(2.8rem, 6vw, 5.2rem);
+    line-height:    1.05;
+    letter-spacing: 0.005em;
+    color:          var(--tinta);
+    margin-bottom:  2.2rem;
+}
+
+.d-hero-sub {
+    font-family: 'EB Garamond', serif;
+    font-style:  italic;
+    font-size:   1.35rem;
+    line-height: 1.65;
+    color:       var(--tinta-suave);
+    max-width:   34ch;
+}
+
+
+/* ====================================================
+   2. PRODUCTO — ficha
+   ==================================================== */
+
+.d-ficha {
+    list-style:  none;
+    margin-top:  3rem;
+    border-top:  1px solid var(--borde);
+    max-width:   560px;
+}
+
+.d-ficha li {
+    display:               grid;
+    grid-template-columns: 11rem 1fr;
+    gap:                   1.5rem;
+    padding:               1.1rem 0;
+    border-bottom:         1px solid var(--borde);
+}
+
+.d-ficha-k {
+    font-size:      0.6rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color:          var(--tinta-fina);
+    padding-top:    0.35rem;
+}
+
+.d-ficha-v {
+    font-family: 'EB Garamond', serif;
+    font-size:   1.1rem;
+    color:       var(--tinta);
+}
+
+
+/* ====================================================
+   3. CÓMO FUNCIONA — semana
+   ==================================================== */
+
+.d-pasos {
+    list-style:            none;
+    display:               grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap:                   0;
+    margin:                4rem 0 5rem;
+    border-top:            1px solid var(--borde);
+}
+
+.d-paso {
+    padding:      2.2rem 1.6rem 0 0;
+    border-right: 1px solid var(--borde);
+    padding-left: 1.6rem;
+}
+
+.d-paso:first-child { padding-left: 0; }
+.d-paso:last-child  { border-right: none; }
+
+.d-paso-num {
+    display:        block;
+    font-size:      0.58rem;
+    letter-spacing: 0.3em;
+    color:          var(--dorado);
+    margin-bottom:  1.2rem;
+}
+
+.d-paso h3 {
+    font-family:   'EB Garamond', serif;
+    font-weight:   400;
+    font-size:     1.35rem;
+    color:         var(--tinta);
+    margin-bottom: 0.7rem;
+}
+
+.d-paso p {
+    font-size:   0.86rem;
+    line-height: 1.7;
+    color:       var(--tinta-suave);
+}
+
+
+/* ====================================================
+   4. TRAZABILIDAD
+   ==================================================== */
+
+.d-albaran {
+    list-style:            none;
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   0 2.5rem;
+    margin:                2.5rem 0;
+    max-width:             560px;
+}
+
+.d-albaran li {
+    font-family:   'EB Garamond', serif;
+    font-size:     1.1rem;
+    color:         var(--tinta);
+    padding:       0.75rem 0;
+    border-bottom: 1px solid var(--borde);
+}
+
+.d-norma {
+    margin-top:     2rem;
+    padding-left:   1.4rem;
+    border-left:    1px solid var(--dorado);
+    font-size:      0.9rem;
+    line-height:    1.8;
+    color:          var(--tinta-suave);
+    max-width:      52ch;
+}
+
+
+/* ====================================================
+   5. CONDICIONES
+   ==================================================== */
+
+.d-condiciones {
+    list-style:            none;
+    display:               grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:                   0;
+    margin-top:            4rem;
+    border-top:            1px solid var(--borde);
+    border-left:           1px solid var(--borde);
+}
+
+.d-condiciones li {
+    padding:       2.4rem 2.2rem;
+    border-right:  1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+}
+
+.d-condiciones h3 {
+    font-size:      0.6rem;
+    font-weight:    400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color:          var(--dorado);
+    margin-bottom:  1rem;
+}
+
+.d-condiciones p {
+    font-family: 'EB Garamond', serif;
+    font-size:   1.12rem;
+    line-height: 1.6;
+    color:       var(--tinta);
+}
+
+
+/* ====================================================
+   6. CONTACTO
+   ==================================================== */
+
+.d-contacto {
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   5rem;
+    align-items:           end;
+}
+
+.d-contacto-datos {
+    list-style: none;
+    border-top: 1px solid var(--borde);
+}
+
+.d-contacto-datos li {
+    display:               grid;
+    grid-template-columns: 8rem 1fr;
+    gap:                   1.5rem;
+    padding:               1.1rem 0;
+    border-bottom:         1px solid var(--borde);
+}
+
+.d-contacto-datos a {
+    font-family:     'EB Garamond', serif;
+    font-size:       1.2rem;
+    color:           var(--tinta);
+    text-decoration: none;
+    transition:      color 0.3s;
+}
+
+.d-contacto-datos a:hover { color: var(--dorado); }
+
+
+/* ====================================================
+   7. EL CLUB — bloque discreto
+   ==================================================== */
+
+.d-club {
+    padding:    5rem 6vw;
+    border-top: 1px solid var(--borde);
+}
+
+.d-club-card {
+    max-width:             900px;
+    margin:                0 auto;
+    display:               grid;
+    grid-template-columns: 240px 1fr;
+    gap:                   3rem;
+    align-items:           center;
+    text-decoration:       none;
+    color:                 inherit;
+}
+
+.d-club-card img {
+    width:        100%;
+    aspect-ratio: 4 / 3;
+    object-fit:   cover;
+    filter:       saturate(0.85);
+    transition:   filter 0.5s;
+}
+
+.d-club-card:hover img { filter: saturate(1); }
+
+.d-club-eyebrow {
+    font-size:      0.58rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color:          var(--tinta-fina);
+    margin-bottom:  0.8rem;
+}
+
+.d-club-title {
+    font-family:   'EB Garamond', serif;
+    font-weight:   400;
+    font-size:     1.6rem;
+    color:         var(--tinta);
+    margin-bottom: 0.6rem;
+}
+
+.d-club-text {
+    font-family: 'EB Garamond', serif;
+    font-style:  italic;
+    font-size:   1.05rem;
+    color:       var(--tinta-suave);
+    margin-bottom: 1.2rem;
+}
+
+.d-club-card .d-link { transition: color 0.3s; }
+.d-club-card:hover .d-link { color: var(--dorado); }
+
+
+/* ====================================================
+   PIE — línea del club
+   ==================================================== */
+
+.footer-club {
+    padding:     1.2rem 6vw;
+    border-top:  1px solid var(--borde);
+}
+
+.footer-club a {
+    font-family:     'EB Garamond', serif;
+    font-style:      italic;
+    font-size:       0.95rem;
+    color:           var(--tinta-fina);
+    text-decoration: none;
+    transition:      color 0.3s;
+}
+
+.footer-club a:hover { color: var(--dorado); }
+
+
+/* ====================================================
+   PÁGINA «PRÓXIMAMENTE»
+   ==================================================== */
+
+.d-prox {
+    min-height:      100svh;
+    padding:         11rem 6vw 6rem;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+}
+
+.d-prox-inner { max-width: 640px; }
+
+.d-prox .d-contacto-datos { margin-top: 3rem; }
+
+
+/* ====================================================
+   RESPONSIVE
+   ==================================================== */
+
+@media (max-width: 1100px) {
+    .d-pasos { grid-template-columns: repeat(3, 1fr); }
+    .d-paso:nth-child(3n)   { border-right: none; }
+    .d-paso:nth-child(3n+1) { padding-left: 0; }
+    .d-paso:nth-child(n+4)  { padding-top: 2.6rem; }
+    .d-condiciones { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .d-section       { padding: 5.5rem 1.5rem; }
+    .d-hero          { padding: 8.5rem 1.5rem 4rem; min-height: auto; }
+    .d-split,
+    .d-contacto      { grid-template-columns: 1fr; gap: 3rem; }
+    .d-club          { padding: 4rem 1.5rem; }
+    .d-club-card     { grid-template-columns: 1fr; gap: 1.6rem; }
+    .footer-club     { padding: 1.2rem 1.5rem; }
+    .d-prox          { padding: 8.5rem 1.5rem 4rem; }
+    .d-page .nav-right .nav-cta { display: none; }
+}
+
+@media (max-width: 600px) {
+    .d-pasos { grid-template-columns: 1fr; }
+    .d-paso,
+    .d-paso:nth-child(n) {
+        padding:       1.8rem 0;
+        border-right:  none;
+        border-bottom: 1px solid var(--borde);
+    }
+    .d-condiciones   { grid-template-columns: 1fr; }
+    .d-condiciones li { padding: 1.8rem 1.4rem; }
+    .d-albaran       { grid-template-columns: 1fr; }
+    .d-ficha li,
+    .d-contacto-datos li { grid-template-columns: 1fr; gap: 0.3rem; }
+    .d-btns          { gap: 1.6rem; }
+}
