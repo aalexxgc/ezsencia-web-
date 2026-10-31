@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/distribucion.css">
     <style>
         .legal-hero {
             background:    var(--fondo-alt);
@@ -129,7 +130,7 @@
     </style>
 </head>
 
-<body>
+<body class="d-page">
 
     <div class="cursor"      id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
@@ -137,28 +138,38 @@
     <nav id="navbar">
         <a href="/" class="nav-logo">EZSENCIA</a>
         <ul class="nav-links">
-            <li><a href="/club#experiencia">La Experiencia</a></li>
-            <li><a href="/club/nosotros">Nosotros</a></li>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+            <li><a href="/#trazabilidad">Trazabilidad</a></li>
+            <li><a href="/#condiciones">Condiciones</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
         </ul>
-        <a href="/club/acceso" class="nav-cta">Solicitar Acceso</a>
-        <button class="nav-hamburger" id="navHamburger" aria-label="Men&uacute;">
-            <span></span><span></span><span></span>
-        </button>
+        <div class="nav-right">
+            <a href="/clientes" class="nav-cta">Acceso clientes</a>
+            <button class="nav-hamburger" id="navHamburger"
+                    aria-label="Abrir men&uacute;" aria-expanded="false"
+                    aria-controls="navMobileDrawer">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </nav>
 
     <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <div class="nav-mobile-drawer" id="navMobileDrawer"
          role="dialog" aria-modal="true" aria-hidden="true"
          aria-label="Men&uacute; de navegaci&oacute;n">
         <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
         <ul class="nav-mobile-links">
             <li><a href="/">Inicio</a></li>
-            <li><a href="/club#experiencia">La Experiencia</a></li>
-            <li><a href="/club/nosotros">Sobre Nosotros</a></li>
-            <li><a href="/club/socios">Área de Socios</a></li>
+            <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+            <li><a href="/#trazabilidad">Trazabilidad</a></li>
+            <li><a href="/#condiciones">Condiciones</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
         </ul>
-        <a href="/club/acceso" class="nav-mobile-cta">Solicitar Invitaci&oacute;n</a>
-        <p class="nav-mobile-sub">Edici&oacute;n Fundadores 2026 &nbsp;&middot;&nbsp; 20 miembros</p>
+        <a href="/clientes" class="nav-mobile-cta">Acceso clientes</a>
+        <p class="nav-mobile-sub">Trufa negra fresca para restaurantes</p>
+        <a href="/club" class="nav-mobile-club">El Club Ezsencia</a>
     </div>
 
     <div class="legal-hero">
@@ -243,8 +254,8 @@
             <div class="footer-brand">
                 <span class="footer-brand-logo">EZSENCIA</span>
                 <p class="footer-brand-sub">
-                    Truffle Society<br>
-                    Alcotas, Teruel &nbsp;&middot;&nbsp; Desde 2012
+                    Distribuci&oacute;n de trufa negra fresca<br>
+                    Segorbe
                 </p>
             </div>
 
@@ -252,28 +263,30 @@
                 <span class="footer-section-label">Navegar</span>
                 <ul class="footer-nav-list">
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="/club/nosotros">Sobre Nosotros</a></li>
-                    <li><a href="/club/acceso">Solicitar Acceso</a></li>
-                    <li><a href="/club/socios/login">&Aacute;rea de Socios</a></li>
+                    <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+                    <li><a href="/#trazabilidad">Trazabilidad</a></li>
+                    <li><a href="/#condiciones">Condiciones</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <span class="footer-section-label">La Experiencia</span>
+                <span class="footer-section-label">Clientes</span>
                 <ul class="footer-nav-list">
-                    <li><a href="/club/experiencia/caja-fundadora">La Caja Fundadora</a></li>
-                    <li><a href="/club/experiencia/mesa">La Mesa</a></li>
-                    <li><a href="/club/experiencia/origen">El Origen</a></li>
-                    <li><a href="/club/experiencia/ritual">El Ritual</a></li>
+                    <li><a href="/clientes">Acceso clientes</a></li>
+                    <li><a href="/alta">Solicitar alta</a></li>
                 </ul>
             </div>
 
             <div class="footer-contact">
                 <span class="footer-section-label">Contacto</span>
-                <a href="mailto:founder@ezsencia.com" class="footer-contact-email">founder@ezsencia.com</a>
-                <a href="https://www.instagram.com/laezsencia" target="_blank" rel="noopener" class="footer-contact-ig">@laezsencia</a>
+                <a href="mailto:gilcebrianalex@gmail.com" class="footer-contact-email">gilcebrianalex@gmail.com</a>
+                <a href="tel:+34662024039" class="footer-contact-email">662 02 40 39</a>
             </div>
 
+        </div>
+
+        <div class="footer-club">
+            <a href="/club">Ezsencia tambi&eacute;n es un club privado en Alcotas &rarr;</a>
         </div>
 
         <div class="footer-bottom">
