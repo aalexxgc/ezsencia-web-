@@ -510,7 +510,9 @@
     .d-split,
     .d-contacto      { grid-template-columns: 1fr; gap: 3rem; }
     .d-club          { padding: 4rem 1.5rem; }
-    .d-club-card     { grid-template-columns: 1fr; gap: 1.6rem; }
+    .d-club-card     { grid-template-columns: 110px 1fr; gap: 1.4rem; }
+    .d-club-card img { aspect-ratio: 1 / 1; }
+    .d-club-title    { font-size: 1.3rem; }
     .footer-club     { padding: 1.2rem 1.5rem; }
     .d-prox          { padding: 8.5rem 1.5rem 4rem; }
     .d-page .nav-right .nav-cta { display: none; }
