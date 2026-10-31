@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- ============================================================
+     EZSENCIA DISTRIBUCIÓN — Acceso clientes
+     Página provisional «Próximamente» (ver README, siguientes fases)
+     ============================================================ -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f0e8">
+    <title>Acceso clientes — Ezsencia Distribución</title>
+    <meta name="description" content="Área de clientes de Ezsencia Distribución. Próximamente.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://ezsencia.com/clientes">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/distribucion.css">
+
+</head>
+
+<body class="d-page">
+
+    <div class="cursor"      id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- ========================================================
+         NAVEGACIÓN
+         ======================================================== -->
+
+    <nav id="navbar">
+        <a href="/" class="nav-logo">EZSENCIA</a>
+        <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+            <li><a href="/#trazabilidad">Trazabilidad</a></li>
+            <li><a href="/#condiciones">Condiciones</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="/clientes" class="nav-cta">Acceso clientes</a>
+            <button class="nav-hamburger" id="navHamburger"
+                    aria-label="Abrir men&uacute;" aria-expanded="false"
+                    aria-controls="navMobileDrawer">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+    <div class="nav-mobile-drawer" id="navMobileDrawer"
+         role="dialog" aria-modal="true" aria-hidden="true"
+         aria-label="Men&uacute; de navegaci&oacute;n">
+        <button class="nav-mobile-close" id="navMobileClose" aria-label="Cerrar men&uacute;">&#215;</button>
+        <ul class="nav-mobile-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+            <li><a href="/#trazabilidad">Trazabilidad</a></li>
+            <li><a href="/#condiciones">Condiciones</a></li>
+            <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+        <a href="/clientes" class="nav-mobile-cta">Acceso clientes</a>
+        <p class="nav-mobile-sub">Trufa negra fresca para restaurantes</p>
+        <a href="/club" class="nav-mobile-club">El Club Ezsencia</a>
+    </div>
+
+
+
+    <main class="d-prox">
+        <div class="d-prox-inner">
+            <p class="d-hero-eyebrow">Acceso clientes</p>
+            <h1 class="d-hero-title">Pr&oacute;ximamente</h1>
+            <p class="d-lead">Estamos preparando el &aacute;rea de clientes: tarifa semanal, pedidos y albaranes. Mientras tanto, los pedidos se gestionan directamente con nosotros.</p>
+            <ul class="d-contacto-datos">
+                <li><span class="d-ficha-k">Responsable</span><span class="d-ficha-v">Alejandro Gil Cebri&aacute;n</span></li>
+                <li><span class="d-ficha-k">Tel&eacute;fono</span><a href="tel:+34662024039">662 02 40 39</a></li>
+                <li><span class="d-ficha-k">Email</span><a href="mailto:gilcebrianalex@gmail.com">gilcebrianalex@gmail.com</a></li>
+                <li><span class="d-ficha-k">Base</span><span class="d-ficha-v">Segorbe</span></li>
+            </ul>
+            <div class="d-btns">
+                <a href="/" class="d-link">&larr; Volver al inicio</a>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <span class="footer-brand-logo">EZSENCIA</span>
+                <p class="footer-brand-sub">
+                    Distribuci&oacute;n de trufa negra fresca<br>
+                    Segorbe
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-section-label">Navegar</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/#como-trabajamos">C&oacute;mo trabajamos</a></li>
+                    <li><a href="/#trazabilidad">Trazabilidad</a></li>
+                    <li><a href="/#condiciones">Condiciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-section-label">Clientes</span>
+                <ul class="footer-nav-list">
+                    <li><a href="/clientes">Acceso clientes</a></li>
+                    <li><a href="/alta">Solicitar alta</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <span class="footer-section-label">Contacto</span>
+                <a href="mailto:gilcebrianalex@gmail.com" class="footer-contact-email">gilcebrianalex@gmail.com</a>
+                <a href="tel:+34662024039" class="footer-contact-email">662 02 40 39</a>
+            </div>
+
+        </div>
+
+        <div class="footer-club">
+            <a href="/club">Ezsencia tambi&eacute;n es un club privado en Alcotas &rarr;</a>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 EZSENCIA. Todos los derechos reservados.</p>
+            <ul class="footer-legal">
+                <li><a href="/aviso-legal">Aviso Legal</a></li>
+                <li><a href="/privacidad">Privacidad</a></li>
+                <li><a href="/cookies">Cookies</a></li>
+                <li><button class="footer-cookies-btn" onclick="resetCookies()">Gestionar cookies</button></li>
+            </ul>
+        </div>
+
+    </footer>
+
+
+    <script src="/distribucion.js"></script>
+    <script src="/cookies.js"></script>
+</body>
+</html>
