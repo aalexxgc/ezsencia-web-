@@ -2331,3 +2331,39 @@ footer {
     border:     0;
     pointer-events: none;
 }
+
+
+/* ====================================================
+   CLUB — Enlace discreto de vuelta a Distribución
+   ==================================================== */
+
+.nav-back {
+    position:        absolute;
+    left:            5rem;
+    bottom:          0.55rem;
+    font-size:       0.56rem;
+    letter-spacing:  0.22em;
+    text-transform:  uppercase;
+    color:           var(--tinta-fina);
+    text-decoration: none;
+    transition:      color 0.3s;
+}
+
+.nav-back:hover { color: var(--dorado); }
+
+.nav-mobile-back {
+    margin-top:      2.4rem;
+    padding-top:     1.6rem;
+    border-top:      1px solid var(--borde);
+    font-size:       0.62rem;
+    letter-spacing:  0.2em;
+    text-transform:  uppercase;
+    color:           var(--tinta-fina);
+    text-decoration: none;
+}
+
+.nav-mobile-back:hover { color: var(--dorado); }
+
+@media (max-width: 900px) {
+    .nav-back { display: none; }
+}
