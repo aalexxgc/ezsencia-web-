@@ -1,16 +1,20 @@
 {
   "redirects": [
-    { "source": "/experiencia/?",                  "destination": "/club#experiencia",        "statusCode": 301 },
-    { "source": "/experiencia/(.+)",               "destination": "/club/experiencia/$1",     "statusCode": 301 },
-    { "source": "/nosotros(/.*)?",                 "destination": "/club/nosotros$1",         "statusCode": 301 },
-    { "source": "/acceso(/.*)?",                   "destination": "/club/acceso$1",           "statusCode": 301 },
-    { "source": "/socios(/.*)?",                   "destination": "/club/socios$1",           "statusCode": 301 },
-    { "source": "/recetario(/.*)?",                "destination": "/club/recetario$1",        "statusCode": 301 },
-    { "source": "/(home|experiencia|eventos|evento-origen|tarjeta-fundador)\\.html", "destination": "/club", "statusCode": 301 }
+    { "source": "/experiencia",             "destination": "/club#experiencia",          "statusCode": 301 },
+    { "source": "/experiencia/:slug+",      "destination": "/club/experiencia/:slug+",   "statusCode": 301 },
+    { "source": "/nosotros/:path*",         "destination": "/club/nosotros/:path*",      "statusCode": 301 },
+    { "source": "/acceso/:path*",           "destination": "/club/acceso/:path*",        "statusCode": 301 },
+    { "source": "/socios/:path*",           "destination": "/club/socios/:path*",        "statusCode": 301 },
+    { "source": "/recetario/:path*",        "destination": "/club/recetario/:path*",     "statusCode": 301 },
+    { "source": "/home.html",               "destination": "/club",                      "statusCode": 301 },
+    { "source": "/experiencia.html",        "destination": "/club",                      "statusCode": 301 },
+    { "source": "/eventos.html",            "destination": "/club",                      "statusCode": 301 },
+    { "source": "/evento-origen.html",      "destination": "/club",                      "statusCode": 301 },
+    { "source": "/tarjeta-fundador.html",   "destination": "/club",                      "statusCode": 301 }
   ],
   "headers": [
     {
-      "source": "/club(.*)",
+      "source": "/club/:path*",
       "headers": [
         { "key": "X-Robots-Tag", "value": "index, follow" }
       ]
