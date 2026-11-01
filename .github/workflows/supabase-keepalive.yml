@@ -1,0 +1,45 @@
+# Mantiene activo el proyecto de Supabase del club (login de socios y recetario).
+# En el plan gratuito, Supabase pausa los proyectos tras 7 días sin actividad.
+# Esta tarea hace una consulta real a la base de datos cada 3 días.
+
+name: Supabase keepalive
+
+on:
+  schedule:
+    - cron: '0 8 */3 * *'   # cada 3 días a las 08:00 UTC
+  workflow_dispatch:         # botón "Run workflow" en la pestaña Actions
+  push:
+    branches: [main]
+    paths: ['.github/workflows/supabase-keepalive.yml']
+
+permissions:
+  actions: write             # para reactivarse a sí misma (ver último paso)
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consulta a la base de datos
+        env:
+          SUPABASE_URL: https://wclyxuxpezxksxcfsmpn.supabase.co
+          # Clave pública "anon": es la misma que ya está en las páginas del club.
+          SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjbHl4dXhwZXp4a3N4Y2ZzbXBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MTgwMTEsImV4cCI6MjA5MjA5NDAxMX0.BKEhBt5zZVqDCv81NqtAmjRODFUM6TWRs1e26kradL8
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --retry 3 --retry-delay 30 \
+            "$SUPABASE_URL/rest/v1/solicitudes?select=id&limit=1" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+          echo "Supabase respondió HTTP $code"
+          test "$code" = "200"
+
+      # GitHub desactiva las tareas programadas tras 60 días sin actividad en el
+      # repositorio. Reactivarla en cada ejecución reinicia ese plazo.
+      - name: Mantener la tarea activada
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -s -o /dev/null -w 'enable HTTP %{http_code}\n' -X PUT \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/supabase-keepalive.yml/enable"
