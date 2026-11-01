@@ -105,7 +105,7 @@ Los textos del club no están sujetos a esta lista.
    - tarifa semanal visible solo para clientes aprobados;
    - pedidos validados **en el servidor**: mínimo 100 g, cierre a las 11:00 de la víspera (hora de Madrid, `Europe/Madrid`) y solo de lunes a viernes.
 3. **Panel de administración** (`/admin`): aprobar clientes, publicar la tarifa, ver la ruta del día, exportar a CSV y generar el albarán en PDF.
-4. **Ajuste `REGISTRO_SANITARIO`**: una variable de entorno en Vercel. Mientras esté vacía, la API rechaza los pedidos y la web muestra "Abriremos pedidos en cuanto tengamos el registro sanitario".
+4. **Ajuste `REGISTRO_SANITARIO`**: una variable de entorno en Vercel. Mientras esté vacía, la API rechaza los pedidos y la web muestra "Abriremos pedidos en cuanto tengamos el registro sanitario". Cuando exista el registro, descomenta también en `index.html` (sección Trazabilidad) la frase del «canal autorizado (RD 30/2009, art. 6)».
 
 Las rutas `/clientes` y `/alta` ya existen y ya están enlazadas desde el menú. Las fases siguientes solo tienen que sustituir su contenido.
 
